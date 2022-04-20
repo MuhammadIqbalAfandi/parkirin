@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class ParkingFee extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'price',
+        'time_period',
+        'type_vehicle_id',
+    ];
+}

@@ -1,0 +1,80 @@
+@startuml Database
+
+entity User {
+  * id
+  __
+  * name
+  * phone
+  * email
+  * status
+  * password
+  * role_id
+}
+
+entity Role {
+  * id
+  __
+  * name
+}
+
+entity Member {
+  * id
+  __
+  * name
+  * phone
+  * plat_number
+}
+
+entity TypeVehicle {
+  * id
+  __
+  * type
+}
+
+entity ParkingFee {
+  * id
+  __
+  * price
+  * time_period
+  * type_vehicle_id
+}
+
+entity Transaction {
+  * id
+  __
+  * login_time
+  * time_out
+  * plat_number
+  * price
+  * input_by
+  * capture_vehicle
+  * type_vehicle_id
+  * user_id
+  member_id
+}
+
+entity Expense {
+  * id
+  __
+  * description
+  * amount
+  * user_id
+}
+
+entity Mutation {
+  * id
+  __
+  * type
+  * amount
+  transaction_id
+  expense_id
+
+}
+
+Transaction ||--|{ Member
+Transaction ||--|{ TypeVehicle
+Transaction ||--|| Mutation
+Transaction ||--|{ User
+TypeVehicle }|--|| ParkingFee
+Expense ||--|| Mutation
+User ||--|{ Role
