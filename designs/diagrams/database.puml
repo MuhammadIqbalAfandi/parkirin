@@ -23,6 +23,7 @@ entity Member {
   * name
   * phone
   * plat_number
+  * type_member_id
 }
 
 entity TypeVehicle {
@@ -68,7 +69,23 @@ entity Mutation {
   * amount
   transaction_id
   expense_id
+  topup_id
+}
 
+entity TopUp {
+  * id
+  __
+  * member_id
+  * value
+  * exp_date
+  * user_id
+}
+
+entity TypeMember {
+  * id
+  __
+  * name
+  * price
 }
 
 Transaction ||--|{ Member
@@ -77,4 +94,9 @@ Transaction ||--|| Mutation
 Transaction ||--|{ User
 TypeVehicle }|--|| ParkingFee
 Expense ||--|| Mutation
+TopUp ||--|| Mutation
 User ||--|{ Role
+User }|--|| TopUp
+User }|--|| Expense
+Member }|--|| TopUp
+Member ||--|| TypeMember

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', DashboardController::class);
+
+    Route::get('/dashboards', DashboardController::class);
 });
 
 require __DIR__ . '/auth.php';
