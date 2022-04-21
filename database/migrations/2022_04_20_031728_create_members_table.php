@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('plat_number')->unique();
+            $table->foreignId('type_member_id')->constrained();
             $table->timestamps();
         });
     }

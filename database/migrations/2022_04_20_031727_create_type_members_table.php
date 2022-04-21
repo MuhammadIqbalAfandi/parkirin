@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mutations', function (Blueprint $table) {
+        Schema::create('type_members', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->unsignedInteger('amount');
-            $table->foreignId('transaction_id')->nullable()->default(null)->constrained();
-            $table->foreignId('expense_id')->nullable()->default(null)->constrained();
-            $table->foreignId('topup_id')->nullable()->default(null)->constrained();
+            $table->string('name');
+            $table->unsignedInteger('price');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mutations');
+        Schema::dropIfExists('type_members');
     }
 };
