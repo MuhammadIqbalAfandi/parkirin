@@ -34,6 +34,7 @@ const submit = () => {
     <div class="grid">
       <div class="col-12 lg:col-8">
         <Card>
+          <template #title> Tambah User </template>
           <template #content>
             <div class="grid">
               <div class="col-12 md:col-6">

@@ -6,6 +6,10 @@ export default {
       items: [{ label: 'Dashboard', icon: 'pi pi-home', to: '/dashboards', component: 'home/Index' }],
     },
     {
+      label: 'Menu',
+      items: [{ label: 'Pengeluaran', icon: 'pi pi-wallet', to: '/expenses', component: 'expense/Index' }],
+    },
+    {
       label: 'Master',
       items: [{ label: 'User', icon: 'pi pi-user', to: '/users', component: 'user/Index' }],
     },
@@ -16,6 +20,10 @@ export default {
     {
       label: 'Home',
       items: [{ label: 'Dashboard', icon: 'pi pi-home', to: '/dashboards', component: 'home/Index' }],
+    },
+    {
+      label: 'Menu',
+      items: [{ label: 'Pengeluaran', icon: 'pi pi-wallet', to: '/expenses', component: 'expense/Index' }],
     },
   ],
 

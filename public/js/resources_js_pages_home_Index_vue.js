@@ -902,6 +902,14 @@ __webpack_require__.r(__webpack_exports__);
       component: 'home/Index'
     }]
   }, {
+    label: 'Menu',
+    items: [{
+      label: 'Pengeluaran',
+      icon: 'pi pi-wallet',
+      to: '/expenses',
+      component: 'expense/Index'
+    }]
+  }, {
     label: 'Master',
     items: [{
       label: 'User',
@@ -918,6 +926,14 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-home',
       to: '/dashboards',
       component: 'home/Index'
+    }]
+  }, {
+    label: 'Menu',
+    items: [{
+      label: 'Pengeluaran',
+      icon: 'pi pi-wallet',
+      to: '/expenses',
+      component: 'expense/Index'
     }]
   }],
   // Operator

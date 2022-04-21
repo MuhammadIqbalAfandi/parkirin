@@ -1459,11 +1459,11 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "col-12 lg:col-8"
 };
-var _hoisted_3 = {
-  "class": "grid"
-};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit User ");
+
 var _hoisted_4 = {
-  "class": "col-12 md:col-6"
+  "class": "grid"
 };
 var _hoisted_5 = {
   "class": "col-12 md:col-6"
@@ -1472,16 +1472,19 @@ var _hoisted_6 = {
   "class": "col-12 md:col-6"
 };
 var _hoisted_7 = {
-  key: 0,
   "class": "col-12 md:col-6"
 };
 var _hoisted_8 = {
-  "class": "grid"
+  key: 0,
+  "class": "col-12 md:col-6"
 };
 var _hoisted_9 = {
-  "class": "col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-start"
+  "class": "grid"
 };
 var _hoisted_10 = {
+  "class": "col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-start"
+};
+var _hoisted_11 = {
   "class": "col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-end"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1494,8 +1497,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppLayout"], null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
+        title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_3];
+        }),
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
             label: "Nama",
             placeholder: "nama",
             disabled: $props.user.role_id !== 1,
@@ -1506,7 +1512,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, null, 8
           /* PROPS */
-          , ["disabled", "error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
+          , ["disabled", "error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
             label: "Nomor HP",
             placeholder: "nomor hp",
             disabled: $props.user.role_id !== 1,
@@ -1517,7 +1523,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, null, 8
           /* PROPS */
-          , ["disabled", "error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
+          , ["disabled", "error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
             label: "Email",
             placeholder: "email",
             disabled: $props.user.role_id !== 1,
@@ -1528,7 +1534,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, null, 8
           /* PROPS */
-          , ["disabled", "error", "modelValue"])]), $props.user.role_id !== 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppDropdown"], {
+          , ["disabled", "error", "modelValue"])]), $props.user.role_id !== 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppDropdown"], {
             label: "Hak Akses",
             placeholder: "Pilih satu",
             modelValue: $setup.form.role_id,
@@ -1542,7 +1548,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           , ["modelValue", "options", "error"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
         }),
         footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppDialog"], {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppDialog"], {
             message: "Yakin akan menghapus data ini?",
             visible: $setup.visibleDialog,
             "onUpdate:visible": _cache[4] || (_cache[4] = function ($event) {
@@ -1560,7 +1566,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             icon: "pi pi-trash",
             "class": "p-button-outlined p-button-danger",
             onClick: $setup.confirmDialog
-          })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppButton"], {
+          })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppButton"], {
             label: "Blokir",
             icon: "pi pi-ban",
             method: "delete",
@@ -1614,6 +1620,14 @@ __webpack_require__.r(__webpack_exports__);
       component: 'home/Index'
     }]
   }, {
+    label: 'Menu',
+    items: [{
+      label: 'Pengeluaran',
+      icon: 'pi pi-wallet',
+      to: '/expenses',
+      component: 'expense/Index'
+    }]
+  }, {
     label: 'Master',
     items: [{
       label: 'User',
@@ -1630,6 +1644,14 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-home',
       to: '/dashboards',
       component: 'home/Index'
+    }]
+  }, {
+    label: 'Menu',
+    items: [{
+      label: 'Pengeluaran',
+      icon: 'pi pi-wallet',
+      to: '/expenses',
+      component: 'expense/Index'
     }]
   }],
   // Operator

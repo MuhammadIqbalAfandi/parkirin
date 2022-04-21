@@ -20,6 +20,7 @@ import DataTable from 'primevue/datatable'
 import Dialog from 'primevue/dialog'
 import Divider from 'primevue/divider'
 import Dropdown from 'primevue/dropdown'
+import Editor from 'primevue/editor'
 import InputNumber from 'primevue/inputnumber'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
@@ -53,6 +54,7 @@ createInertiaApp({
       .component('Dialog', Dialog)
       .component('Divider', Divider)
       .component('Dropdown', Dropdown)
+      .component('Editor', Editor)
       .component('InputNumber', InputNumber)
       .component('InputText', InputText)
       .component('Message', Message)

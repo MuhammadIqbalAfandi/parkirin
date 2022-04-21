@@ -1203,11 +1203,11 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "col-12 lg:col-8"
 };
-var _hoisted_3 = {
-  "class": "grid"
-};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Tambah User ");
+
 var _hoisted_4 = {
-  "class": "col-12 md:col-6"
+  "class": "grid"
 };
 var _hoisted_5 = {
   "class": "col-12 md:col-6"
@@ -1219,6 +1219,9 @@ var _hoisted_7 = {
   "class": "col-12 md:col-6"
 };
 var _hoisted_8 = {
+  "class": "col-12 md:col-6"
+};
+var _hoisted_9 = {
   "class": "flex flex-column md:flex-row justify-content-end"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1231,8 +1234,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppLayout"], null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
+        title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_3];
+        }),
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
             label: "Nama",
             placeholder: "nama",
             error: $setup.form.errors.name,
@@ -1242,7 +1248,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, null, 8
           /* PROPS */
-          , ["error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
+          , ["error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
             label: "Nomor HP",
             placeholder: "nomor hp",
             error: $setup.form.errors.phone,
@@ -1252,7 +1258,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, null, 8
           /* PROPS */
-          , ["error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
+          , ["error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
             label: "Email",
             placeholder: "email",
             error: $setup.form.errors.email,
@@ -1262,7 +1268,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, null, 8
           /* PROPS */
-          , ["error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppDropdown"], {
+          , ["error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppDropdown"], {
             label: "Hak Akses",
             placeholder: "pilih satu",
             modelValue: $setup.form.role_id,
@@ -1276,7 +1282,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           , ["modelValue", "options", "error"])])])];
         }),
         footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
             label: "Simpan",
             icon: "pi pi-check",
             "class": "p-button-outlined",
@@ -1322,6 +1328,14 @@ __webpack_require__.r(__webpack_exports__);
       component: 'home/Index'
     }]
   }, {
+    label: 'Menu',
+    items: [{
+      label: 'Pengeluaran',
+      icon: 'pi pi-wallet',
+      to: '/expenses',
+      component: 'expense/Index'
+    }]
+  }, {
     label: 'Master',
     items: [{
       label: 'User',
@@ -1338,6 +1352,14 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-home',
       to: '/dashboards',
       component: 'home/Index'
+    }]
+  }, {
+    label: 'Menu',
+    items: [{
+      label: 'Pengeluaran',
+      icon: 'pi pi-wallet',
+      to: '/expenses',
+      component: 'expense/Index'
     }]
   }],
   // Operator
