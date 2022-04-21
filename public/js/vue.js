@@ -43810,6 +43810,46 @@ var map = {
 	"./home/Index.vue": [
 		"./resources/js/pages/home/Index.vue",
 		"resources_js_pages_home_Index_vue"
+	],
+	"./user/Create": [
+		"./resources/js/pages/user/Create.vue",
+		"resources_js_pages_user_Create_vue"
+	],
+	"./user/Create.vue": [
+		"./resources/js/pages/user/Create.vue",
+		"resources_js_pages_user_Create_vue"
+	],
+	"./user/Edit": [
+		"./resources/js/pages/user/Edit.vue",
+		"resources_js_pages_user_Edit_vue"
+	],
+	"./user/Edit.vue": [
+		"./resources/js/pages/user/Edit.vue",
+		"resources_js_pages_user_Edit_vue"
+	],
+	"./user/Index": [
+		"./resources/js/pages/user/Index.vue",
+		"resources_js_pages_user_Index_vue"
+	],
+	"./user/Index.vue": [
+		"./resources/js/pages/user/Index.vue",
+		"resources_js_pages_user_Index_vue"
+	],
+	"./user/Show": [
+		"./resources/js/pages/user/Show.vue",
+		"resources_js_pages_user_Show_vue"
+	],
+	"./user/Show.vue": [
+		"./resources/js/pages/user/Show.vue",
+		"resources_js_pages_user_Show_vue"
+	],
+	"./user/TableHeader": [
+		"./resources/js/pages/user/TableHeader.js",
+		"resources_js_pages_user_TableHeader_js"
+	],
+	"./user/TableHeader.js": [
+		"./resources/js/pages/user/TableHeader.js",
+		"resources_js_pages_user_TableHeader_js"
 	]
 };
 function webpackAsyncContext(req) {
@@ -43928,7 +43968,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"node_modules_chart_js_auto_auto_esm_js":"10c6b388645ceb22","resources_js_pages_auth_ForgotPassword_vue":"5b9f0529bda25a9b","resources_js_pages_auth_Login_vue":"61b9c9ae1ae9da32","resources_js_pages_auth_ResetPassword_vue":"b091193a1e114ce8","resources_js_pages_auth_VerifyEmail_vue":"a7b9a99e5a331088","resources_js_pages_home_Index_vue":"ac979b71a6556fb9"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"node_modules_chart_js_auto_auto_esm_js":"10c6b388645ceb22","resources_js_pages_auth_ForgotPassword_vue":"5b9f0529bda25a9b","resources_js_pages_auth_Login_vue":"61b9c9ae1ae9da32","resources_js_pages_auth_ResetPassword_vue":"b091193a1e114ce8","resources_js_pages_auth_VerifyEmail_vue":"a7b9a99e5a331088","resources_js_pages_home_Index_vue":"a357d4139a5256e8","resources_js_pages_user_Create_vue":"bd11fb7ccd86dc6e","resources_js_pages_user_Edit_vue":"0b47a99f15339c5f","resources_js_pages_user_Index_vue":"170f708e9932b04b","resources_js_pages_user_Show_vue":"ee8e5d4cb9d97c90","resources_js_pages_user_TableHeader_js":"0d87fd422fe40491"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

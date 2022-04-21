@@ -32,7 +32,7 @@ defineEmits(['menu-toggle'])
         <span class="hidden lg:inline">{{ $page.props.auth.user.name }}</span>
       </li>
       <li>
-        <Link class="p-link layout-topbar-button">
+        <Link :href="route('users.show', $page.props.auth.user.id)" class="p-link layout-topbar-button">
           <i class="pi pi-user"></i>
           <span>Profil Saya</span>
         </Link>

@@ -24,9 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'status',
         'password',
-        'gender_id',
         'role_id',
-        'outlet_id',
     ];
 
     /**
@@ -47,4 +45,27 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function status(): Attribute
+    {
+        return Attribute::make(
+            get:fn($value) => $value ? __('words.active') : __('words.not_active'),
+        );
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('phone', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%');
+            });
+        });
+    }
 }
