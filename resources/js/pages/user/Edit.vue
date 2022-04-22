@@ -13,6 +13,22 @@ const props = defineProps({
   roles: Array,
 })
 
+const errors = computed(() => usePage().props.value.errors)
+
+watch(errors, () => {
+  form.clearErrors()
+})
+
+const visibleDialog = ref(false)
+
+const confirmDialog = () => {
+  visibleDialog.value = true
+}
+
+const onAgree = () => Inertia.delete(route('users.destroy', props.user.id))
+
+const onCancel = () => (visibleDialog.value = false)
+
 const form = useForm({
   name: props.user.name,
   phone: props.user.phone,
@@ -23,22 +39,6 @@ const form = useForm({
 const submit = () => {
   form.put(route('users.update', props.user.id))
 }
-
-const visibleDialog = ref(false)
-
-const confirmDialog = () => {
-  visibleDialog.value = true
-}
-
-const onAgree = (id) => Inertia.delete(route('users.destroy', id))
-
-const onCancel = () => (visibleDialog.value = false)
-
-const errors = computed(() => usePage().props.value.errors)
-
-watch(errors, () => {
-  form.clearErrors()
-})
 </script>
 
 <template>
@@ -99,7 +99,7 @@ watch(errors, () => {
                 <AppDialog
                   message="Yakin akan menghapus data ini?"
                   v-model:visible="visibleDialog"
-                  @agree="onAgree(user.id)"
+                  @agree="onAgree"
                   @cancel="onCancel"
                 />
 

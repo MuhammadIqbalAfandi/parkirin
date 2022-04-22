@@ -1,4 +1,5 @@
 <script setup>
+import { Head } from '@inertiajs/inertia-vue3'
 import AppButton from '@/components/AppButton.vue'
 import AppLayout from '@/layouts/AppLayout.vue'
 
@@ -10,6 +11,8 @@ defineProps({
 </script>
 
 <template>
+  <Head title="Daftar Jenis Member" />
+
   <AppLayout>
     <DataTable
       responsive-layout="scroll"

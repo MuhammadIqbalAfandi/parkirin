@@ -2,11 +2,11 @@
 import { computed, watch } from 'vue'
 import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
 import AppLayout from '@/layouts/AppLayout.vue'
+import AppDropdown from '@/components/AppDropdown.vue'
 import AppInputText from '@/components/AppInputText.vue'
-import AppInputNumber from '@/components/AppInputNumber.vue'
 
-const props = defineProps({
-  typeMember: Object,
+defineProps({
+  typeMembers: Array,
 })
 
 const errors = computed(() => usePage().props.value.errors)
@@ -16,40 +16,51 @@ watch(errors, () => {
 })
 
 const form = useForm({
-  type: props.typeMember.type,
-  price: props.typeMember.price,
+  name: null,
+  phone: null,
+  plat_number: null,
+  type_member_id: null,
 })
 
 const submit = () => {
-  form.put(route('type-members.update', props.typeMember.id))
+  form.post(route('members.store'), { onSuccess: () => form.reset() })
 }
 </script>
 
 <template>
-  <Head title="Ubah Jenis Member" />
+  <Head title="Tambah Member" />
 
   <AppLayout>
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
-          <template #title> Ubah Jenis Member </template>
+          <template #title> Tambah Member </template>
           <template #content>
             <div class="grid">
               <div class="col-12 md:col-6">
+                <AppInputText v-model="form.name" label="Nama" placeholder="nama" :error="form.errors.name" />
+              </div>
+
+              <div class="col-12 md:col-6">
+                <AppInputText v-model="form.phone" label="Nomor HP" placeholder="nomor hp" :error="form.errors.phone" />
+              </div>
+
+              <div class="col-12 md:col-6">
                 <AppInputText
-                  v-model="form.type"
-                  label="Jenis Member"
-                  placeholder="jenis member"
-                  :error="form.errors.type"
+                  v-model="form.plat_number"
+                  label="Plat Kendaraan"
+                  placeholder="plat kendaraan"
+                  :error="form.errors.plat_number"
                 />
               </div>
 
               <div class="col-12 md:col-6">
-                <AppInputNumber
-                  v-model="form.price"
-                  label="Tarif Member"
-                  placeholder="tarif member"
-                  :error="form.errors.price"
+                <AppDropdown
+                  label="Jenis member"
+                  placeholder="pilih satu"
+                  v-model="form.type_member_id"
+                  :options="typeMembers"
+                  :error="form.errors.type_member_id"
                 />
               </div>
             </div>

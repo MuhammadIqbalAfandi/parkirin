@@ -22,6 +22,7 @@ return [
             'verify_email' => 'Link verifikasi email berhasil terkirim',
         ],
         'store' => [
+            'member' => 'Member berhasil ditambahkan',
             'type-member' => 'Jenis member berhasil ditambahkan',
             'discount' => 'Diskon berhasil diubah',
             'expense' => 'Pengeluaran berhasil ditambahkan',
@@ -29,12 +30,14 @@ return [
             'user' => 'Akun user berhasil ditambahkan',
         ],
         'update' => [
+            'member' => 'Member berhasil diubah',
             'type-member' => 'Jenis member berhasil diubah',
             'change-password' => 'Password berhasil diubah',
             'transaction_status' => 'Status transaksi berhasil diubah',
             'user' => 'Akun user berhasil diubah',
         ],
         'destroy' => [
+            'member' => 'Akun member berhasil dihapus',
             'user' => 'Akun user berhasil dihapus',
         ],
     ],

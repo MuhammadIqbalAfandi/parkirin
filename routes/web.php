@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TypeMemberController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/expenses', ExpenseController::class);
 
     Route::resource('/type-members', TypeMemberController::class);
+
+    Route::resource('/members', MemberController::class);
 });
 
 require __DIR__ . '/auth.php';

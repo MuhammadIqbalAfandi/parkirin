@@ -1,6 +1,6 @@
 <script setup>
 import { computed, watch } from 'vue'
-import { useForm, usePage } from '@inertiajs/inertia-vue3'
+import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
 import AppLayout from '@/layouts/AppLayout.vue'
 import AppInputText from '@/components/AppInputText.vue'
 import AppInputNumber from '@/components/AppInputNumber.vue'
@@ -22,6 +22,8 @@ const submit = () => {
 </script>
 
 <template>
+  <Head title="Tambah Jenis Member" />
+
   <AppLayout>
     <div class="grid">
       <div class="col-12 md:col-8">

@@ -607,6 +607,26 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
+    var errors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.usePage)().props.value.errors;
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(errors, function () {
+      form.clearErrors();
+    });
+    var visibleDialog = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+
+    var confirmDialog = function confirmDialog() {
+      visibleDialog.value = true;
+    };
+
+    var onAgree = function onAgree() {
+      return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia["delete"](route('users.destroy', props.user.id));
+    };
+
+    var onCancel = function onCancel() {
+      return visibleDialog.value = false;
+    };
+
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)({
       name: props.user.name,
       phone: props.user.phone,
@@ -618,35 +638,15 @@ __webpack_require__.r(__webpack_exports__);
       form.put(route('users.update', props.user.id));
     };
 
-    var visibleDialog = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
-
-    var confirmDialog = function confirmDialog() {
-      visibleDialog.value = true;
-    };
-
-    var onAgree = function onAgree(id) {
-      return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia["delete"](route('users.destroy', id));
-    };
-
-    var onCancel = function onCancel() {
-      return visibleDialog.value = false;
-    };
-
-    var errors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.usePage)().props.value.errors;
-    });
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(errors, function () {
-      form.clearErrors();
-    });
     var __returned__ = {
       props: props,
-      form: form,
-      submit: submit,
+      errors: errors,
       visibleDialog: visibleDialog,
       confirmDialog: confirmDialog,
       onAgree: onAgree,
       onCancel: onCancel,
-      errors: errors,
+      form: form,
+      submit: submit,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
@@ -1554,9 +1554,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "onUpdate:visible": _cache[4] || (_cache[4] = function ($event) {
               return $setup.visibleDialog = $event;
             }),
-            onAgree: _cache[5] || (_cache[5] = function ($event) {
-              return $setup.onAgree($props.user.id);
-            }),
+            onAgree: $setup.onAgree,
             onCancel: $setup.onCancel
           }, null, 8
           /* PROPS */
@@ -1649,6 +1647,11 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-id-card',
       to: '/type-members',
       component: 'typemember/Index'
+    }, {
+      label: 'Member',
+      icon: 'pi pi-id-card',
+      to: '/members',
+      component: 'member/Index'
     }]
   }],
   // Operator
@@ -1659,6 +1662,24 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-home',
       to: '/dashboards',
       component: 'home/Index'
+    }]
+  }, {
+    label: 'Menu',
+    items: [{
+      label: 'Pengeluaran',
+      icon: 'pi pi-wallet',
+      to: '/expenses',
+      component: 'expense/Index'
+    }, {
+      label: 'Jenis Member',
+      icon: 'pi pi-id-card',
+      to: '/type-members',
+      component: 'typemember/Index'
+    }, {
+      label: 'Member',
+      icon: 'pi pi-id-card',
+      to: '/members',
+      component: 'member/Index'
     }]
   }]
 });

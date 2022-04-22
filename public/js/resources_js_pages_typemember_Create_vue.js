@@ -579,6 +579,7 @@ __webpack_require__.r(__webpack_exports__);
       submit: submit,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
+      Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Head,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm,
       usePage: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage,
       AppLayout: _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -1245,7 +1246,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_Card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Card");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AppLayout"], null, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Head"], {
+    title: "Tambah Jenis Member"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppLayout"], null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -1293,7 +1296,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  });
+  })], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -1348,6 +1353,11 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-id-card',
       to: '/type-members',
       component: 'typemember/Index'
+    }, {
+      label: 'Member',
+      icon: 'pi pi-id-card',
+      to: '/members',
+      component: 'member/Index'
     }]
   }],
   // Operator
@@ -1358,6 +1368,24 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-home',
       to: '/dashboards',
       component: 'home/Index'
+    }]
+  }, {
+    label: 'Menu',
+    items: [{
+      label: 'Pengeluaran',
+      icon: 'pi pi-wallet',
+      to: '/expenses',
+      component: 'expense/Index'
+    }, {
+      label: 'Jenis Member',
+      icon: 'pi pi-id-card',
+      to: '/type-members',
+      component: 'typemember/Index'
+    }, {
+      label: 'Member',
+      icon: 'pi pi-id-card',
+      to: '/members',
+      component: 'member/Index'
     }]
   }]
 });

@@ -30,5 +30,4 @@ class TypeMember extends Model
             get:fn($value) => (new CurrencyFormatService)->setRupiahFormat($value, true)
         );
     }
-
 }

@@ -931,6 +931,11 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-id-card',
       to: '/type-members',
       component: 'typemember/Index'
+    }, {
+      label: 'Member',
+      icon: 'pi pi-id-card',
+      to: '/members',
+      component: 'member/Index'
     }]
   }],
   // Operator
@@ -941,6 +946,24 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-home',
       to: '/dashboards',
       component: 'home/Index'
+    }]
+  }, {
+    label: 'Menu',
+    items: [{
+      label: 'Pengeluaran',
+      icon: 'pi pi-wallet',
+      to: '/expenses',
+      component: 'expense/Index'
+    }, {
+      label: 'Jenis Member',
+      icon: 'pi pi-id-card',
+      to: '/type-members',
+      component: 'typemember/Index'
+    }, {
+      label: 'Member',
+      icon: 'pi pi-id-card',
+      to: '/members',
+      component: 'member/Index'
     }]
   }]
 });
