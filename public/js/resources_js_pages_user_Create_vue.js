@@ -524,10 +524,10 @@ __webpack_require__.r(__webpack_exports__);
       form.clearErrors();
     });
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
-      name: '',
-      phone: '',
-      email: '',
-      role_id: ''
+      name: null,
+      phone: null,
+      email: null,
+      role_id: null
     });
 
     var submit = function submit() {
@@ -1328,14 +1328,6 @@ __webpack_require__.r(__webpack_exports__);
       component: 'home/Index'
     }]
   }, {
-    label: 'Menu',
-    items: [{
-      label: 'Pengeluaran',
-      icon: 'pi pi-wallet',
-      to: '/expenses',
-      component: 'expense/Index'
-    }]
-  }, {
     label: 'Master',
     items: [{
       label: 'User',
@@ -1360,6 +1352,11 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-wallet',
       to: '/expenses',
       component: 'expense/Index'
+    }, {
+      label: 'Jenis Member',
+      icon: 'pi pi-id-card',
+      to: '/type-members',
+      component: 'typemember/Index'
     }]
   }],
   // Operator

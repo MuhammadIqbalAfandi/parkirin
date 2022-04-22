@@ -1348,14 +1348,6 @@ __webpack_require__.r(__webpack_exports__);
       component: 'home/Index'
     }]
   }, {
-    label: 'Menu',
-    items: [{
-      label: 'Pengeluaran',
-      icon: 'pi pi-wallet',
-      to: '/expenses',
-      component: 'expense/Index'
-    }]
-  }, {
     label: 'Master',
     items: [{
       label: 'User',
@@ -1380,6 +1372,11 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-wallet',
       to: '/expenses',
       component: 'expense/Index'
+    }, {
+      label: 'Jenis Member',
+      icon: 'pi pi-id-card',
+      to: '/type-members',
+      component: 'typemember/Index'
     }]
   }],
   // Operator

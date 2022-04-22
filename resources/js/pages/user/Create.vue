@@ -16,10 +16,10 @@ watch(errors, () => {
 })
 
 const form = useForm({
-  name: '',
-  phone: '',
-  email: '',
-  role_id: '',
+  name: null,
+  phone: null,
+  email: null,
+  role_id: null,
 })
 
 const submit = () => {

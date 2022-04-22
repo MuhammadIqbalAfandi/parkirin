@@ -84,7 +84,7 @@ entity TopUp {
 entity TypeMember {
   * id
   __
-  * name
+  * type
   * price
 }
 
