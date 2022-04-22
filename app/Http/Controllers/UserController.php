@@ -180,11 +180,11 @@ class UserController extends Controller
     public function changePassword(ChangePasswordRequest $request)
     {
         if (!Hash::check($request->old_password, $request->user()->password)) {
-            return back()->with('error', __('messages.error.store.change-password'));
+            return back()->with('error', __('messages.error.store.change_password'));
         }
 
         $request->user()->update(['password' => bcrypt($request->new_password)]);
 
-        return back()->with('success', __('messages.success.update.change-password'));
+        return back()->with('success', __('messages.success.update.change_password'));
     }
 }

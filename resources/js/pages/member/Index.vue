@@ -39,7 +39,7 @@ watch(
       :striped-rows="true"
     >
       <template #header>
-        <h1>Jenis Member</h1>
+        <h1>Daftar Member</h1>
 
         <div class="grid">
           <div class="col-12 md:col-8">

@@ -39,6 +39,7 @@ export default {
         { label: 'Pengeluaran', icon: 'pi pi-wallet', to: '/expenses', component: 'expense/Index' },
         { label: 'Jenis Member', icon: 'pi pi-id-card', to: '/type-members', component: 'typemember/Index' },
         { label: 'Member', icon: 'pi pi-id-card', to: '/members', component: 'member/Index' },
+        { label: 'Top Up', icon: 'pi pi-wallet', to: '/top-ups', component: 'topup/Index' },
       ],
     },
   ],

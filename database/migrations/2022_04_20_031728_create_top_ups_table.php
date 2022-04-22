@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('topups', function (Blueprint $table) {
+        Schema::create('top_ups', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('amount');
+            $table->unsignedInteger('balance');
             $table->dateTime('exp_date');
             $table->foreignId('member_id')->constrained();
             $table->foreignId('user_id')->constrained();

@@ -75,7 +75,7 @@ entity Mutation {
 entity TopUp {
   * id
   __
-  * amount
+  * balance
   * exp_date
   * member_id
   * user_id

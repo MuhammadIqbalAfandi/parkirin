@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('amount');
             $table->foreignId('transaction_id')->nullable()->default(null)->constrained();
             $table->foreignId('expense_id')->nullable()->default(null)->constrained();
-            $table->foreignId('topup_id')->nullable()->default(null)->constrained();
+            $table->foreignId('top_up_id')->nullable()->default(null)->constrained();
             $table->timestamps();
         });
     }

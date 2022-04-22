@@ -1168,6 +1168,11 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-id-card',
       to: '/members',
       component: 'member/Index'
+    }, {
+      label: 'Top Up',
+      icon: 'pi pi-wallet',
+      to: '/top-ups',
+      component: 'topup/Index'
     }]
   }]
 });

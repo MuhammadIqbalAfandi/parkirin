@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TypeMember\StoreTypeMemberRequest;
 use App\Http\Requests\TypeMember\UpdateTypeMemberRequest;
 use App\Models\TypeMember;
-use Illuminate\Http\Request;
 
 class TypeMemberController extends Controller
 {
@@ -46,7 +45,7 @@ class TypeMemberController extends Controller
     {
         TypeMember::create($request->validated());
 
-        return back()->with('success', __('messages.success.store.type-member'));
+        return back()->with('success', __('messages.success.store.type_member'));
     }
 
     /**
@@ -88,7 +87,7 @@ class TypeMemberController extends Controller
     {
         $typeMember->update($request->validated());
 
-        return back()->with('success', __('messages.success.update.type-member'));
+        return back()->with('success', __('messages.success.update.type_member'));
     }
 
     /**
