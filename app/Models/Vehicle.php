@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mutation extends Model
+class Vehicle extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'type',
-        'amount',
-        'transaction_id',
-        'expense_id',
-        'topup_id',
+        'plat_number',
+        'member_id',
+        'type_vehicle_id',
     ];
 }

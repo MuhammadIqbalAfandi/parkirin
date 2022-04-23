@@ -14,7 +14,7 @@ class Member extends Model
     protected $fillable = [
         'name',
         'phone',
-        'plat_number',
+        'exp_date',
         'type_member_id',
     ];
 

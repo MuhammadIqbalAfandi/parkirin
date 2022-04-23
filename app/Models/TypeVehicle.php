@@ -10,11 +10,6 @@ class TypeVehicle extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'phone',
-        'email',
-        'password',
-        'status',
-        'role_id',
+        'type',
     ];
 }

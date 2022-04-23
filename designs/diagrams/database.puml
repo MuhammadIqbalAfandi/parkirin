@@ -102,15 +102,15 @@ entity Mutation {
 
 TransactionIn ||--|| TransactionOut
 TransactionOut ||--|| Mutation
-TransactionOut ||--|| Vehicle
+TransactionOut ||--|{ Vehicle
 TransactionOut ||--|{ TypeVehicle
 TransactionOut ||--|{ User
-TypeVehicle }|--|| ParkingFee
+TypeVehicle ||--|| ParkingFee
 Expense ||--|| Mutation
 TopUp ||--|| Mutation
 User ||--|{ Role
 User }|--|| TopUp
 User }|--|| Expense
 Member }|--|| TopUp
-Member }|--|| TypeMember
+Member ||--|| TypeMember
 Member }|--|| Vehicle
