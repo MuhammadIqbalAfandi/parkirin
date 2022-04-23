@@ -501,10 +501,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/layouts/AppLayout.vue */ "./resources/js/layouts/AppLayout.vue");
-/* harmony import */ var _components_AppDropdown_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/AppDropdown.vue */ "./resources/js/components/AppDropdown.vue");
-/* harmony import */ var _components_AppInputText_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/AppInputText.vue */ "./resources/js/components/AppInputText.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/layouts/AppLayout.vue */ "./resources/js/layouts/AppLayout.vue");
+/* harmony import */ var _components_AppDropdown_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/AppDropdown.vue */ "./resources/js/components/AppDropdown.vue");
+/* harmony import */ var _components_AppInputText_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/AppInputText.vue */ "./resources/js/components/AppInputText.vue");
+/* harmony import */ var _TableHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TableHeader */ "./resources/js/pages/member/TableHeader.js");
+
+
 
 
 
@@ -512,44 +516,113 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    typeMembers: Array
+    typeMembers: Array,
+    typeVehicles: Array,
+    typeMember: Object
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
+    var props = __props;
     var errors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage)().props.value.errors;
+      return (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.usePage)().props.value.errors;
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(errors, function () {
       form.clearErrors();
     });
-    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
+    var listPlatNumber = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)([]);
+
+    var listPlatNumberClear = function listPlatNumberClear() {
+      listPlatNumber.splice(0);
+    };
+
+    var listPlatNumberOnDelete = function listPlatNumberOnDelete(index) {
+      listPlatNumber.splice(index, 1);
+    };
+
+    var addPlatNumber = function addPlatNumber() {
+      form.clearErrors('plat_number');
+
+      if (form.plat_number) {
+        if (listPlatNumber.length + 1 > props.typeMember.max) {
+          form.setError('plat_number', 'Melibihi batas maksimal kendaraan');
+          return;
+        }
+
+        listPlatNumber.push({
+          platNumber: form.plat_number,
+          typeVehicleId: form.type_member_id
+        });
+        form.reset('plat_number');
+      } else {
+        form.setError('plat_number', 'Plat kendaraan tidak boleh kosong');
+      }
+    };
+
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)({
       name: null,
       phone: null,
       plat_number: null,
+      type_vehicle: null,
       type_member_id: null
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return form.type_member_id;
+    }, function () {
+      listPlatNumberClear();
+      form.reset('plat_number');
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
+        only: ['typeMember'],
+        data: {
+          id: form.type_member_id
+        }
+      });
     });
 
     var submit = function submit() {
-      form.post(route('members.store'), {
+      form.transform(function (data) {
+        return {
+          name: data.name,
+          phone: data.phone,
+          plat_numbers: listPlatNumber,
+          type_member_id: data.type_member_id
+        };
+      }).post(route('members.store'), {
+        onError: function onError() {
+          _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
+            only: ['typeMember'],
+            data: {
+              id: form.type_member_id
+            }
+          });
+        },
         onSuccess: function onSuccess() {
-          return form.reset();
+          listPlatNumberClear();
+          form.reset();
         }
       });
     };
 
     var __returned__ = {
+      props: props,
       errors: errors,
+      listPlatNumber: listPlatNumber,
+      listPlatNumberClear: listPlatNumberClear,
+      listPlatNumberOnDelete: listPlatNumberOnDelete,
+      addPlatNumber: addPlatNumber,
       form: form,
       submit: submit,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
-      Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Head,
-      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm,
-      usePage: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage,
-      AppLayout: _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-      AppDropdown: _components_AppDropdown_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-      AppInputText: _components_AppInputText_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
+      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia,
+      Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head,
+      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm,
+      usePage: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.usePage,
+      AppLayout: _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+      AppDropdown: _components_AppDropdown_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+      AppInputText: _components_AppInputText_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+      PlatNumberTable: _TableHeader__WEBPACK_IMPORTED_MODULE_6__.PlatNumberTable
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -1219,15 +1292,81 @@ var _hoisted_7 = {
   "class": "col-12 md:col-6"
 };
 var _hoisted_8 = {
+  "class": "col-12 md:col-4"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Detail Harga");
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-base font-bold mb-0"
+}, "Jenis Member", -1
+/* HOISTED */
+);
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-base font-bold mb-0"
+}, "Batas Maksimal Kendaraan", -1
+/* HOISTED */
+);
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-base font-bold mb-0"
+}, "Keterangan", -1
+/* HOISTED */
+);
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-base font-bold mb-0"
+}, "Tarif Member", -1
+/* HOISTED */
+);
+
+var _hoisted_14 = {
+  "class": "grid"
+};
+var _hoisted_15 = {
+  "class": "col-12 md:col-8"
+};
+var _hoisted_16 = {
+  "class": "grid"
+};
+var _hoisted_17 = {
   "class": "col-12 md:col-6"
 };
-var _hoisted_9 = {
+var _hoisted_18 = {
+  "class": "col-12 md:col-6"
+};
+var _hoisted_19 = {
+  "class": "col-12 flex flex-column md:flex-row md:align-items-center justify-content-end mb-3 md:mb-0"
+};
+var _hoisted_20 = {
+  "class": "col-12"
+};
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+  "class": "text-base"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "pi pi-car"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "ml-2"
+}, "Daftar Plat Kendaraan")], -1
+/* HOISTED */
+);
+
+var _hoisted_22 = {
+  "class": "flex justify-content-end"
+};
+var _hoisted_23 = {
   "class": "flex flex-column md:flex-row justify-content-end"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_Card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Card");
+
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
-  var _component_Card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Card");
+  var _component_Column = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Column");
+
+  var _component_DataTable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DataTable");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Head"], {
     title: "Tambah Member"
@@ -1258,21 +1397,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             error: $setup.form.errors.phone
           }, null, 8
           /* PROPS */
-          , ["modelValue", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
-            modelValue: $setup.form.plat_number,
-            "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-              return $setup.form.plat_number = $event;
-            }),
-            label: "Plat Kendaraan",
-            placeholder: "plat kendaraan",
-            error: $setup.form.errors.plat_number
-          }, null, 8
-          /* PROPS */
-          , ["modelValue", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppDropdown"], {
+          , ["modelValue", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppDropdown"], {
             label: "Jenis member",
             placeholder: "pilih satu",
             modelValue: $setup.form.type_member_id,
-            "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+            "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
               return $setup.form.type_member_id = $event;
             }),
             options: $props.typeMembers,
@@ -1281,12 +1410,112 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           /* PROPS */
           , ["modelValue", "options", "error"])])])];
         }),
+        _: 1
+        /* STABLE */
+
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, {
+        "class": "bg-primary"
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createSlots)({
+        title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_9];
+        }),
+        _: 2
+        /* DYNAMIC */
+
+      }, [$props.typeMember ? {
+        name: "content",
+        fn: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.typeMember.type), 1
+          /* TEXT */
+          ), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.typeMember.max), 1
+          /* TEXT */
+          ), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.typeMember.description), 1
+          /* TEXT */
+          ), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.typeMember.price), 1
+          /* TEXT */
+          )];
+        })
+      } : undefined]), 1024
+      /* DYNAMIC_SLOTS */
+      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
+        content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
+            modelValue: $setup.form.plat_number,
+            "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+              return $setup.form.plat_number = $event;
+            }),
+            label: "Plat Kendaraan",
+            placeholder: "plat kendaraan",
+            disabled: !$setup.form.type_member_id,
+            error: $setup.form.errors.plat_number
+          }, null, 8
+          /* PROPS */
+          , ["modelValue", "disabled", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
+            modelValue: $setup.form.type_vehicle,
+            "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+              return $setup.form.type_vehicle = $event;
+            }),
+            label: "Jenis Kendaraan",
+            placeholder: "jenis kendaraan",
+            disabled: !$setup.form.type_member_id,
+            error: $setup.form.errors.type_vehicle
+          }, null, 8
+          /* PROPS */
+          , ["modelValue", "disabled", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+            label: "Tambah",
+            "class": "p-button-outlined",
+            icon: "pi pi-car",
+            onClick: $setup.addPlatNumber
+          })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataTable, {
+            "striped-rows": "",
+            "row-hover": "",
+            "responsive-layout": "scroll",
+            "column-resize-mode": "expand",
+            "edit-mode": "cell",
+            value: $setup.listPlatNumber
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.PlatNumberTable, function (platNumberTable) {
+                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Column, {
+                  field: platNumberTable.field,
+                  header: platNumberTable.header,
+                  key: platNumberTable.field
+                }, null, 8
+                /* PROPS */
+                , ["field", "header"]);
+              }), 128
+              /* KEYED_FRAGMENT */
+              )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Column, null, {
+                body: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
+                  var index = _ref.index;
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+                    icon: "pi pi-trash",
+                    "class": "p-button-rounded p-button-text",
+                    onClick: function onClick($event) {
+                      return $setup.listPlatNumberOnDelete(index);
+                    }
+                  }, null, 8
+                  /* PROPS */
+                  , ["onClick"])])];
+                }),
+                _: 1
+                /* STABLE */
+
+              })];
+            }),
+            _: 1
+            /* STABLE */
+
+          }, 8
+          /* PROPS */
+          , ["value"])])])];
+        }),
         footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
             label: "Simpan",
             icon: "pi pi-check",
             "class": "p-button-outlined",
-            disabled: $setup.form.processing,
+            disabled: $setup.form.processing || $setup.listPlatNumber.length === 0,
             onClick: $setup.submit
           }, null, 8
           /* PROPS */
@@ -1304,6 +1533,43 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STABLE_FRAGMENT */
   );
 }
+
+/***/ }),
+
+/***/ "./resources/js/pages/member/TableHeader.js":
+/*!**************************************************!*\
+  !*** ./resources/js/pages/member/TableHeader.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IndexTable": () => (/* binding */ IndexTable),
+/* harmony export */   "PlatNumberTable": () => (/* binding */ PlatNumberTable)
+/* harmony export */ });
+var IndexTable = [{
+  field: 'updatedAt',
+  header: 'Diperbaharui'
+}, {
+  field: 'name',
+  header: 'Nama'
+}, {
+  field: 'phone',
+  header: 'Nomor HP'
+}, {
+  field: 'platNumber',
+  header: 'Plat Kendaraan'
+}, {
+  field: 'type',
+  header: 'Jenis Member'
+}, {
+  field: 'price',
+  header: 'Tarif Member'
+}];
+var PlatNumberTable = [{
+  field: 'platNumber',
+  header: 'Plat Kendaraan'
+}];
 
 /***/ }),
 
@@ -1352,16 +1618,14 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-wallet',
       to: '/expenses',
       component: 'expense/Index'
-    }, {
+    }]
+  }, {
+    label: 'Master',
+    items: [{
       label: 'Jenis Member',
       icon: 'pi pi-id-card',
       to: '/type-members',
       component: 'typemember/Index'
-    }, {
-      label: 'Member',
-      icon: 'pi pi-id-card',
-      to: '/members',
-      component: 'member/Index'
     }]
   }],
   // Operator
@@ -1380,11 +1644,6 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-wallet',
       to: '/expenses',
       component: 'expense/Index'
-    }, {
-      label: 'Jenis Member',
-      icon: 'pi pi-id-card',
-      to: '/type-members',
-      component: 'typemember/Index'
     }, {
       label: 'Member',
       icon: 'pi pi-id-card',

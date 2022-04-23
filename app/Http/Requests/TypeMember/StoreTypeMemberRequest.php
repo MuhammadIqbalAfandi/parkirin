@@ -27,6 +27,7 @@ class StoreTypeMemberRequest extends FormRequest
             'type' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|numeric',
+            'max' => 'required|numeric',
         ];
     }
 }

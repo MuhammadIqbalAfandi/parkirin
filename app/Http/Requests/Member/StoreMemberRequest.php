@@ -26,7 +26,6 @@ class StoreMemberRequest extends FormRequest
         return [
             'name' => 'required|string|max:50',
             'phone' => 'required|numeric|min:12|unique:members,phone',
-            'plat_number' => 'required|string|unique:members,plat_number',
             'type_member_id' => 'required|numeric',
         ];
     }

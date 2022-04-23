@@ -3,4 +3,5 @@ export default [
   { field: 'type', header: 'Jenis Member' },
   { field: 'description', header: 'Keterangan' },
   { field: 'price', header: 'Tarif Member' },
+  { field: 'max', header: 'Maksimal Kendaraan' },
 ]

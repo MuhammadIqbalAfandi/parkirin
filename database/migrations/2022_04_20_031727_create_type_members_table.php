@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('type');
             $table->text('description');
             $table->unsignedInteger('price');
+            $table->unsignedInteger('max');
             $table->timestamps();
         });
     }

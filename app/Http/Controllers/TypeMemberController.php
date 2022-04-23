@@ -22,6 +22,7 @@ class TypeMemberController extends Controller
                 'type' => $typeMember->type,
                 'description' => $typeMember->description,
                 'price' => $typeMember->price,
+                'max' => $typeMember->max,
             ]),
         ]);
     }
@@ -74,6 +75,7 @@ class TypeMemberController extends Controller
                 'type' => $typeMember->type,
                 'description' => $typeMember->description,
                 'price' => $typeMember->getRawOriginal('price'),
+                'max' => $typeMember->max,
             ],
         ]);
     }

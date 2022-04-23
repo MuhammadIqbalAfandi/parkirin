@@ -6,6 +6,8 @@ use App\Http\Requests\Member\StoreMemberRequest;
 use App\Http\Requests\Member\UpdateMemberRequest;
 use App\Models\Member;
 use App\Models\TypeMember;
+use App\Models\TypeVehicle;
+use Inertia\Inertia;
 
 class MemberController extends Controller
 {
@@ -46,6 +48,18 @@ class MemberController extends Controller
                 'label' => $typeMember->type,
                 'value' => $typeMember->id,
             ]),
+            'typeVehicles' => TypeVehicle::get()->transform(fn($typeVehicle) => [
+                'label' => $typeVehicle->type,
+                'value' => $typeVehicle->id,
+            ]),
+            'typeMember' => Inertia::lazy(
+                fn() => TypeMember::filter(request('id'))->get()->transform(fn($typeMember) => [
+                    'type' => $typeMember->type,
+                    'description' => $typeMember->description,
+                    'price' => $typeMember->price,
+                    'max' => $typeMember->max,
+                ])->first()
+            ),
         ]);
     }
 
@@ -57,7 +71,27 @@ class MemberController extends Controller
      */
     public function store(StoreMemberRequest $request)
     {
-        Member::create($request->validated());
+        dd(request());
+
+        $member = Member::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'exp_date' => now()->addDays(30),
+            'type_member_id' => $request->type_member_id,
+        ]);
+
+        $member->topUps()->create([
+            'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
+            'exp_date' => now()->addDays(30),
+            'user_id' => auth()->user()->id,
+        ]);
+
+        foreach ($request->vehicles as $vehicle) {
+            $member->vehicles()->create([
+                'plat_number' => $vehicle['platNumber'],
+                'type_vehicle_id' => $vehicle['typeVehicleId'],
+            ]);
+        }
 
         return back()->with('success', __('messages.success.store.member'));
     }

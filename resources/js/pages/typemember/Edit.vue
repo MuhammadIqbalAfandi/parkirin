@@ -20,6 +20,7 @@ const form = useForm({
   type: props.typeMember.type,
   description: props.typeMember.description,
   price: props.typeMember.price,
+  max: props.typeMember.max,
 })
 
 const submit = () => {
@@ -61,6 +62,15 @@ const submit = () => {
                   v-model="form.description"
                   placeholder="tulis keterangan disini"
                   :error="form.errors.description"
+                />
+              </div>
+
+              <div class="col-12 md:col-6">
+                <AppInputNumber
+                  v-model="form.max"
+                  label="Maksimal Kendaraan"
+                  placeholder="maksimal kendaraan"
+                  :error="form.errors.max"
                 />
               </div>
             </div>

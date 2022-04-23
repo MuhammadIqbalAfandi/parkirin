@@ -23,6 +23,9 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   field: 'price',
   header: 'Tarif Member'
+}, {
+  field: 'max',
+  header: 'Maksimal Kendaraan'
 }]);
 
 /***/ })

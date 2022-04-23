@@ -72,6 +72,7 @@ entity TypeMember {
   * type
   * description
   * price
+  * max
 }
 
 entity TopUp {
@@ -107,6 +108,7 @@ TransactionOut ||--|{ Vehicle
 TransactionOut ||--|{ TypeVehicle
 TransactionOut ||--|{ User
 TypeVehicle ||--|| ParkingFee
+TypeVehicle }|--|| Vehicle
 Expense ||--|| Mutation
 TopUp ||--|| Mutation
 User ||--|{ Role

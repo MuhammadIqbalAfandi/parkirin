@@ -16,6 +16,7 @@ class TypeMember extends Model
         'type',
         'description',
         'price',
+        'max',
     ];
 
     protected function updatedAt(): Attribute
@@ -30,5 +31,12 @@ class TypeMember extends Model
         return Attribute::make(
             get:fn($value) => (new CurrencyFormatService)->setRupiahFormat($value, true)
         );
+    }
+
+    public function scopeFilter($query, $id)
+    {
+        $query->when($id ?? null, function ($query, $id) {
+            $query->where('id', $id);
+        });
     }
 }

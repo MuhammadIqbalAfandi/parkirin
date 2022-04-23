@@ -16,6 +16,7 @@ const form = useForm({
   type: null,
   description: null,
   price: null,
+  max: null,
 })
 
 const submit = () => {
@@ -57,6 +58,15 @@ const submit = () => {
                   label="Keterangan"
                   placeholder="tulis keterangan disini"
                   :error="form.errors.description"
+                />
+              </div>
+
+              <div class="col-12 md:col-6">
+                <AppInputNumber
+                  v-model="form.max"
+                  label="Maksimal Kendaraan"
+                  placeholder="maksimal kendaraan"
+                  :error="form.errors.max"
                 />
               </div>
             </div>

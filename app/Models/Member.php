@@ -30,6 +30,16 @@ class Member extends Model
         return $this->belongsTo(TypeMember::class);
     }
 
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
+
+    public function topUps()
+    {
+        return $this->hasMany(TopUp::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {

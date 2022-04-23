@@ -636,7 +636,8 @@ __webpack_require__.r(__webpack_exports__);
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
       type: null,
       description: null,
-      price: null
+      price: null,
+      max: null
     });
 
     var submit = function submit() {
@@ -1372,6 +1373,9 @@ var _hoisted_7 = {
   "class": "col-12 sm:col-6"
 };
 var _hoisted_8 = {
+  "class": "col-12 md:col-6"
+};
+var _hoisted_9 = {
   "class": "flex flex-column md:flex-row justify-content-end"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1418,10 +1422,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             error: $setup.form.errors.description
           }, null, 8
           /* PROPS */
+          , ["modelValue", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputNumber"], {
+            modelValue: $setup.form.max,
+            "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+              return $setup.form.max = $event;
+            }),
+            label: "Maksimal Kendaraan",
+            placeholder: "maksimal kendaraan",
+            error: $setup.form.errors.max
+          }, null, 8
+          /* PROPS */
           , ["modelValue", "error"])])])];
         }),
         footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
             label: "Simpan",
             icon: "pi pi-check",
             "class": "p-button-outlined",
@@ -1491,16 +1505,14 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-wallet',
       to: '/expenses',
       component: 'expense/Index'
-    }, {
+    }]
+  }, {
+    label: 'Master',
+    items: [{
       label: 'Jenis Member',
       icon: 'pi pi-id-card',
       to: '/type-members',
       component: 'typemember/Index'
-    }, {
-      label: 'Member',
-      icon: 'pi pi-id-card',
-      to: '/members',
-      component: 'member/Index'
     }]
   }],
   // Operator
@@ -1519,11 +1531,6 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-wallet',
       to: '/expenses',
       component: 'expense/Index'
-    }, {
-      label: 'Jenis Member',
-      icon: 'pi pi-id-card',
-      to: '/type-members',
-      component: 'typemember/Index'
     }, {
       label: 'Member',
       icon: 'pi pi-id-card',
