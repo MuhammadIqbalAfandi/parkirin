@@ -33,7 +33,7 @@ defineProps({
         </h2>
       </div>
 
-      <div class="col-auto mr-7">
+      <div class="col-auto">
         <h2>
           <span class="text-base"> <i class="pi pi-at" /> Email</span>
 
@@ -42,8 +42,10 @@ defineProps({
           <span class="text-lg">{{ expense.user.email }}</span>
         </h2>
       </div>
+    </div>
 
-      <div class="col-auto">
+    <div class="grid">
+      <div class="col-12">
         <h2 class="mb-4">
           <span class="text-base">
             <i class="pi pi-wallet red-700" />
