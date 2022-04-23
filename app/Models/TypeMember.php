@@ -14,6 +14,7 @@ class TypeMember extends Model
 
     protected $fillable = [
         'type',
+        'description',
         'price',
     ];
 

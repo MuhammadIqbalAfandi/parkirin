@@ -70,6 +70,7 @@ entity TypeMember {
   * id
   __
   * type
+  * description
   * price
 }
 

@@ -4,6 +4,7 @@ import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
 import AppLayout from '@/layouts/AppLayout.vue'
 import AppInputText from '@/components/AppInputText.vue'
 import AppInputNumber from '@/components/AppInputNumber.vue'
+import AppTextArea from '@/components/AppTextArea.vue'
 
 const errors = computed(() => usePage().props.value.errors)
 
@@ -13,6 +14,7 @@ watch(errors, () => {
 
 const form = useForm({
   type: null,
+  description: null,
   price: null,
 })
 
@@ -46,6 +48,15 @@ const submit = () => {
                   label="Tarif Member"
                   placeholder="tarif member"
                   :error="form.errors.price"
+                />
+              </div>
+
+              <div class="col-12 sm:col-6">
+                <AppTextArea
+                  v-model="form.description"
+                  label="Keterangan"
+                  placeholder="tulis keterangan disini"
+                  :error="form.errors.description"
                 />
               </div>
             </div>

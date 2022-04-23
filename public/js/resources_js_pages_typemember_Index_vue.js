@@ -1079,6 +1079,9 @@ __webpack_require__.r(__webpack_exports__);
   field: 'type',
   header: 'Jenis Member'
 }, {
+  field: 'description',
+  header: 'Keterangan'
+}, {
   field: 'price',
   header: 'Tarif Member'
 }]);

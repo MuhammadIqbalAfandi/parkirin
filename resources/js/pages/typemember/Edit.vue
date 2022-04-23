@@ -4,6 +4,7 @@ import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
 import AppLayout from '@/layouts/AppLayout.vue'
 import AppInputText from '@/components/AppInputText.vue'
 import AppInputNumber from '@/components/AppInputNumber.vue'
+import AppTextArea from '@/components/AppTextArea.vue'
 
 const props = defineProps({
   typeMember: Object,
@@ -17,6 +18,7 @@ watch(errors, () => {
 
 const form = useForm({
   type: props.typeMember.type,
+  description: props.typeMember.description,
   price: props.typeMember.price,
 })
 
@@ -50,6 +52,15 @@ const submit = () => {
                   label="Tarif Member"
                   placeholder="tarif member"
                   :error="form.errors.price"
+                />
+              </div>
+
+              <div class="col-12 sm:col-6">
+                <AppTextArea
+                  label="Keterangan"
+                  v-model="form.description"
+                  placeholder="tulis keterangan disini"
+                  :error="form.errors.description"
                 />
               </div>
             </div>

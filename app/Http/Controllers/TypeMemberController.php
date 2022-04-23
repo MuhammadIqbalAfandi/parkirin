@@ -20,6 +20,7 @@ class TypeMemberController extends Controller
                 'id' => $typeMember->id,
                 'updatedAt' => $typeMember->updated_at,
                 'type' => $typeMember->type,
+                'description' => $typeMember->description,
                 'price' => $typeMember->price,
             ]),
         ]);
@@ -71,6 +72,7 @@ class TypeMemberController extends Controller
             'typeMember' => [
                 'id' => $typeMember->id,
                 'type' => $typeMember->type,
+                'description' => $typeMember->description,
                 'price' => $typeMember->getRawOriginal('price'),
             ],
         ]);
