@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('top_ups', function (Blueprint $table) {
+        Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('amount');
-            $table->dateTime('exp_date');
+            $table->string('plat_number');
             $table->foreignId('member_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('type_vehicle_id')->constrained();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topups');
+        Schema::dropIfExists('vehicles');
     }
 };

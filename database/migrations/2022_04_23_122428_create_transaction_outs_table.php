@@ -13,17 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('transaction_outs', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('login_time');
-            $table->dateTime('time_out');
-            $table->unsignedInteger('price');
-            $table->string('plat_number')->unique();
-            $table->string('input_by');
-            $table->string('capture_vehicle');
+            $table->string('plat_number');
+            $table->foreignId('transaction_in_id')->constrained();
             $table->foreignId('type_vehicle_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('member_id')->nullable()->default(null)->constrained();
             $table->timestamps();
         });
     }
@@ -35,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tansactions');
+        Schema::dropIfExists('transaction_outs');
     }
 };

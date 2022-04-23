@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('top_ups', function (Blueprint $table) {
+        Schema::create('mutations', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
             $table->unsignedInteger('amount');
-            $table->dateTime('exp_date');
-            $table->foreignId('member_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('transaction_out')->nullable()->default(null)->constrained();
+            $table->foreignId('expense_id')->nullable()->default(null)->constrained();
+            $table->foreignId('top_up_id')->nullable()->default(null)->constrained();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topups');
+        Schema::dropIfExists('mutations');
     }
 };

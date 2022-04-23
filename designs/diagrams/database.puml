@@ -1,5 +1,22 @@
 @startuml Database
 
+entity TransactionIn {
+  * id
+  __
+  * capture_vehicle
+  * transaction_number
+}
+
+entity TransactionOut {
+  * id
+  __
+  * plat_number
+  price
+  * transaction_in_id
+  type_vehicle_id
+  * user_id
+}
+
 entity User {
   * id
   __
@@ -17,15 +34,6 @@ entity Role {
   * name
 }
 
-entity Member {
-  * id
-  __
-  * name
-  * phone
-  * plat_number
-  * type_member_id
-}
-
 entity TypeVehicle {
   * id
   __
@@ -40,18 +48,38 @@ entity ParkingFee {
   * type_vehicle_id
 }
 
-entity Transaction {
+entity Member {
   * id
   __
-  * capture_vehicle
-  * transaction_number
-  * login_time
-  time_out
-  plat_number
-  price
-  type_vehicle_id
-  user_id
-  member_id
+  * name
+  * phone
+  * exp_date
+  * type_member_id
+}
+
+entity Vehicle {
+  * id
+  __
+  * plat_number
+  * member_id
+  * type_vehicle_id
+}
+
+
+entity TypeMember {
+  * id
+  __
+  * type
+  * price
+}
+
+entity TopUp {
+  * id
+  __
+  * amount
+  * exp_date
+  * member_id
+  * user_id
 }
 
 entity Expense {
@@ -67,31 +95,16 @@ entity Mutation {
   __
   * type
   * amount
-  transaction_id
+  transaction_out_id
   expense_id
   topup_id
 }
 
-entity TopUp {
-  * id
-  __
-  * balance
-  * exp_date
-  * member_id
-  * user_id
-}
-
-entity TypeMember {
-  * id
-  __
-  * type
-  * price
-}
-
-Transaction ||--|{ Member
-Transaction ||--|{ TypeVehicle
-Transaction ||--|| Mutation
-Transaction ||--|{ User
+TransactionIn ||--|| TransactionOut
+TransactionOut ||--|| Mutation
+TransactionOut ||--|| Vehicle
+TransactionOut ||--|{ TypeVehicle
+TransactionOut ||--|{ User
 TypeVehicle }|--|| ParkingFee
 Expense ||--|| Mutation
 TopUp ||--|| Mutation
@@ -99,4 +112,5 @@ User ||--|{ Role
 User }|--|| TopUp
 User }|--|| Expense
 Member }|--|| TopUp
-Member ||--|| TypeMember
+Member }|--|| TypeMember
+Member }|--|| Vehicle

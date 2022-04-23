@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone')->unique();
-            $table->string('plat_number')->unique();
+            $table->dateTime('exp_date');
             $table->foreignId('type_member_id')->constrained();
             $table->timestamps();
         });
