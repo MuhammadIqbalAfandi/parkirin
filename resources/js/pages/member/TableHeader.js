@@ -5,6 +5,10 @@ export const IndexTable = [
   { field: 'platNumber', header: 'Plat Kendaraan' },
   { field: 'type', header: 'Jenis Member' },
   { field: 'price', header: 'Tarif Member' },
+  { field: 'expDate', header: 'Berakhir' },
 ]
 
-export const PlatNumberTable = [{ field: 'platNumber', header: 'Plat Kendaraan' }]
+export const PlatNumberTable = [
+  { field: 'platNumber', header: 'Plat Kendaraan' },
+  { field: 'typeVehicle', header: 'Jenis Kendaraan' },
+]

@@ -7,6 +7,8 @@ use App\Http\Requests\Member\UpdateMemberRequest;
 use App\Models\Member;
 use App\Models\TypeMember;
 use App\Models\TypeVehicle;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class MemberController extends Controller
@@ -29,9 +31,10 @@ class MemberController extends Controller
                     'updatedAt' => $member->updated_at,
                     'name' => $member->name,
                     'phone' => $member->phone,
-                    'platNumber' => $member->plat_number,
+                    'platNumber' => $member->vehicleDetail(),
                     'type' => $member->typeMember->type,
                     'price' => $member->typeMember->price,
+                    'expDate' => $member->exp_date,
                 ]),
         ]);
     }
@@ -71,29 +74,42 @@ class MemberController extends Controller
      */
     public function store(StoreMemberRequest $request)
     {
-        dd(request());
+        DB::beginTransaction();
 
-        $member = Member::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'exp_date' => now()->addDays(30),
-            'type_member_id' => $request->type_member_id,
-        ]);
-
-        $member->topUps()->create([
-            'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
-            'exp_date' => now()->addDays(30),
-            'user_id' => auth()->user()->id,
-        ]);
-
-        foreach ($request->vehicles as $vehicle) {
-            $member->vehicles()->create([
-                'plat_number' => $vehicle['platNumber'],
-                'type_vehicle_id' => $vehicle['typeVehicleId'],
+        try {
+            $member = Member::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'exp_date' => now()->addDays(30),
+                'type_member_id' => $request->type_member_id,
             ]);
-        }
 
-        return back()->with('success', __('messages.success.store.member'));
+            foreach ($request->vehicles as $vehicle) {
+                $member->vehicles()->create([
+                    'plat_number' => $vehicle['platNumber'],
+                    'type_vehicle_id' => $vehicle['typeVehicleId'],
+                ]);
+            }
+
+            $topUp = $member->topUps()->create([
+                'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
+                'exp_date' => now()->addDays(30),
+                'user_id' => auth()->user()->id,
+            ]);
+
+            $topUp->mutation()->create([
+                'type' => 1,
+                'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
+            ]);
+
+            DB::commit();
+
+            return back()->with('success', __('messages.success.store.member'));
+        } catch (QueryException $e) {
+            DB::rollBack();
+
+            return back()->with('success', __('messages.error.store.member'));
+        }
     }
 
     /**
@@ -120,13 +136,7 @@ class MemberController extends Controller
                 'id' => $member->id,
                 'name' => $member->name,
                 'phone' => $member->phone,
-                'plat_number' => $member->plat_number,
-                'type_member_id' => $member->type_member_id,
             ],
-            'typeMembers' => TypeMember::get()->transform(fn($typeMember) => [
-                'label' => $typeMember->type,
-                'value' => $typeMember->id,
-            ]),
         ]);
     }
 
@@ -150,7 +160,7 @@ class MemberController extends Controller
      * @param  Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function destroy($member)
+    public function destroy(Member $member)
     {
         $member->delete();
 

@@ -4,12 +4,10 @@ import { Inertia } from '@inertiajs/inertia'
 import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
 import AppLayout from '@/layouts/AppLayout.vue'
 import AppDialog from '@/components/AppDialog.vue'
-import AppDropdown from '@/components/AppDropdown.vue'
 import AppInputText from '@/components/AppInputText.vue'
 
 const props = defineProps({
   member: Object,
-  typeMembers: Array,
 })
 
 const errors = computed(() => usePage().props.value.errors)
@@ -24,15 +22,13 @@ const confirmDialog = () => {
   visibleDialog.value = true
 }
 
-const onAgree = () => Inertia.delete(route('users.destroy', props.member.id))
+const onAgree = () => Inertia.delete(route('members.destroy', props.member.id))
 
 const onCancel = () => (visibleDialog.value = false)
 
 const form = useForm({
   name: props.member.name,
   phone: props.member.phone,
-  plat_number: props.member.plat_number,
-  type_member_id: props.member.type_member_id,
 })
 
 const submit = () => {
@@ -56,25 +52,6 @@ const submit = () => {
 
               <div class="col-12 md:col-6">
                 <AppInputText v-model="form.phone" label="Nomor HP" placeholder="nomor hp" :error="form.errors.phone" />
-              </div>
-
-              <div class="col-12 md:col-6">
-                <AppInputText
-                  v-model="form.plat_number"
-                  label="Plat Kendaraan"
-                  placeholder="plat kendaraan"
-                  :error="form.errors.plat_number"
-                />
-              </div>
-
-              <div class="col-12 md:col-6">
-                <AppDropdown
-                  label="Jenis member"
-                  placeholder="pilih satu"
-                  v-model="form.type_member_id"
-                  :options="typeMembers"
-                  :error="form.errors.type_member_id"
-                />
               </div>
             </div>
           </template>

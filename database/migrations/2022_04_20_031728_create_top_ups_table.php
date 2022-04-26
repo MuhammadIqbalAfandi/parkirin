@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('amount');
             $table->dateTime('exp_date');
-            $table->foreignId('member_id')->constrained();
+            $table->foreignId('member_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

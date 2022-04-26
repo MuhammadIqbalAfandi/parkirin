@@ -538,39 +538,59 @@ __webpack_require__.r(__webpack_exports__);
 
     var listPlatNumberOnDelete = function listPlatNumberOnDelete(index) {
       listPlatNumber.splice(index, 1);
+      (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.usePage)().props.value.errors = {};
     };
 
     var addPlatNumber = function addPlatNumber() {
-      form.clearErrors('plat_number');
+      form.clearErrors('plat_number', 'type_vehicle_id');
 
-      if (form.plat_number) {
-        if (listPlatNumber.length + 1 > props.typeMember.max) {
-          form.setError('plat_number', 'Melibihi batas maksimal kendaraan');
-          return;
-        }
-
-        listPlatNumber.push({
-          platNumber: form.plat_number,
-          typeVehicleId: form.type_member_id
-        });
-        form.reset('plat_number');
-      } else {
+      if (!form.plat_number) {
         form.setError('plat_number', 'Plat kendaraan tidak boleh kosong');
+        return;
       }
+
+      if (!form.type_vehicle_id) {
+        form.setError('type_vehicle_id', 'Tidak boleh kosong');
+        return;
+      }
+
+      var listPlatNumberExist = listPlatNumber.filter(function (val) {
+        return val.platNumber === form.plat_number.toUpperCase();
+      });
+
+      if (listPlatNumberExist.length) {
+        form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama');
+        return;
+      }
+
+      if (listPlatNumber.length + 1 > props.typeMember.max) {
+        form.setError('plat_number', 'Melibihi batas maksimal kendaraan');
+        return;
+      }
+
+      var typeVehicleFilter = props.typeVehicles.filter(function (val) {
+        return val.value === form.type_vehicle_id;
+      })[0];
+      listPlatNumber.push({
+        platNumber: form.plat_number.toUpperCase(),
+        typeVehicle: typeVehicleFilter.label,
+        typeVehicleId: typeVehicleFilter.value
+      });
+      form.reset('plat_number', 'type_vehicle_id');
     };
 
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)({
       name: null,
       phone: null,
       plat_number: null,
-      type_vehicle: null,
+      type_vehicle_id: null,
       type_member_id: null
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
       return form.type_member_id;
     }, function () {
       listPlatNumberClear();
-      form.reset('plat_number');
+      form.reset('plat_number', 'type_vehicle_id');
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
         only: ['typeMember'],
         data: {
@@ -584,7 +604,7 @@ __webpack_require__.r(__webpack_exports__);
         return {
           name: data.name,
           phone: data.phone,
-          plat_numbers: listPlatNumber,
+          vehicles: listPlatNumber,
           type_member_id: data.type_member_id
         };
       }).post(route('members.store'), {
@@ -1354,9 +1374,14 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_22 = {
-  "class": "flex justify-content-end"
+  style: {
+    "color": "#b71c1c"
+  }
 };
 var _hoisted_23 = {
+  "class": "flex justify-content-end"
+};
+var _hoisted_24 = {
   "class": "flex flex-column md:flex-row justify-content-end"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1450,23 +1475,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             error: $setup.form.errors.plat_number
           }, null, 8
           /* PROPS */
-          , ["modelValue", "disabled", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
-            modelValue: $setup.form.type_vehicle,
+          , ["modelValue", "disabled", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppDropdown"], {
+            modelValue: $setup.form.type_vehicle_id,
             "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-              return $setup.form.type_vehicle = $event;
+              return $setup.form.type_vehicle_id = $event;
             }),
             label: "Jenis Kendaraan",
             placeholder: "jenis kendaraan",
             disabled: !$setup.form.type_member_id,
-            error: $setup.form.errors.type_vehicle
+            options: $props.typeVehicles,
+            error: $setup.form.errors.type_vehicle_id
           }, null, 8
           /* PROPS */
-          , ["modelValue", "disabled", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+          , ["modelValue", "disabled", "options", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
             label: "Tambah",
             "class": "p-button-outlined",
             icon: "pi pi-car",
+            disabled: !$setup.form.type_member_id,
             onClick: $setup.addPlatNumber
-          })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataTable, {
+          }, null, 8
+          /* PROPS */
+          , ["disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataTable, {
             "striped-rows": "",
             "row-hover": "",
             "responsive-layout": "scroll",
@@ -1488,15 +1517,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Column, null, {
                 body: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
                   var index = _ref.index;
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.errors["vehicles.".concat(index, ".platNumber")]), 1
+                  /* TEXT */
+                  )];
+                }),
+                _: 1
+                /* STABLE */
+
+              }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Column, null, {
+                body: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref2) {
+                  var index = _ref2.index,
+                      data = _ref2.data;
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
                     icon: "pi pi-trash",
-                    "class": "p-button-rounded p-button-text",
+                    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["p-button-rounded p-button-text", {
+                      'p-button-danger': _ctx.$page.props.errors["vehicles.".concat(index, ".platNumber")]
+                    }]),
                     onClick: function onClick($event) {
-                      return $setup.listPlatNumberOnDelete(index);
+                      return $setup.listPlatNumberOnDelete(data.platNumber);
                     }
                   }, null, 8
                   /* PROPS */
-                  , ["onClick"])])];
+                  , ["class", "onClick"])])];
                 }),
                 _: 1
                 /* STABLE */
@@ -1511,7 +1553,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           , ["value"])])])];
         }),
         footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
             label: "Simpan",
             icon: "pi pi-check",
             "class": "p-button-outlined",
@@ -1565,10 +1607,16 @@ var IndexTable = [{
 }, {
   field: 'price',
   header: 'Tarif Member'
+}, {
+  field: 'expDate',
+  header: 'Berakhir'
 }];
 var PlatNumberTable = [{
   field: 'platNumber',
   header: 'Plat Kendaraan'
+}, {
+  field: 'typeVehicle',
+  header: 'Jenis Kendaraan'
 }];
 
 /***/ }),

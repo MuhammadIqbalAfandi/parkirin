@@ -50,6 +50,7 @@ return [
 
     'error' => [
         'store' => [
+            'member' => 'member gagal ditambahkan',
             'change_password' => 'Password lama salah',
             'expense' => 'Pengeluaran gagal ditambahkan',
             'transaction' => 'Transaksi gagal ditambahkan',

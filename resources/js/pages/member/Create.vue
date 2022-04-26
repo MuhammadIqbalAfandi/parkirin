@@ -28,31 +28,53 @@ const listPlatNumberClear = () => {
 
 const listPlatNumberOnDelete = (index) => {
   listPlatNumber.splice(index, 1)
+
+  usePage().props.value.errors = {}
 }
 
 const addPlatNumber = () => {
-  form.clearErrors('plat_number')
+  form.clearErrors('plat_number', 'type_vehicle_id')
 
-  if (form.plat_number) {
-    if (listPlatNumber.length + 1 > props.typeMember.max) {
-      form.setError('plat_number', 'Melibihi batas maksimal kendaraan')
-
-      return
-    }
-
-    listPlatNumber.push({ platNumber: form.plat_number, typeVehicleId: form.type_member_id })
-
-    form.reset('plat_number')
-  } else {
+  if (!form.plat_number) {
     form.setError('plat_number', 'Plat kendaraan tidak boleh kosong')
+
+    return
   }
+
+  if (!form.type_vehicle_id) {
+    form.setError('type_vehicle_id', 'Tidak boleh kosong')
+
+    return
+  }
+
+  const listPlatNumberExist = listPlatNumber.filter((val) => val.platNumber === form.plat_number.toUpperCase())
+  if (listPlatNumberExist.length) {
+    form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama')
+
+    return
+  }
+
+  if (listPlatNumber.length + 1 > props.typeMember.max) {
+    form.setError('plat_number', 'Melibihi batas maksimal kendaraan')
+
+    return
+  }
+
+  const typeVehicleFilter = props.typeVehicles.filter((val) => val.value === form.type_vehicle_id)[0]
+  listPlatNumber.push({
+    platNumber: form.plat_number.toUpperCase(),
+    typeVehicle: typeVehicleFilter.label,
+    typeVehicleId: typeVehicleFilter.value,
+  })
+
+  form.reset('plat_number', 'type_vehicle_id')
 }
 
 const form = useForm({
   name: null,
   phone: null,
   plat_number: null,
-  type_vehicle: null,
+  type_vehicle_id: null,
   type_member_id: null,
 })
 
@@ -60,7 +82,7 @@ watch(
   () => form.type_member_id,
   () => {
     listPlatNumberClear()
-    form.reset('plat_number')
+    form.reset('plat_number', 'type_vehicle_id')
 
     Inertia.reload({ only: ['typeMember'], data: { id: form.type_member_id } })
   }
@@ -71,7 +93,7 @@ const submit = () => {
     .transform((data) => ({
       name: data.name,
       phone: data.phone,
-      plat_numbers: listPlatNumber,
+      vehicles: listPlatNumber,
       type_member_id: data.type_member_id,
     }))
     .post(route('members.store'), {
@@ -156,16 +178,23 @@ const submit = () => {
                 />
               </div>
               <div class="col-12 md:col-6">
-                <AppInputText
-                  v-model="form.type_vehicle"
+                <AppDropdown
+                  v-model="form.type_vehicle_id"
                   label="Jenis Kendaraan"
                   placeholder="jenis kendaraan"
                   :disabled="!form.type_member_id"
-                  :error="form.errors.type_vehicle"
+                  :options="typeVehicles"
+                  :error="form.errors.type_vehicle_id"
                 />
               </div>
               <div class="col-12 flex flex-column md:flex-row md:align-items-center justify-content-end mb-3 md:mb-0">
-                <Button label="Tambah" class="p-button-outlined" icon="pi pi-car" @click="addPlatNumber" />
+                <Button
+                  label="Tambah"
+                  class="p-button-outlined"
+                  icon="pi pi-car"
+                  :disabled="!form.type_member_id"
+                  @click="addPlatNumber"
+                />
               </div>
               <div class="col-12">
                 <h1 class="text-base"><i class="pi pi-car"></i> <span class="ml-2">Daftar Plat Kendaraan</span></h1>
@@ -187,11 +216,18 @@ const submit = () => {
 
                   <Column>
                     <template #body="{ index }">
+                      <span style="color: #b71c1c">{{ $page.props.errors[`vehicles.${index}.platNumber`] }}</span>
+                    </template>
+                  </Column>
+
+                  <Column>
+                    <template #body="{ index, data }">
                       <div class="flex justify-content-end">
                         <Button
                           icon="pi pi-trash"
                           class="p-button-rounded p-button-text"
-                          @click="listPlatNumberOnDelete(index)"
+                          :class="{ 'p-button-danger': $page.props.errors[`vehicles.${index}.platNumber`] }"
+                          @click="listPlatNumberOnDelete(data.platNumber)"
                         />
                       </div>
                     </template>

@@ -26,6 +26,13 @@ class TypeMember extends Model
         );
     }
 
+    protected function type(): Attribute
+    {
+        return Attribute::make(
+            set:fn($value) => ucwords($value)
+        );
+    }
+
     protected function price(): Attribute
     {
         return Attribute::make(

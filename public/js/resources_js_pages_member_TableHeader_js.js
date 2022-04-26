@@ -30,10 +30,16 @@ var IndexTable = [{
 }, {
   field: 'price',
   header: 'Tarif Member'
+}, {
+  field: 'expDate',
+  header: 'Berakhir'
 }];
 var PlatNumberTable = [{
   field: 'platNumber',
   header: 'Plat Kendaraan'
+}, {
+  field: 'typeVehicle',
+  header: 'Jenis Kendaraan'
 }];
 
 /***/ })

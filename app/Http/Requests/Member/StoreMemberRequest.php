@@ -27,6 +27,7 @@ class StoreMemberRequest extends FormRequest
             'name' => 'required|string|max:50',
             'phone' => 'required|numeric|min:12|unique:members,phone',
             'type_member_id' => 'required|numeric',
+            'vehicles.*.platNumber' => 'unique:vehicles,plat_number',
         ];
     }
 }

@@ -21,4 +21,11 @@ class TypeVehicle extends Model
             get:fn($value) => Carbon::parse($value)->translatedFormat('l d/m/Y')
         );
     }
+
+    protected function type(): Attribute
+    {
+        return Attribute::make(
+            set:fn($value) => ucwords($value)
+        );
+    }
 }
