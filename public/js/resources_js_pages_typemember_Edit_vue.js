@@ -1514,6 +1514,11 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-id-card',
       to: '/type-members',
       component: 'typemember/Index'
+    }, {
+      label: 'Jenis Kendaraan',
+      icon: 'pi pi-car',
+      to: '/type-vehicles',
+      component: 'typevehicle/Index'
     }]
   }],
   // Operator

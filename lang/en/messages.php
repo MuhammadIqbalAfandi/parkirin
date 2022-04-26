@@ -22,6 +22,7 @@ return [
             'verify_email' => 'Email Verification link successfully sent',
         ],
         'store' => [
+            'type_vehicle' => 'Type vehicle successfully added',
             'top_up' => 'Top Up successfully',
             'member' => 'Member successfully added',
             'type_member' => 'Jenis member successfully added',
@@ -31,6 +32,7 @@ return [
             'user' => 'User Account successfully added',
         ],
         'update' => [
+            'type_vehicle' => 'Type vehicle successfully changed',
             'top_up' => 'Top Up successfully changed',
             'member' => 'Member successfully changed',
             'type_member' => 'Jenis member successfully changed',
@@ -39,6 +41,7 @@ return [
             'user' => 'User Account successfully changed',
         ],
         'destroy' => [
+            'type_vehicle' => 'Type vehicle successfully deleted',
             'top_up' => 'Top Up successfully deleted',
             'member' => 'Member Account successfully deleted',
             'user' => 'User Account successfully deleted',

@@ -5,6 +5,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TopUpController;
 use App\Http\Controllers\TypeMemberController;
+use App\Http\Controllers\TypeVehicleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,17 +25,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboards', DashboardController::class);
 
-    Route::delete('/users/block/{user}', [UserController::class, 'block'])->name('users.block');
-    Route::post('/users/change-password/{user}', [UserController::class, 'changePassword'])->name('users.change-password');
-    Route::resource('/users', UserController::class);
-
     Route::resource('/expenses', ExpenseController::class);
-
-    Route::resource('/type-members', TypeMemberController::class);
 
     Route::resource('/members', MemberController::class);
 
     Route::resource('/top-ups', TopUpController::class);
+
+    Route::delete('/users/block/{user}', [UserController::class, 'block'])->name('users.block');
+    Route::post('/users/change-password/{user}', [UserController::class, 'changePassword'])->name('users.change-password');
+    Route::resource('/users', UserController::class);
+
+    Route::resource('/type-members', TypeMemberController::class);
+
+    Route::resource('/type-vehicles', TypeVehicleController::class);
 });
 
 require __DIR__ . '/auth.php';

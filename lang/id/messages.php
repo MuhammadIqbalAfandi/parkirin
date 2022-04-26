@@ -22,6 +22,7 @@ return [
             'verify_email' => 'Link verifikasi email berhasil terkirim',
         ],
         'store' => [
+            'type_vehicle' => 'Jenis kendaraan berhasil ditambahkan',
             'top_up' => 'Top Up berhasil',
             'member' => 'Member berhasil ditambahkan',
             'type_member' => 'Jenis member berhasil ditambahkan',
@@ -31,6 +32,7 @@ return [
             'user' => 'Akun user berhasil ditambahkan',
         ],
         'update' => [
+            'type_vehicle' => 'Jenis kendaraan berhasil diubah',
             'top_up' => 'Top Up berhasil diubah',
             'member' => 'Member berhasil diubah',
             'type_member' => 'Jenis member berhasil diubah',
@@ -39,6 +41,7 @@ return [
             'user' => 'Akun user berhasil diubah',
         ],
         'destroy' => [
+            'type_vehicle' => 'Jenis kendaraan berhasil dihapus',
             'top_up' => 'Top Up berhasil dihapus',
             'member' => 'Akun member berhasil dihapus',
             'user' => 'Akun user berhasil dihapus',

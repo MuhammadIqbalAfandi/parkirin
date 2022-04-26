@@ -57912,6 +57912,38 @@ var map = {
 		"./resources/js/pages/typemember/TableHeader.js",
 		"resources_js_pages_typemember_TableHeader_js"
 	],
+	"./typevehicle/Create": [
+		"./resources/js/pages/typevehicle/Create.vue",
+		"resources_js_pages_typevehicle_Create_vue"
+	],
+	"./typevehicle/Create.vue": [
+		"./resources/js/pages/typevehicle/Create.vue",
+		"resources_js_pages_typevehicle_Create_vue"
+	],
+	"./typevehicle/Edit": [
+		"./resources/js/pages/typevehicle/Edit.vue",
+		"resources_js_pages_typevehicle_Edit_vue"
+	],
+	"./typevehicle/Edit.vue": [
+		"./resources/js/pages/typevehicle/Edit.vue",
+		"resources_js_pages_typevehicle_Edit_vue"
+	],
+	"./typevehicle/Index": [
+		"./resources/js/pages/typevehicle/Index.vue",
+		"resources_js_pages_typevehicle_Index_vue"
+	],
+	"./typevehicle/Index.vue": [
+		"./resources/js/pages/typevehicle/Index.vue",
+		"resources_js_pages_typevehicle_Index_vue"
+	],
+	"./typevehicle/TableHeader": [
+		"./resources/js/pages/typevehicle/TableHeader.js",
+		"resources_js_pages_typevehicle_TableHeader_js"
+	],
+	"./typevehicle/TableHeader.js": [
+		"./resources/js/pages/typevehicle/TableHeader.js",
+		"resources_js_pages_typevehicle_TableHeader_js"
+	],
 	"./user/Create": [
 		"./resources/js/pages/user/Create.vue",
 		"resources_js_pages_user_Create_vue"
@@ -58069,7 +58101,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"node_modules_chart_js_auto_auto_esm_js":"10c6b388645ceb22","resources_js_pages_auth_ForgotPassword_vue":"5b9f0529bda25a9b","resources_js_pages_auth_Login_vue":"61b9c9ae1ae9da32","resources_js_pages_auth_ResetPassword_vue":"b091193a1e114ce8","resources_js_pages_auth_VerifyEmail_vue":"a7b9a99e5a331088","resources_js_pages_expense_Create_vue":"54b97ae6c316abfa","resources_js_pages_expense_Index_vue":"7e4675bef5384e18","resources_js_pages_expense_Show_vue":"076b6af6a74ae394","resources_js_pages_expense_TableHeader_js":"eed3f0613f167cfd","resources_js_pages_home_Index_vue":"974feaa7a6242a6a","resources_js_pages_member_Create_vue":"b82c7658d250d1e9","resources_js_pages_member_Edit_vue":"112590bfb9d36785","resources_js_pages_member_Index_vue":"7311f392b54954c7","resources_js_pages_member_TableHeader_js":"9e189bc69c98169d","resources_js_pages_topup_Create_vue":"e41982f4330265c4","resources_js_pages_topup_Edit_vue":"258c3b0746574dc0","resources_js_pages_topup_Index_vue":"6be7c2a056e3e85a","resources_js_pages_topup_Show_vue":"cb35ad21e9ce163f","resources_js_pages_topup_TableHeader_js":"c803a04362b71855","resources_js_pages_typemember_Create_vue":"df16d8a936e5a9aa","resources_js_pages_typemember_Edit_vue":"38e1734003de8485","resources_js_pages_typemember_Index_vue":"1bfac1a233119d8e","resources_js_pages_typemember_TableHeader_js":"de81088b132d3e90","resources_js_pages_user_Create_vue":"6fffb95dab72cc3b","resources_js_pages_user_Edit_vue":"7e8601af1be1d211","resources_js_pages_user_Index_vue":"a82ee15061ab051d","resources_js_pages_user_Show_vue":"5c3fc30a8d575515","resources_js_pages_user_TableHeader_js":"0d87fd422fe40491"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"node_modules_chart_js_auto_auto_esm_js":"10c6b388645ceb22","resources_js_pages_auth_ForgotPassword_vue":"5b9f0529bda25a9b","resources_js_pages_auth_Login_vue":"61b9c9ae1ae9da32","resources_js_pages_auth_ResetPassword_vue":"b091193a1e114ce8","resources_js_pages_auth_VerifyEmail_vue":"a7b9a99e5a331088","resources_js_pages_expense_Create_vue":"1772093ec9ad8e1f","resources_js_pages_expense_Index_vue":"51f7facd5c3c3ea6","resources_js_pages_expense_Show_vue":"6e60ec4571b580bb","resources_js_pages_expense_TableHeader_js":"eed3f0613f167cfd","resources_js_pages_home_Index_vue":"6cd0224828ac8129","resources_js_pages_member_Create_vue":"e560dbe95154c5fa","resources_js_pages_member_Edit_vue":"05b5081c82d41225","resources_js_pages_member_Index_vue":"80015a0d2c0ee954","resources_js_pages_member_TableHeader_js":"9e189bc69c98169d","resources_js_pages_topup_Create_vue":"9d958cbaf19eb892","resources_js_pages_topup_Edit_vue":"258c3b0746574dc0","resources_js_pages_topup_Index_vue":"5c7eced88af886fa","resources_js_pages_topup_Show_vue":"cb35ad21e9ce163f","resources_js_pages_topup_TableHeader_js":"c803a04362b71855","resources_js_pages_typemember_Create_vue":"79728a0314d12450","resources_js_pages_typemember_Edit_vue":"94fb9b5b49338c01","resources_js_pages_typemember_Index_vue":"cd93651ebf36d5a5","resources_js_pages_typemember_TableHeader_js":"de81088b132d3e90","resources_js_pages_typevehicle_Create_vue":"0f937d93865a1ea2","resources_js_pages_typevehicle_Edit_vue":"edba97a3715ba957","resources_js_pages_typevehicle_Index_vue":"53c702d33feb6196","resources_js_pages_typevehicle_TableHeader_js":"a40378918fbe74e1","resources_js_pages_user_Create_vue":"361bf2589467f820","resources_js_pages_user_Edit_vue":"fdb844cf830ec11c","resources_js_pages_user_Index_vue":"16d93eb7e5210300","resources_js_pages_user_Show_vue":"138fd92d6ae36518","resources_js_pages_user_TableHeader_js":"0d87fd422fe40491"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	
