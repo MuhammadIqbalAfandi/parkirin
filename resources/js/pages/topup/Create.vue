@@ -1,19 +1,15 @@
 <script setup>
-import { computed, watch, ref } from 'vue'
+import { computed, watch } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
 import AppAutocompleteBasic from '@/components/AppAutocompleteBasic.vue'
-import AppInputNumber from '@/components/AppInputNumber.vue'
-import AppDropdown from '@/components/AppDropdown.vue'
-import AppInputText from '@/components/AppInputText.vue'
+import AppLayout from '@/layouts/AppLayout.vue'
 
 defineProps({
   members: {
     type: Array,
     default: [],
   },
-  typeMembers: Array,
 })
 
 const errors = computed(() => usePage().props.value.errors)
@@ -21,18 +17,6 @@ const errors = computed(() => usePage().props.value.errors)
 watch(errors, () => {
   form.clearErrors()
 })
-
-const memberDialogShow = ref(false)
-
-const memberDialogOnHide = () => {
-  formMember.reset()
-
-  formMember.clearErrors()
-
-  usePage().props.value.errors = {}
-
-  usePage().props.value.flash.error = null
-}
 
 const memberOnComplete = (event) => {
   Inertia.reload({
@@ -45,35 +29,16 @@ const memberOnSelected = (event) => {
   form.member = event.value
 }
 
-const formMember = useForm({
-  name: null,
-  phone: null,
-  plat_number: null,
-  type_member_id: null,
-})
-
-const submitMember = () => {
-  formMember.post(route('members.store'), {
-    onSuccess: () => {
-      formMember.reset()
-
-      memberDialogShow.value = !memberDialogShow.value
-    },
-  })
+const gotoMember = () => {
+  return Inertia.get(route('members.create'))
 }
 
 const form = useForm({
-  balance: null,
   member: null,
 })
 
 const submit = () => {
-  form
-    .transform((data) => ({
-      balance: data.balance,
-      member_id: data.member.id,
-    }))
-    .post(route('top-ups.store'), { onSuccess: () => form.reset() })
+  form.post(route('top-ups.store'), { onSuccess: () => form.reset() })
 }
 </script>
 
@@ -81,6 +46,47 @@ const submit = () => {
   <Head title="Top Up" />
 
   <AppLayout>
+    <template v-if="form.member">
+      <h1 class="text-2xl font-bold">Detail Member</h1>
+
+      <div class="grid px-2">
+        <div class="col-auto mr-7">
+          <h2>
+            <span class="text-base"> <i class="pi pi-user" /> Nama</span>
+
+            <br />
+
+            <span class="text-lg">{{ form.member.name }}</span>
+          </h2>
+        </div>
+
+        <div class="col-auto mr-7">
+          <h2>
+            <span class="text-base"> <i class="pi pi-mobile" /> No HP</span>
+
+            <br />
+
+            <span class="text-lg">{{ form.member.phone }}</span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="col-12">
+          <h2 class="mb-4">
+            <span class="text-base">
+              <i class="pi pi-car red-700" />
+              Detail Plat Kendaraan
+            </span>
+
+            <br />
+
+            <span class="text-lg">{{ form.member.platNumber }}</span>
+          </h2>
+        </div>
+      </div>
+    </template>
+
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
@@ -88,17 +94,13 @@ const submit = () => {
           <template #content>
             <div class="grid">
               <div class="col-12 md:col-6">
-                <AppInputNumber v-model="form.balance" label="Saldo" placeholder="saldo" :error="form.errors.balance" />
-              </div>
-
-              <div class="col-12 md:col-6">
                 <AppAutocompleteBasic
                   empty
                   label="Member"
-                  field="platNumber"
+                  field="name"
                   placeholder="member"
                   v-model="form.member"
-                  :error="form.errors.member_id"
+                  :error="form.errors.member"
                   :suggestions="members"
                   @complete="memberOnComplete"
                   @item-select="memberOnSelected"
@@ -108,18 +110,14 @@ const submit = () => {
                       <div class="flex flex-column">
                         <span>{{ slotProps.item.name }}</span>
                         <span class="font-bold">{{ slotProps.item.phone }}</span>
-                        <span class="font-bold">{{ slotProps.item.platNumber }}</span>
+                        <span class="font-bold">{{ slotProps.item.type }}</span>
                       </div>
                     </template>
                   </template>
 
                   <template #empty>
-                    <span
-                      class="cursor-pointer"
-                      style="color: var(--primary-color)"
-                      @click="memberDialogShow = !memberDialogShow"
-                    >
-                      Tambah Member
+                    <span class="cursor-pointer" style="color: var(--primary-color)" @click="gotoMember">
+                      Buat Member
                     </span>
                   </template>
                 </AppAutocompleteBasic>
@@ -141,61 +139,5 @@ const submit = () => {
         </Card>
       </div>
     </div>
-
-    <Dialog
-      modal
-      v-model:visible="memberDialogShow"
-      class="p-fluid"
-      header="Tambah Member"
-      :style="{ width: '450px' }"
-      :breakpoints="{ '960px': '75vw' }"
-      @hide="memberDialogOnHide"
-    >
-      <div class="grid">
-        <div class="col-12 md:col-6">
-          <AppInputText v-model="formMember.name" label="Nama" placeholder="nama" :error="formMember.errors.name" />
-        </div>
-
-        <div class="col-12 md:col-6">
-          <AppInputText
-            v-model="formMember.phone"
-            label="Nomor HP"
-            placeholder="nomor hp"
-            :error="formMember.errors.phone"
-          />
-        </div>
-
-        <div class="col-12 md:col-6">
-          <AppInputText
-            v-model="formMember.plat_number"
-            label="Plat Kendaraan"
-            placeholder="plat kendaraan"
-            :error="formMember.errors.plat_number"
-          />
-        </div>
-
-        <div class="col-12 md:col-6">
-          <AppDropdown
-            label="Jenis member"
-            placeholder="pilih satu"
-            v-model="formMember.type_member_id"
-            :options="typeMembers"
-            :error="formMember.errors.type_member_id"
-          />
-        </div>
-      </div>
-
-      <template #footer>
-        <div class="flex flex-column md:flex-row justify-content-end">
-          <Button
-            label="Simpan"
-            icon="pi pi-check"
-            class="p-button-outlined"
-            :disabled="formMember.processing"
-            @click="submitMember"
-          />
-        </div>
-      </template>
-    </Dialog>
   </AppLayout>
 </template>

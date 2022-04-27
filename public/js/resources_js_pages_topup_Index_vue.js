@@ -1317,11 +1317,14 @@ __webpack_require__.r(__webpack_exports__);
   field: 'platNumber',
   header: 'Plat Kendaraan'
 }, {
-  field: 'balance',
-  header: 'Saldo'
+  field: 'type',
+  header: 'Jenis Member'
+}, {
+  field: 'amount',
+  header: 'Tarif Member'
 }, {
   field: 'expDate',
-  header: 'Tanggal Kadaluarsa'
+  header: 'Berakhir'
 }]);
 
 /***/ }),

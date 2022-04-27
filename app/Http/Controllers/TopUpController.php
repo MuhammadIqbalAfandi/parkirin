@@ -6,7 +6,6 @@ use App\Http\Requests\TopUp\StoreTopUpRequest;
 use App\Http\Requests\TopUp\UpdateTopUpRequest;
 use App\Models\Member;
 use App\Models\TopUp;
-use App\Models\TypeMember;
 use Inertia\Inertia;
 
 class TopUpController extends Controller
@@ -25,11 +24,13 @@ class TopUpController extends Controller
                 ->paginate(10)
                 ->withQueryString()
                 ->through(fn($topUp) => [
+                    'id' => $topUp->id,
                     'updatedAt' => $topUp->updated_at,
                     'name' => $topUp->member->name,
                     'phone' => $topUp->member->phone,
-                    'platNumber' => $topUp->member->plat_number,
-                    'balance' => $topUp->balance,
+                    'platNumber' => $topUp->member->vehicleDetail(),
+                    'amount' => $topUp->amount,
+                    'type' => $topUp->member->typeMember->type,
                     'expDate' => $topUp->exp_date,
                 ]),
         ]);
@@ -43,16 +44,14 @@ class TopUpController extends Controller
     public function create()
     {
         return inertia('topup/Create', [
-            'typeMembers' => TypeMember::get()->transform(fn($typeMember) => [
-                'label' => $typeMember->type,
-                'value' => $typeMember->id,
-            ]),
             'members' => Inertia::lazy(
                 fn() => Member::filter(request()->only('search'))->latest()->get()->transform(fn($member) => [
                     'id' => $member->id,
                     'name' => $member->name,
                     'phone' => $member->phone,
-                    'platNumber' => $member->plat_number,
+                    'platNumber' => $member->vehicleDetail(),
+                    'type' => $member->typeMember->type,
+                    'expDate' => $member->exp_date,
                 ])
             ),
         ]);

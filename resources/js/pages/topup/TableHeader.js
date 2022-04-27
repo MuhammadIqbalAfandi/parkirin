@@ -3,6 +3,7 @@ export default [
   { field: 'name', header: 'Nama' },
   { field: 'phone', header: 'Nomor HP' },
   { field: 'platNumber', header: 'Plat Kendaraan' },
-  { field: 'balance', header: 'Saldo' },
-  { field: 'expDate', header: 'Tanggal Kadaluarsa' },
+  { field: 'type', header: 'Jenis Member' },
+  { field: 'amount', header: 'Tarif Member' },
+  { field: 'expDate', header: 'Berakhir' },
 ]

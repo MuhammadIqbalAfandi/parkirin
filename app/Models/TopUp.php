@@ -26,10 +26,17 @@ class TopUp extends Model
         );
     }
 
-    protected function balance(): Attribute
+    protected function amount(): Attribute
     {
         return Attribute::make(
             get:fn($value) => (new CurrencyFormatService)->setRupiahFormat($value, true)
+        );
+    }
+
+    protected function expDate(): Attribute
+    {
+        return Attribute::make(
+            get:fn($value) => Carbon::parse($value)->translatedFormat('l d/m/Y')
         );
     }
 
