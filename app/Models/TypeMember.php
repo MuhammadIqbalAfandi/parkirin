@@ -60,7 +60,7 @@ class TypeMember extends Model
 
     public function maxVehicleDetail()
     {
-        $maxVehicle = $this->maxVehicles->transform(fn($maxVehicle) => $maxVehicle->typeVehicle->type . ', ' . 'Maksimal Kendaraan ' . $maxVehicle->max)->toArray();
+        $maxVehicle = $this->maxVehicles->transform(fn($maxVehicle) => "{$maxVehicle->typeVehicle->type}, maksimal ({$maxVehicle->max})")->toArray();
 
         return implode(". ", $maxVehicle);
     }

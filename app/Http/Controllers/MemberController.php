@@ -6,7 +6,6 @@ use App\Http\Requests\Member\StoreMemberRequest;
 use App\Http\Requests\Member\UpdateMemberRequest;
 use App\Models\Member;
 use App\Models\TypeMember;
-use App\Models\TypeVehicle;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -51,16 +50,17 @@ class MemberController extends Controller
                 'label' => $typeMember->type,
                 'value' => $typeMember->id,
             ]),
-            'typeVehicles' => TypeVehicle::get()->transform(fn($typeVehicle) => [
-                'label' => $typeVehicle->type,
-                'value' => $typeVehicle->id,
-            ]),
             'typeMember' => Inertia::lazy(
                 fn() => TypeMember::filter(request('id'))->get()->transform(fn($typeMember) => [
                     'type' => $typeMember->type,
                     'description' => $typeMember->description,
                     'price' => $typeMember->price,
-                    'max' => $typeMember->max,
+                    'max' => $typeMember->maxVehicleDetail(),
+                    'maxVehicles' => $typeMember->fresh()->maxVehicles->transform(fn($maxVehicle) => [
+                        'value' => $maxVehicle->id,
+                        'label' => $maxVehicle->typeVehicle->type,
+                        'max' => $maxVehicle->max,
+                    ]),
                 ])->first()
             ),
         ]);

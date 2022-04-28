@@ -33,41 +33,33 @@ const listPlatNumberOnDelete = (index) => {
 }
 
 const addPlatNumber = () => {
-  form.clearErrors('plat_number', 'type_vehicle_id')
+  console.log(props.typeMember.maxVehicles)
 
-  if (!form.plat_number) {
-    form.setError('plat_number', 'Plat kendaraan tidak boleh kosong')
-
-    return
-  }
-
-  if (!form.type_vehicle_id) {
-    form.setError('type_vehicle_id', 'Tidak boleh kosong')
-
-    return
-  }
-
-  const listPlatNumberExist = listPlatNumber.filter((val) => val.platNumber === form.plat_number.toUpperCase())
-  if (listPlatNumberExist.length) {
-    form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama')
-
-    return
-  }
-
-  if (listPlatNumber.length + 1 > props.typeMember.max) {
-    form.setError('plat_number', 'Melibihi batas maksimal kendaraan')
-
-    return
-  }
-
-  const typeVehicleFilter = props.typeVehicles.filter((val) => val.value === form.type_vehicle_id)[0]
-  listPlatNumber.push({
-    platNumber: form.plat_number.toUpperCase(),
-    typeVehicle: typeVehicleFilter.label,
-    typeVehicleId: typeVehicleFilter.value,
-  })
-
-  form.reset('plat_number', 'type_vehicle_id')
+  //   form.clearErrors('plat_number', 'type_vehicle_id')
+  //   if (!form.plat_number) {
+  //     form.setError('plat_number', 'Plat kendaraan tidak boleh kosong')
+  //     return
+  //   }
+  //   if (!form.type_vehicle_id) {
+  //     form.setError('type_vehicle_id', 'Tidak boleh kosong')
+  //     return
+  //   }
+  //   const listPlatNumberExist = listPlatNumber.filter((val) => val.platNumber === form.plat_number.toUpperCase())
+  //   if (listPlatNumberExist.length) {
+  //     form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama')
+  //     return
+  //   }
+  //   if (listPlatNumber.length + 1 > props.typeMember.max) {
+  //     form.setError('plat_number', 'Melibihi batas maksimal kendaraan')
+  //     return
+  //   }
+  //   const typeVehicleFilter = props.typeVehicles.filter((val) => val.value === form.type_vehicle_id)[0]
+  //   listPlatNumber.push({
+  //     platNumber: form.plat_number.toUpperCase(),
+  //     typeVehicle: typeVehicleFilter.label,
+  //     typeVehicleId: typeVehicleFilter.value,
+  //   })
+  //   form.reset('plat_number', 'type_vehicle_id')
 }
 
 const form = useForm({
@@ -163,7 +155,7 @@ const submit = () => {
       </div>
     </div>
 
-    <div class="grid">
+    <div v-if="typeMember" class="grid">
       <div class="col-12 md:col-8">
         <Card>
           <template #content>
@@ -183,22 +175,22 @@ const submit = () => {
                   label="Jenis Kendaraan"
                   placeholder="jenis kendaraan"
                   :disabled="!form.type_member_id"
-                  :options="typeVehicles"
+                  :options="typeMember.maxVehicles"
                   :error="form.errors.type_vehicle_id"
                 />
               </div>
-              <div class="col-12 flex flex-column md:flex-row md:align-items-center justify-content-end mb-3 md:mb-0">
-                <Button
-                  label="Tambah"
-                  class="p-button-outlined"
-                  icon="pi pi-car"
-                  :disabled="!form.type_member_id"
-                  @click="addPlatNumber"
-                />
+              <div class="col-12 mb-3 md:mb-0">
+                <div class="flex flex-column md:flex-row md:align-items-center justify-content-end">
+                  <Button
+                    label="Tambah"
+                    class="p-button-outlined"
+                    icon="pi pi-car"
+                    :disabled="!form.type_member_id"
+                    @click="addPlatNumber"
+                  />
+                </div>
               </div>
               <div class="col-12">
-                <h1 class="text-base"><i class="pi pi-car"></i> <span class="ml-2">Daftar Plat Kendaraan</span></h1>
-
                 <DataTable
                   striped-rows
                   row-hover

@@ -542,41 +542,31 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var addPlatNumber = function addPlatNumber() {
-      form.clearErrors('plat_number', 'type_vehicle_id');
-
-      if (!form.plat_number) {
-        form.setError('plat_number', 'Plat kendaraan tidak boleh kosong');
-        return;
-      }
-
-      if (!form.type_vehicle_id) {
-        form.setError('type_vehicle_id', 'Tidak boleh kosong');
-        return;
-      }
-
-      var listPlatNumberExist = listPlatNumber.filter(function (val) {
-        return val.platNumber === form.plat_number.toUpperCase();
-      });
-
-      if (listPlatNumberExist.length) {
-        form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama');
-        return;
-      }
-
-      if (listPlatNumber.length + 1 > props.typeMember.max) {
-        form.setError('plat_number', 'Melibihi batas maksimal kendaraan');
-        return;
-      }
-
-      var typeVehicleFilter = props.typeVehicles.filter(function (val) {
-        return val.value === form.type_vehicle_id;
-      })[0];
-      listPlatNumber.push({
-        platNumber: form.plat_number.toUpperCase(),
-        typeVehicle: typeVehicleFilter.label,
-        typeVehicleId: typeVehicleFilter.value
-      });
-      form.reset('plat_number', 'type_vehicle_id');
+      console.log(props.typeMember.maxVehicles); //   form.clearErrors('plat_number', 'type_vehicle_id')
+      //   if (!form.plat_number) {
+      //     form.setError('plat_number', 'Plat kendaraan tidak boleh kosong')
+      //     return
+      //   }
+      //   if (!form.type_vehicle_id) {
+      //     form.setError('type_vehicle_id', 'Tidak boleh kosong')
+      //     return
+      //   }
+      //   const listPlatNumberExist = listPlatNumber.filter((val) => val.platNumber === form.plat_number.toUpperCase())
+      //   if (listPlatNumberExist.length) {
+      //     form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama')
+      //     return
+      //   }
+      //   if (listPlatNumber.length + 1 > props.typeMember.max) {
+      //     form.setError('plat_number', 'Melibihi batas maksimal kendaraan')
+      //     return
+      //   }
+      //   const typeVehicleFilter = props.typeVehicles.filter((val) => val.value === form.type_vehicle_id)[0]
+      //   listPlatNumber.push({
+      //     platNumber: form.plat_number.toUpperCase(),
+      //     typeVehicle: typeVehicleFilter.label,
+      //     typeVehicleId: typeVehicleFilter.value,
+      //   })
+      //   form.reset('plat_number', 'type_vehicle_id')
     };
 
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)({
@@ -1342,6 +1332,7 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_14 = {
+  key: 0,
   "class": "grid"
 };
 var _hoisted_15 = {
@@ -1357,22 +1348,14 @@ var _hoisted_18 = {
   "class": "col-12 md:col-6"
 };
 var _hoisted_19 = {
-  "class": "col-12 flex flex-column md:flex-row md:align-items-center justify-content-end mb-3 md:mb-0"
+  "class": "col-12 mb-3 md:mb-0"
 };
 var _hoisted_20 = {
+  "class": "flex flex-column md:flex-row md:align-items-center justify-content-end"
+};
+var _hoisted_21 = {
   "class": "col-12"
 };
-
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-  "class": "text-base"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "pi pi-car"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "ml-2"
-}, "Daftar Plat Kendaraan")], -1
-/* HOISTED */
-);
-
 var _hoisted_22 = {
   style: {
     "color": "#b71c1c"
@@ -1462,7 +1445,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       } : undefined]), 1024
       /* DYNAMIC_SLOTS */
-      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
+      )])]), $props.typeMember ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
             modelValue: $setup.form.plat_number,
@@ -1483,11 +1466,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             label: "Jenis Kendaraan",
             placeholder: "jenis kendaraan",
             disabled: !$setup.form.type_member_id,
-            options: $props.typeVehicles,
+            options: $props.typeMember.maxVehicles,
             error: $setup.form.errors.type_vehicle_id
           }, null, 8
           /* PROPS */
-          , ["modelValue", "disabled", "options", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+          , ["modelValue", "disabled", "options", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
             label: "Tambah",
             "class": "p-button-outlined",
             icon: "pi pi-car",
@@ -1495,7 +1478,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onClick: $setup.addPlatNumber
           }, null, 8
           /* PROPS */
-          , ["disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataTable, {
+          , ["disabled"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataTable, {
             "striped-rows": "",
             "row-hover": "",
             "responsive-layout": "scroll",
@@ -1566,7 +1549,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      })])])];
+      })])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1
     /* STABLE */
