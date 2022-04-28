@@ -77,7 +77,7 @@ entity MaxVehicle {
   * id
   __
   * max
-  * member_id
+  * type_member_id
   * type_vehicle_id
 }
 

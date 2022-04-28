@@ -25,9 +25,8 @@ class StoreTypeMemberRequest extends FormRequest
     {
         return [
             'type' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'nullable',
             'price' => 'required|numeric',
-            'max' => 'required|numeric',
         ];
     }
 }

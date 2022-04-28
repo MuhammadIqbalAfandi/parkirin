@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('max_vehicles', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('max');
-            $table->foreignId('member_id')->constrained();
+            $table->foreignId('type_member_id')->constrained()->cascadeOnDelete();
             $table->foreignId('type_vehicle_id')->constrained();
             $table->timestamps();
         });

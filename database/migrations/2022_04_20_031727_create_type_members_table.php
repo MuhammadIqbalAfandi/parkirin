@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('type_members', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->text('description');
+            $table->text('description')->nullable()->default(null);
             $table->unsignedInteger('price');
             $table->timestamps();
         });

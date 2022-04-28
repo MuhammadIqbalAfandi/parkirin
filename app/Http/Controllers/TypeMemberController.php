@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TypeMember\StoreTypeMemberRequest;
 use App\Http\Requests\TypeMember\UpdateTypeMemberRequest;
+use App\Models\MaxVehicle;
 use App\Models\TypeMember;
+use App\Models\TypeVehicle;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class TypeMemberController extends Controller
 {
@@ -22,7 +26,7 @@ class TypeMemberController extends Controller
                 'type' => $typeMember->type,
                 'description' => $typeMember->description,
                 'price' => $typeMember->price,
-                'max' => $typeMember->max,
+                'max' => $typeMember->maxVehicleDetail(),
             ]),
         ]);
     }
@@ -34,7 +38,12 @@ class TypeMemberController extends Controller
      */
     public function create()
     {
-        return inertia('typemember/Create');
+        return inertia('typemember/Create', [
+            'typeVehicles' => TypeVehicle::get()->transform(fn($typeVehicle) => [
+                'value' => $typeVehicle->id,
+                'label' => $typeVehicle->type,
+            ]),
+        ]);
     }
 
     /**
@@ -45,9 +54,26 @@ class TypeMemberController extends Controller
      */
     public function store(StoreTypeMemberRequest $request)
     {
-        TypeMember::create($request->validated());
+        DB::beginTransaction();
 
-        return back()->with('success', __('messages.success.store.type_member'));
+        try {
+            $typeMember = TypeMember::create($request->validated());
+
+            foreach ($request->maxVehicles as $maxVehicle) {
+                $typeMember->maxVehicles()->create([
+                    'max' => $maxVehicle['max'],
+                    'type_vehicle_id' => $maxVehicle['typeVehicleId'],
+                ]);
+            }
+
+            DB::commit();
+
+            return back()->with('success', __('messages.success.store.type_member'));
+        } catch (QueryException $qe) {
+            DB::rollBack();
+
+            return back()->with('error', __('messages.error.store.type_member'));
+        }
     }
 
     /**
@@ -75,8 +101,17 @@ class TypeMemberController extends Controller
                 'type' => $typeMember->type,
                 'description' => $typeMember->description,
                 'price' => $typeMember->getRawOriginal('price'),
-                'max' => $typeMember->max,
+                'availableToMember' => $typeMember->member()->exists(),
             ],
+            'typeVehicles' => TypeVehicle::get()->transform(fn($typeVehicle) => [
+                'value' => $typeVehicle->id,
+                'label' => $typeVehicle->type,
+            ]),
+            'maxVehicles' => $typeMember->maxVehicles->transform(fn($maxVehicle) => [
+                'max' => $maxVehicle->max,
+                'type' => $maxVehicle->typeVehicle->type,
+                'typeVehicleId' => $maxVehicle->type_vehicle_id,
+            ]),
         ]);
     }
 
@@ -89,19 +124,43 @@ class TypeMemberController extends Controller
      */
     public function update(UpdateTypeMemberRequest $request, TypeMember $typeMember)
     {
-        $typeMember->update($request->validated());
+        DB::beginTransaction();
 
-        return back()->with('success', __('messages.success.update.type_member'));
+        try {
+            $typeMember->update($request->validated());
+
+            MaxVehicle::where('type_member_id', $typeMember->id)->delete();
+
+            foreach ($request->maxVehicles as $maxVehicle) {
+                $typeMember->maxVehicles()->create([
+                    'max' => $maxVehicle['max'],
+                    'type_vehicle_id' => $maxVehicle['typeVehicleId'],
+                ]);
+            }
+
+            DB::commit();
+
+            return back()->with('success', __('messages.success.update.type_member'));
+
+        } catch (QueryException $qe) {
+            DB::rollBack();
+
+            return back()->with('error', __('messages.error.update.type_member'));
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  TypeMember  $typeMember
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TypeMember $typeMember)
     {
-        //
+        if (!$typeMember->member()->exists()) {
+            $typeMember->delete();
+
+            return to_route('users.index')->with('success', __('messages.success.destroy.type_member'));
+        }
     }
 }

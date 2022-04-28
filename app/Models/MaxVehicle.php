@@ -11,7 +11,12 @@ class MaxVehicle extends Model
 
     protected $fillable = [
         'max',
-        'member_id',
+        'type_member_id',
         'type_vehicle_id',
     ];
+
+    public function typeVehicle()
+    {
+        return $this->belongsTo(TypeVehicle::class);
+    }
 }

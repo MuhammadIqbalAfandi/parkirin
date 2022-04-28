@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\MaxVehicle;
+use App\Models\Member;
 use App\Services\CurrencyFormatService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -39,10 +41,27 @@ class TypeMember extends Model
         );
     }
 
+    public function maxVehicles()
+    {
+        return $this->hasMany(MaxVehicle::class);
+    }
+
+    public function member()
+    {
+        return $this->hasOne(Member::class);
+    }
+
     public function scopeFilter($query, $id)
     {
         $query->when($id ?? null, function ($query, $id) {
             $query->where('id', $id);
         });
+    }
+
+    public function maxVehicleDetail()
+    {
+        $maxVehicle = $this->maxVehicles->transform(fn($maxVehicle) => $maxVehicle->typeVehicle->type . ', ' . 'Maksimal Kendaraan ' . $maxVehicle->max)->toArray();
+
+        return implode(". ", $maxVehicle);
     }
 }

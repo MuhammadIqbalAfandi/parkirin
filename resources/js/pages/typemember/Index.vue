@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/inertia-vue3'
 import AppButton from '@/components/AppButton.vue'
 import AppLayout from '@/layouts/AppLayout.vue'
 
-import TableHeader from './TableHeader'
+import { IndexTable } from './TableHeader'
 
 defineProps({
   typeMembers: Object,
@@ -25,22 +25,24 @@ defineProps({
         <h1>Jenis Member</h1>
 
         <div class="grid">
-          <div class="col-12 flex flex-column md:flex-row justify-content-end">
-            <AppButton
-              label="Tambah Jenis Member"
-              class="p-button-outlined"
-              icon="pi pi-pencil"
-              :href="route('type-members.create')"
-            />
+          <div class="col-12">
+            <div class="flex flex-column md:flex-row justify-content-end">
+              <AppButton
+                label="Tambah Jenis Member"
+                class="p-button-outlined"
+                icon="pi pi-pencil"
+                :href="route('type-members.create')"
+              />
+            </div>
           </div>
         </div>
       </template>
 
       <Column
-        v-for="tableHeader in TableHeader"
-        :field="tableHeader.field"
-        :header="tableHeader.header"
-        :key="tableHeader.field"
+        v-for="indexTable in IndexTable"
+        :field="indexTable.field"
+        :header="indexTable.header"
+        :key="indexTable.field"
       />
 
       <Column>

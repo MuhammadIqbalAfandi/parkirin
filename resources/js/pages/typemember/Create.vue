@@ -1,10 +1,17 @@
 <script setup>
-import { computed, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
 import AppLayout from '@/layouts/AppLayout.vue'
 import AppInputText from '@/components/AppInputText.vue'
+import AppDropdown from '@/components/AppDropdown.vue'
 import AppInputNumber from '@/components/AppInputNumber.vue'
 import AppTextArea from '@/components/AppTextArea.vue'
+
+import { Vehicle } from './TableHeader'
+
+const props = defineProps({
+  typeVehicles: Object,
+})
 
 const errors = computed(() => usePage().props.value.errors)
 
@@ -12,15 +19,71 @@ watch(errors, () => {
   form.clearErrors()
 })
 
+const listVehicle = reactive([])
+
+const vehicleClear = () => {
+  listVehicle.splice(0)
+}
+
+const vehicleOnDelete = (index) => {
+  listVehicle.splice(index, 1)
+}
+
+const vehicleOnAdd = () => {
+  form.clearErrors('type_vehicle_id', 'max_vehicle')
+
+  if (!form.type_vehicle_id) {
+    form.setError('type_vehicle_id', 'Tidak boleh kosong')
+
+    return
+  }
+
+  if (!form.max_vehicle) {
+    form.setError('max_vehicle', 'Tidak boleh kosong')
+
+    return
+  }
+
+  const listVehicleExist = listVehicle.filter((val) => val.typeVehicleId === form.type_vehicle_id)
+  if (listVehicleExist.length) {
+    form.setError('type_vehicle_id', 'Jenis Kendaraan sudah ada')
+
+    return
+  }
+
+  const typeVehicle = props.typeVehicles.filter((val) => val.value === form.type_vehicle_id)[0]
+  listVehicle.push({
+    max: form.max_vehicle,
+    type: typeVehicle.label,
+    typeVehicleId: typeVehicle.value,
+  })
+
+  form.reset('type_vehicle_id', 'max_vehicle')
+}
+
 const form = useForm({
   type: null,
   description: null,
   price: null,
-  max: null,
+  type_vehicle_id: null,
+  max_vehicle: null,
 })
 
 const submit = () => {
-  form.post(route('type-members.store'), { onSuccess: () => form.reset() })
+  form
+    .transform((data) => ({
+      type: data.type,
+      description: data.description,
+      price: data.price,
+      maxVehicles: listVehicle,
+    }))
+    .post(route('type-members.store'), {
+      onSuccess: () => {
+        vehicleClear()
+
+        form.reset()
+      },
+    })
 }
 </script>
 
@@ -52,7 +115,7 @@ const submit = () => {
                 />
               </div>
 
-              <div class="col-12 sm:col-6">
+              <div class="col-12">
                 <AppTextArea
                   v-model="form.description"
                   label="Keterangan"
@@ -60,25 +123,80 @@ const submit = () => {
                   :error="form.errors.description"
                 />
               </div>
+            </div>
+          </template>
+        </Card>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12 md:col-8">
+        <Card>
+          <template #content>
+            <div class="grid">
+              <div class="col-12 md:col-6">
+                <AppDropdown
+                  label="Jenis Kendaraan"
+                  placeholder="jenis kendaraan"
+                  v-model="form.type_vehicle_id"
+                  :options="typeVehicles"
+                  :error="form.errors.type_vehicle_id"
+                />
+              </div>
 
               <div class="col-12 md:col-6">
                 <AppInputNumber
-                  v-model="form.max"
+                  v-model="form.max_vehicle"
                   label="Maksimal Kendaraan"
                   placeholder="maksimal kendaraan"
-                  :error="form.errors.max"
+                  :error="form.errors.max_vehicle"
                 />
+              </div>
+
+              <div class="col-12">
+                <div class="flex flex-column md:flex-row md:justify-content-end">
+                  <Button label="Tambah" icon="pi pi-car" class="p-button-outlined" @click="vehicleOnAdd" />
+                </div>
+              </div>
+
+              <div class="col-12 md-col-6">
+                <DataTable
+                  striped-rows
+                  row-hover
+                  responsive-layout="scroll"
+                  column-resize-mode="expand"
+                  edit-mode="cell"
+                  :value="listVehicle"
+                >
+                  <Column
+                    v-for="vehicle in Vehicle"
+                    :field="vehicle.field"
+                    :header="vehicle.header"
+                    :key="vehicle.field"
+                  />
+
+                  <Column>
+                    <template #body="{ index }">
+                      <div class="flex justify-content-end">
+                        <Button
+                          icon="pi pi-trash"
+                          class="p-button-rounded p-button-text"
+                          @click="vehicleOnDelete(index)"
+                        />
+                      </div>
+                    </template>
+                  </Column>
+                </DataTable>
               </div>
             </div>
           </template>
-
           <template #footer>
-            <div class="flex flex-column md:flex-row justify-content-end">
+            <div class="flex flex-column md:flex-row md:justify-content-end">
               <Button
                 label="Simpan"
                 icon="pi pi-check"
                 class="p-button-outlined"
-                :disabled="form.processing"
+                :disabled="form.processing || listVehicle.length === 0"
                 @click="submit"
               />
             </div>

@@ -41,6 +41,7 @@ return [
             'user' => 'User Account successfully changed',
         ],
         'destroy' => [
+            'type_member' => 'Jenis member successfully deleted',
             'type_vehicle' => 'Type vehicle successfully deleted',
             'top_up' => 'Top Up successfully deleted',
             'member' => 'Member Account successfully deleted',
@@ -50,10 +51,14 @@ return [
 
     'error' => [
         'store' => [
+            'type_member' => 'Type member failed to be added',
             'member' => 'member failed to be added',
             'change_password' => 'Password invalid',
             'expense' => 'Expense failed to be added',
             'transaction' => 'Transaction failed to be added',
+        ],
+        'update' => [
+            'type_member' => 'Type member failed to be changed',
         ],
     ],
 ];

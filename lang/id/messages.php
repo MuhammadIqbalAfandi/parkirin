@@ -41,6 +41,7 @@ return [
             'user' => 'Akun user berhasil diubah',
         ],
         'destroy' => [
+            'type_member' => 'Jenis member berhasil dihapus',
             'type_vehicle' => 'Jenis kendaraan berhasil dihapus',
             'top_up' => 'Top Up berhasil dihapus',
             'member' => 'Akun member berhasil dihapus',
@@ -50,10 +51,14 @@ return [
 
     'error' => [
         'store' => [
-            'member' => 'member gagal ditambahkan',
+            'type_member' => 'Jenis member gagal ditambahkan',
+            'member' => 'Member gagal ditambahkan',
             'change_password' => 'Password lama salah',
             'expense' => 'Pengeluaran gagal ditambahkan',
             'transaction' => 'Transaksi gagal ditambahkan',
+        ],
+        'update' => [
+            'type_member' => 'Jenis member gagal diubah',
         ],
     ],
 ];
