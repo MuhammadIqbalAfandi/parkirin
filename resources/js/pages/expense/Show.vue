@@ -48,7 +48,7 @@ defineProps({
       <div class="col-12">
         <h2 class="mb-4">
           <span class="text-base">
-            <i class="pi pi-wallet red-700" />
+            <i class="pi pi-wallet" />
             Pengeluaran
           </span>
 

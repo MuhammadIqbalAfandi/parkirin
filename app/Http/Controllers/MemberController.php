@@ -33,7 +33,7 @@ class MemberController extends Controller
                     'phone' => $member->phone,
                     'platNumber' => $member->vehicleDetail(),
                     'type' => $member->typeMember->type,
-                    'price' => $member->typeMember->price,
+                    'price' => $member->topUps()->latest()->first()->amount,
                     'expDate' => $member->exp_date,
                 ]),
         ]);

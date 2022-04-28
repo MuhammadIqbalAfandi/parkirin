@@ -46,46 +46,31 @@ const submit = () => {
   <Head title="Top Up" />
 
   <AppLayout>
-    <template v-if="form.member">
-      <h1 class="text-2xl font-bold">Detail Member</h1>
+    <div class="grid">
+      <div class="col-12 md:col-8">
+        <Card class="surface-200">
+          <template #title>Detail Member</template>
+          <template v-if="form.member" #content>
+            <h3 class="text-base font-bold mb-0">Nama</h3>
+            <p>{{ form.member.name }}</p>
 
-      <div class="grid px-2">
-        <div class="col-auto mr-7">
-          <h2>
-            <span class="text-base"> <i class="pi pi-user" /> Nama</span>
+            <h3 class="text-base font-bold mb-0">Nomor HP</h3>
+            <p>{{ form.member.phone }}</p>
 
-            <br />
+            <h3 class="text-base font-bold mb-0">Plat Kendaraan</h3>
+            <p>
+              {{ form.member.platNumber }}
+            </p>
 
-            <span class="text-lg">{{ form.member.name }}</span>
-          </h2>
-        </div>
+            <h3 class="text-base font-bold mb-0">Jenis Member</h3>
+            <p>{{ form.member.type }}</p>
 
-        <div class="col-auto mr-7">
-          <h2>
-            <span class="text-base"> <i class="pi pi-mobile" /> No HP</span>
-
-            <br />
-
-            <span class="text-lg">{{ form.member.phone }}</span>
-          </h2>
-        </div>
+            <h3 class="text-base font-bold mb-0">Berakhir</h3>
+            <p>{{ form.member.expDate }}</p>
+          </template>
+        </Card>
       </div>
-
-      <div class="grid">
-        <div class="col-12">
-          <h2 class="mb-4">
-            <span class="text-base">
-              <i class="pi pi-car red-700" />
-              Detail Plat Kendaraan
-            </span>
-
-            <br />
-
-            <span class="text-lg">{{ form.member.platNumber }}</span>
-          </h2>
-        </div>
-      </div>
-    </template>
+    </div>
 
     <div class="grid">
       <div class="col-12 md:col-8">
@@ -123,18 +108,8 @@ const submit = () => {
                 </AppAutocompleteBasic>
               </div>
             </div>
-          </template>
 
-          <template #footer>
-            <div class="flex flex-column md:flex-row justify-content-end">
-              <Button
-                label="Simpan"
-                icon="pi pi-check"
-                class="p-button-outlined"
-                :disabled="form.processing"
-                @click="submit"
-              />
-            </div>
+            <Divider type="dashed" />
           </template>
         </Card>
       </div>
