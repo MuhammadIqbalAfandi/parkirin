@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('transaction_outs', function (Blueprint $table) {
             $table->id();
             $table->string('plat_number');
+            $table->unsignedInteger('price');
             $table->foreignId('transaction_in_id')->constrained();
             $table->foreignId('type_vehicle_id')->constrained();
             $table->foreignId('user_id')->constrained();

@@ -16,7 +16,6 @@ class TypeMember extends Model
         'type',
         'description',
         'price',
-        'max',
     ];
 
     protected function updatedAt(): Attribute

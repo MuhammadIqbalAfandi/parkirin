@@ -65,14 +65,20 @@ entity Vehicle {
   * type_vehicle_id
 }
 
-
 entity TypeMember {
   * id
   __
   * type
   * description
   * price
+}
+
+entity MaxVehicle {
+  * id
+  __
   * max
+  * member_id
+  * type_vehicle_id
 }
 
 entity TopUp {
@@ -109,11 +115,13 @@ TransactionOut ||--|{ TypeVehicle
 TransactionOut ||--|{ User
 TypeVehicle ||--|| ParkingFee
 TypeVehicle }|--|| Vehicle
-Expense ||--|| Mutation
-TopUp ||--|| Mutation
+TypeVehicle }|--|| MaxVehicle
 User ||--|{ Role
 User }|--|| TopUp
 User }|--|| Expense
 Member }|--|| TopUp
 Member ||--|| TypeMember
 Member }|--|| Vehicle
+Expense ||--|| Mutation
+TypeMember }|--|| MaxVehicle
+TopUp ||--|| Mutation
