@@ -26,6 +26,8 @@ class UpdateMemberRequest extends FormRequest
         return [
             'name' => 'required|string|max:50',
             'phone' => 'required|numeric|min:12|unique:members,phone,' . $this->member->id,
+            'type_member_id' => 'required|numeric',
+            'vehicles.*.platNumber' => 'unique:vehicles,plat_number',
         ];
     }
 }

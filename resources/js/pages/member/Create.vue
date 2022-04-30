@@ -10,7 +10,6 @@ import { PlatNumberTable } from './TableHeader'
 
 const props = defineProps({
   typeMembers: Array,
-  typeVehicles: Array,
   typeMember: Object,
 })
 
@@ -33,40 +32,49 @@ const listPlatNumberOnDelete = (index) => {
 }
 
 const addPlatNumber = () => {
-  console.log(props.typeMember.maxVehicles)
+  form.clearErrors('plat_number', 'max_vehicle_id')
 
-  //   form.clearErrors('plat_number', 'type_vehicle_id')
-  //   if (!form.plat_number) {
-  //     form.setError('plat_number', 'Plat kendaraan tidak boleh kosong')
-  //     return
-  //   }
-  //   if (!form.type_vehicle_id) {
-  //     form.setError('type_vehicle_id', 'Tidak boleh kosong')
-  //     return
-  //   }
-  //   const listPlatNumberExist = listPlatNumber.filter((val) => val.platNumber === form.plat_number.toUpperCase())
-  //   if (listPlatNumberExist.length) {
-  //     form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama')
-  //     return
-  //   }
-  //   if (listPlatNumber.length + 1 > props.typeMember.max) {
-  //     form.setError('plat_number', 'Melibihi batas maksimal kendaraan')
-  //     return
-  //   }
-  //   const typeVehicleFilter = props.typeVehicles.filter((val) => val.value === form.type_vehicle_id)[0]
-  //   listPlatNumber.push({
-  //     platNumber: form.plat_number.toUpperCase(),
-  //     typeVehicle: typeVehicleFilter.label,
-  //     typeVehicleId: typeVehicleFilter.value,
-  //   })
-  //   form.reset('plat_number', 'type_vehicle_id')
+  if (!form.plat_number) {
+    form.setError('plat_number', 'Plat kendaraan tidak boleh kosong')
+    return
+  }
+
+  if (!form.max_vehicle_id) {
+    form.setError('max_vehicle_id', 'Tidak boleh kosong')
+    return
+  }
+
+  const listPlatNumberExist = listPlatNumber.filter((val) => val.platNumber === form.plat_number.toUpperCase())
+  if (listPlatNumberExist.length) {
+    form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama')
+    return
+  }
+
+  const maxVehicles = listPlatNumber.filter((val) => val.maxVehicleId === form.max_vehicle_id)
+  if (maxVehicles.length) {
+    if (maxVehicles.length + 1 > maxVehicles[0].maxVehicle) {
+      form.setError('plat_number', 'Melibihi batas maksimal kendaraan')
+      return
+    }
+  }
+
+  const typeVehicle = props.typeMember.maxVehicles.filter((val) => val.value === form.max_vehicle_id)[0]
+  listPlatNumber.push({
+    platNumber: form.plat_number.toUpperCase(),
+    typeVehicle: typeVehicle.label,
+    typeVehicleId: typeVehicle.typeVehicleId,
+    maxVehicleId: typeVehicle.value,
+    maxVehicle: typeVehicle.maxVehicle,
+  })
+
+  form.reset('plat_number', 'max_vehicle_id')
 }
 
 const form = useForm({
   name: null,
   phone: null,
   plat_number: null,
-  type_vehicle_id: null,
+  max_vehicle_id: null,
   type_member_id: null,
 })
 
@@ -74,7 +82,7 @@ watch(
   () => form.type_member_id,
   () => {
     listPlatNumberClear()
-    form.reset('plat_number', 'type_vehicle_id')
+    form.reset('plat_number', 'max_vehicle_id')
 
     Inertia.reload({ only: ['typeMember'], data: { id: form.type_member_id } })
   }
@@ -132,8 +140,10 @@ const submit = () => {
           </template>
         </Card>
       </div>
+    </div>
 
-      <div class="col-12 md:col-4">
+    <div class="gri">
+      <div class="col-12 md:col-8">
         <Card class="bg-primary">
           <template #title>Detail Harga</template>
           <template v-if="typeMember" #content>
@@ -171,12 +181,12 @@ const submit = () => {
               </div>
               <div class="col-12 md:col-6">
                 <AppDropdown
-                  v-model="form.type_vehicle_id"
+                  v-model="form.max_vehicle_id"
                   label="Jenis Kendaraan"
                   placeholder="jenis kendaraan"
                   :disabled="!form.type_member_id"
                   :options="typeMember.maxVehicles"
-                  :error="form.errors.type_vehicle_id"
+                  :error="form.errors.max_vehicle_id"
                 />
               </div>
               <div class="col-12 mb-3 md:mb-0">
@@ -213,13 +223,13 @@ const submit = () => {
                   </Column>
 
                   <Column>
-                    <template #body="{ index, data }">
+                    <template #body="{ index }">
                       <div class="flex justify-content-end">
                         <Button
                           icon="pi pi-trash"
                           class="p-button-rounded p-button-text"
                           :class="{ 'p-button-danger': $page.props.errors[`vehicles.${index}.platNumber`] }"
-                          @click="listPlatNumberOnDelete(data.platNumber)"
+                          @click="listPlatNumberOnDelete(index)"
                         />
                       </div>
                     </template>

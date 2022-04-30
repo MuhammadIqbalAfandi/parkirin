@@ -59,7 +59,8 @@ class MemberController extends Controller
                     'maxVehicles' => $typeMember->fresh()->maxVehicles->transform(fn($maxVehicle) => [
                         'value' => $maxVehicle->id,
                         'label' => $maxVehicle->typeVehicle->type,
-                        'max' => $maxVehicle->max,
+                        'maxVehicle' => $maxVehicle->max,
+                        'typeVehicleId' => $maxVehicle->typeVehicle->id,
                     ]),
                 ])->first()
             ),
@@ -105,10 +106,10 @@ class MemberController extends Controller
             DB::commit();
 
             return back()->with('success', __('messages.success.store.member'));
-        } catch (QueryException $e) {
+        } catch (QueryException $qe) {
             DB::rollBack();
 
-            return back()->with('success', __('messages.error.store.member'));
+            return back()->with('error', __('messages.error.store.member'));
         }
     }
 
@@ -131,11 +132,45 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
+        if (request('id')) {
+            $typeMember = $member->typeMember->filter(request('id'))->first();
+        } else {
+            $typeMember = $member->typeMember;
+        }
+
         return inertia('member/Edit', [
             'member' => [
                 'id' => $member->id,
                 'name' => $member->name,
                 'phone' => $member->phone,
+                'typeMemberId' => $member->type_member_id,
+                'vehicles' => $member->vehicles->transform(fn($vehicle) => [
+                    'platNumber' => $vehicle->plat_number,
+                    'typeVehicle' => $vehicle->typeVehicle->type,
+                    'typeVehicleId' => $vehicle->typeVehicle->id,
+                    'maxVehicleId' => $member->typeMember->maxVehicles
+                        ->where('type_vehicle_id', $vehicle->typeVehicle->id)
+                        ->pluck('id')[0],
+                    'maxVehicle' => $member->typeMember->maxVehicles
+                        ->where('type_vehicle_id', $vehicle->typeVehicle->id)
+                        ->pluck('max')[0],
+                ]),
+            ],
+            'typeMembers' => TypeMember::get()->transform(fn($typeMember) => [
+                'label' => $typeMember->type,
+                'value' => $typeMember->id,
+            ]),
+            'typeMember' => [
+                'type' => $typeMember->type,
+                'description' => $typeMember->description,
+                'price' => $typeMember->price,
+                'max' => $typeMember->maxVehicleDetail(),
+                'maxVehicles' => $typeMember->fresh()->maxVehicles->transform(fn($maxVehicle) => [
+                    'value' => $maxVehicle->id,
+                    'label' => $maxVehicle->typeVehicle->type,
+                    'maxVehicle' => $maxVehicle->max,
+                    'typeVehicleId' => $maxVehicle->typeVehicle->id,
+                ]),
             ],
         ]);
     }
@@ -149,21 +184,53 @@ class MemberController extends Controller
      */
     public function update(UpdateMemberRequest $request, Member $member)
     {
-        $member->update($request->validated());
+        dd($request);
+        // DB::beginTransaction();
 
-        return back()->with('success', __('messages.success.update.member'));
+        // try {
+        //     $member->update([
+        //         'name' => $request->name,
+        //         'phone' => $request->phone,
+        //         'exp_date' => now()->addDays(30),
+        //         'type_member_id' => $request->type_member_id,
+        //     ]);
+
+        //     foreach ($request->vehicles as $vehicle) {
+        //         $member->vehicles()->create([
+        //             'plat_number' => $vehicle['platNumber'],
+        //             'type_vehicle_id' => $vehicle['typeVehicleId'],
+        //         ]);
+        //     }
+
+        //     $topUp = $member->topUps()->create([
+        //         'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
+        //         'exp_date' => now()->addDays(30),
+        //         'user_id' => auth()->user()->id,
+        //     ]);
+
+        //     $topUp->mutation()->create([
+        //         'type' => 1,
+        //         'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
+        //     ]);
+
+        //     DB::commit();
+
+        //     return back()->with('success', __('messages.success.update.member'));
+        // } catch (QueryException $qe) {
+        //     DB::rollBack();
+
+        //     return back()->with('error', __('messages.error.update'));
+        // }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Member  $member
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Member $member)
+    public function destroy($id)
     {
-        $member->delete();
-
-        return to_route('members.index')->with('success', __('messages.success.destroy.member'));
+        //
     }
 }

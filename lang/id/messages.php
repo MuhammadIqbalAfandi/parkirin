@@ -59,6 +59,7 @@ return [
         ],
         'update' => [
             'type_member' => 'Jenis member gagal diubah',
+            'member' => 'Member gagal diubah',
         ],
     ],
 ];

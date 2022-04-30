@@ -59,6 +59,7 @@ return [
         ],
         'update' => [
             'type_member' => 'Type member failed to be changed',
+            'member' => 'Member failed to be changed',
         ],
     ],
 ];
