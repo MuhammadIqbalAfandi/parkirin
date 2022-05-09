@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TypeVehicle\StoreTypeVehicleRequest;
 use App\Http\Requests\TypeVehicle\UpdateTypeVehicleRequest;
 use App\Models\TypeVehicle;
+use App\Services\TypeVehicleService;
 
 class TypeVehicleController extends Controller
 {
@@ -23,6 +24,7 @@ class TypeVehicleController extends Controller
                     'id' => $typeVehicle->id,
                     'updatedAt' => $typeVehicle->updated_at,
                     'type' => $typeVehicle->type,
+                    'isUsed' => (new TypeVehicleService)->isUsed($typeVehicle),
                 ]),
         ]);
     }
@@ -86,9 +88,12 @@ class TypeVehicleController extends Controller
      */
     public function update(UpdateTypeVehicleRequest $request, TypeVehicle $typeVehicle)
     {
-        $typeVehicle->update($request->validated());
+        $isUsed = (new TypeVehicleService)->isUsed($typeVehicle);
+        if (!$isUsed) {
+            $typeVehicle->update($request->validated());
 
-        return back()->with('success', __('messages.success.update.type_vehicle'));
+            return back()->with('success', __('messages.success.update.type_vehicle'));
+        }
     }
 
     /**
@@ -99,8 +104,11 @@ class TypeVehicleController extends Controller
      */
     public function destroy(TypeVehicle $typeVehicle)
     {
-        $typeVehicle->delete();
+        $isUsed = (new TypeVehicleService)->isUsed($typeVehicle);
+        if (!$isUsed) {
+            $typeVehicle->delete();
 
-        return to_route('type-vehicles.index')->with('success', __('messages.success.destroy.type_vehicle'));
+            return to_route('type-vehicles.index')->with('success', __('messages.success.destroy.type_vehicle'));
+        }
     }
 }

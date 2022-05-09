@@ -1116,13 +1116,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Column, null, {
             body: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
               var data = _ref.data;
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppButton"], {
+              return [!data.isUsed ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AppButton"], {
+                key: 0,
                 icon: "pi pi-angle-double-right",
                 "class": "p-button-text p-button-icon-only p-button-rounded p-button-text",
                 href: _ctx.route('type-vehicles.edit', data.id)
               }, null, 8
               /* PROPS */
-              , ["href"])];
+              , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
             }),
             _: 1
             /* STABLE */

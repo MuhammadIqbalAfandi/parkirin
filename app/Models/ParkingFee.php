@@ -12,6 +12,6 @@ class ParkingFee extends Model
     protected $fillable = [
         'price',
         'time_period',
-        'type_vehicle_id',
+        'parking_fee_id',
     ];
 }

@@ -28,4 +28,19 @@ class TypeVehicle extends Model
             set:fn($value) => ucwords($value)
         );
     }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
+
+    public function maxVehicles()
+    {
+        return $this->hasMany(MaxVehicle::class);
+    }
+
+    public function parkingFee()
+    {
+        return $this->hasOne(ParkingFee::class);
+    }
 }

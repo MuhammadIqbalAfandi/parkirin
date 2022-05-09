@@ -111,7 +111,7 @@ entity Mutation {
 TransactionIn ||--|| TransactionOut
 TransactionOut ||--|| Mutation
 TransactionOut ||--|{ Vehicle
-TransactionOut ||--|{ TypeVehicle
+TransactionOut ||--|{ ParkingFee
 TransactionOut ||--|{ User
 TypeVehicle ||--|| ParkingFee
 TypeVehicle }|--|| Vehicle
