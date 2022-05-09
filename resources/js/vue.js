@@ -16,6 +16,8 @@ import Calendar from 'primevue/calendar'
 import Card from 'primevue/card'
 import Chart from 'primevue/chart'
 import Column from 'primevue/column'
+import ConfirmationService from 'primevue/confirmationservice'
+import ConfirmDialog from 'primevue/confirmdialog'
 import DataTable from 'primevue/datatable'
 import Dialog from 'primevue/dialog'
 import Divider from 'primevue/divider'
@@ -39,6 +41,7 @@ createInertiaApp({
     createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(PrimeVue, { ripple: true })
+      .use(ConfirmationService)
       .mixin({ methods: { route } })
       .directive('styleclass', StyleClass)
       .directive('ripple', Ripple)
@@ -50,6 +53,7 @@ createInertiaApp({
       .component('Calendar', Calendar)
       .component('Chart', Chart)
       .component('Column', Column)
+      .component('ConfirmDialog', ConfirmDialog)
       .component('DataTable', DataTable)
       .component('Dialog', Dialog)
       .component('Divider', Divider)

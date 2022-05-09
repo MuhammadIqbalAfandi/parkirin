@@ -2,6 +2,7 @@
 import { computed, watch, reactive } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
+import { useConfirm } from 'primevue/useconfirm'
 import AppLayout from '@/layouts/AppLayout.vue'
 import AppDropdown from '@/components/AppDropdown.vue'
 import AppInputText from '@/components/AppInputText.vue'
@@ -31,31 +32,48 @@ const listPlatNumberOnDelete = (index) => {
   usePage().props.value.errors = {}
 }
 
-const addPlatNumber = () => {
-  form.clearErrors('plat_number', 'max_vehicle_id')
-
+const addPlatNumberValidation = () => {
   if (!form.plat_number) {
     form.setError('plat_number', 'Plat kendaraan tidak boleh kosong')
-    return
+    return {
+      error: true,
+    }
   }
 
   if (!form.max_vehicle_id) {
     form.setError('max_vehicle_id', 'Tidak boleh kosong')
-    return
+    return {
+      error: true,
+    }
   }
 
   const listPlatNumberExist = listPlatNumber.filter((val) => val.platNumber === form.plat_number.toUpperCase())
   if (listPlatNumberExist.length) {
     form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama')
-    return
+    return {
+      error: true,
+    }
   }
 
   const maxVehicles = listPlatNumber.filter((val) => val.maxVehicleId === form.max_vehicle_id)
   if (maxVehicles.length) {
     if (maxVehicles.length + 1 > maxVehicles[0].maxVehicle) {
       form.setError('plat_number', 'Melibihi batas maksimal kendaraan')
-      return
+      return {
+        error: true,
+      }
     }
+  }
+
+  return { error: false }
+}
+
+const addPlatNumber = () => {
+  form.clearErrors('plat_number', 'max_vehicle_id')
+
+  const validation = addPlatNumberValidation()
+  if (validation.error) {
+    return
   }
 
   const typeVehicle = props.typeMember.maxVehicles.filter((val) => val.value === form.max_vehicle_id)[0]
@@ -88,24 +106,37 @@ watch(
   }
 )
 
-const submit = () => {
-  form
-    .transform((data) => ({
-      name: data.name,
-      phone: data.phone,
-      vehicles: listPlatNumber,
-      type_member_id: data.type_member_id,
-    }))
-    .post(route('members.store'), {
-      onError: () => {
-        Inertia.reload({ only: ['typeMember'], data: { id: form.type_member_id } })
-      },
-      onSuccess: () => {
-        listPlatNumberClear()
+const confirm = useConfirm()
 
-        form.reset()
-      },
-    })
+const submit = () => {
+  confirm.require({
+    message: `Tagihan dikenakan untuk member baru sebesar ${props.typeMember.price}`,
+    header: 'Tagihan',
+    acceptLabel: 'Bayar dan simpan',
+    rejectLabel: 'Batalkan',
+    accept: () => {
+      form
+        .transform((data) => ({
+          name: data.name,
+          phone: data.phone,
+          vehicles: listPlatNumber,
+          type_member_id: data.type_member_id,
+        }))
+        .post(route('members.store'), {
+          onError: () => {
+            Inertia.reload({ only: ['typeMember'], data: { id: form.type_member_id } })
+          },
+          onSuccess: () => {
+            listPlatNumberClear()
+
+            form.reset()
+          },
+        })
+    },
+    reject: () => {
+      console.info('transaksi digagalkan')
+    },
+  })
 }
 </script>
 
@@ -113,6 +144,8 @@ const submit = () => {
   <Head title="Tambah Member" />
 
   <AppLayout>
+    <ConfirmDialog></ConfirmDialog>
+
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>

@@ -1,9 +1,10 @@
 <script setup>
-import { computed, watch, ref, reactive, onMounted } from 'vue'
+import { computed, watch, reactive, ref, onMounted } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
+import { groupBy } from 'lodash'
+import { useConfirm } from 'primevue/useconfirm'
 import AppLayout from '@/layouts/AppLayout.vue'
-import AppDialog from '@/components/AppDialog.vue'
 import AppDropdown from '@/components/AppDropdown.vue'
 import AppInputText from '@/components/AppInputText.vue'
 
@@ -21,11 +22,11 @@ watch(errors, () => {
   form.clearErrors()
 })
 
+const listPlatNumber = reactive([])
+
 onMounted(() => {
   props.member.vehicles.forEach((val) => listPlatNumber.push(val))
 })
-
-const listPlatNumber = reactive([])
 
 const listPlatNumberClear = () => {
   listPlatNumber.splice(0)
@@ -37,31 +38,48 @@ const listPlatNumberOnDelete = (index) => {
   usePage().props.value.errors = {}
 }
 
-const addPlatNumber = () => {
-  form.clearErrors('plat_number', 'max_vehicle_id')
-
+const addPlatNumberValidation = () => {
   if (!form.plat_number) {
     form.setError('plat_number', 'Plat kendaraan tidak boleh kosong')
-    return
+    return {
+      error: true,
+    }
   }
 
   if (!form.max_vehicle_id) {
     form.setError('max_vehicle_id', 'Tidak boleh kosong')
-    return
+    return {
+      error: true,
+    }
   }
 
   const listPlatNumberExist = listPlatNumber.filter((val) => val.platNumber === form.plat_number.toUpperCase())
   if (listPlatNumberExist.length) {
     form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama')
-    return
+    return {
+      error: true,
+    }
   }
 
   const maxVehicles = listPlatNumber.filter((val) => val.maxVehicleId === form.max_vehicle_id)
   if (maxVehicles.length) {
     if (maxVehicles.length + 1 > maxVehicles[0].maxVehicle) {
       form.setError('plat_number', 'Melibihi batas maksimal kendaraan')
-      return
+      return {
+        error: true,
+      }
     }
+  }
+
+  return { error: false }
+}
+
+const addPlatNumber = () => {
+  form.clearErrors('plat_number', 'max_vehicle_id')
+
+  const validation = addPlatNumberValidation()
+  if (validation.error) {
+    return
   }
 
   const typeVehicle = props.typeMember.maxVehicles.filter((val) => val.value === form.max_vehicle_id)[0]
@@ -75,16 +93,6 @@ const addPlatNumber = () => {
 
   form.reset('plat_number', 'max_vehicle_id')
 }
-
-const visibleDialog = ref(false)
-
-const confirmDialog = () => {
-  visibleDialog.value = true
-}
-
-const onAgree = () => Inertia.delete(route('members.destroy', props.member.id))
-
-const onCancel = () => (visibleDialog.value = false)
 
 const form = useForm({
   name: props.member.name,
@@ -104,7 +112,45 @@ watch(
   }
 )
 
-const submit = () => {
+const errorSubmitVisible = ref(false)
+
+const errorSubmitText = ref()
+
+const submitValidation = () => {
+  const listPlatNumberGroup = groupBy(listPlatNumber, 'typeVehicleId')
+  const listVehicles = []
+  const error = ref(false)
+
+  for (let key in listPlatNumberGroup) {
+    listVehicles.push({
+      typeVehicleId: listPlatNumberGroup[key][0]['typeVehicleId'],
+      maxVehicle: listPlatNumberGroup[key][0]['maxVehicle'],
+      count: listPlatNumberGroup[key].length,
+    })
+  }
+
+  listVehicles.forEach((val) => {
+    if (val.count > val.maxVehicle) {
+      errorSubmitVisible.value = true
+      errorSubmitText.value = 'Ada perubahan pada batas maksimal kendaraan'
+      error.value = true
+    }
+  })
+
+  if (error.value) {
+    return {
+      error: true,
+    }
+  } else {
+    return {
+      error: false,
+    }
+  }
+}
+
+const confirm = useConfirm()
+
+const formSent = () => {
   form
     .transform((data) => ({
       name: data.name,
@@ -114,12 +160,38 @@ const submit = () => {
     }))
     .put(route('members.update', props.member.id))
 }
+
+const submit = () => {
+  const validation = submitValidation()
+  if (validation.error) {
+    return
+  }
+
+  if (props.member.typeMemberId != form.type_member_id) {
+    confirm.require({
+      message: `Tagihan dikenakan untuk jenis member yang berbeda sebesar ${props.typeMember.price}`,
+      header: 'Tagihan',
+      acceptLabel: 'Bayar dan simpan',
+      rejectLabel: 'Batalkan',
+      accept: () => {
+        formSent()
+      },
+      reject: () => {
+        console.info('transaksi digagalkan')
+      },
+    })
+  } else {
+    formSent()
+  }
+}
 </script>
 
 <template>
   <Head title="Ubah Member" />
 
   <AppLayout>
+    <ConfirmDialog></ConfirmDialog>
+
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
@@ -261,5 +333,14 @@ const submit = () => {
         </Card>
       </div>
     </div>
+
+    <Dialog
+      header="Error"
+      v-model:visible="errorSubmitVisible"
+      :style="{ width: '40vw' }"
+      contentStyle="color: #b71c1c"
+    >
+      <p>{{ errorSubmitText }}</p>
+    </Dialog>
   </AppLayout>
 </template>

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Member;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateMemberRequest extends FormRequest
 {
@@ -27,7 +28,7 @@ class UpdateMemberRequest extends FormRequest
             'name' => 'required|string|max:50',
             'phone' => 'required|numeric|min:12|unique:members,phone,' . $this->member->id,
             'type_member_id' => 'required|numeric',
-            'vehicles.*.platNumber' => 'unique:vehicles,plat_number',
+            'vehicles.*.platNumber' => [Rule::unique('vehicles', 'plat_number')->ignore($this->member->id, 'member_id')],
         ];
     }
 }

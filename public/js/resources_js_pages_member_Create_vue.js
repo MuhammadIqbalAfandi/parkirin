@@ -503,10 +503,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/layouts/AppLayout.vue */ "./resources/js/layouts/AppLayout.vue");
-/* harmony import */ var _components_AppDropdown_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/AppDropdown.vue */ "./resources/js/components/AppDropdown.vue");
-/* harmony import */ var _components_AppInputText_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/AppInputText.vue */ "./resources/js/components/AppInputText.vue");
-/* harmony import */ var _TableHeader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TableHeader */ "./resources/js/pages/member/TableHeader.js");
+/* harmony import */ var primevue_useconfirm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! primevue/useconfirm */ "./node_modules/primevue/useconfirm/useconfirm.esm.js");
+/* harmony import */ var _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/layouts/AppLayout.vue */ "./resources/js/layouts/AppLayout.vue");
+/* harmony import */ var _components_AppDropdown_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/AppDropdown.vue */ "./resources/js/components/AppDropdown.vue");
+/* harmony import */ var _components_AppInputText_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/AppInputText.vue */ "./resources/js/components/AppInputText.vue");
+/* harmony import */ var _TableHeader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TableHeader */ "./resources/js/pages/member/TableHeader.js");
+
 
 
 
@@ -540,17 +542,19 @@ __webpack_require__.r(__webpack_exports__);
       (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.usePage)().props.value.errors = {};
     };
 
-    var addPlatNumber = function addPlatNumber() {
-      form.clearErrors('plat_number', 'max_vehicle_id');
-
+    var addPlatNumberValidation = function addPlatNumberValidation() {
       if (!form.plat_number) {
         form.setError('plat_number', 'Plat kendaraan tidak boleh kosong');
-        return;
+        return {
+          error: true
+        };
       }
 
       if (!form.max_vehicle_id) {
         form.setError('max_vehicle_id', 'Tidak boleh kosong');
-        return;
+        return {
+          error: true
+        };
       }
 
       var listPlatNumberExist = listPlatNumber.filter(function (val) {
@@ -559,7 +563,9 @@ __webpack_require__.r(__webpack_exports__);
 
       if (listPlatNumberExist.length) {
         form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama');
-        return;
+        return {
+          error: true
+        };
       }
 
       var maxVehicles = listPlatNumber.filter(function (val) {
@@ -569,8 +575,23 @@ __webpack_require__.r(__webpack_exports__);
       if (maxVehicles.length) {
         if (maxVehicles.length + 1 > maxVehicles[0].maxVehicle) {
           form.setError('plat_number', 'Melibihi batas maksimal kendaraan');
-          return;
+          return {
+            error: true
+          };
         }
+      }
+
+      return {
+        error: false
+      };
+    };
+
+    var addPlatNumber = function addPlatNumber() {
+      form.clearErrors('plat_number', 'max_vehicle_id');
+      var validation = addPlatNumberValidation();
+
+      if (validation.error) {
+        return;
       }
 
       var typeVehicle = props.typeMember.maxVehicles.filter(function (val) {
@@ -605,27 +626,39 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     });
+    var confirm = (0,primevue_useconfirm__WEBPACK_IMPORTED_MODULE_3__.useConfirm)();
 
     var submit = function submit() {
-      form.transform(function (data) {
-        return {
-          name: data.name,
-          phone: data.phone,
-          vehicles: listPlatNumber,
-          type_member_id: data.type_member_id
-        };
-      }).post(route('members.store'), {
-        onError: function onError() {
-          _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
-            only: ['typeMember'],
-            data: {
-              id: form.type_member_id
+      confirm.require({
+        message: "Tagihan dikenakan untuk member baru sebesar ".concat(props.typeMember.price),
+        header: 'Tagihan',
+        acceptLabel: 'Bayar dan simpan',
+        rejectLabel: 'Batalkan',
+        accept: function accept() {
+          form.transform(function (data) {
+            return {
+              name: data.name,
+              phone: data.phone,
+              vehicles: listPlatNumber,
+              type_member_id: data.type_member_id
+            };
+          }).post(route('members.store'), {
+            onError: function onError() {
+              _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
+                only: ['typeMember'],
+                data: {
+                  id: form.type_member_id
+                }
+              });
+            },
+            onSuccess: function onSuccess() {
+              listPlatNumberClear();
+              form.reset();
             }
           });
         },
-        onSuccess: function onSuccess() {
-          listPlatNumberClear();
-          form.reset();
+        reject: function reject() {
+          console.info('transaksi digagalkan');
         }
       });
     };
@@ -636,8 +669,10 @@ __webpack_require__.r(__webpack_exports__);
       listPlatNumber: listPlatNumber,
       listPlatNumberClear: listPlatNumberClear,
       listPlatNumberOnDelete: listPlatNumberOnDelete,
+      addPlatNumberValidation: addPlatNumberValidation,
       addPlatNumber: addPlatNumber,
       form: form,
+      confirm: confirm,
       submit: submit,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
@@ -646,10 +681,11 @@ __webpack_require__.r(__webpack_exports__);
       Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm,
       usePage: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.usePage,
-      AppLayout: _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-      AppDropdown: _components_AppDropdown_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-      AppInputText: _components_AppInputText_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-      PlatNumberTable: _TableHeader__WEBPACK_IMPORTED_MODULE_6__.PlatNumberTable
+      useConfirm: primevue_useconfirm__WEBPACK_IMPORTED_MODULE_3__.useConfirm,
+      AppLayout: _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+      AppDropdown: _components_AppDropdown_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+      AppInputText: _components_AppInputText_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+      PlatNumberTable: _TableHeader__WEBPACK_IMPORTED_MODULE_7__.PlatNumberTable
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -1388,6 +1424,8 @@ var _hoisted_25 = {
   "class": "flex flex-column md:flex-row justify-content-end"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_ConfirmDialog = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ConfirmDialog");
+
   var _component_Card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Card");
 
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
@@ -1400,7 +1438,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Tambah Member"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppLayout"], null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ConfirmDialog), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_3];
         }),

@@ -32358,6 +32358,235 @@ var PrimeVue = {
 
 /***/ }),
 
+/***/ "./node_modules/primevue/confirmationeventbus/confirmationeventbus.esm.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/primevue/confirmationeventbus/confirmationeventbus.esm.js ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ConfirmationEventBus)
+/* harmony export */ });
+/* harmony import */ var primevue_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! primevue/utils */ "./node_modules/primevue/utils/utils.esm.js");
+
+
+var ConfirmationEventBus = (0,primevue_utils__WEBPACK_IMPORTED_MODULE_0__.EventBus)();
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/primevue/confirmationservice/confirmationservice.esm.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/primevue/confirmationservice/confirmationservice.esm.js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ConfirmationService)
+/* harmony export */ });
+/* harmony import */ var primevue_confirmationeventbus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! primevue/confirmationeventbus */ "./node_modules/primevue/confirmationeventbus/confirmationeventbus.esm.js");
+/* harmony import */ var primevue_useconfirm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! primevue/useconfirm */ "./node_modules/primevue/useconfirm/useconfirm.esm.js");
+
+
+
+var ConfirmationService = {
+    install: (app) => {
+        const ConfirmationService = {
+            require: (options) => {
+                primevue_confirmationeventbus__WEBPACK_IMPORTED_MODULE_0__["default"].emit('confirm', options);
+            },
+            close: () => {
+                primevue_confirmationeventbus__WEBPACK_IMPORTED_MODULE_0__["default"].emit('close');
+            }
+        };
+        app.config.globalProperties.$confirm = ConfirmationService;
+        app.provide(primevue_useconfirm__WEBPACK_IMPORTED_MODULE_1__.PrimeVueConfirmSymbol, ConfirmationService);
+    }
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/primevue/confirmdialog/confirmdialog.esm.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/primevue/confirmdialog/confirmdialog.esm.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ script)
+/* harmony export */ });
+/* harmony import */ var primevue_confirmationeventbus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! primevue/confirmationeventbus */ "./node_modules/primevue/confirmationeventbus/confirmationeventbus.esm.js");
+/* harmony import */ var primevue_dialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! primevue/dialog */ "./node_modules/primevue/dialog/dialog.esm.js");
+/* harmony import */ var primevue_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primevue/button */ "./node_modules/primevue/button/button.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+
+
+
+var script = {
+    name: 'ConfirmDialog',
+    props: {
+        group: String,
+        breakpoints: {
+            type: Object,
+            default: null
+        }
+    },
+    confirmListener: null,
+    closeListener: null,
+    data() {
+        return {
+            visible: false,
+            confirmation: null,
+        }
+    },
+    mounted() {
+        this.confirmListener = (options) => {
+            if (!options) {
+                return;
+            }
+
+            if (options.group === this.group) {
+                this.confirmation = options;
+                this.visible = true;
+            }
+        };
+
+        this.closeListener = () => {
+            this.visible = false;
+            this.confirmation = null;
+        };
+        primevue_confirmationeventbus__WEBPACK_IMPORTED_MODULE_0__["default"].on('confirm', this.confirmListener);
+        primevue_confirmationeventbus__WEBPACK_IMPORTED_MODULE_0__["default"].on('close', this.closeListener);
+    },
+    beforeUnmount() {
+        primevue_confirmationeventbus__WEBPACK_IMPORTED_MODULE_0__["default"].off('confirm', this.confirmListener);
+        primevue_confirmationeventbus__WEBPACK_IMPORTED_MODULE_0__["default"].off('close', this.closeListener);
+    },
+    methods: {
+        accept() {
+            if (this.confirmation.accept) {
+                this.confirmation.accept();
+            }
+
+            this.visible = false;
+        },
+        reject() {
+            if (this.confirmation.reject) {
+                this.confirmation.reject();
+            }
+
+            this.visible = false;
+        }
+    },
+    computed: {
+        header() {
+            return this.confirmation ? this.confirmation.header : null;
+        },
+        message() {
+            return this.confirmation ? this.confirmation.message : null;
+        },
+        blockScroll() {
+            return this.confirmation ? this.confirmation.blockScroll : true;
+        },
+        position() {
+            return this.confirmation ? this.confirmation.position : null;
+        },
+        iconClass() {
+            return ['p-confirm-dialog-icon', this.confirmation ? this.confirmation.icon : null];
+        },
+        acceptLabel() {
+            return this.confirmation ? (this.confirmation.acceptLabel || this.$primevue.config.locale.accept) : null;
+        },
+        rejectLabel() {
+            return this.confirmation ? (this.confirmation.rejectLabel || this.$primevue.config.locale.reject) : null;
+        },
+        acceptIcon() {
+            return this.confirmation ? this.confirmation.acceptIcon : null;
+        },
+        rejectIcon() {
+            return this.confirmation ? this.confirmation.rejectIcon : null;
+        },
+        acceptClass() {
+            return ['p-confirm-dialog-accept', this.confirmation ? this.confirmation.acceptClass : null];
+        },
+        rejectClass() {
+            return ['p-confirm-dialog-reject', this.confirmation ? (this.confirmation.rejectClass || 'p-button-text') : null];
+        },
+        autoFocusAccept() {
+            return (this.confirmation.defaultFocus === undefined || this.confirmation.defaultFocus === 'accept') ? true : false;
+        },
+        autoFocusReject() {
+            return this.confirmation.defaultFocus === 'reject' ? true : false;
+        }
+    },
+    components: {
+        'CDialog': primevue_dialog__WEBPACK_IMPORTED_MODULE_1__["default"],
+        'CDButton': primevue_button__WEBPACK_IMPORTED_MODULE_2__["default"]
+    }
+};
+
+const _hoisted_1 = { class: "p-confirm-dialog-message" };
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_CDButton = (0,vue__WEBPACK_IMPORTED_MODULE_3__.resolveComponent)("CDButton");
+  const _component_CDialog = (0,vue__WEBPACK_IMPORTED_MODULE_3__.resolveComponent)("CDialog");
+
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_3__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_3__.createBlock)(_component_CDialog, {
+    visible: $data.visible,
+    "onUpdate:visible": _cache[2] || (_cache[2] = $event => (($data.visible) = $event)),
+    modal: true,
+    header: $options.header,
+    blockScroll: $options.blockScroll,
+    position: $options.position,
+    class: "p-confirm-dialog",
+    breakpoints: $props.breakpoints
+  }, {
+    footer: (0,vue__WEBPACK_IMPORTED_MODULE_3__.withCtx)(() => [
+      (0,vue__WEBPACK_IMPORTED_MODULE_3__.createVNode)(_component_CDButton, {
+        label: $options.rejectLabel,
+        icon: $options.rejectIcon,
+        class: (0,vue__WEBPACK_IMPORTED_MODULE_3__.normalizeClass)($options.rejectClass),
+        onClick: _cache[0] || (_cache[0] = $event => ($options.reject())),
+        autofocus: $options.autoFocusReject
+      }, null, 8, ["label", "icon", "class", "autofocus"]),
+      (0,vue__WEBPACK_IMPORTED_MODULE_3__.createVNode)(_component_CDButton, {
+        label: $options.acceptLabel,
+        icon: $options.acceptIcon,
+        class: (0,vue__WEBPACK_IMPORTED_MODULE_3__.normalizeClass)($options.acceptClass),
+        onClick: _cache[1] || (_cache[1] = $event => ($options.accept())),
+        autofocus: $options.autoFocusAccept
+      }, null, 8, ["label", "icon", "class", "autofocus"])
+    ]),
+    default: (0,vue__WEBPACK_IMPORTED_MODULE_3__.withCtx)(() => [
+      (0,vue__WEBPACK_IMPORTED_MODULE_3__.createElementVNode)("i", {
+        class: (0,vue__WEBPACK_IMPORTED_MODULE_3__.normalizeClass)($options.iconClass)
+      }, null, 2),
+      (0,vue__WEBPACK_IMPORTED_MODULE_3__.createElementVNode)("span", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_3__.toDisplayString)($options.message), 1)
+    ]),
+    _: 1
+  }, 8, ["visible", "header", "blockScroll", "position", "breakpoints"]))
+}
+
+script.render = render;
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/primevue/datatable/datatable.esm.js":
 /*!**********************************************************!*\
   !*** ./node_modules/primevue/datatable/datatable.esm.js ***!
@@ -42709,6 +42938,37 @@ const Tooltip = {
         }
     }
 };
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/primevue/useconfirm/useconfirm.esm.js":
+/*!************************************************************!*\
+  !*** ./node_modules/primevue/useconfirm/useconfirm.esm.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PrimeVueConfirmSymbol": () => (/* binding */ PrimeVueConfirmSymbol),
+/* harmony export */   "useConfirm": () => (/* binding */ useConfirm)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+const PrimeVueConfirmSymbol = Symbol();
+
+function useConfirm() {
+    const PrimeVueConfirm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(PrimeVueConfirmSymbol);
+    if (!PrimeVueConfirm) {
+        throw new Error('No PrimeVue Confirmation provided!');
+    } 
+
+    return PrimeVueConfirm;
+}
 
 
 
@@ -58120,7 +58380,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"node_modules_chart_js_auto_auto_esm_js":"10c6b388645ceb22","resources_js_pages_auth_ForgotPassword_vue":"5b9f0529bda25a9b","resources_js_pages_auth_Login_vue":"61b9c9ae1ae9da32","resources_js_pages_auth_ResetPassword_vue":"b091193a1e114ce8","resources_js_pages_auth_VerifyEmail_vue":"a7b9a99e5a331088","resources_js_pages_expense_Create_vue":"1772093ec9ad8e1f","resources_js_pages_expense_Index_vue":"bb79e50a3f9cc936","resources_js_pages_expense_Show_vue":"6200e318fe2f7fed","resources_js_pages_expense_TableHeader_js":"eed3f0613f167cfd","resources_js_pages_home_Index_vue":"6cd0224828ac8129","resources_js_pages_member_Create_vue":"edbba0c4457eb3b4","resources_js_pages_member_Edit_vue":"0dba027c7041b01c","resources_js_pages_member_Index_vue":"4c8d34b88ca81ceb","resources_js_pages_member_TableHeader_js":"51dbf053f7ddd45c","resources_js_pages_topup_Create_vue":"24940afcdac09553","resources_js_pages_topup_Edit_vue":"258c3b0746574dc0","resources_js_pages_topup_Index_vue":"0733ef204a4ec33e","resources_js_pages_topup_Show_vue":"cb35ad21e9ce163f","resources_js_pages_topup_TableHeader_js":"c0dc89df0e3b8b7d","resources_js_pages_typemember_Create_vue":"e9028dd632c51636","resources_js_pages_typemember_Edit_vue":"c51c01c7afe7241d","resources_js_pages_typemember_Index_vue":"f9b93dac2e59fcc5","resources_js_pages_typemember_TableHeader_js":"ac1d31a59f8d464e","resources_js_pages_typevehicle_Create_vue":"0f937d93865a1ea2","resources_js_pages_typevehicle_Edit_vue":"edba97a3715ba957","resources_js_pages_typevehicle_Index_vue":"a150bdc8e5ca38d8","resources_js_pages_typevehicle_TableHeader_js":"a40378918fbe74e1","resources_js_pages_user_Create_vue":"361bf2589467f820","resources_js_pages_user_Edit_vue":"fdb844cf830ec11c","resources_js_pages_user_Index_vue":"28306eabc84a84d1","resources_js_pages_user_Show_vue":"138fd92d6ae36518","resources_js_pages_user_TableHeader_js":"0d87fd422fe40491"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"node_modules_chart_js_auto_auto_esm_js":"10c6b388645ceb22","resources_js_pages_auth_ForgotPassword_vue":"5b9f0529bda25a9b","resources_js_pages_auth_Login_vue":"61b9c9ae1ae9da32","resources_js_pages_auth_ResetPassword_vue":"b091193a1e114ce8","resources_js_pages_auth_VerifyEmail_vue":"a7b9a99e5a331088","resources_js_pages_expense_Create_vue":"1772093ec9ad8e1f","resources_js_pages_expense_Index_vue":"bb79e50a3f9cc936","resources_js_pages_expense_Show_vue":"6200e318fe2f7fed","resources_js_pages_expense_TableHeader_js":"eed3f0613f167cfd","resources_js_pages_home_Index_vue":"6cd0224828ac8129","resources_js_pages_member_Create_vue":"65532cf5d3ca8ed2","resources_js_pages_member_Edit_vue":"8953f866891a3551","resources_js_pages_member_Index_vue":"4c8d34b88ca81ceb","resources_js_pages_member_TableHeader_js":"51dbf053f7ddd45c","resources_js_pages_topup_Create_vue":"24940afcdac09553","resources_js_pages_topup_Edit_vue":"258c3b0746574dc0","resources_js_pages_topup_Index_vue":"0733ef204a4ec33e","resources_js_pages_topup_Show_vue":"cb35ad21e9ce163f","resources_js_pages_topup_TableHeader_js":"c0dc89df0e3b8b7d","resources_js_pages_typemember_Create_vue":"e9028dd632c51636","resources_js_pages_typemember_Edit_vue":"c51c01c7afe7241d","resources_js_pages_typemember_Index_vue":"f9b93dac2e59fcc5","resources_js_pages_typemember_TableHeader_js":"ac1d31a59f8d464e","resources_js_pages_typevehicle_Create_vue":"0f937d93865a1ea2","resources_js_pages_typevehicle_Edit_vue":"edba97a3715ba957","resources_js_pages_typevehicle_Index_vue":"a150bdc8e5ca38d8","resources_js_pages_typevehicle_TableHeader_js":"a40378918fbe74e1","resources_js_pages_user_Create_vue":"361bf2589467f820","resources_js_pages_user_Edit_vue":"fdb844cf830ec11c","resources_js_pages_user_Index_vue":"28306eabc84a84d1","resources_js_pages_user_Show_vue":"138fd92d6ae36518","resources_js_pages_user_TableHeader_js":"0d87fd422fe40491"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -58337,21 +58597,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var primevue_card__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! primevue/card */ "./node_modules/primevue/card/card.esm.js");
 /* harmony import */ var primevue_chart__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! primevue/chart */ "./node_modules/primevue/chart/chart.esm.js");
 /* harmony import */ var primevue_column__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! primevue/column */ "./node_modules/primevue/column/column.esm.js");
-/* harmony import */ var primevue_datatable__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! primevue/datatable */ "./node_modules/primevue/datatable/datatable.esm.js");
-/* harmony import */ var primevue_dialog__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! primevue/dialog */ "./node_modules/primevue/dialog/dialog.esm.js");
-/* harmony import */ var primevue_divider__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! primevue/divider */ "./node_modules/primevue/divider/divider.esm.js");
-/* harmony import */ var primevue_dropdown__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! primevue/dropdown */ "./node_modules/primevue/dropdown/dropdown.esm.js");
-/* harmony import */ var primevue_editor__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! primevue/editor */ "./node_modules/primevue/editor/editor.esm.js");
-/* harmony import */ var primevue_inputnumber__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! primevue/inputnumber */ "./node_modules/primevue/inputnumber/inputnumber.esm.js");
-/* harmony import */ var primevue_inputtext__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! primevue/inputtext */ "./node_modules/primevue/inputtext/inputtext.esm.js");
-/* harmony import */ var primevue_message__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! primevue/message */ "./node_modules/primevue/message/message.esm.js");
-/* harmony import */ var primevue_paginator__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! primevue/paginator */ "./node_modules/primevue/paginator/paginator.esm.js");
-/* harmony import */ var primevue_password__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! primevue/password */ "./node_modules/primevue/password/password.esm.js");
-/* harmony import */ var primevue_ripple__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! primevue/ripple */ "./node_modules/primevue/ripple/ripple.esm.js");
-/* harmony import */ var primevue_tabview__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! primevue/tabview */ "./node_modules/primevue/tabview/tabview.esm.js");
-/* harmony import */ var primevue_tabpanel__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! primevue/tabpanel */ "./node_modules/primevue/tabpanel/tabpanel.esm.js");
-/* harmony import */ var primevue_textarea__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! primevue/textarea */ "./node_modules/primevue/textarea/textarea.esm.js");
-/* harmony import */ var primevue_tooltip__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! primevue/tooltip */ "./node_modules/primevue/tooltip/tooltip.esm.js");
+/* harmony import */ var primevue_confirmationservice__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! primevue/confirmationservice */ "./node_modules/primevue/confirmationservice/confirmationservice.esm.js");
+/* harmony import */ var primevue_confirmdialog__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! primevue/confirmdialog */ "./node_modules/primevue/confirmdialog/confirmdialog.esm.js");
+/* harmony import */ var primevue_datatable__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! primevue/datatable */ "./node_modules/primevue/datatable/datatable.esm.js");
+/* harmony import */ var primevue_dialog__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! primevue/dialog */ "./node_modules/primevue/dialog/dialog.esm.js");
+/* harmony import */ var primevue_divider__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! primevue/divider */ "./node_modules/primevue/divider/divider.esm.js");
+/* harmony import */ var primevue_dropdown__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! primevue/dropdown */ "./node_modules/primevue/dropdown/dropdown.esm.js");
+/* harmony import */ var primevue_editor__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! primevue/editor */ "./node_modules/primevue/editor/editor.esm.js");
+/* harmony import */ var primevue_inputnumber__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! primevue/inputnumber */ "./node_modules/primevue/inputnumber/inputnumber.esm.js");
+/* harmony import */ var primevue_inputtext__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! primevue/inputtext */ "./node_modules/primevue/inputtext/inputtext.esm.js");
+/* harmony import */ var primevue_message__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! primevue/message */ "./node_modules/primevue/message/message.esm.js");
+/* harmony import */ var primevue_paginator__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! primevue/paginator */ "./node_modules/primevue/paginator/paginator.esm.js");
+/* harmony import */ var primevue_password__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! primevue/password */ "./node_modules/primevue/password/password.esm.js");
+/* harmony import */ var primevue_ripple__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! primevue/ripple */ "./node_modules/primevue/ripple/ripple.esm.js");
+/* harmony import */ var primevue_tabview__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! primevue/tabview */ "./node_modules/primevue/tabview/tabview.esm.js");
+/* harmony import */ var primevue_tabpanel__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! primevue/tabpanel */ "./node_modules/primevue/tabpanel/tabpanel.esm.js");
+/* harmony import */ var primevue_textarea__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! primevue/textarea */ "./node_modules/primevue/textarea/textarea.esm.js");
+/* harmony import */ var primevue_tooltip__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! primevue/tooltip */ "./node_modules/primevue/tooltip/tooltip.esm.js");
+
+
 
 
 
@@ -58402,11 +58666,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     }).use(plugin).use(primevue_config__WEBPACK_IMPORTED_MODULE_8__["default"], {
       ripple: true
-    }).mixin({
+    }).use(primevue_confirmationservice__WEBPACK_IMPORTED_MODULE_17__["default"]).mixin({
       methods: {
         route: route
       }
-    }).directive('styleclass', primevue_styleclass__WEBPACK_IMPORTED_MODULE_9__["default"]).directive('ripple', primevue_ripple__WEBPACK_IMPORTED_MODULE_27__["default"]).directive('tooltip', primevue_tooltip__WEBPACK_IMPORTED_MODULE_31__["default"]).component('AutoComplete', primevue_autocomplete__WEBPACK_IMPORTED_MODULE_10__["default"]).component('Button', primevue_button__WEBPACK_IMPORTED_MODULE_12__["default"]).component('Badge', primevue_badge__WEBPACK_IMPORTED_MODULE_11__["default"]).component('Card', primevue_card__WEBPACK_IMPORTED_MODULE_14__["default"]).component('Calendar', primevue_calendar__WEBPACK_IMPORTED_MODULE_13__["default"]).component('Chart', primevue_chart__WEBPACK_IMPORTED_MODULE_15__["default"]).component('Column', primevue_column__WEBPACK_IMPORTED_MODULE_16__["default"]).component('DataTable', primevue_datatable__WEBPACK_IMPORTED_MODULE_17__["default"]).component('Dialog', primevue_dialog__WEBPACK_IMPORTED_MODULE_18__["default"]).component('Divider', primevue_divider__WEBPACK_IMPORTED_MODULE_19__["default"]).component('Dropdown', primevue_dropdown__WEBPACK_IMPORTED_MODULE_20__["default"]).component('Editor', primevue_editor__WEBPACK_IMPORTED_MODULE_21__["default"]).component('InputNumber', primevue_inputnumber__WEBPACK_IMPORTED_MODULE_22__["default"]).component('InputText', primevue_inputtext__WEBPACK_IMPORTED_MODULE_23__["default"]).component('Message', primevue_message__WEBPACK_IMPORTED_MODULE_24__["default"]).component('Paginator', primevue_paginator__WEBPACK_IMPORTED_MODULE_25__["default"]).component('Password', primevue_password__WEBPACK_IMPORTED_MODULE_26__["default"]).component('TabView', primevue_tabview__WEBPACK_IMPORTED_MODULE_28__["default"]).component('TabPanel', primevue_tabpanel__WEBPACK_IMPORTED_MODULE_29__["default"]).component('Textarea', primevue_textarea__WEBPACK_IMPORTED_MODULE_30__["default"]).mount(el);
+    }).directive('styleclass', primevue_styleclass__WEBPACK_IMPORTED_MODULE_9__["default"]).directive('ripple', primevue_ripple__WEBPACK_IMPORTED_MODULE_29__["default"]).directive('tooltip', primevue_tooltip__WEBPACK_IMPORTED_MODULE_33__["default"]).component('AutoComplete', primevue_autocomplete__WEBPACK_IMPORTED_MODULE_10__["default"]).component('Button', primevue_button__WEBPACK_IMPORTED_MODULE_12__["default"]).component('Badge', primevue_badge__WEBPACK_IMPORTED_MODULE_11__["default"]).component('Card', primevue_card__WEBPACK_IMPORTED_MODULE_14__["default"]).component('Calendar', primevue_calendar__WEBPACK_IMPORTED_MODULE_13__["default"]).component('Chart', primevue_chart__WEBPACK_IMPORTED_MODULE_15__["default"]).component('Column', primevue_column__WEBPACK_IMPORTED_MODULE_16__["default"]).component('ConfirmDialog', primevue_confirmdialog__WEBPACK_IMPORTED_MODULE_18__["default"]).component('DataTable', primevue_datatable__WEBPACK_IMPORTED_MODULE_19__["default"]).component('Dialog', primevue_dialog__WEBPACK_IMPORTED_MODULE_20__["default"]).component('Divider', primevue_divider__WEBPACK_IMPORTED_MODULE_21__["default"]).component('Dropdown', primevue_dropdown__WEBPACK_IMPORTED_MODULE_22__["default"]).component('Editor', primevue_editor__WEBPACK_IMPORTED_MODULE_23__["default"]).component('InputNumber', primevue_inputnumber__WEBPACK_IMPORTED_MODULE_24__["default"]).component('InputText', primevue_inputtext__WEBPACK_IMPORTED_MODULE_25__["default"]).component('Message', primevue_message__WEBPACK_IMPORTED_MODULE_26__["default"]).component('Paginator', primevue_paginator__WEBPACK_IMPORTED_MODULE_27__["default"]).component('Password', primevue_password__WEBPACK_IMPORTED_MODULE_28__["default"]).component('TabView', primevue_tabview__WEBPACK_IMPORTED_MODULE_30__["default"]).component('TabPanel', primevue_tabpanel__WEBPACK_IMPORTED_MODULE_31__["default"]).component('Textarea', primevue_textarea__WEBPACK_IMPORTED_MODULE_32__["default"]).mount(el);
   }
 });
 _inertiajs_progress__WEBPACK_IMPORTED_MODULE_7__.InertiaProgress.init({
