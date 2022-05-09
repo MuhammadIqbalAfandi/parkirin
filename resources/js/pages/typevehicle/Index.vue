@@ -48,7 +48,7 @@ defineProps({
         <template #body="{ data }">
           <AppButton
             v-if="!data.isUsed"
-            icon="pi pi-angle-double-right"
+            icon="pi pi-pencil"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
             :href="route('type-vehicles.edit', data.id)"
           />

@@ -1118,7 +1118,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               var data = _ref.data;
               return [!data.isUsed ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AppButton"], {
                 key: 0,
-                icon: "pi pi-angle-double-right",
+                icon: "pi pi-pencil",
                 "class": "p-button-text p-button-icon-only p-button-rounded p-button-text",
                 href: _ctx.route('type-vehicles.edit', data.id)
               }, null, 8

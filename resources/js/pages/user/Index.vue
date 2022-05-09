@@ -69,7 +69,7 @@ watch(
       <Column>
         <template #body="{ data }">
           <AppButton
-            icon="pi pi-angle-double-right"
+            icon="pi pi-pencil"
             class="p-button-icon-only p-button-rounded p-button-text"
             :href="route('users.edit', data.id)"
           />

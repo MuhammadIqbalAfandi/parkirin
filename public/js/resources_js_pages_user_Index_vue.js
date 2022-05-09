@@ -1179,7 +1179,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             body: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
               var data = _ref.data;
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppButton"], {
-                icon: "pi pi-angle-double-right",
+                icon: "pi pi-pencil",
                 "class": "p-button-icon-only p-button-rounded p-button-text",
                 href: _ctx.route('users.edit', data.id)
               }, null, 8

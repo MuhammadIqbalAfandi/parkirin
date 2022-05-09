@@ -126,7 +126,7 @@ const filterReset = () => {
       <Column>
         <template #body="{ data }">
           <AppButton
-            icon="pi pi-angle-double-right"
+            icon="pi pi-eye"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
             :href="route('top-ups.show', data.id)"
           />
