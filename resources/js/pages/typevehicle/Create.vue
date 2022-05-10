@@ -32,7 +32,7 @@ const submit = () => {
                 <AppInputText
                   v-model="form.type"
                   label="Jenis Kendaraan"
-                  placeholder="jenis kendaraan"
+                  placeholder="contoh: sepeda, mobil, motor ..."
                   :error="form.errors.type"
                 />
               </div>

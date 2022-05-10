@@ -1835,7 +1835,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return $setup.form.price = $event;
             }),
             label: "Tarif Member",
-            placeholder: "tarif member",
+            placeholder: "contoh: 100000",
             error: $setup.form.errors.price
           }, null, 8
           /* PROPS */
@@ -1873,7 +1873,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return $setup.form.max_vehicle = $event;
             }),
             label: "Maksimal Kendaraan",
-            placeholder: "maksimal kendaraan",
+            placeholder: "contoh: 1",
             error: $setup.form.errors.max_vehicle
           }, null, 8
           /* PROPS */

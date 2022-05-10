@@ -32,7 +32,7 @@ const submit = () => {
               v-model="form.amount"
               class="md:w-16rem"
               label="Pengeluaran"
-              placeholder="jumlah pengeluaran"
+              placeholder="contoh: 100000"
               :error="form.errors.amount"
             />
 

@@ -1274,7 +1274,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }),
             "class": "md:w-16rem",
             label: "Pengeluaran",
-            placeholder: "jumlah pengeluaran",
+            placeholder: "contoh: 100000",
             error: $setup.form.errors.amount
           }, null, 8
           /* PROPS */

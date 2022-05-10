@@ -110,7 +110,7 @@ const submit = () => {
                 <AppInputNumber
                   v-model="form.price"
                   label="Tarif Member"
-                  placeholder="tarif member"
+                  placeholder="contoh: 100000"
                   :error="form.errors.price"
                 />
               </div>
@@ -148,7 +148,7 @@ const submit = () => {
                 <AppInputNumber
                   v-model="form.max_vehicle"
                   label="Maksimal Kendaraan"
-                  placeholder="maksimal kendaraan"
+                  placeholder="contoh: 1"
                   :error="form.errors.max_vehicle"
                 />
               </div>

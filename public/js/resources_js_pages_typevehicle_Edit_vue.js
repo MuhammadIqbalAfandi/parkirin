@@ -1209,7 +1209,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return $setup.form.type = $event;
             }),
             label: "Jenis Kendaraan",
-            placeholder: "jenis kendaraan",
+            placeholder: "contoh: sepeda, mobil, motor ...",
             error: $setup.form.errors.type
           }, null, 8
           /* PROPS */

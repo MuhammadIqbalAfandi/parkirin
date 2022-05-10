@@ -82,7 +82,7 @@ const filterReset = () => {
           <div class="col-12 md:col-8">
             <div class="grid">
               <div class="col-12 md:col-3">
-                <InputText class="w-full" placeholder="cari..." v-model="filterForm.search" />
+                <InputText class="w-full" placeholder="cari, contoh: 08xx, tina" v-model="filterForm.search" />
               </div>
               <div class="col-12 md:col-3">
                 <Calendar

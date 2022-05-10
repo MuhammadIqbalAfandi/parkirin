@@ -44,7 +44,11 @@ watch(
         <div class="grid">
           <div class="col-12 md:col-8">
             <div class="flex align-items-center">
-              <InputText class="w-full md:w-27rem" placeholder="cari..." v-model="filterForm.search" />
+              <InputText
+                class="w-full md:w-27rem"
+                placeholder="cari, contoh: 08xx, tina, tina@xx.com"
+                v-model="filterForm.search"
+              />
             </div>
           </div>
 

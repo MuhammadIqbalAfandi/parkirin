@@ -83,7 +83,7 @@ const submit = () => {
                   empty
                   label="Member"
                   field="name"
-                  placeholder="member"
+                  placeholder="cari, contoh: 08xx, tina"
                   v-model="form.member"
                   :error="form.errors.member"
                   :suggestions="members"

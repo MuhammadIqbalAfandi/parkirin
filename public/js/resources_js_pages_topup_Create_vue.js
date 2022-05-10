@@ -1189,7 +1189,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             empty: "",
             label: "Member",
             field: "name",
-            placeholder: "member",
+            placeholder: "cari, contoh: 08xx, tina",
             modelValue: $setup.form.member,
             "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
               return $setup.form.member = $event;
