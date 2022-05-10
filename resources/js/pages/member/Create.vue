@@ -130,7 +130,7 @@ const formSent = () => {
 
 const submit = () => {
   confirm.require({
-    message: `Tagihan dikenakan untuk member baru sebesar ${props.typeMember.price}`,
+    message: `Dikenakan tagihan untuk member baru sebesar ${props.typeMember.price}`,
     header: 'Tagihan',
     acceptLabel: 'Bayar dan simpan',
     rejectLabel: 'Batalkan',
@@ -138,7 +138,7 @@ const submit = () => {
       formSent()
     },
     reject: () => {
-      console.info('transaksi digagalkan')
+      console.info('transaksi dibatalkan')
     },
   })
 }

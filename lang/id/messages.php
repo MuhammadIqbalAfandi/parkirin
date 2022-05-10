@@ -51,6 +51,7 @@ return [
 
     'error' => [
         'store' => [
+            'top_up' => 'Top up gagal ditambahkan',
             'type_member' => 'Jenis member gagal ditambahkan',
             'member' => 'Member gagal ditambahkan',
             'change_password' => 'Password lama salah',

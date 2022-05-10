@@ -6,6 +6,10 @@ use App\Http\Requests\TopUp\StoreTopUpRequest;
 use App\Http\Requests\TopUp\UpdateTopUpRequest;
 use App\Models\Member;
 use App\Models\TopUp;
+use App\Models\TypeMember;
+use Carbon\Carbon;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class TopUpController extends Controller
@@ -51,6 +55,7 @@ class TopUpController extends Controller
                     'phone' => $member->phone,
                     'platNumber' => $member->vehicleDetail(),
                     'type' => $member->typeMember->type,
+                    'price' => $member->typeMember->price,
                     'expDate' => $member->exp_date,
                 ])
             ),
@@ -65,14 +70,32 @@ class TopUpController extends Controller
      */
     public function store(StoreTopUpRequest $request)
     {
-        TopUp::create([
-            'balance' => $request->balance,
-            'exp_date' => $request->exp_date,
-            'member_id' => $request->member_id,
-            'user_id' => auth()->user()->id,
-        ]);
+        $member = Member::find($request->member_id);
 
-        return back()->with('success', __('messages.success.store.top_up'));
+        $latest = $member->topUps->last()->getRawOriginal('exp_date');
+
+        DB::beginTransaction();
+
+        try {
+            $topUp = $member->topUps()->create([
+                'amount' => TypeMember::find($member->typeMember->id)->getRawOriginal('price'),
+                'exp_date' => Carbon::create($latest)->addDays(30),
+                'user_id' => auth()->user()->id,
+            ]);
+
+            $topUp->mutation()->create([
+                'type' => 1,
+                'amount' => TypeMember::find($member->typeMember->id)->getRawOriginal('price'),
+            ]);
+
+            DB::commit();
+
+            return back()->with('success', __('messages.success.store.top_up'));
+        } catch (QueryException $qe) {
+            DB::rollBack();
+
+            return back()->with('error', __('messages.error.store.top_up'));
+        }
     }
 
     /**
@@ -83,20 +106,27 @@ class TopUpController extends Controller
      */
     public function show(TopUp $topUp)
     {
+        $member = $topUp->member;
+
         return inertia('topup/Show', [
-            'topUp' => [
-                'updatedAt' => $topUp->updated_at,
-                'name' => $topUp->member->name,
-                'phone' => $topUp->member->phone,
-                'platNumber' => $topUp->member->plat_number,
-                'balance' => $topUp->balance,
-                'expDate' => $topUp->exp_date,
-                'user' => [
+            'member' => [
+                'name' => $member->name,
+                'phone' => $member->phone,
+            ],
+            'topUp' => $member->topUps
+                ->last()
+                ->paginate(15)
+                ->withQueryString()
+                ->through(fn($topUp) => [
+                    'id' => $topUp->id,
+                    'updatedAt' => $topUp->updated_at,
                     'name' => $topUp->user->name,
                     'phone' => $topUp->user->phone,
-                    'email' => $topUp->user->email,
-                ],
-            ],
+                    'platNumber' => $topUp->member->vehicleDetail(),
+                    'amount' => $topUp->amount,
+                    'type' => $topUp->member->typeMember->type,
+                    'expDate' => $topUp->exp_date,
+                ]),
         ]);
     }
 

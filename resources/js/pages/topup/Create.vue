@@ -2,6 +2,7 @@
 import { computed, watch } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
+import { useConfirm } from 'primevue/useconfirm'
 import AppAutocompleteBasic from '@/components/AppAutocompleteBasic.vue'
 import AppLayout from '@/layouts/AppLayout.vue'
 
@@ -37,8 +38,29 @@ const form = useForm({
   member: null,
 })
 
+const confirm = useConfirm()
+
+const formSent = () => {
+  form
+    .transform((data) => ({
+      member_id: data.member.id,
+    }))
+    .post(route('top-ups.store'), { onSuccess: () => form.reset() })
+}
+
 const submit = () => {
-  form.post(route('top-ups.store'), { onSuccess: () => form.reset() })
+  confirm.require({
+    message: `Dikenakan tagihan sebesar ${form.member.price}`,
+    header: 'Top Up',
+    acceptLabel: 'Bayar dan simpan',
+    rejectLabel: 'Batalkan',
+    accept: () => {
+      formSent()
+    },
+    reject: () => {
+      console.info('transaksi dibatalkan')
+    },
+  })
 }
 </script>
 
@@ -46,27 +68,52 @@ const submit = () => {
   <Head title="Top Up" />
 
   <AppLayout>
+    <ConfirmDialog></ConfirmDialog>
+
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card class="surface-200">
           <template #title>Detail Member</template>
           <template v-if="form.member" #content>
-            <h3 class="text-base font-bold mb-0">Nama</h3>
-            <p>{{ form.member.name }}</p>
+            <p v-if="form.member.name">
+              <span class="text-base font-bold"> Nama </span>
 
-            <h3 class="text-base font-bold mb-0">Nomor HP</h3>
-            <p>{{ form.member.phone }}</p>
+              <br />
 
-            <h3 class="text-base font-bold mb-0">Plat Kendaraan</h3>
-            <p>
-              {{ form.member.platNumber }}
+              {{ form.member.name }}
             </p>
 
-            <h3 class="text-base font-bold mb-0">Jenis Member</h3>
-            <p>{{ form.member.type }}</p>
+            <p v-if="form.member.phone">
+              <span class="text-base font-bold"> Nomor HP </span>
 
-            <h3 class="text-base font-bold mb-0">Berakhir</h3>
-            <p>{{ form.member.expDate }}</p>
+              <br />
+
+              {{ form.member.phone }}
+            </p>
+
+            <p v-if="form.member.type">
+              <span class="text-base font-bold"> Jenis Member </span>
+
+              <br />
+
+              {{ form.member.type }}
+            </p>
+
+            <p v-if="form.member.price">
+              <span class="text-base font-bold"> Tarif Member </span>
+
+              <br />
+
+              {{ form.member.price }}
+            </p>
+
+            <p v-if="form.member.expDate">
+              <span class="text-base font-bold"> Berakhir </span>
+
+              <br />
+
+              {{ form.member.expDate }}
+            </p>
           </template>
         </Card>
       </div>
@@ -108,8 +155,17 @@ const submit = () => {
                 </AppAutocompleteBasic>
               </div>
             </div>
-
-            <Divider type="dashed" />
+          </template>
+          <template #footer>
+            <div class="flex flex-column md:flex-row justify-content-end">
+              <Button
+                label="Topup"
+                icon="pi pi-check"
+                class="p-button-outlined"
+                :disabled="form.processing"
+                @click="submit"
+              />
+            </div>
           </template>
         </Card>
       </div>

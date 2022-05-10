@@ -654,7 +654,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var submit = function submit() {
       confirm.require({
-        message: "Tagihan dikenakan untuk member baru sebesar ".concat(props.typeMember.price),
+        message: "Dikenakan tagihan untuk member baru sebesar ".concat(props.typeMember.price),
         header: 'Tagihan',
         acceptLabel: 'Bayar dan simpan',
         rejectLabel: 'Batalkan',
@@ -662,7 +662,7 @@ __webpack_require__.r(__webpack_exports__);
           formSent();
         },
         reject: function reject() {
-          console.info('transaksi digagalkan');
+          console.info('transaksi dibatalkan');
         }
       });
     };

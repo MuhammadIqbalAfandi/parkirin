@@ -8,7 +8,7 @@ import AppLayout from '@/layouts/AppLayout.vue'
 import AppPagination from '@/components/AppPagination.vue'
 import AppButton from '@/components/AppButton.vue'
 
-import TableHeader from './TableHeader'
+import { IndexTable } from './TableHeader'
 
 const props = defineProps({
   topUp: Object,
@@ -117,10 +117,10 @@ const filterReset = () => {
       </template>
 
       <Column
-        v-for="tableHeader in TableHeader"
-        :field="tableHeader.field"
-        :header="tableHeader.header"
-        :key="tableHeader.field"
+        v-for="indexTable in IndexTable"
+        :field="indexTable.field"
+        :header="indexTable.header"
+        :key="indexTable.field"
       />
 
       <Column>

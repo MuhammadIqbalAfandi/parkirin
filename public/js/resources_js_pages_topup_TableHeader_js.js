@@ -9,9 +9,10 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "IndexTable": () => (/* binding */ IndexTable),
+/* harmony export */   "TopUpsTable": () => (/* binding */ TopUpsTable)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
+var IndexTable = [{
   field: 'updatedAt',
   header: 'Diperbaharui'
 }, {
@@ -32,7 +33,29 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   field: 'expDate',
   header: 'Berakhir'
-}]);
+}];
+var TopUpsTable = [{
+  field: 'updatedAt',
+  header: 'Diperbaharui'
+}, {
+  field: 'name',
+  header: 'Nama User'
+}, {
+  field: 'phone',
+  header: 'Nomor HP User'
+}, {
+  field: 'platNumber',
+  header: 'Plat Kendaraan'
+}, {
+  field: 'type',
+  header: 'Jenis Member'
+}, {
+  field: 'amount',
+  header: 'Tarif Member'
+}, {
+  field: 'expDate',
+  header: 'Berakhir'
+}];
 
 /***/ })
 

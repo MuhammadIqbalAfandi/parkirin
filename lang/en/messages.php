@@ -51,6 +51,7 @@ return [
 
     'error' => [
         'store' => [
+            'top_up' => 'Top up failed to be added',
             'type_member' => 'Type member failed to be added',
             'member' => 'member failed to be added',
             'change_password' => 'Password invalid',

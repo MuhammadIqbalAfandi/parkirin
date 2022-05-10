@@ -24,7 +24,6 @@ class StoreTopUpRequest extends FormRequest
     public function rules()
     {
         return [
-            'balance' => 'required|numeric',
             'member_id' => 'required|numeric',
         ];
     }
