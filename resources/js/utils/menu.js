@@ -24,8 +24,8 @@ export default {
     {
       label: 'Master',
       items: [
-        { label: 'Jenis Member', icon: 'pi pi-id-card', to: '/type-members', component: 'typemember/Index' },
         { label: 'Jenis Kendaraan', icon: 'pi pi-car', to: '/type-vehicles', component: 'typevehicle/Index' },
+        { label: 'Jenis Member', icon: 'pi pi-id-card', to: '/type-members', component: 'typemember/Index' },
       ],
     },
   ],

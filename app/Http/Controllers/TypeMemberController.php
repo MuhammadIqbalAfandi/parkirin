@@ -101,7 +101,7 @@ class TypeMemberController extends Controller
                 'type' => $typeMember->type,
                 'description' => $typeMember->description,
                 'price' => $typeMember->getRawOriginal('price'),
-                'availableToMember' => $typeMember->member()->exists(),
+                'isUsed' => $typeMember->member()->exists(),
             ],
             'typeVehicles' => TypeVehicle::get()->transform(fn($typeVehicle) => [
                 'value' => $typeVehicle->id,

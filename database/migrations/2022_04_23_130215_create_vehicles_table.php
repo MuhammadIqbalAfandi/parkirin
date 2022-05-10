@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('plat_number');
             $table->foreignId('member_id')->constrained();
-            $table->foreignId('transaction_out_id')->constrained();
-            $table->foreignId('type_vehicle_id')->constrained();
+            $table->foreignId('transaction_out_id')->nullable()->default(null)->constrained();
+            $table->foreignId('type_vehicle_id')->nullable()->default(null)->constrained();
             $table->timestamps();
         });
     }

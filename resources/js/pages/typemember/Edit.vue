@@ -213,6 +213,7 @@ const submit = () => {
                   />
 
                   <Button
+                    v-if="!typeMember.isUsed"
                     label="Hapus"
                     icon="pi pi-trash"
                     class="p-button-outlined p-button-danger"

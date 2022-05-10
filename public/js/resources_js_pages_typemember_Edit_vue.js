@@ -1937,12 +1937,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onCancel: $setup.onCancel
           }, null, 8
           /* PROPS */
-          , ["visible"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+          , ["visible"]), !$props.typeMember.isUsed ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Button, {
+            key: 0,
             label: "Hapus",
             icon: "pi pi-trash",
             "class": "p-button-outlined p-button-danger",
             onClick: $setup.confirmDialog
-          })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+          })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
             label: "Simpan",
             icon: "pi pi-check",
             "class": "p-button-outlined",
@@ -2053,15 +2054,15 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     label: 'Master',
     items: [{
-      label: 'Jenis Member',
-      icon: 'pi pi-id-card',
-      to: '/type-members',
-      component: 'typemember/Index'
-    }, {
       label: 'Jenis Kendaraan',
       icon: 'pi pi-car',
       to: '/type-vehicles',
       component: 'typevehicle/Index'
+    }, {
+      label: 'Jenis Member',
+      icon: 'pi pi-id-card',
+      to: '/type-members',
+      component: 'typemember/Index'
     }]
   }],
   // Operator
