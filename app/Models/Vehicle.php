@@ -13,6 +13,7 @@ class Vehicle extends Model
     protected $fillable = [
         'plat_number',
         'member_id',
+        'transaction_out_id',
         'type_vehicle_id',
     ];
 

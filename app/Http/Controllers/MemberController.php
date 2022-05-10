@@ -184,42 +184,57 @@ class MemberController extends Controller
      */
     public function update(UpdateMemberRequest $request, Member $member)
     {
-        if ($member->type_member_id !== $request->type_member_id) {
-            dd('type member changes');
-        } else {
-            dd('old member');
+        DB::beginTransaction();
+
+        try {
+            if ($member->type_member_id !== $request->type_member_id) {
+                $member->update([
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'exp_date' => now()->addDays(30),
+                    'type_member_id' => $request->type_member_id,
+                ]);
+
+                $member->vehicles()->delete();
+
+                foreach ($request->vehicles as $vehicle) {
+                    $member->vehicles()->create([
+                        'plat_number' => $vehicle['platNumber'],
+                        'type_vehicle_id' => $vehicle['typeVehicleId'],
+                    ]);
+                }
+
+                $topUp = $member->topUps()->create([
+                    'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
+                    'exp_date' => now()->addDays(30),
+                    'user_id' => auth()->user()->id,
+                ]);
+
+                $topUp->mutation()->create([
+                    'type' => 1,
+                    'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
+                ]);
+            } else {
+                $member->update($request->validated());
+
+                $member->vehicles()->delete();
+
+                foreach ($request->vehicles as $vehicle) {
+                    $member->vehicles()->create([
+                        'plat_number' => $vehicle['platNumber'],
+                        'type_vehicle_id' => $vehicle['typeVehicleId'],
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return back()->with('success', __('messages.success.update.member'));
+        } catch (QueryException $qe) {
+            DB::rollBack();
+
+            return back()->with('error', __('messages.error.update'));
         }
-        // DB::beginTransaction();
-
-        // try {
-        //     $member->update($request->validated());
-
-        //     foreach ($request->vehicles as $vehicle) {
-        //         $member->vehicles()->create([
-        //             'plat_number' => $vehicle['platNumber'],
-        //             'type_vehicle_id' => $vehicle['typeVehicleId'],
-        //         ]);
-        //     }
-
-        //     $topUp = $member->topUps()->create([
-        //         'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
-        //         'exp_date' => now()->addDays(30),
-        //         'user_id' => auth()->user()->id,
-        //     ]);
-
-        //     $topUp->mutation()->create([
-        //         'type' => 1,
-        //         'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
-        //     ]);
-
-        //     DB::commit();
-
-        //     return back()->with('success', __('messages.success.update.member'));
-        // } catch (QueryException $qe) {
-        //     DB::rollBack();
-
-        //     return back()->with('error', __('messages.error.update'));
-        // }
     }
 
     /**

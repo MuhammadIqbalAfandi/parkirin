@@ -628,6 +628,30 @@ __webpack_require__.r(__webpack_exports__);
     });
     var confirm = (0,primevue_useconfirm__WEBPACK_IMPORTED_MODULE_3__.useConfirm)();
 
+    var formSent = function formSent() {
+      form.transform(function (data) {
+        return {
+          name: data.name,
+          phone: data.phone,
+          vehicles: listPlatNumber,
+          type_member_id: data.type_member_id
+        };
+      }).post(route('members.store'), {
+        onError: function onError() {
+          _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
+            only: ['typeMember'],
+            data: {
+              id: form.type_member_id
+            }
+          });
+        },
+        onSuccess: function onSuccess() {
+          listPlatNumberClear();
+          form.reset();
+        }
+      });
+    };
+
     var submit = function submit() {
       confirm.require({
         message: "Tagihan dikenakan untuk member baru sebesar ".concat(props.typeMember.price),
@@ -635,27 +659,7 @@ __webpack_require__.r(__webpack_exports__);
         acceptLabel: 'Bayar dan simpan',
         rejectLabel: 'Batalkan',
         accept: function accept() {
-          form.transform(function (data) {
-            return {
-              name: data.name,
-              phone: data.phone,
-              vehicles: listPlatNumber,
-              type_member_id: data.type_member_id
-            };
-          }).post(route('members.store'), {
-            onError: function onError() {
-              _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.reload({
-                only: ['typeMember'],
-                data: {
-                  id: form.type_member_id
-                }
-              });
-            },
-            onSuccess: function onSuccess() {
-              listPlatNumberClear();
-              form.reset();
-            }
-          });
+          formSent();
         },
         reject: function reject() {
           console.info('transaksi digagalkan');
@@ -673,6 +677,7 @@ __webpack_require__.r(__webpack_exports__);
       addPlatNumber: addPlatNumber,
       form: form,
       confirm: confirm,
+      formSent: formSent,
       submit: submit,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,

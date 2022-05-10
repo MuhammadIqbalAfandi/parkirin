@@ -13,7 +13,6 @@ entity TransactionOut {
   * plat_number
   price
   * transaction_in_id
-  type_vehicle_id
   * user_id
 }
 
@@ -62,6 +61,8 @@ entity Vehicle {
   __
   * plat_number
   * member_id
+  * transaction_out_id
+  * parking_fee_id
   * type_vehicle_id
 }
 

@@ -108,6 +108,26 @@ watch(
 
 const confirm = useConfirm()
 
+const formSent = () => {
+  form
+    .transform((data) => ({
+      name: data.name,
+      phone: data.phone,
+      vehicles: listPlatNumber,
+      type_member_id: data.type_member_id,
+    }))
+    .post(route('members.store'), {
+      onError: () => {
+        Inertia.reload({ only: ['typeMember'], data: { id: form.type_member_id } })
+      },
+      onSuccess: () => {
+        listPlatNumberClear()
+
+        form.reset()
+      },
+    })
+}
+
 const submit = () => {
   confirm.require({
     message: `Tagihan dikenakan untuk member baru sebesar ${props.typeMember.price}`,
@@ -115,23 +135,7 @@ const submit = () => {
     acceptLabel: 'Bayar dan simpan',
     rejectLabel: 'Batalkan',
     accept: () => {
-      form
-        .transform((data) => ({
-          name: data.name,
-          phone: data.phone,
-          vehicles: listPlatNumber,
-          type_member_id: data.type_member_id,
-        }))
-        .post(route('members.store'), {
-          onError: () => {
-            Inertia.reload({ only: ['typeMember'], data: { id: form.type_member_id } })
-          },
-          onSuccess: () => {
-            listPlatNumberClear()
-
-            form.reset()
-          },
-        })
+      formSent()
     },
     reject: () => {
       console.info('transaksi digagalkan')
