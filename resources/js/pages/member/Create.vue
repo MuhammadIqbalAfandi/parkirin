@@ -179,7 +179,7 @@ const submit = () => {
       </div>
     </div>
 
-    <div class="gri">
+    <div class="grid">
       <div class="col-12 md:col-8">
         <Card class="bg-primary">
           <template #title>Detail Harga</template>

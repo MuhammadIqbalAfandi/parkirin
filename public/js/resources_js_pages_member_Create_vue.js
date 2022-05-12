@@ -1360,7 +1360,7 @@ var _hoisted_7 = {
   "class": "col-12 md:col-6"
 };
 var _hoisted_8 = {
-  "class": "gri"
+  "class": "grid"
 };
 var _hoisted_9 = {
   "class": "col-12 md:col-8"

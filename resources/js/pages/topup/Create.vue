@@ -72,48 +72,60 @@ const submit = () => {
 
     <div class="grid">
       <div class="col-12 md:col-8">
-        <Card class="surface-200">
+        <Card>
           <template #title>Detail Member</template>
           <template v-if="form.member" #content>
-            <p v-if="form.member.name">
-              <span class="text-base font-bold"> Nama </span>
+            <div class="grid">
+              <div class="col-12">
+                <h2 v-if="form.member.name">
+                  <span class="text-base"> <i class="pi pi-user" /> Nama</span>
 
-              <br />
+                  <br />
 
-              {{ form.member.name }}
-            </p>
+                  <span class="text-lg">{{ form.member.name }}</span>
+                </h2>
+              </div>
 
-            <p v-if="form.member.phone">
-              <span class="text-base font-bold"> Nomor HP </span>
+              <div class="col-12">
+                <h2 v-if="form.member.phone">
+                  <span class="text-base"> <i class="pi pi-phone" /> Nomor HP</span>
 
-              <br />
+                  <br />
 
-              {{ form.member.phone }}
-            </p>
+                  <span class="text-lg">{{ form.member.phone }}</span>
+                </h2>
+              </div>
 
-            <p v-if="form.member.type">
-              <span class="text-base font-bold"> Jenis Member </span>
+              <div class="col-12">
+                <h2 v-if="form.member.type">
+                  <span class="text-base"> <i class="pi pi-id-card" /> Jenis Member</span>
 
-              <br />
+                  <br />
 
-              {{ form.member.type }}
-            </p>
+                  <span class="text-lg">{{ form.member.type }}</span>
+                </h2>
+              </div>
 
-            <p v-if="form.member.price">
-              <span class="text-base font-bold"> Tarif Member </span>
+              <div class="col-12">
+                <h2 v-if="form.member.price">
+                  <span class="text-base"> <i class="pi pi-wallet" /> Tarif Member</span>
 
-              <br />
+                  <br />
 
-              {{ form.member.price }}
-            </p>
+                  <span class="text-lg">{{ form.member.price }}</span>
+                </h2>
+              </div>
 
-            <p v-if="form.member.expDate">
-              <span class="text-base font-bold"> Berakhir </span>
+              <div class="col-12">
+                <h2 v-if="form.member.expDate">
+                  <span class="text-base"> <i class="pi pi-calendar-times" /> Berakhir</span>
 
-              <br />
+                  <br />
 
-              {{ form.member.expDate }}
-            </p>
+                  <span class="text-lg">{{ form.member.expDate }}</span>
+                </h2>
+              </div>
+            </div>
           </template>
         </Card>
       </div>
