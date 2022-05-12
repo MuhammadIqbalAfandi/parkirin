@@ -63,9 +63,9 @@ class MutationService extends CurrencyFormatService
         return $collections->transform(fn($collection) => $collection->sum(fn($collect) => $collect->getRawOriginal('amount')));
     }
 
-    public function statisticData(SupportCollection $collections, int $take = -1)
+    public function statistic(SupportCollection $collections)
     {
-        $collections = $collections->take($take);
+        $collections = $collections;
         $collections->transform(fn($collections) => $this->totalPerMonth($collections));
         return $collections;
     }

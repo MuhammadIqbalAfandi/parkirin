@@ -31,5 +31,10 @@ return [
     'per_year' => 'Pertahun',
     'top_customer' => 'Top Pelanggan',
     'top_number_customer' => 'Top :number Pelanggan',
+    'member' => 'Member',
+    'type_member' => 'Jenis Member',
+    'type_vehicle' => 'Jenis Kendaraan',
+    'top_up_rank' => 'Top Up',
+    'top_up_number_rank' => 'Peringkat :number Top Up',
 
 ];
