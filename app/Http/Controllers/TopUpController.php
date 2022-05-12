@@ -113,8 +113,8 @@ class TopUpController extends Controller
                 'name' => $member->name,
                 'phone' => $member->phone,
             ],
-            'topUp' => $member->topUps
-                ->last()
+            'topUp' => $member->topUps()
+                ->latest()
                 ->paginate(15)
                 ->withQueryString()
                 ->through(fn($topUp) => [
