@@ -20,14 +20,17 @@ class TypeMemberController extends Controller
     public function index()
     {
         return inertia('typemember/Index', [
-            'typeMembers' => TypeMember::get()->transform(fn($typeMember) => [
-                'id' => $typeMember->id,
-                'updatedAt' => $typeMember->updated_at,
-                'type' => $typeMember->type,
-                'description' => $typeMember->description,
-                'price' => $typeMember->price,
-                'max' => $typeMember->maxVehicleDetail(),
-            ]),
+            'typeMember' => TypeMember::latest()
+                ->paginate(10)
+                ->withQueryString()
+                ->through(fn($typeMember) => [
+                    'id' => $typeMember->id,
+                    'updatedAt' => $typeMember->updated_at,
+                    'type' => $typeMember->type,
+                    'description' => $typeMember->description,
+                    'price' => $typeMember->price,
+                    'max' => $typeMember->maxVehicleDetail(),
+                ]),
         ]);
     }
 

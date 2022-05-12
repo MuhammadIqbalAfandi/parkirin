@@ -1,12 +1,13 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3'
+import AppPagination from '@/components/AppPagination.vue'
 import AppButton from '@/components/AppButton.vue'
 import AppLayout from '@/layouts/AppLayout.vue'
 
 import { IndexTable } from './TableHeader'
 
 defineProps({
-  typeMembers: Object,
+  typeMember: Object,
 })
 </script>
 
@@ -17,7 +18,7 @@ defineProps({
     <DataTable
       responsive-layout="scroll"
       column-resize-mode="expand"
-      :value="typeMembers"
+      :value="typeMember.data"
       :row-hover="true"
       :striped-rows="true"
     >
@@ -55,5 +56,7 @@ defineProps({
         </template>
       </Column>
     </DataTable>
+
+    <AppPagination :links="typeMember.links" />
   </AppLayout>
 </template>
