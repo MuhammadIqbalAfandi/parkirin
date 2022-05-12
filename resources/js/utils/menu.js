@@ -19,7 +19,14 @@ export default {
     },
     {
       label: 'Menu',
-      items: [{ label: 'Pengeluaran', icon: 'pi pi-wallet', to: '/expenses', component: 'expense/Index' }],
+      items: [
+        { label: 'Pengeluaran', icon: 'pi pi-wallet', to: '/expenses', component: 'expense/Index' },
+        {
+          label: 'Laporan',
+          icon: 'pi pi-book',
+          items: [{ label: 'Mutasi', icon: 'pi pi-circle', to: '/reports/mutations', component: 'mutation/Report' }],
+        },
+      ],
     },
     {
       label: 'Master',

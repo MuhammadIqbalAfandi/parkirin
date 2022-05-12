@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ReportMutationController;
 use App\Http\Controllers\TopUpController;
 use App\Http\Controllers\TypeMemberController;
 use App\Http\Controllers\TypeVehicleController;
@@ -26,6 +27,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboards', DashboardController::class);
 
     Route::resource('/expenses', ExpenseController::class);
+
+    Route::get('/reports/mutations', [ReportMutationController::class, 'index']);
+    Route::get('/reports/mutations/export/excel', [ReportMutationController::class, 'exportExcel'])->name('mutations.excel');
 
     Route::resource('/members', MemberController::class);
 

@@ -1,19 +1,13 @@
 <script setup>
-import { onMounted } from 'vue'
 import { Head } from '@inertiajs/inertia-vue3'
 import AppPagination from '@/components/AppPagination.vue'
 import AppLayout from '@/layouts/AppLayout.vue'
 
 import { TopUpsTable } from './TableHeader'
 
-const props = defineProps({
+defineProps({
   member: Object,
   topUp: Object,
-})
-
-onMounted(() => {
-  console.info(props.member)
-  console.table(props.topUp)
 })
 </script>
 

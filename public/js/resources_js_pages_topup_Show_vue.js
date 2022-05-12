@@ -374,12 +374,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _components_AppPagination_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/AppPagination.vue */ "./resources/js/components/AppPagination.vue");
-/* harmony import */ var _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/layouts/AppLayout.vue */ "./resources/js/layouts/AppLayout.vue");
-/* harmony import */ var _TableHeader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TableHeader */ "./resources/js/pages/topup/TableHeader.js");
-
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _components_AppPagination_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/AppPagination.vue */ "./resources/js/components/AppPagination.vue");
+/* harmony import */ var _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/layouts/AppLayout.vue */ "./resources/js/layouts/AppLayout.vue");
+/* harmony import */ var _TableHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TableHeader */ "./resources/js/pages/topup/TableHeader.js");
 
 
 
@@ -392,18 +390,11 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var props = __props;
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      console.info(props.member);
-      console.table(props.topUp);
-    });
     var __returned__ = {
-      props: props,
-      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
-      Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Head,
-      AppPagination: _components_AppPagination_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-      AppLayout: _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-      TopUpsTable: _TableHeader__WEBPACK_IMPORTED_MODULE_4__.TopUpsTable
+      Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Head,
+      AppPagination: _components_AppPagination_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+      AppLayout: _layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+      TopUpsTable: _TableHeader__WEBPACK_IMPORTED_MODULE_3__.TopUpsTable
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -1174,6 +1165,15 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-wallet',
       to: '/expenses',
       component: 'expense/Index'
+    }, {
+      label: 'Laporan',
+      icon: 'pi pi-book',
+      items: [{
+        label: 'Mutasi',
+        icon: 'pi pi-circle',
+        to: '/reports/mutations',
+        component: 'mutation/Report'
+      }]
     }]
   }, {
     label: 'Master',
