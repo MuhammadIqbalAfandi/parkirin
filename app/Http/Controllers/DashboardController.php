@@ -8,7 +8,6 @@ use App\Models\TopUp;
 use App\Models\TypeMember;
 use App\Models\TypeVehicle;
 use App\Services\MutationService;
-use App\Services\TopUpService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -69,13 +68,6 @@ class DashboardController extends Controller
                     'title' => __('words.mutation_statistic'),
                     'description' => __('words.per_year') . ' ' . date('Y'),
                     'data' => (new MutationService)->statistic($mutation),
-                ],
-            ],
-            'barHorizontalStatistics' => [
-                [
-                    'title' => __('words.top_up_rank'),
-                    'description' => __('words.top_up_number_rank', ['number' => 5]),
-                    'data' => (new TopUpService)->topUpRank($topUp),
                 ],
             ],
         ]);

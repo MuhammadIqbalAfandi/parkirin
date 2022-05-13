@@ -1,6 +1,5 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3'
-import { orderBy } from 'lodash'
 import AppCardStatistic from '@/components/AppCardStatistic.vue'
 import AppLayout from '@/layouts/AppLayout.vue'
 
@@ -50,29 +49,12 @@ const barChartOption = {
 }
 
 const barHorizontalChart = (chartData) => {
-  // const data = {
-  //   datasets: [],
-  // }
-
-  // let id = 0
-  // for (const key in chartData) {
-  //   data.datasets.push({
-  //     label: key,
-  //     backgroundColor: colors[id],
-  //     data: chartData[key],
-  //   })
-
-  //   id++
-  // }
-
-  // return data
-
   const labels = []
   const data = []
 
-  for (const chartData of chartData) {
-    labels.push([chartData.phone, chartData.name])
-    data.push(chartData.amount)
+  for (const obj of chartData) {
+    labels.push([obj.label1, obj.label2])
+    data.push(obj.data)
   }
 
   return {
@@ -176,7 +158,7 @@ const pieChartOption = {
         </Card>
       </div>
 
-      <!-- <div v-for="pieStatistic in pieStatistics" class="col-12 md:col-6">
+      <div v-for="pieStatistic in pieStatistics" class="col-12 md:col-6">
         <Card>
           <template #title>
             <div class="flex flex-column">
@@ -194,7 +176,7 @@ const pieChartOption = {
             />
           </template>
         </Card>
-      </div> -->
+      </div>
     </div>
   </AppLayout>
 </template>
