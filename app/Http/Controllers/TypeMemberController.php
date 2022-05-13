@@ -163,7 +163,7 @@ class TypeMemberController extends Controller
         if (!$typeMember->member()->exists()) {
             $typeMember->delete();
 
-            return to_route('users.index')->with('success', __('messages.success.destroy.type_member'));
+            return to_route('type-members.index')->with('success', __('messages.success.destroy.type_member'));
         }
     }
 }

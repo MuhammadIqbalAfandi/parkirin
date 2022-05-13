@@ -69,15 +69,14 @@ const submit = () => {
 
   <AppLayout>
     <ConfirmDialog></ConfirmDialog>
-
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
           <template #title>Detail Member</template>
           <template v-if="form.member" #content>
-            <div class="grid">
+            <div v-if="form.member.id" class="grid">
               <div class="col-12">
-                <h2 v-if="form.member.name">
+                <h2>
                   <span class="text-base"> <i class="pi pi-user" /> Nama</span>
 
                   <br />
@@ -87,7 +86,7 @@ const submit = () => {
               </div>
 
               <div class="col-12">
-                <h2 v-if="form.member.phone">
+                <h2>
                   <span class="text-base"> <i class="pi pi-phone" /> Nomor HP</span>
 
                   <br />
@@ -97,7 +96,7 @@ const submit = () => {
               </div>
 
               <div class="col-12">
-                <h2 v-if="form.member.type">
+                <h2>
                   <span class="text-base"> <i class="pi pi-id-card" /> Jenis Member</span>
 
                   <br />
@@ -107,7 +106,7 @@ const submit = () => {
               </div>
 
               <div class="col-12">
-                <h2 v-if="form.member.price">
+                <h2>
                   <span class="text-base"> <i class="pi pi-wallet" /> Tarif Member</span>
 
                   <br />
@@ -117,7 +116,7 @@ const submit = () => {
               </div>
 
               <div class="col-12">
-                <h2 v-if="form.member.expDate">
+                <h2>
                   <span class="text-base"> <i class="pi pi-calendar-times" /> Berakhir</span>
 
                   <br />

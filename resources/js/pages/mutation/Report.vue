@@ -149,7 +149,7 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
           </div>
           <div class="col-auto">
             <h2>
-              <span class="text-base"> <i class="pi pi-wallet" /> Total Pendapatan </span>
+              <span class="text-base"> <i class="pi pi-wallet" /> Total </span>
 
               <br />
 

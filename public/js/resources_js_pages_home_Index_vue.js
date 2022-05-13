@@ -1093,26 +1093,6 @@ var _hoisted_6 = {
   key: 0,
   "class": "text-base font-normal"
 };
-var _hoisted_7 = {
-  "class": "col-12 md:col-6"
-};
-var _hoisted_8 = {
-  "class": "flex flex-column"
-};
-var _hoisted_9 = {
-  key: 0,
-  "class": "text-base font-normal"
-};
-var _hoisted_10 = {
-  "class": "col-12 md:col-6"
-};
-var _hoisted_11 = {
-  "class": "flex flex-column"
-};
-var _hoisted_12 = {
-  key: 0,
-  "class": "text-base font-normal"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Chart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Chart");
 
@@ -1158,63 +1138,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         )]);
       }), 256
       /* UNKEYED_FRAGMENT */
-      )), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.barHorizontalStatistics, function (barHorizontalStatistic) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
-          title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(barHorizontalStatistic.title), 1
-            /* TEXT */
-            ), barHorizontalStatistic.description ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(barHorizontalStatistic.description), 1
-            /* TEXT */
-            )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
-          }),
-          content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
-              type: "bar",
-              width: 600,
-              height: 300,
-              data: $setup.barHorizontalChart(barHorizontalStatistic.data),
-              options: $setup.barHorizontalChartOption
-            }, null, 8
-            /* PROPS */
-            , ["data"])];
-          }),
-          _: 2
-          /* DYNAMIC */
-
-        }, 1024
-        /* DYNAMIC_SLOTS */
-        )]);
-      }), 256
-      /* UNKEYED_FRAGMENT */
-      )), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.pieStatistics, function (pieStatistic) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
-          title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(pieStatistic.title), 1
-            /* TEXT */
-            ), pieStatistic.description ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(pieStatistic.description), 1
-            /* TEXT */
-            )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
-          }),
-          content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
-              type: "pie",
-              width: 600,
-              height: 300,
-              data: $setup.pieChart(pieStatistic.data),
-              options: $setup.pieChartOption
-            }, null, 8
-            /* PROPS */
-            , ["data"])];
-          }),
-          _: 2
-          /* DYNAMIC */
-
-        }, 1024
-        /* DYNAMIC_SLOTS */
-        )]);
-      }), 256
-      /* UNKEYED_FRAGMENT */
-      ))])];
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-for=\"barHorizontalStatistic in barHorizontalStatistics\" class=\"col-12 md:col-6\">\n        <Card>\n          <template #title>\n            <div class=\"flex flex-column\">\n              <span>{{ barHorizontalStatistic.title }}</span>\n              <span v-if=\"barHorizontalStatistic.description\" class=\"text-base font-normal\">{{\n                barHorizontalStatistic.description\n              }}</span>\n            </div>\n          </template>\n          <template #content>\n            <Chart\n              type=\"bar\"\n              :width=\"600\"\n              :height=\"300\"\n              :data=\"barHorizontalChart(barHorizontalStatistic.data)\"\n              :options=\"barHorizontalChartOption\"\n            />\n          </template>\n        </Card>\n      </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-for=\"pieStatistic in pieStatistics\" class=\"col-12 md:col-6\">\n        <Card>\n          <template #title>\n            <div class=\"flex flex-column\">\n              <span>{{ pieStatistic.title }}</span>\n              <span v-if=\"pieStatistic.description\" class=\"text-base font-normal\">{{ pieStatistic.description }}</span>\n            </div>\n          </template>\n          <template #content>\n            <Chart\n              type=\"pie\"\n              :width=\"600\"\n              :height=\"300\"\n              :data=\"pieChart(pieStatistic.data)\"\n              :options=\"pieChartOption\"\n            />\n          </template>\n        </Card>\n      </div> ")])];
     }),
     _: 1
     /* STABLE */

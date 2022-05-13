@@ -38,7 +38,7 @@
             <td>{{ (new App\Services\MutationService())->totalExpenseAsString($mutations) }}</td>
         </tr>
         <tr>
-            <td colspan="3">Jumlah Pendapatan</td>
+            <td colspan="3">Jumlah</td>
             <td>{{ (new App\Services\MutationService())->totalAmountAsString($mutations) }}</td>
         </tr>
     </tbody>

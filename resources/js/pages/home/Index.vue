@@ -136,7 +136,7 @@ const pieChartOption = {
         </Card>
       </div>
 
-      <div v-for="barHorizontalStatistic in barHorizontalStatistics" class="col-12 md:col-6">
+      <!-- <div v-for="barHorizontalStatistic in barHorizontalStatistics" class="col-12 md:col-6">
         <Card>
           <template #title>
             <div class="flex flex-column">
@@ -156,9 +156,9 @@ const pieChartOption = {
             />
           </template>
         </Card>
-      </div>
+      </div> -->
 
-      <div v-for="pieStatistic in pieStatistics" class="col-12 md:col-6">
+      <!-- <div v-for="pieStatistic in pieStatistics" class="col-12 md:col-6">
         <Card>
           <template #title>
             <div class="flex flex-column">
@@ -176,7 +176,7 @@ const pieChartOption = {
             />
           </template>
         </Card>
-      </div>
+      </div> -->
     </div>
   </AppLayout>
 </template>

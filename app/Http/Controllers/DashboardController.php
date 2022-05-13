@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use App\Models\Mutation;
-use App\Models\TopUp;
 use App\Models\TypeMember;
 use App\Models\TypeVehicle;
 use App\Services\MutationService;
@@ -34,7 +33,6 @@ class DashboardController extends Controller
                 fn($mutation) => Carbon::parse($mutation->getRawOriginal('created_at'))->format('M'),
             ]);
 
-        $topUp = TopUp::get()->groupBy('member_id');
         return inertia('home/Index.vue', [
             'cardStatistics' => [
                 //  [
