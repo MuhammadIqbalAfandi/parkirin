@@ -387,9 +387,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    cardStatistics: Object,
-    barStatistics: Object,
-    barHorizontalStatistics: Object
+    cardStatistics: Array,
+    barStatistics: Array,
+    barHorizontalStatistics: Array
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
@@ -1111,7 +1111,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), 256
       /* UNKEYED_FRAGMENT */
       ))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.barStatistics, function (barStatistic) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Card, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createSlots)({
           title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(barStatistic.title), 1
             /* TEXT */
@@ -1119,7 +1119,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             /* TEXT */
             )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
           }),
-          content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          _: 2
+          /* DYNAMIC */
+
+        }, [Object.keys(barStatistic.data).length ? {
+          name: "content",
+          fn: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Chart, {
               type: "bar",
               width: 600,
@@ -1129,11 +1134,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }, null, 8
             /* PROPS */
             , ["data"])];
-          }),
-          _: 2
-          /* DYNAMIC */
-
-        }, 1024
+          })
+        } : undefined]), 1024
         /* DYNAMIC_SLOTS */
         )]);
       }), 256

@@ -4,9 +4,9 @@ import AppCardStatistic from '@/components/AppCardStatistic.vue'
 import AppLayout from '@/layouts/AppLayout.vue'
 
 defineProps({
-  cardStatistics: Object,
-  barStatistics: Object,
-  barHorizontalStatistics: Object,
+  cardStatistics: Array,
+  barStatistics: Array,
+  barHorizontalStatistics: Array,
 })
 
 const colors = [
@@ -124,7 +124,7 @@ const pieChartOption = {
               <span v-if="barStatistic.description" class="text-base font-normal">{{ barStatistic.description }}</span>
             </div>
           </template>
-          <template #content>
+          <template v-if="Object.keys(barStatistic.data).length" #content>
             <Chart
               type="bar"
               :width="600"
