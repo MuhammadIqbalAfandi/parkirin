@@ -14,6 +14,7 @@ class TransactionOut extends Model
         'price',
         'transaction_in_id',
         'parking_fee_id',
+        'type_vehicle_id',
         'user_id',
     ];
 }

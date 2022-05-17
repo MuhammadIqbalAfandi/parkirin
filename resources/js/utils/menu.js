@@ -35,6 +35,10 @@ export default {
         { label: 'Jenis Member', icon: 'pi pi-id-card', to: '/type-members', component: 'typemember/Index' },
       ],
     },
+    {
+      label: 'Pengaturan',
+      items: [{ label: 'Tarif Parkir', icon: 'pi pi-car', to: '/parking-fees/create', component: 'parkingfee/Create' }],
+    },
   ],
 
   // Operator
@@ -48,7 +52,7 @@ export default {
       items: [
         { label: 'Pengeluaran', icon: 'pi pi-wallet', to: '/expenses', component: 'expense/Index' },
         { label: 'Member', icon: 'pi pi-id-card', to: '/members', component: 'member/Index' },
-        { label: 'Top Up', icon: 'pi pi-wallet', to: '/top-ups', component: 'topup/Index' },
+        { label: 'Top Up', icon: 'pi pi-car', to: '/top-ups', component: 'topup/Index' },
       ],
     },
   ],

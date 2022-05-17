@@ -22,6 +22,7 @@ return [
             'verify_email' => 'Link verifikasi email berhasil terkirim',
         ],
         'store' => [
+            'parking_fee' => 'Tarif parkir berhasil ditambahkan',
             'type_vehicle' => 'Jenis kendaraan berhasil ditambahkan',
             'top_up' => 'Top Up berhasil',
             'member' => 'Member berhasil ditambahkan',

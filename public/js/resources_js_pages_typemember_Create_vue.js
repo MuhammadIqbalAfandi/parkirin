@@ -1898,6 +1898,14 @@ __webpack_require__.r(__webpack_exports__);
       to: '/type-members',
       component: 'typemember/Index'
     }]
+  }, {
+    label: 'Pengaturan',
+    items: [{
+      label: 'Tarif Parkir',
+      icon: 'pi pi-car',
+      to: '/parking-fees/create',
+      component: 'parkingfee/Create'
+    }]
   }],
   // Operator
   3: [{
@@ -1922,7 +1930,7 @@ __webpack_require__.r(__webpack_exports__);
       component: 'member/Index'
     }, {
       label: 'Top Up',
-      icon: 'pi pi-wallet',
+      icon: 'pi pi-car',
       to: '/top-ups',
       component: 'topup/Index'
     }]

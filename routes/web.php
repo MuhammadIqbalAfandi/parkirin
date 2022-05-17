@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ParkingFeeController;
 use App\Http\Controllers\ReportMutationController;
 use App\Http\Controllers\TopUpController;
 use App\Http\Controllers\TypeMemberController;
@@ -42,6 +43,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/type-members', TypeMemberController::class);
 
     Route::resource('/type-vehicles', TypeVehicleController::class);
+
+    Route::resource('/parking-fees', ParkingFeeController::class);
 });
 
 require __DIR__ . '/auth.php';

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('price');
             $table->unsignedInteger('time_period');
-            $table->foreignId('type_vehicle_id')->constrained();
             $table->timestamps();
         });
     }

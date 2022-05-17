@@ -22,6 +22,7 @@ return [
             'verify_email' => 'Email Verification link successfully sent',
         ],
         'store' => [
+            'parking_fee' => 'Parking fee successfully added',
             'type_vehicle' => 'Type vehicle successfully added',
             'top_up' => 'Top Up successfully',
             'member' => 'Member successfully added',
