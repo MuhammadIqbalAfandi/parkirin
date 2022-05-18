@@ -1,6 +1,6 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3'
-import AppCardStatistic from '@/components/AppCardStatistic.vue'
+import { includes } from 'lodash'
 import AppLayout from '@/layouts/AppLayout.vue'
 
 defineProps({
@@ -110,31 +110,54 @@ const pieChartOption = {
     <Head title="Dashboard" />
 
     <div class="grid">
-      <div class="col-12 flex flex-wrap justify-content-between card-statistic">
-        <div v-for="cardStatistic in cardStatistics" class="flex-grow-1">
-          <AppCardStatistic :data="cardStatistic" />
+      <template v-for="cardStatistic in cardStatistics">
+        <div v-if="includes(cardStatistic.roleId, $page.props.auth.user.role_id)" class="col-12 md:col-4 xl:col-3">
+          <Card class="h-full">
+            <template #content>
+              <div class="flex justify-content-between mb-3">
+                <div>
+                  <span class="block text-500 font-medium mb-3">{{ cardStatistic.title }}</span>
+                  <div v-if="cardStatistic.value" class="text-900 font-medium text-xl">{{ cardStatistic.value }}</div>
+                </div>
+                <div
+                  class="flex align-items-center justify-content-center bg-orange-100 border-round"
+                  style="width: 2.5rem; height: 2.5rem"
+                >
+                  <i class="text-orange-500 text-xl" :class="cardStatistic.icon"></i>
+                </div>
+              </div>
+              <span class="text-green-500 font-medium">{{ cardStatistic.amount }} </span>
+              <span class="text-500"> {{ ' ' + cardStatistic.amountLabel }}</span>
+            </template>
+          </Card>
         </div>
-      </div>
+      </template>
+    </div>
 
-      <div v-for="barStatistic in barStatistics" class="col-12 md:col-6">
-        <Card>
-          <template #title>
-            <div class="flex flex-column">
-              <span>{{ barStatistic.title }}</span>
-              <span v-if="barStatistic.description" class="text-base font-normal">{{ barStatistic.description }}</span>
-            </div>
-          </template>
-          <template v-if="Object.keys(barStatistic.data).length" #content>
-            <Chart
-              type="bar"
-              :width="600"
-              :height="300"
-              :data="barChart(barStatistic.data)"
-              :options="barChartOption"
-            />
-          </template>
-        </Card>
-      </div>
+    <div class="grid">
+      <template v-for="barStatistic in barStatistics">
+        <div v-if="includes(barStatistic.roleId, $page.props.auth.user.role_id)" class="col-12 md:col-6">
+          <Card>
+            <template #title>
+              <div class="flex flex-column">
+                <span>{{ barStatistic.title }}</span>
+                <span v-if="barStatistic.description" class="text-base font-normal">{{
+                  barStatistic.description
+                }}</span>
+              </div>
+            </template>
+            <template v-if="Object.keys(barStatistic.data).length" #content>
+              <Chart
+                type="bar"
+                :width="600"
+                :height="300"
+                :data="barChart(barStatistic.data)"
+                :options="barChartOption"
+              />
+            </template>
+          </Card>
+        </div>
+      </template>
 
       <!-- <div v-for="barHorizontalStatistic in barHorizontalStatistics" class="col-12 md:col-6">
         <Card>
@@ -180,9 +203,3 @@ const pieChartOption = {
     </div>
   </AppLayout>
 </template>
-
-<style scoped>
-.card-statistic {
-  gap: 1rem;
-}
-</style>

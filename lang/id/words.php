@@ -36,5 +36,6 @@ return [
     'type_vehicle' => 'Jenis Kendaraan',
     'top_up_rank' => 'Top Up',
     'top_up_number_rank' => 'Peringkat :number Top Up',
+    'user' => 'User',
 
 ];

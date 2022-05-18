@@ -36,5 +36,6 @@ return [
     'type_vehicle' => 'Type Kendaraan',
     'top_up_rank' => 'Top Up',
     'top_up_number_rank' => 'Top Up :number Rank',
+    'user' => 'User',
 
 ];

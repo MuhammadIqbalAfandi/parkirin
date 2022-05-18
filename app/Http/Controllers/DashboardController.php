@@ -6,6 +6,7 @@ use App\Models\Member;
 use App\Models\Mutation;
 use App\Models\TypeMember;
 use App\Models\TypeVehicle;
+use App\Models\User;
 use App\Services\MutationService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,13 +21,15 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $member = Member::get();
+        $members = Member::get();
 
-        $typeMember = TypeMember::get();
+        $typeMembers = TypeMember::get();
 
-        $typeVehicle = TypeVehicle::get();
+        $typeVehicles = TypeVehicle::get();
 
-        $mutation = Mutation::whereYear('created_at', date('Y'))
+        $users = User::get();
+
+        $mutations = Mutation::whereYear('created_at', date('Y'))
             ->get()
             ->groupBy([
                 fn($mutation) => $mutation->type,
@@ -41,31 +44,49 @@ class DashboardController extends Controller
                 //     'amount' => ...,
                 //     'amountLabel' => ...,
                 //     'value' => ...,
+                //     'roleId' => [...,...]
                 // ],
                 [
                     'title' => __('words.member'),
                     'icon' => 'pi pi-id-card',
-                    'amount' => $member->count(),
+                    'amount' => $members->count(),
                     'amountLabel' => __('words.total'),
+                    'roleId' => [3],
                 ],
                 [
                     'title' => __('words.type_member'),
                     'icon' => 'pi pi-id-card',
-                    'amount' => $typeMember->count(),
+                    'amount' => $typeMembers->count(),
                     'amountLabel' => __('words.total'),
+                    'roleId' => [2],
                 ],
                 [
                     'title' => __('words.type_vehicle'),
                     'icon' => 'pi pi-car',
-                    'amount' => $typeVehicle->count(),
+                    'amount' => $typeVehicles->count(),
                     'amountLabel' => __('words.total'),
+                    'roleId' => [3],
+                ],
+                [
+                    'title' => __('words.user'),
+                    'icon' => 'pi pi-user',
+                    'amount' => $users->count(),
+                    'amountLabel' => __('words.total'),
+                    'roleId' => [1],
                 ],
             ],
             'barStatistics' => [
+                // [
+                //     'title' => ...,
+                //     'description' => ...,
+                //     'data' => ...,
+                //     'roleId' => [..., ...],
+                // ],
                 [
                     'title' => __('words.mutation_statistic'),
                     'description' => __('words.per_year') . ' ' . date('Y'),
-                    'data' => (new MutationService)->statistic($mutation),
+                    'data' => (new MutationService)->statistic($mutations),
+                    'roleId' => [2, 3],
                 ],
             ],
         ]);
