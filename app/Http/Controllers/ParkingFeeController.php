@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ParkingFeeController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(ParkingFee::class);
+    }
+
     /**
      * Display a listing of the resource.
      *

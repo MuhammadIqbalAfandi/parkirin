@@ -94,16 +94,6 @@ const filterReset = () => {
                   :manual-input="false"
                 />
               </div>
-              <div v-if="$page.props.auth.user.role_id === 1" class="col-12 md:col-3">
-                <Dropdown
-                  class="w-full"
-                  placeholder="pilih outlet..."
-                  v-model="filterForm.outlet"
-                  option-label="label"
-                  option-value="value"
-                  :options="outlets"
-                />
-              </div>
               <div class="col-auto mt-2 ml-2">
                 <Button label="reset" class="p-button-link" @click="filterReset" />
               </div>

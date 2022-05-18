@@ -7,7 +7,7 @@ use App\Models\Mutation;
 use App\Services\MutationService;
 use Inertia\Inertia;
 
-class ReportMutationController extends Controller
+class MutationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +16,8 @@ class ReportMutationController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Mutation::class);
+
         $mutations = Mutation::filter(request()->only('startDate', 'endDate'));
 
         return inertia('mutation/Report', [
@@ -47,6 +49,8 @@ class ReportMutationController extends Controller
      */
     public function exportExcel()
     {
+        $this->authorize('viewAny', Mutation::class);
+
         return new MutationExport(request());
     }
 }

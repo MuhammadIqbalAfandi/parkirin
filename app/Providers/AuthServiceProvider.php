@@ -2,6 +2,21 @@
 
 namespace App\Providers;
 
+use App\Models\Expense;
+use App\Models\Member;
+use App\Models\Mutation;
+use App\Models\ParkingFee;
+use App\Models\TopUp;
+use App\Models\TypeMember;
+use App\Models\TypeVehicle;
+use App\Models\User;
+use App\Policies\ExpensePolicy;
+use App\Policies\MemberPolicy;
+use App\Policies\MutationPolicy;
+use App\Policies\ParkingFeePolicy;
+use App\Policies\TopUpPolicy;
+use App\Policies\TypeMemberPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -13,6 +28,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // Class::class => ClassPolicy::class,
+        User::class => UserPolicy::class,
+        Expense::class => ExpensePolicy::class,
+        Member::class => MemberPolicy::class,
+        Mutation::class => MutationPolicy::class,
+        ParkingFee::class => ParkingFeePolicy::class,
+        TopUp::class => TopUpPolicy::class,
+        TypeMember::class => TypeMemberPolicy::class,
+        TypeVehicle::class => TypeVehicle::class,
     ];
 
     /**

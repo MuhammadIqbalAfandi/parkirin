@@ -14,6 +14,11 @@ use Inertia\Inertia;
 
 class TopUpController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(TopUp::class);
+    }
+
     /**
      * Display a listing of the resource.
      *

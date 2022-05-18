@@ -1154,21 +1154,15 @@ var _hoisted_6 = {
   "class": "col-12 md:col-3"
 };
 var _hoisted_7 = {
-  key: 0,
-  "class": "col-12 md:col-3"
-};
-var _hoisted_8 = {
   "class": "col-auto mt-2 ml-2"
 };
-var _hoisted_9 = {
+var _hoisted_8 = {
   "class": "col-12 md:col-4 flex flex-column md:flex-row justify-content-end"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_InputText = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InputText");
 
   var _component_Calendar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Calendar");
-
-  var _component_Dropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Dropdown");
 
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
@@ -1209,23 +1203,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "manual-input": false
           }, null, 8
           /* PROPS */
-          , ["modelValue"])]), _ctx.$page.props.auth.user.role_id === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, {
-            "class": "w-full",
-            placeholder: "pilih outlet...",
-            modelValue: $setup.filterForm.outlet,
-            "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-              return $setup.filterForm.outlet = $event;
-            }),
-            "option-label": "label",
-            "option-value": "value",
-            options: _ctx.outlets
-          }, null, 8
-          /* PROPS */
-          , ["modelValue", "options"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+          , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
             label: "reset",
             "class": "p-button-link",
             onClick: $setup.filterReset
-          })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppButton"], {
+          })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppButton"], {
             label: "Top Up",
             "class": "p-button-outlined",
             icon: "pi pi-pencil",

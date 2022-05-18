@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 class TypeMemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(TypeMember::class);
+    }
+
     /**
      * Display a listing of the resource.
      *

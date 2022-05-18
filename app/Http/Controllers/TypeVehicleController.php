@@ -9,6 +9,11 @@ use App\Services\TypeVehicleService;
 
 class TypeVehicleController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(TypeVehicle::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
