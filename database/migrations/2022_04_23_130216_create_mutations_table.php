@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->enum('type', [1, 2]); // 1(income) 2(expense)
             $table->unsignedInteger('amount');
-            $table->foreignId('transaction_out_id')->nullable()->default(null)->constrained();
+            $table->foreignId('out_transaction_id')->nullable()->default(null)->constrained();
             $table->foreignId('expense_id')->nullable()->default(null)->constrained();
             $table->foreignId('top_up_id')->nullable()->default(null)->constrained();
             $table->timestamps();

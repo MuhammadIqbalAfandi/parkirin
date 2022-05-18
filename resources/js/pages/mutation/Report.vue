@@ -72,12 +72,12 @@ const filterReset = () => {
 
 const linkReference = (data) => {
   if (data.topupId) {
-    return route('top-ups.show', data.topupId)
+    return route('top-ups.show', data.topUpId)
   } else if (data.expenseId) {
     return route('expenses.show', data.expenseId)
   } else {
     console.info('under construction')
-    // return route('expenses.show', data.expenseId)
+    //  return route('out-transactions.show', data.outTransactionId)
   }
 }
 

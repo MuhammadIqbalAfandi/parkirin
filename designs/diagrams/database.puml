@@ -1,19 +1,18 @@
 @startuml Database
 
-entity TransactionIn {
+entity EntryTransaction {
   * id
   __
-  * capture_vehicle
   * transaction_number
+  capture_vehicle
 }
 
-entity TransactionOut {
+entity OutTransaction {
   * id
   __
   * plat_number
   price
-  * transaction_in_id
-  * parking_fee_id
+  * entry_transaction_id
   * type_vehicle_id
   * user_id
 }
@@ -62,7 +61,7 @@ entity Vehicle {
   __
   * plat_number
   * member_id
-  * transaction_out_id
+  * out_transaction_id
   * type_vehicle_id
 }
 
@@ -104,17 +103,17 @@ entity Mutation {
   __
   * type
   * amount
-  transaction_out_id
+  out_transaction_id
   expense_id
-  topup_id
+  top_up_id
 }
 
-TransactionIn ||--|| TransactionOut
-TransactionOut ||--|| Mutation
-TransactionOut ||--|{ Vehicle
-TransactionOut ||--|{ ParkingFee
-TransactionOut ||--|{ User
-TransactionOut ||--|{ TypeVehicle
+EntryTransaction ||--|| OutTransaction
+OutTransaction ||--|| Mutation
+OutTransaction ||--|{ Vehicle
+OutTransaction ||--|{ ParkingFee
+OutTransaction ||--|{ User
+OutTransaction ||--|{ TypeVehicle
 TypeVehicle }|--|| Vehicle
 TypeVehicle }|--|| MaxVehicle
 User ||--|{ Role

@@ -15,9 +15,9 @@ class Mutation extends Model
     protected $fillable = [
         'type',
         'amount',
-        'transaction_out_id',
+        'out_transaction_id',
         'expense_id',
-        'topup_id',
+        'top_up_id',
     ];
 
     protected function createdAt(): Attribute

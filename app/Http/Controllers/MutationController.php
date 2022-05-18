@@ -35,9 +35,9 @@ class MutationController extends Controller
                             'createdAt' => $mutation->created_at,
                             'amount' => $mutation->amount,
                             'type' => $mutation->type,
-                            'transactionOutId' => $mutation->transaction_out,
+                            'outTransactionId' => $mutation->out_transaction_id,
                             'expenseId' => $mutation->expense_id,
-                            'topupId' => $mutation->top_up_id,
+                            'topUpId' => $mutation->top_up_id,
                         ]),
                 ]
             ),

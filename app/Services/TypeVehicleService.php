@@ -8,6 +8,6 @@ class TypeVehicleService
 {
     public function isUsed(TypeVehicle $typeVehicle)
     {
-        return $typeVehicle->vehicles()->exists() || $typeVehicle->maxVehicles()->exists() || $typeVehicle->parkingFee()->exists();
+        return $typeVehicle->vehicles()->exists() || $typeVehicle->maxVehicles()->exists() || $typeVehicle->outTransaction()->exists();
     }
 }

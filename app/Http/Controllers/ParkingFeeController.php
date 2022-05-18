@@ -49,7 +49,7 @@ class ParkingFeeController extends Controller
         foreach ($request->id as $key => $id) {
             ParkingFee::upsert([
                 'id' => $id,
-                'time_period' => $request->timePeriod[$key],
+                'time_period' => $request->time_period[$key],
                 'price' => $request->price[$key],
             ], ['id']);
         }

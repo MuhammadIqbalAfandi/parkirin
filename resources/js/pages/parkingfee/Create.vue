@@ -42,7 +42,7 @@ const submit = () => {
   form
     .transform((data) => ({
       id: [data.id1, data.id2, data.id3, data.id4, data.idNext],
-      timePeriod: [data.timePeriod1, data.timePeriod2, data.timePeriod3, data.timePeriod4, data.timePeriodNext],
+      time_period: [data.timePeriod1, data.timePeriod2, data.timePeriod3, data.timePeriod4, data.timePeriodNext],
       price: [data.price1, data.price2, data.price3, data.price4, data.priceNext],
     }))
     .post(route('parking-fees.store'), { onSuccess: () => (disabled.value = true) })

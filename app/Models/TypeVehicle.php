@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\MaxVehicle;
+use App\Models\OutTransaction;
+use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -39,8 +42,8 @@ class TypeVehicle extends Model
         return $this->hasMany(MaxVehicle::class);
     }
 
-    public function parkingFee()
+    public function outTransaction()
     {
-        return $this->hasOne(ParkingFee::class);
+        return $this->hasOne(OutTransaction::class);
     }
 }

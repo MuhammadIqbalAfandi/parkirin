@@ -16,6 +16,7 @@ use App\Policies\MutationPolicy;
 use App\Policies\ParkingFeePolicy;
 use App\Policies\TopUpPolicy;
 use App\Policies\TypeMemberPolicy;
+use App\Policies\TypeVehiclePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -35,7 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         ParkingFee::class => ParkingFeePolicy::class,
         TopUp::class => TopUpPolicy::class,
         TypeMember::class => TypeMemberPolicy::class,
-        TypeVehicle::class => TypeVehicle::class,
+        TypeVehicle::class => TypeVehiclePolicy::class,
     ];
 
     /**

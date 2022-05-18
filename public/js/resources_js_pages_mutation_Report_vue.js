@@ -502,11 +502,11 @@ __webpack_require__.r(__webpack_exports__);
 
     var linkReference = function linkReference(data) {
       if (data.topupId) {
-        return route('top-ups.show', data.topupId);
+        return route('top-ups.show', data.topUpId);
       } else if (data.expenseId) {
         return route('expenses.show', data.expenseId);
       } else {
-        console.info('under construction'); // return route('expenses.show', data.expenseId)
+        console.info('under construction'); //  return route('out-transactions.show', data.outTransactionId)
       }
     };
 

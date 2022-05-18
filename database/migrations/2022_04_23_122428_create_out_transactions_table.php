@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transaction_ins', function (Blueprint $table) {
+        Schema::create('out_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('capture_vehicle');
-            $table->string('transaction_number');
+            $table->string('plat_number');
+            $table->unsignedInteger('price');
+            $table->foreignId('entry_transaction_id')->constrained();
+            $table->foreignId('type_vehicle_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaction_ins');
+        Schema::dropIfExists('out_transactions');
     }
 };
