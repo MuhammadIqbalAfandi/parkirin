@@ -38,7 +38,38 @@ const form = useForm({
   priceNext: props.parkingFees[4]?.price ?? null,
 })
 
+const submitValidation = () => {
+  const periodTimeCount = [
+    form.timePeriod1,
+    form.timePeriod2,
+    form.timePeriod3,
+    form.timePeriod4,
+    form.timePeriodNext,
+  ].reduce((prev, current) => prev + current)
+
+  if (periodTimeCount > 24) {
+    alert('Waktu tidak boleh melebihi 24 jam')
+    return {
+      alert: true,
+    }
+  } else if (periodTimeCount < 24) {
+    alert('Waktu tidak boleh kurang dari 24 jam')
+    return {
+      alert: true,
+    }
+  }
+
+  return {
+    alert: false,
+  }
+}
+
 const submit = () => {
+  const validation = submitValidation()
+  if (validation.alert) {
+    return
+  }
+
   form
     .transform((data) => ({
       id: [data.id1, data.id2, data.id3, data.id4, data.idNext],
@@ -56,7 +87,10 @@ const submit = () => {
         <Card>
           <template #title>
             <div class="flex justify-content-between">
-              <h1>Tarif Parkir</h1>
+              <div>
+                <h1>Tarif Parkir</h1>
+                <span>24 jam pertama</span>
+              </div>
 
               <Button icon="pi pi-pencil" class="p-button-rounded p-button-primary" @click="edit" />
             </div>

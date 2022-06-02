@@ -106,8 +106,6 @@ watch(
   }
 )
 
-const confirm = useConfirm()
-
 const formSent = () => {
   form
     .transform((data) => ({
@@ -127,6 +125,8 @@ const formSent = () => {
       },
     })
 }
+
+const confirm = useConfirm()
 
 const submit = () => {
   confirm.require({
