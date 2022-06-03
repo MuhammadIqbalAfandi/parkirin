@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 
 defineProps({
@@ -9,114 +8,108 @@ defineProps({
     default: false,
   },
 })
-
-const emits = defineEmits(['menuitem-click'])
-
-const activeIndex = ref(null)
-
-const onMenuItemClick = (event, item, index) => {
-  if (item.disabled) {
-    event.preventDefault()
-    return
-  }
-  if (!item.to && !item.url) {
-    event.preventDefault()
-  }
-
-  if (item.command) {
-    item.command({ originalEvent: event, item: item })
-  }
-
-  activeIndex.value = index === activeIndex.value ? null : index
-
-  emits('menuitem-click', {
-    originalEvent: event,
-    item: item,
-  })
-}
-
-const visible = (item) => {
-  return typeof item.visible === 'function' ? item.visible() : item.visible !== false
-}
 </script>
 
 <template>
   <ul v-if="items">
     <template v-for="(item, i) of items">
-      <li
-        v-if="visible(item) && !item.separator"
-        :key="item.label || i"
-        :class="[
-          { 'layout-menuitem-category': root, 'active-menuitem': activeIndex === i && !item.to && !item.disabled },
-        ]"
-        role="none"
-      >
+      <li v-if="item" :key="i" :class="[{ 'layout-menuitem-category': root }]" role="none">
         <template v-if="root">
           <div class="layout-menuitem-root-text" :aria-label="item.label">{{ item.label }}</div>
-          <AppSubSidebar
-            :items="visible(item) && item.items"
-            @menuitem-click="$emit('menuitem-click', $event)"
-          ></AppSubSidebar>
+
+          <AppSubSidebar :items="item.items"></AppSubSidebar>
         </template>
         <template v-else>
           <Link
             v-if="item.to"
-            v-ripple
             role="menuitem"
             :href="item.to"
             :class="[
-              item.class,
-              'p-ripple',
               {
-                'p-disabled': item.disabled,
                 'router-link-active': $page.component.startsWith(item.component) || $page.url.startsWith(item.to),
                 'router-link-exact-active': $page.component.startsWith(item.component) || $page.url.startsWith(item.to),
               },
             ]"
-            :style="item.style"
-            :target="item.target"
             :aria-label="item.label"
-            @click="onMenuItemClick($event, item, i)"
           >
             <i :class="item.icon"></i>
             <span>{{ item.label }}</span>
-            <i v-if="item.items" class="pi pi-fw pi-angle-down menuitem-toggle-icon"></i>
-            <Badge v-if="item.badge" :value="item.badge"></Badge>
           </Link>
 
-          <a
-            v-if="!item.to"
-            v-ripple
-            role="menuitem"
-            :style="item.style"
-            :class="[item.class, 'p-ripple', { 'p-disabled': item.disabled }]"
-            :href="item.url || '#'"
-            :target="item.target"
-            :aria-label="item.label"
-            @click="onMenuItemClick($event, item, i)"
-          >
+          <a v-if="!item.to" href="#" role="menuitem" :aria-label="item.label">
             <i :class="item.icon"></i>
             <span>{{ item.label }}</span>
-            <i v-if="item.items" class="pi pi-fw pi-angle-down menuitem-toggle-icon"></i>
-            <Badge v-if="item.badge" :value="item.badge"></Badge>
           </a>
 
-          <transition name="layout-submenu-wrapper">
-            <AppSubSidebar
-              v-show="activeIndex === i"
-              :items="visible(item) && item.items"
-              @menuitem-click="$emit('menuitem-click', $event)"
-            ></AppSubSidebar>
-          </transition>
+          <AppSubSidebar :items="item.items"></AppSubSidebar>
         </template>
       </li>
-      <li
-        class="p-menu-separator"
-        v-if="visible(item) && item.separator"
-        role="separator"
-        :style="item.style"
-        :key="'separator' + i"
-      ></li>
     </template>
   </ul>
 </template>
+
+<style lang="scss" scoped>
+li {
+  &.layout-menuitem-category {
+    margin-top: 0.75rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .layout-menuitem-root-text {
+    text-transform: uppercase;
+    color: var(--surface-900);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+    transition: color 0.2s;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    transition: background-color 0.15s;
+
+    span {
+      margin-left: 0.5rem;
+    }
+
+    .menuitem-toggle-icon {
+      margin-left: auto;
+    }
+
+    &:focus {
+      outline: 0 none;
+      outline-offset: 0;
+      transition: box-shadow 0.2s;
+      box-shadow: inset var(--focus-ring);
+    }
+
+    &:hover {
+      background-color: var(--surface-hover);
+    }
+
+    &.router-link-exact-active {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    ul {
+      padding-left: 1rem;
+    }
+  }
+}
+</style>

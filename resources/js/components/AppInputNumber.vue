@@ -10,37 +10,37 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  type: {
+  placeholder: {
     type: String,
-    default: 'text',
+    required: true,
+  },
+  error: {
+    type: String,
+    default: null,
+  },
+  useGrouping: {
+    type: Boolean,
+    default: true,
   },
   mode: {
     type: String,
     default: 'decimal',
   },
-  incrementButtonClass: {
+  currency: {
     type: String,
-    default: null,
+    default: undefined,
   },
-  decrementButtonClass: {
+  locale: {
     type: String,
-    default: null,
+    default: undefined,
   },
-  incrementButtonIcon: {
+  currencyDisplay: {
     type: String,
-    default: 'pi pi-angle-up',
-  },
-  decrementButtonIcon: {
-    type: String,
-    default: 'pi pi-angle-down',
+    default: undefined,
   },
   showButtons: {
     type: Boolean,
     default: false,
-  },
-  buttonLayout: {
-    type: String,
-    default: 'stacked',
   },
   min: {
     type: Number,
@@ -61,30 +61,6 @@ const props = defineProps({
   suffix: {
     type: String,
     default: null,
-  },
-  placeholder: {
-    type: String,
-    required: true,
-  },
-  useGrouping: {
-    type: Boolean,
-    default: true,
-  },
-  currency: {
-    type: String,
-    default: undefined,
-  },
-  locale: {
-    type: String,
-    default: undefined,
-  },
-  error: {
-    type: String,
-    default: null,
-  },
-  currencyDisplay: {
-    type: String,
-    default: undefined,
   },
   modelValue: null,
 })
@@ -111,7 +87,6 @@ const ariaDescribedbyLabel = computed(() => props.label.toLowerCase().replace(/\
       :class="{ 'p-invalid': isError }"
       :id="forLabel"
       :aria-describedby="ariaDescribedbyLabel"
-      :type="type"
       :placeholder="placeholder"
       :model-value="modelValue"
       :disabled="disabled"
@@ -123,11 +98,6 @@ const ariaDescribedbyLabel = computed(() => props.label.toLowerCase().replace(/\
       :mode="mode"
       :use-grouping="useGrouping"
       :show-buttons="showButtons"
-      :button-layout="buttonLayout"
-      :increment-button-class="incrementButtonClass"
-      :decrement-button-class="decrementButtonClass"
-      :increment-button-icon="incrementButtonIcon"
-      :decrement-button-icon="decrementButtonIcon"
       @input="$emit('update:modelValue', $event.value)"
     />
 

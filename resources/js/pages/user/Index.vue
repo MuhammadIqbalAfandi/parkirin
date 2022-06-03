@@ -1,36 +1,30 @@
 <script setup>
 import { watch } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
-import { Head, useForm } from '@inertiajs/inertia-vue3'
-import throttle from 'lodash/throttle'
-import pickBy from 'lodash/pickBy'
-import AppLayout from '@/layouts/AppLayout.vue'
-import AppButton from '@/components/AppButton.vue'
+import { Head } from '@inertiajs/inertia-vue3'
+import { pickBy } from 'lodash'
+import tableHeader from './tableHeader'
+import { useSearchText } from '@/components/useSearchText'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
+import AppButtonLink from '@/components/AppButtonLink.vue'
 import AppPagination from '@/components/AppPagination.vue'
-
-import TableHeader from './TableHeader'
 
 const props = defineProps({
   users: Object,
-  filters: Object,
+  initialSearch: String,
 })
 
-const filterForm = useForm({
-  search: props.filters.search,
-})
+const { search } = useSearchText(props.initialSearch)
 
-watch(
-  filterForm,
-  throttle(() => {
-    Inertia.get('/users', pickBy({ search: filterForm.search }), { preserveState: true })
-  }, 300)
-)
+watch(search, () => {
+  Inertia.get('/users', pickBy({ search: search.value }), { preserveState: true })
+})
 </script>
 
 <template>
   <Head title="Daftar User" />
 
-  <AppLayout>
+  <DashboardLayout>
     <DataTable
       responsiveLayout="scroll"
       columnResizeMode="expand"
@@ -47,13 +41,13 @@ watch(
               <InputText
                 class="w-full md:w-27rem"
                 placeholder="cari, contoh: 08xx, tina, tina@xx.com"
-                v-model="filterForm.search"
+                v-model="search"
               />
             </div>
           </div>
 
           <div class="col-12 md:col-4 flex flex-column md:flex-row justify-content-end">
-            <AppButton
+            <AppButtonLink
               label="Tambah User"
               icon="pi pi-pencil"
               class="p-button-outlined"
@@ -63,16 +57,11 @@ watch(
         </div>
       </template>
 
-      <Column
-        v-for="tableHeader in TableHeader"
-        :field="tableHeader.field"
-        :header="tableHeader.header"
-        :key="tableHeader.field"
-      />
+      <Column v-for="value in tableHeader" :field="value.field" :header="value.header" :key="value.field" />
 
       <Column>
         <template #body="{ data }">
-          <AppButton
+          <AppButtonLink
             icon="pi pi-pencil"
             class="p-button-icon-only p-button-rounded p-button-text"
             :href="route('users.edit', data.id)"
@@ -82,5 +71,5 @@ watch(
     </DataTable>
 
     <AppPagination :links="users.links" />
-  </AppLayout>
+  </DashboardLayout>
 </template>

@@ -1,57 +1,31 @@
 <script setup>
 import { Inertia } from '@inertiajs/inertia'
-import { watch, onMounted } from 'vue'
-import { Head, useForm } from '@inertiajs/inertia-vue3'
-import dayjs from 'dayjs'
-import pickBy from 'lodash/pickBy'
-import AppLayout from '@/layouts/AppLayout.vue'
+import { watch } from 'vue'
+import { Head } from '@inertiajs/inertia-vue3'
+import { pickBy } from 'lodash'
+import { indexTable } from './tableHeader'
+import { useSearchText } from '@/components/useSearchText'
+import { useDateRangeFilter } from '@/components/useDateRangeFilter'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import AppPagination from '@/components/AppPagination.vue'
-import AppButton from '@/components/AppButton.vue'
-
-import { IndexTable } from './TableHeader'
+import AppButtonLink from '@/components/AppButtonLink.vue'
 
 const props = defineProps({
   topUp: Object,
-  filters: Object,
+  initialSearch: String,
+  initialDateRange: Array,
 })
 
-const filterForm = useForm({
-  dates: null,
-  startDate: props.filters.startDate,
-  endDate: props.filters.endDate,
-  search: props.filters.search,
-})
+const { search } = useSearchText(props.initialSearch)
+const { dates, startDate, endDate } = useDateRangeFilter(props.initialDateRange)
 
-onMounted(() => {
-  if (props.filters.startDate || props.filters.endDate) {
-    if (props.filters.endDate) {
-      filterForm.dates = [new Date(props.filters.startDate), new Date(props.filters.endDate)]
-    } else {
-      filterForm.dates = [new Date(props.filters.startDate), null]
-    }
-  }
-})
-
-watch(filterForm, () => {
-  if (filterForm.dates) {
-    if (filterForm.dates[1]) {
-      filterForm.startDate = dayjs(filterForm.dates[0]).format('YYYY-MM-DD')
-      filterForm.endDate = dayjs(filterForm.dates[1]).format('YYYY-MM-DD')
-    } else {
-      filterForm.startDate = dayjs(filterForm.dates[0]).format('YYYY-MM-DD')
-      filterForm.endDate = null
-    }
-  } else {
-    filterForm.endDate = null
-    filterForm.startDate = null
-  }
-
+watch([dates, search], () => {
   Inertia.get(
     '/top-ups',
     pickBy({
-      startDate: filterForm.startDate,
-      endDate: filterForm.endDate,
-      search: filterForm.search,
+      startDate: startDate.value,
+      endDate: endDate.value,
+      search: search.value,
     }),
     {
       preserveState: true,
@@ -67,7 +41,7 @@ const filterReset = () => {
 <template>
   <Head title="Top Up" />
 
-  <AppLayout>
+  <DashboardLayout>
     <DataTable
       responsive-layout="scroll"
       column-resize-mode="expand"
@@ -82,12 +56,13 @@ const filterReset = () => {
           <div class="col-12 md:col-8">
             <div class="grid">
               <div class="col-12 md:col-3">
-                <InputText class="w-full" placeholder="cari, contoh: 08xx, tina" v-model="filterForm.search" />
+                <InputText class="w-full" placeholder="cari, contoh: 08xx, tina" v-model="search" />
               </div>
               <div class="col-12 md:col-3">
                 <Calendar
+                  touch-u-i
                   class="w-full"
-                  v-model="filterForm.dates"
+                  v-model="dates"
                   selection-mode="range"
                   placeholder="filter waktu..."
                   date-format="dd/mm/yy"
@@ -101,21 +76,21 @@ const filterReset = () => {
           </div>
 
           <div class="col-12 md:col-4 flex flex-column md:flex-row justify-content-end">
-            <AppButton label="Top Up" class="p-button-outlined" icon="pi pi-pencil" :href="route('top-ups.create')" />
+            <AppButtonLink
+              label="Top Up"
+              class="p-button-outlined"
+              icon="pi pi-pencil"
+              :href="route('top-ups.create')"
+            />
           </div>
         </div>
       </template>
 
-      <Column
-        v-for="indexTable in IndexTable"
-        :field="indexTable.field"
-        :header="indexTable.header"
-        :key="indexTable.field"
-      />
+      <Column v-for="value in indexTable" :field="value.field" :header="value.header" :key="value.field" />
 
       <Column>
         <template #body="{ data }">
-          <AppButton
+          <AppButtonLink
             icon="pi pi-eye"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
             :href="route('top-ups.show', data.id)"
@@ -125,5 +100,5 @@ const filterReset = () => {
     </DataTable>
 
     <AppPagination :links="topUp.links" />
-  </AppLayout>
+  </DashboardLayout>
 </template>

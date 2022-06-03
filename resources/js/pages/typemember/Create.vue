@@ -1,65 +1,17 @@
 <script setup>
-import { computed, reactive, watch } from 'vue'
-import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
+import { Head, useForm } from '@inertiajs/inertia-vue3'
+import { vehicleTable } from './tableHeader'
+import { useVehicle } from './useVehicle'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import AppInputText from '@/components/AppInputText.vue'
 import AppDropdown from '@/components/AppDropdown.vue'
 import AppInputNumber from '@/components/AppInputNumber.vue'
 import AppTextArea from '@/components/AppTextArea.vue'
 
-import { Vehicle } from './TableHeader'
-
 const props = defineProps({
   typeVehicles: Object,
 })
-
-const errors = computed(() => usePage().props.value.errors)
-
-watch(errors, () => {
-  form.clearErrors()
-})
-
-const listVehicle = reactive([])
-
-const vehicleClear = () => {
-  listVehicle.splice(0)
-}
-
-const vehicleOnDelete = (index) => {
-  listVehicle.splice(index, 1)
-}
-
-const vehicleOnAdd = () => {
-  form.clearErrors('type_vehicle_id', 'max_vehicle')
-
-  if (!form.type_vehicle_id) {
-    form.setError('type_vehicle_id', 'Tidak boleh kosong')
-
-    return
-  }
-
-  if (!form.max_vehicle) {
-    form.setError('max_vehicle', 'Tidak boleh kosong')
-
-    return
-  }
-
-  const listVehicleExist = listVehicle.filter((val) => val.typeVehicleId === form.type_vehicle_id)
-  if (listVehicleExist.length) {
-    form.setError('type_vehicle_id', 'Jenis Kendaraan sudah ada')
-
-    return
-  }
-
-  const typeVehicle = props.typeVehicles.filter((val) => val.value === form.type_vehicle_id)[0]
-  listVehicle.push({
-    max: form.max_vehicle,
-    type: typeVehicle.label,
-    typeVehicleId: typeVehicle.value,
-  })
-
-  form.reset('type_vehicle_id', 'max_vehicle')
-}
 
 const form = useForm({
   type: null,
@@ -69,7 +21,11 @@ const form = useForm({
   max_vehicle: null,
 })
 
-const submit = () => {
+useFormErrorReset(form)
+
+const { listVehicle, vehicleClear, vehicleOnAdd, vehicleOnDelete } = useVehicle(form, props.typeVehicles)
+
+const onSubmit = () => {
   form
     .transform((data) => ({
       type: data.type,
@@ -90,7 +46,7 @@ const submit = () => {
 <template>
   <Head title="Tambah Jenis Member" />
 
-  <AppLayout>
+  <DashboardLayout>
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
@@ -169,12 +125,11 @@ const submit = () => {
                   :value="listVehicle"
                 >
                   <Column
-                    v-for="vehicle in Vehicle"
-                    :field="vehicle.field"
-                    :header="vehicle.header"
-                    :key="vehicle.field"
+                    v-for="value in vehicleTable"
+                    :field="value.field"
+                    :header="value.header"
+                    :key="value.field"
                   />
-
                   <Column>
                     <template #body="{ index }">
                       <div class="flex justify-content-end">
@@ -197,12 +152,12 @@ const submit = () => {
                 icon="pi pi-check"
                 class="p-button-outlined"
                 :disabled="form.processing || listVehicle.length === 0"
-                @click="submit"
+                @click="onSubmit"
               />
             </div>
           </template>
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

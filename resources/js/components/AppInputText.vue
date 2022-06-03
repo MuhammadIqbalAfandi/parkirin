@@ -2,10 +2,6 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  type: {
-    type: String,
-    default: 'text',
-  },
   label: {
     type: String,
     required: true,
@@ -40,11 +36,11 @@ const ariaDescribedbyLabel = computed(() => props.label.toLowerCase().replace(/\
 
     <InputText
       class="w-full"
+      type="text"
       :class="{ 'p-invalid': isError }"
       :id="forLabel"
       :aria-describedby="ariaDescribedbyLabel"
       :model-value="modelValue"
-      :type="type"
       :placeholder="placeholder"
       :value="modelValue"
       :disabled="disabled"

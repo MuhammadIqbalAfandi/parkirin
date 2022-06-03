@@ -1,10 +1,9 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3'
+import { indexTable } from './tableHeader'
 import AppPagination from '@/components/AppPagination.vue'
-import AppButton from '@/components/AppButton.vue'
-import AppLayout from '@/layouts/AppLayout.vue'
-
-import { IndexTable } from './TableHeader'
+import AppButtonLink from '@/components/AppButtonLink.vue'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 defineProps({
   typeMember: Object,
@@ -14,7 +13,7 @@ defineProps({
 <template>
   <Head title="Daftar Jenis Member" />
 
-  <AppLayout>
+  <DashboardLayout>
     <DataTable
       responsive-layout="scroll"
       column-resize-mode="expand"
@@ -28,7 +27,7 @@ defineProps({
         <div class="grid">
           <div class="col-12">
             <div class="flex flex-column md:flex-row justify-content-end">
-              <AppButton
+              <AppButtonLink
                 label="Tambah Jenis Member"
                 class="p-button-outlined"
                 icon="pi pi-pencil"
@@ -39,16 +38,11 @@ defineProps({
         </div>
       </template>
 
-      <Column
-        v-for="indexTable in IndexTable"
-        :field="indexTable.field"
-        :header="indexTable.header"
-        :key="indexTable.field"
-      />
+      <Column v-for="value in indexTable" :field="value.field" :header="value.header" :key="value.field" />
 
       <Column>
         <template #body="{ data }">
-          <AppButton
+          <AppButtonLink
             icon="pi pi-pencil"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
             :href="route('type-members.edit', data.id)"
@@ -58,5 +52,5 @@ defineProps({
     </DataTable>
 
     <AppPagination :links="typeMember.links" />
-  </AppLayout>
+  </DashboardLayout>
 </template>

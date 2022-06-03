@@ -30,7 +30,7 @@ class UserController extends Controller
     public function index()
     {
         return inertia('user/Index', [
-            'filters' => request()->all('search'),
+            'initialSearch' => request('search'),
             'users' => User::filter(request()->only('search'))
                 ->latest()
                 ->paginate(10)

@@ -21,7 +21,7 @@ class EmailVerificationPromptController extends Controller
         } else {
             $request->user()->sendEmailVerificationNotification();
 
-            return inertia('auth/VerifyEmail', ['status' => session('status')]);
+            return inertia('auth/VerifyEmail');
         }
     }
 }

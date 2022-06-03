@@ -1,33 +1,34 @@
 <script setup>
-import { ref, watch, computed } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
-import { useForm, Head, usePage } from '@inertiajs/inertia-vue3'
+import { useForm, Head } from '@inertiajs/inertia-vue3'
+import { useConfirm } from 'primevue/useconfirm'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
 import AppInputText from '@/components/AppInputText.vue'
 import AppDropdown from '@/components/AppDropdown.vue'
-import AppButton from '@/components/AppButton.vue'
-import AppDialog from '@/components/AppDialog.vue'
-import AppLayout from '@/layouts/AppLayout.vue'
+import AppButtonLink from '@/components/AppButtonLink.vue'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 const props = defineProps({
   user: Object,
   roles: Array,
 })
 
-const errors = computed(() => usePage().props.value.errors)
+const deleteConfirm = useConfirm()
 
-watch(errors, () => {
-  form.clearErrors()
-})
-
-const visibleDialog = ref(false)
-
-const confirmDialog = () => {
-  visibleDialog.value = true
+const onDeleteUser = () => {
+  deleteConfirm.require({
+    message: `Yakin akan menghapus (${props.user.email}) ?`,
+    header: 'Hapus User',
+    acceptLabel: 'Hapus',
+    rejectLabel: 'Batalkan',
+    accept: () => {
+      Inertia.delete(route('users.destroy', props.user.id))
+    },
+    reject: () => {
+      deleteConfirm.close()
+    },
+  })
 }
-
-const onAgree = () => Inertia.delete(route('users.destroy', props.user.id))
-
-const onCancel = () => (visibleDialog.value = false)
 
 const form = useForm({
   name: props.user.name,
@@ -36,7 +37,9 @@ const form = useForm({
   role_id: props.user.role_id,
 })
 
-const submit = () => {
+useFormErrorReset(form)
+
+const onSubmit = () => {
   form.put(route('users.update', props.user.id))
 }
 </script>
@@ -44,7 +47,9 @@ const submit = () => {
 <template>
   <Head title="Ubah User" />
 
-  <AppLayout>
+  <DashboardLayout>
+    <ConfirmDialog></ConfirmDialog>
+
     <div class="grid">
       <div class="col-12 lg:col-8">
         <Card>
@@ -96,24 +101,17 @@ const submit = () => {
           <template #footer>
             <div class="grid">
               <div class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-start">
-                <AppDialog
-                  message="Yakin akan menghapus data ini?"
-                  v-model:visible="visibleDialog"
-                  @agree="onAgree"
-                  @cancel="onCancel"
-                />
-
                 <Button
                   v-if="$page.props.auth.user.role_id !== user.role_id"
                   label="Hapus"
                   icon="pi pi-trash"
                   class="p-button-outlined p-button-danger"
-                  @click="confirmDialog"
+                  @click="onDeleteUser"
                 />
               </div>
 
               <div class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-end">
-                <AppButton
+                <AppButtonLink
                   label="Blokir"
                   icon="pi pi-ban"
                   method="delete"
@@ -126,7 +124,7 @@ const submit = () => {
                   class="p-button-outlined"
                   icon="pi pi-check"
                   :disabled="form.processing"
-                  @click="submit"
+                  @click="onSubmit"
                 />
               </div>
             </div>
@@ -134,5 +132,5 @@ const submit = () => {
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

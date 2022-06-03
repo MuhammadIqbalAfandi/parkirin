@@ -1,6 +1,6 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 defineProps({
   expense: Object,
@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <Head title="Detail Pengeluaran" />
-  <AppLayout>
+  <DashboardLayout>
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
@@ -68,5 +68,5 @@ defineProps({
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

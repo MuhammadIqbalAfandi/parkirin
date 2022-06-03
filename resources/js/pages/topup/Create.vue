@@ -1,22 +1,16 @@
 <script setup>
-import { computed, watch } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
-import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
+import { Head, useForm } from '@inertiajs/inertia-vue3'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
 import { useConfirm } from 'primevue/useconfirm'
 import AppAutocompleteBasic from '@/components/AppAutocompleteBasic.vue'
-import AppLayout from '@/layouts/AppLayout.vue'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 defineProps({
   members: {
     type: Array,
     default: [],
   },
-})
-
-const errors = computed(() => usePage().props.value.errors)
-
-watch(errors, () => {
-  form.clearErrors()
 })
 
 const memberOnComplete = (event) => {
@@ -38,6 +32,8 @@ const form = useForm({
   member: null,
 })
 
+useFormErrorReset(form)
+
 const confirm = useConfirm()
 
 const formSent = () => {
@@ -48,7 +44,7 @@ const formSent = () => {
     .post(route('top-ups.store'), { onSuccess: () => form.reset() })
 }
 
-const submit = () => {
+const onSubmit = () => {
   confirm.require({
     message: `Dikenakan tagihan sebesar ${form.member.price}`,
     header: 'Top Up',
@@ -58,7 +54,7 @@ const submit = () => {
       formSent()
     },
     reject: () => {
-      console.info('transaksi dibatalkan')
+      confirm.close()
     },
   })
 }
@@ -67,8 +63,9 @@ const submit = () => {
 <template>
   <Head title="Top Up" />
 
-  <AppLayout>
+  <DashboardLayout>
     <ConfirmDialog></ConfirmDialog>
+
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
@@ -138,7 +135,6 @@ const submit = () => {
             <div class="grid">
               <div class="col-12 md:col-6">
                 <AppAutocompleteBasic
-                  empty
                   label="Member"
                   field="name"
                   placeholder="cari, contoh: 08xx, tina"
@@ -173,13 +169,13 @@ const submit = () => {
                 label="Topup"
                 icon="pi pi-check"
                 class="p-button-outlined"
-                :disabled="form.processing"
-                @click="submit"
+                :disabled="form.processing || typeof form.member !== 'object'"
+                @click="onSubmit"
               />
             </div>
           </template>
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

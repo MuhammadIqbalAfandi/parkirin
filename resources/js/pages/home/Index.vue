@@ -1,7 +1,7 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3'
 import { includes } from 'lodash'
-import AppLayout from '@/layouts/AppLayout.vue'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 defineProps({
   cardStatistics: Array,
@@ -106,7 +106,7 @@ const pieChartOption = {
 </script>
 
 <template>
-  <AppLayout>
+  <DashboardLayout>
     <Head title="Dashboard" />
 
     <div class="grid">
@@ -201,5 +201,5 @@ const pieChartOption = {
         </Card>
       </div> -->
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

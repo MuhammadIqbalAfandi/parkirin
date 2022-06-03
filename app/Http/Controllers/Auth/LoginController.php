@@ -17,7 +17,7 @@ class LoginController extends Controller
      */
     public function create()
     {
-        return inertia('auth/Login', ['status' => session('status')]);
+        return inertia('auth/Login');
     }
 
     /**

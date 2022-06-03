@@ -6,6 +6,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
   placeholder: {
     type: String,
     required: true,
@@ -33,6 +37,7 @@ const ariaDescribedbyLabel = computed(() => props.label.toLowerCase().replace(/\
     <Password
       class="w-full"
       input-class="w-full"
+      :disabled="disabled"
       :id="forLabel"
       :placeholder="placeholder"
       :aria-describedby="ariaDescribedbyLabel"

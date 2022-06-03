@@ -6,6 +6,18 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  placeholder: {
+    type: String,
+    required: true,
+  },
+  error: {
+    type: String,
+    default: null,
+  },
   optionLabel: {
     type: String,
     default: 'label',
@@ -18,21 +30,17 @@ const props = defineProps({
     type: String,
     default: 'disabled',
   },
+  optionGroupChildren: {
+    type: String,
+    default: null,
+  },
+  optionGroupLabel: {
+    type: String,
+    default: null,
+  },
   options: {
     type: Array,
     required: true,
-  },
-  placeholder: {
-    type: String,
-    required: true,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  error: {
-    type: String,
-    default: null,
   },
   modelValue: null,
 })
@@ -65,6 +73,8 @@ const selectedDropdownLabel = (value) => {
       :id="forLabel"
       :aria-describedby="ariaDescribedbyLabel"
       :option-disabled="optionDisabled"
+      :option-group-children="optionGroupChildren"
+      :option-group-label="optionGroupLabel"
       :option-label="optionLabel"
       :option-value="optionValue"
       :placeholder="placeholder"

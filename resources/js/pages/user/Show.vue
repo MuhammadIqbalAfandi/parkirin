@@ -1,20 +1,13 @@
 <script setup>
-import { computed, watch } from 'vue'
-import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
+import { Head, useForm } from '@inertiajs/inertia-vue3'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import AppInputText from '@/components/AppInputText.vue'
 import AppPassword from '@/components/AppPassword.vue'
 
 const props = defineProps({
   user: Object,
   roles: Array,
-})
-
-const errors = computed(() => usePage().props.value.errors)
-
-watch(errors, () => {
-  form.clearErrors()
-  formChangePassword.clearErrors()
 })
 
 const form = useForm({
@@ -24,7 +17,9 @@ const form = useForm({
   role_id: props.user.role_id,
 })
 
-const submit = () => {
+useFormErrorReset(form)
+
+const onSubmit = () => {
   form.put(route('users.update', props.user.id))
 }
 
@@ -34,7 +29,9 @@ const formChangePassword = useForm({
   new_password_confirmation: '',
 })
 
-const changePassword = () => {
+useFormErrorReset(formChangePassword)
+
+const onChangePassword = () => {
   formChangePassword.post(route('users.change-password', props.user.id), {
     onSuccess: () => formChangePassword.reset(),
   })
@@ -44,7 +41,7 @@ const changePassword = () => {
 <template>
   <Head title="Profil Saya" />
 
-  <AppLayout>
+  <DashboardLayout>
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
@@ -77,7 +74,7 @@ const changePassword = () => {
                       icon="pi pi-check"
                       class="p-button-outlined"
                       :disabled="form.processing"
-                      @click="submit"
+                      @click="onSubmit"
                     />
                   </div>
                 </div>
@@ -116,7 +113,7 @@ const changePassword = () => {
                       icon="pi pi-check"
                       class="p-button-outlined"
                       :disabled="formChangePassword.processing"
-                      @click="changePassword"
+                      @click="onChangePassword"
                     />
                   </div>
                 </div>
@@ -126,5 +123,5 @@ const changePassword = () => {
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

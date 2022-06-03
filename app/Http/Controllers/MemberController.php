@@ -20,7 +20,7 @@ class MemberController extends Controller
     public function index()
     {
         return inertia('member/Index', [
-            'filters' => request()->all('search'),
+            'initialSearch' => request('search'),
             'members' => Member::filter(request()->only('search'))
                 ->latest()
                 ->paginate(10)
@@ -50,20 +50,18 @@ class MemberController extends Controller
                 'label' => $typeMember->type,
                 'value' => $typeMember->id,
             ]),
-            'typeMember' => Inertia::lazy(
-                fn() => TypeMember::filter(request('id'))->get()->transform(fn($typeMember) => [
-                    'type' => $typeMember->type,
-                    'description' => $typeMember->description,
-                    'price' => $typeMember->price,
-                    'max' => $typeMember->maxVehicleDetail(),
-                    'maxVehicles' => $typeMember->fresh()->maxVehicles->transform(fn($maxVehicle) => [
-                        'value' => $maxVehicle->id,
-                        'label' => $maxVehicle->typeVehicle->type,
-                        'maxVehicle' => $maxVehicle->max,
-                        'typeVehicleId' => $maxVehicle->typeVehicle->id,
-                    ]),
-                ])->first()
-            ),
+            'typeMember' => fn() => TypeMember::filter(request('id'))->get()->transform(fn($typeMember) => [
+                'type' => $typeMember->type,
+                'description' => $typeMember->description,
+                'price' => $typeMember->price,
+                'max' => $typeMember->maxVehicleDetail(),
+                'maxVehicles' => $typeMember->fresh()->maxVehicles->transform(fn($maxVehicle) => [
+                    'value' => $maxVehicle->id,
+                    'label' => $maxVehicle->typeVehicle->type,
+                    'maxVehicle' => $maxVehicle->max,
+                    'typeVehicleId' => $maxVehicle->typeVehicle->id,
+                ]),
+            ])->first(),
         ]);
     }
 
@@ -144,23 +142,23 @@ class MemberController extends Controller
                 'name' => $member->name,
                 'phone' => $member->phone,
                 'typeMemberId' => $member->type_member_id,
-                'vehicles' => $member->vehicles->transform(fn($vehicle) => [
-                    'platNumber' => $vehicle->plat_number,
-                    'typeVehicle' => $vehicle->typeVehicle->type,
-                    'typeVehicleId' => $vehicle->typeVehicle->id,
-                    'maxVehicleId' => $member->typeMember->maxVehicles
-                        ->where('type_vehicle_id', $vehicle->typeVehicle->id)
-                        ->pluck('id')[0],
-                    'maxVehicle' => $member->typeMember->maxVehicles
-                        ->where('type_vehicle_id', $vehicle->typeVehicle->id)
-                        ->pluck('max')[0],
-                ]),
             ],
+            'initialVehicles' => $member->vehicles->transform(fn($vehicle) => [
+                'platNumber' => $vehicle->plat_number,
+                'typeVehicle' => $vehicle->typeVehicle->type,
+                'typeVehicleId' => $vehicle->typeVehicle->id,
+                'maxVehicleId' => $member->typeMember->maxVehicles
+                    ->where('type_vehicle_id', $vehicle->typeVehicle->id)
+                    ->pluck('id')[0],
+                'maxVehicle' => $member->typeMember->maxVehicles
+                    ->where('type_vehicle_id', $vehicle->typeVehicle->id)
+                    ->pluck('max')[0],
+            ]),
             'typeMembers' => TypeMember::get()->transform(fn($typeMember) => [
                 'label' => $typeMember->type,
                 'value' => $typeMember->id,
             ]),
-            'typeMember' => [
+            'typeMember' => fn() => [
                 'type' => $typeMember->type,
                 'description' => $typeMember->description,
                 'price' => $typeMember->price,

@@ -115,7 +115,7 @@ class TypeMemberController extends Controller
                 'value' => $typeVehicle->id,
                 'label' => $typeVehicle->type,
             ]),
-            'maxVehicles' => $typeMember->maxVehicles->transform(fn($maxVehicle) => [
+            'initialVehicles' => $typeMember->maxVehicles->transform(fn($maxVehicle) => [
                 'max' => $maxVehicle->max,
                 'type' => $maxVehicle->typeVehicle->type,
                 'typeVehicleId' => $maxVehicle->type_vehicle_id,

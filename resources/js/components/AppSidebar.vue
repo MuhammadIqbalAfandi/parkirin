@@ -2,32 +2,20 @@
 import AppSubSidebar from '@/components/AppSubSidebar.vue'
 
 defineProps({
-  model: Array,
+  menu: Array,
 })
-
-const emits = defineEmits(['menuitem-click'])
-
-const onKeyDown = (event) => {
-  const nodeElement = event.target
-  if (event.code === 'Enter' || event.code === 'Space') {
-    nodeElement.click()
-    event.preventDefault()
-  }
-}
-
-const onMenuItemClick = (event) => {
-  emits('menuitem-click', event)
-}
 </script>
 
 <template>
-  <div class="layout-menu-container">
-    <AppSubSidebar
-      class="layout-menu"
-      :items="model"
-      :root="true"
-      @keydown="onKeyDown"
-      @menuitem-click="onMenuItemClick"
-    />
+  <div>
+    <AppSubSidebar class="layout-menu" :items="menu" :root="true" />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.layout-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+</style>

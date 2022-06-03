@@ -1,78 +1,37 @@
 <script setup>
-import { computed, watch, reactive, onMounted, ref } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
-import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
+import { Head, useForm } from '@inertiajs/inertia-vue3'
+import { useConfirm } from 'primevue/useconfirm'
+import { vehicleTable } from './tableHeader'
+import { useVehicle } from './useVehicle'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import AppInputText from '@/components/AppInputText.vue'
 import AppDropdown from '@/components/AppDropdown.vue'
-import AppDialog from '@/components/AppDialog.vue'
 import AppInputNumber from '@/components/AppInputNumber.vue'
 import AppTextArea from '@/components/AppTextArea.vue'
-
-import { Vehicle } from './TableHeader'
 
 const props = defineProps({
   typeMember: Object,
   typeVehicles: Object,
-  maxVehicles: Object,
+  initialVehicles: Object,
 })
 
-const errors = computed(() => usePage().props.value.errors)
+const deleteConfirm = useConfirm()
 
-watch(errors, () => {
-  form.clearErrors()
-})
-
-const visibleDialog = ref(false)
-
-const confirmDialog = () => {
-  visibleDialog.value = true
-}
-
-const onAgree = () => Inertia.delete(route('type-members.destroy', props.typeMember.id))
-
-const onCancel = () => (visibleDialog.value = false)
-
-const listVehicle = reactive([])
-
-onMounted(() => {
-  props.maxVehicles.forEach((val) => listVehicle.push(val))
-})
-
-const vehicleOnDelete = (index) => {
-  listVehicle.splice(index, 1)
-}
-
-const vehicleOnAdd = () => {
-  form.clearErrors('type_vehicle_id', 'max_vehicle')
-
-  if (!form.type_vehicle_id) {
-    form.setError('type_vehicle_id', 'Tidak boleh kosong')
-
-    return
-  }
-
-  if (!form.max_vehicle) {
-    form.setError('max_vehicle', 'Tidak boleh kosong')
-
-    return
-  }
-
-  const listVehicleExist = listVehicle.filter((val) => val.typeVehicleId === form.type_vehicle_id)
-  if (listVehicleExist.length) {
-    form.setError('type_vehicle_id', 'Jenis Kendaraan sudah ada')
-
-    return
-  }
-
-  const typeVehicle = props.typeVehicles.filter((val) => val.value === form.type_vehicle_id)[0]
-  listVehicle.push({
-    max: form.max_vehicle,
-    type: typeVehicle.label,
-    typeVehicleId: typeVehicle.value,
+const onDeleteTypeMember = () => {
+  deleteConfirm.require({
+    message: `Yakin akan menghapus (${props.typeMember.type}) ?`,
+    header: 'Hapus Jenis Member',
+    acceptLabel: 'Hapus',
+    rejectLabel: 'Batalkan',
+    accept: () => {
+      Inertia.delete(route('type-members.destroy', props.typeMember.id))
+    },
+    reject: () => {
+      deleteConfirm.close()
+    },
   })
-
-  form.reset('type_vehicle_id', 'max_vehicle')
 }
 
 const form = useForm({
@@ -83,7 +42,11 @@ const form = useForm({
   max_vehicle: null,
 })
 
-const submit = () => {
+useFormErrorReset(form)
+
+const { listVehicle, vehicleOnAdd, vehicleOnDelete } = useVehicle(form, props.typeVehicles, props.initialVehicles)
+
+const onSubmit = () => {
   form
     .transform((data) => ({
       type: data.type,
@@ -98,7 +61,9 @@ const submit = () => {
 <template>
   <Head title="Ubah Jenis Member" />
 
-  <AppLayout>
+  <DashboardLayout>
+    <ConfirmDialog></ConfirmDialog>
+
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
@@ -177,12 +142,11 @@ const submit = () => {
                   :value="listVehicle"
                 >
                   <Column
-                    v-for="vehicle in Vehicle"
-                    :field="vehicle.field"
-                    :header="vehicle.header"
-                    :key="vehicle.field"
+                    v-for="value in vehicleTable"
+                    :field="value.field"
+                    :header="value.header"
+                    :key="value.field"
                   />
-
                   <Column>
                     <template #body="{ index }">
                       <div class="flex justify-content-end">
@@ -205,19 +169,12 @@ const submit = () => {
                   v-if="!typeMember.availableToMember"
                   class="flex flex-column md:flex-row justify-content-center md:justify-content-start"
                 >
-                  <AppDialog
-                    message="Yakin akan menghapus data ini?"
-                    v-model:visible="visibleDialog"
-                    @agree="onAgree"
-                    @cancel="onCancel"
-                  />
-
                   <Button
                     v-if="!typeMember.isUsed"
                     label="Hapus"
                     icon="pi pi-trash"
                     class="p-button-outlined p-button-danger"
-                    @click="confirmDialog"
+                    @click="onDeleteTypeMember"
                   />
                 </div>
               </div>
@@ -229,7 +186,7 @@ const submit = () => {
                     icon="pi pi-check"
                     class="p-button-outlined"
                     :disabled="form.processing || listVehicle.length === 0"
-                    @click="submit"
+                    @click="onSubmit"
                   />
                 </div>
               </div>
@@ -238,5 +195,5 @@ const submit = () => {
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

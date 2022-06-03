@@ -2,23 +2,11 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  field: {
-    type: String,
-    required: true,
-  },
-  suggestions: {
-    type: Array,
-    required: true,
-  },
-  empty: {
-    type: Boolean,
-    default: false,
-  },
   label: {
     type: String,
     required: true,
   },
-  dropdown: {
+  disabled: {
     type: Boolean,
     default: false,
   },
@@ -29,6 +17,14 @@ const props = defineProps({
   error: {
     type: String,
     default: null,
+  },
+  field: {
+    type: String,
+    required: true,
+  },
+  suggestions: {
+    type: Array,
+    required: true,
   },
   modelValue: null,
 })
@@ -57,7 +53,7 @@ const ariaDescribedbyLabel = computed(() => props.label.toLowerCase().replace(/\
       :placeholder="placeholder"
       :suggestions="suggestions"
       :auto-highlight="true"
-      :dropdown="dropdown"
+      :disabled="disabled"
       @input="$emit('update:modelValue', $event.target.value)"
       @item-select="$emit('itemSelect', $event)"
       @complete="$emit('complete', $event)"
@@ -71,14 +67,14 @@ const ariaDescribedbyLabel = computed(() => props.label.toLowerCase().replace(/\
       <small
         v-if="error"
         class="mt-1"
-        :class="{ 'mb-2': suggestions.length === 0 || (modelValue.length === 0 && empty), 'p-error': isError }"
+        :class="{ 'mb-2': suggestions.length === 0 || modelValue.length === 0, 'p-error': isError }"
         :id="ariaDescribedbyLabel"
       >
         {{ error }}
       </small>
 
-      <small v-if="suggestions.length === 0 || (modelValue.length === 0 && empty)" class="mt-1">
-        <slot v-if="empty" name="empty" />
+      <small v-if="suggestions.length === 0 || modelValue.length === 0" class="mt-1">
+        <slot name="empty" />
       </small>
     </div>
   </div>

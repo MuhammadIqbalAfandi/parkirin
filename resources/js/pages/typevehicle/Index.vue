@@ -1,10 +1,9 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
+import tableHeader from './tableHeader'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import AppPagination from '@/components/AppPagination.vue'
-import AppButton from '@/components/AppButton.vue'
-
-import TableHeader from './TableHeader'
+import AppButtonLink from '@/components/AppButtonLink.vue'
 
 defineProps({
   typeVehicles: Object,
@@ -14,7 +13,7 @@ defineProps({
 <template>
   <Head title="Jenis Kendaraan" />
 
-  <AppLayout>
+  <DashboardLayout>
     <DataTable
       responsive-layout="scroll"
       column-resize-mode="expand"
@@ -27,7 +26,7 @@ defineProps({
 
         <div class="grid">
           <div class="col-12 flex flex-column md:flex-row justify-content-end">
-            <AppButton
+            <AppButtonLink
               label="Tambah Jenis Kendaraan"
               class="p-button-outlined"
               icon="pi pi-pencil"
@@ -37,16 +36,11 @@ defineProps({
         </div>
       </template>
 
-      <Column
-        v-for="tableHeader in TableHeader"
-        :field="tableHeader.field"
-        :header="tableHeader.header"
-        :key="tableHeader.field"
-      />
+      <Column v-for="value in tableHeader" :field="value.field" :header="value.header" :key="value.field" />
 
       <Column>
         <template #body="{ data }">
-          <AppButton
+          <AppButtonLink
             v-if="!data.isUsed"
             icon="pi pi-pencil"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
@@ -57,5 +51,5 @@ defineProps({
     </DataTable>
 
     <AppPagination :links="typeVehicles.links" />
-  </AppLayout>
+  </DashboardLayout>
 </template>

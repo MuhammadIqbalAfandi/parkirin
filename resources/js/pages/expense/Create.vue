@@ -1,28 +1,24 @@
 <script setup>
-import { computed, watch } from 'vue'
-import { useForm, usePage } from '@inertiajs/inertia-vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
+import { useForm } from '@inertiajs/inertia-vue3'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import AppInputNumber from '@/components/AppInputNumber.vue'
 import AppEditor from '@/components/AppEditor.vue'
-
-const errors = computed(() => usePage().props.value.errors)
-
-watch(errors, () => {
-  form.clearErrors()
-})
 
 const form = useForm({
   description: null,
   amount: null,
 })
 
-const submit = () => {
+useFormErrorReset(form)
+
+const onSubmit = () => {
   form.post(route('expenses.store'), { onSuccess: () => form.reset() })
 }
 </script>
 
 <template>
-  <AppLayout>
+  <DashboardLayout>
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
@@ -64,12 +60,12 @@ const submit = () => {
                 icon="pi pi-check"
                 class="p-button-outlined"
                 :disabled="form.processing"
-                @click="submit"
+                @click="onSubmit"
               />
             </div>
           </template>
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

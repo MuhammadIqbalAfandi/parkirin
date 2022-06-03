@@ -1,4 +1,4 @@
-export const IndexTable = [
+export const indexTable = [
   { field: 'updatedAt', header: 'Diperbaharui' },
   { field: 'type', header: 'Jenis Member' },
   { field: 'description', header: 'Keterangan' },
@@ -6,7 +6,7 @@ export const IndexTable = [
   { field: 'max', header: 'Maksimal Kendaraan' },
 ]
 
-export const Vehicle = [
+export const vehicleTable = [
   { field: 'type', header: 'Jenis Kendaraan' },
   { field: 'max', header: 'Maksimal Kendaraan' },
 ]

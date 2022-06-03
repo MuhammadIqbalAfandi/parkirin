@@ -1,92 +1,18 @@
 <script setup>
-import { computed, watch, reactive } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
-import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
+import { Head, useForm } from '@inertiajs/inertia-vue3'
 import { useConfirm } from 'primevue/useconfirm'
-import AppLayout from '@/layouts/AppLayout.vue'
+import { platNumberTable } from './tableHeader'
+import { useVehicle } from './useVehicle'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import AppDropdown from '@/components/AppDropdown.vue'
 import AppInputText from '@/components/AppInputText.vue'
-
-import { PlatNumberTable } from './TableHeader'
 
 const props = defineProps({
   typeMembers: Array,
   typeMember: Object,
 })
-
-const errors = computed(() => usePage().props.value.errors)
-
-watch(errors, () => {
-  form.clearErrors()
-})
-
-const listPlatNumber = reactive([])
-
-const listPlatNumberClear = () => {
-  listPlatNumber.splice(0)
-}
-
-const listPlatNumberOnDelete = (index) => {
-  listPlatNumber.splice(index, 1)
-
-  usePage().props.value.errors = {}
-}
-
-const addPlatNumberValidation = () => {
-  if (!form.plat_number) {
-    form.setError('plat_number', 'Plat kendaraan tidak boleh kosong')
-    return {
-      error: true,
-    }
-  }
-
-  if (!form.max_vehicle_id) {
-    form.setError('max_vehicle_id', 'Tidak boleh kosong')
-    return {
-      error: true,
-    }
-  }
-
-  const listPlatNumberExist = listPlatNumber.filter((val) => val.platNumber === form.plat_number.toUpperCase())
-  if (listPlatNumberExist.length) {
-    form.setError('plat_number', 'Nomor plat kendaraan tidak boleh sama')
-    return {
-      error: true,
-    }
-  }
-
-  const maxVehicles = listPlatNumber.filter((val) => val.maxVehicleId === form.max_vehicle_id)
-  if (maxVehicles.length) {
-    if (maxVehicles.length + 1 > maxVehicles[0].maxVehicle) {
-      form.setError('plat_number', 'Melibihi batas maksimal kendaraan')
-      return {
-        error: true,
-      }
-    }
-  }
-
-  return { error: false }
-}
-
-const addPlatNumber = () => {
-  form.clearErrors('plat_number', 'max_vehicle_id')
-
-  const validation = addPlatNumberValidation()
-  if (validation.error) {
-    return
-  }
-
-  const typeVehicle = props.typeMember.maxVehicles.filter((val) => val.value === form.max_vehicle_id)[0]
-  listPlatNumber.push({
-    platNumber: form.plat_number.toUpperCase(),
-    typeVehicle: typeVehicle.label,
-    typeVehicleId: typeVehicle.typeVehicleId,
-    maxVehicleId: typeVehicle.value,
-    maxVehicle: typeVehicle.maxVehicle,
-  })
-
-  form.reset('plat_number', 'max_vehicle_id')
-}
 
 const form = useForm({
   name: null,
@@ -96,22 +22,16 @@ const form = useForm({
   type_member_id: null,
 })
 
-watch(
-  () => form.type_member_id,
-  () => {
-    listPlatNumberClear()
-    form.reset('plat_number', 'max_vehicle_id')
+useFormErrorReset(form)
 
-    Inertia.reload({ only: ['typeMember'], data: { id: form.type_member_id } })
-  }
-)
+const { listVehicle, vehicleClear, vehicleOnDelete, vehicleOnAdd } = useVehicle(form, props.typeMember.maxVehicles)
 
 const formSent = () => {
   form
     .transform((data) => ({
       name: data.name,
       phone: data.phone,
-      vehicles: listPlatNumber,
+      vehicles: listVehicle,
       type_member_id: data.type_member_id,
     }))
     .post(route('members.store'), {
@@ -119,7 +39,7 @@ const formSent = () => {
         Inertia.reload({ only: ['typeMember'], data: { id: form.type_member_id } })
       },
       onSuccess: () => {
-        listPlatNumberClear()
+        vehicleClear()
 
         form.reset()
       },
@@ -128,17 +48,17 @@ const formSent = () => {
 
 const confirm = useConfirm()
 
-const submit = () => {
+const onSubmit = () => {
   confirm.require({
-    message: `Dikenakan tagihan untuk member baru sebesar ${props.typeMember.price}`,
-    header: 'Tagihan',
+    message: `Dikenakan tagihan member baru sebesar ${props.typeMember.price}`,
+    header: 'Tagihan Member Baru',
     acceptLabel: 'Bayar dan simpan',
     rejectLabel: 'Batalkan',
     accept: () => {
       formSent()
     },
     reject: () => {
-      console.info('transaksi dibatalkan')
+      confirm.close()
     },
   })
 }
@@ -147,7 +67,7 @@ const submit = () => {
 <template>
   <Head title="Tambah Member" />
 
-  <AppLayout>
+  <DashboardLayout>
     <ConfirmDialog></ConfirmDialog>
 
     <div class="grid">
@@ -233,7 +153,7 @@ const submit = () => {
                     class="p-button-outlined"
                     icon="pi pi-car"
                     :disabled="!form.type_member_id"
-                    @click="addPlatNumber"
+                    @click="vehicleOnAdd"
                   />
                 </div>
               </div>
@@ -244,15 +164,14 @@ const submit = () => {
                   responsive-layout="scroll"
                   column-resize-mode="expand"
                   edit-mode="cell"
-                  :value="listPlatNumber"
+                  :value="listVehicle"
                 >
                   <Column
-                    v-for="platNumberTable in PlatNumberTable"
-                    :field="platNumberTable.field"
-                    :header="platNumberTable.header"
-                    :key="platNumberTable.field"
+                    v-for="value in platNumberTable"
+                    :field="value.field"
+                    :header="value.header"
+                    :key="value.field"
                   />
-
                   <Column>
                     <template #body="{ index }">
                       <span style="color: #b71c1c">{{ $page.props.errors[`vehicles.${index}.platNumber`] }}</span>
@@ -266,7 +185,7 @@ const submit = () => {
                           icon="pi pi-trash"
                           class="p-button-rounded p-button-text"
                           :class="{ 'p-button-danger': $page.props.errors[`vehicles.${index}.platNumber`] }"
-                          @click="listPlatNumberOnDelete(index)"
+                          @click="vehicleOnDelete(index)"
                         />
                       </div>
                     </template>
@@ -281,13 +200,13 @@ const submit = () => {
                 label="Simpan"
                 icon="pi pi-check"
                 class="p-button-outlined"
-                :disabled="form.processing || listPlatNumber.length === 0"
-                @click="submit"
+                :disabled="form.processing || listVehicle.length === 0"
+                @click="onSubmit"
               />
             </div>
           </template>
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

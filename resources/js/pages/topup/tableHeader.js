@@ -1,4 +1,4 @@
-export const IndexTable = [
+export const indexTable = [
   { field: 'updatedAt', header: 'Diperbaharui' },
   { field: 'name', header: 'Nama' },
   { field: 'phone', header: 'Nomor HP' },
@@ -8,7 +8,7 @@ export const IndexTable = [
   { field: 'expDate', header: 'Berakhir' },
 ]
 
-export const TopUpsTable = [
+export const topUpTable = [
   { field: 'updatedAt', header: 'Diperbaharui' },
   { field: 'name', header: 'Nama User' },
   { field: 'phone', header: 'Nomor HP User' },

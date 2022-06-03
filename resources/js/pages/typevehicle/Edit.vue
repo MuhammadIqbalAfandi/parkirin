@@ -1,36 +1,39 @@
 <script setup>
-import { computed, watch, ref } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
-import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
-import AppDialog from '@/components/AppDialog.vue'
+import { Head, useForm } from '@inertiajs/inertia-vue3'
+import { useConfirm } from 'primevue/useconfirm'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import AppInputText from '@/components/AppInputText.vue'
 
 const props = defineProps({
   typeVehicle: Object,
 })
 
-const errors = computed(() => usePage().props.value.errors)
+const deleteConfirm = useConfirm()
 
-watch(errors, () => {
-  form.clearErrors()
-})
-
-const visibleDialog = ref(false)
-
-const confirmDialog = () => {
-  visibleDialog.value = true
+const onDeleteTypeVehicle = () => {
+  deleteConfirm.require({
+    message: `Yakin akan menghapus (${props.typeVehicle.type}) ?`,
+    header: 'Hapus Jenis Kendaraan',
+    acceptLabel: 'Hapus',
+    rejectLabel: 'Batalkan',
+    accept: () => {
+      Inertia.delete(route('type-vehicles.destroy', props.typeVehicle.id))
+    },
+    reject: () => {
+      deleteConfirm.close()
+    },
+  })
 }
-
-const onAgree = () => Inertia.delete(route('type-vehicles.destroy', props.typeVehicle.id))
-
-const onCancel = () => (visibleDialog.value = false)
 
 const form = useForm({
   type: props.typeVehicle.type,
 })
 
-const submit = () => {
+useFormErrorReset(form)
+
+const onSubmit = () => {
   form.put(route('type-vehicles.update', props.typeVehicle.id))
 }
 </script>
@@ -38,7 +41,9 @@ const submit = () => {
 <template>
   <Head title="Ubah Jenis Kendaraan" />
 
-  <AppLayout>
+  <DashboardLayout>
+    <ConfirmDialog></ConfirmDialog>
+
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
@@ -59,18 +64,11 @@ const submit = () => {
           <template #footer>
             <div class="grid">
               <div class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-start">
-                <AppDialog
-                  message="Yakin akan menghapus data ini?"
-                  v-model:visible="visibleDialog"
-                  @agree="onAgree"
-                  @cancel="onCancel"
-                />
-
                 <Button
                   label="Hapus"
                   icon="pi pi-trash"
                   class="p-button-outlined p-button-danger"
-                  @click="confirmDialog"
+                  @click="onDeleteTypeVehicle"
                 />
               </div>
 
@@ -80,7 +78,7 @@ const submit = () => {
                   icon="pi pi-check"
                   class="p-button-outlined"
                   :disabled="form.processing"
-                  @click="submit"
+                  @click="onSubmit"
                 />
               </div>
             </div>
@@ -88,5 +86,5 @@ const submit = () => {
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

@@ -1,18 +1,12 @@
 <script setup>
-import { computed, watch } from 'vue'
-import { useForm, Head, usePage } from '@inertiajs/inertia-vue3'
+import { useForm, Head } from '@inertiajs/inertia-vue3'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
 import AppInputText from '@/components/AppInputText.vue'
 import AppDropdown from '@/components/AppDropdown.vue'
-import AppLayout from '@/layouts/AppLayout.vue'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 defineProps({
   roles: Array,
-})
-
-const errors = computed(() => usePage().props.value.errors)
-
-watch(errors, () => {
-  form.clearErrors()
 })
 
 const form = useForm({
@@ -22,7 +16,9 @@ const form = useForm({
   role_id: null,
 })
 
-const submit = () => {
+useFormErrorReset(form)
+
+const onSubmit = () => {
   form.post(route('users.store'), { onSuccess: () => form.reset() })
 }
 </script>
@@ -30,7 +26,7 @@ const submit = () => {
 <template>
   <Head title="Tambah User" />
 
-  <AppLayout>
+  <DashboardLayout>
     <div class="grid">
       <div class="col-12 lg:col-8">
         <Card>
@@ -68,12 +64,12 @@ const submit = () => {
                 icon="pi pi-check"
                 class="p-button-outlined"
                 :disabled="form.processing"
-                @click="submit"
+                @click="onSubmit"
               />
             </div>
           </template>
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

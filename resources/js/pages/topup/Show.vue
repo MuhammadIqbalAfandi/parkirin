@@ -1,9 +1,8 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3'
+import { topUpTable } from './tableHeader'
 import AppPagination from '@/components/AppPagination.vue'
-import AppLayout from '@/layouts/AppLayout.vue'
-
-import { TopUpsTable } from './TableHeader'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 defineProps({
   member: Object,
@@ -14,7 +13,7 @@ defineProps({
 <template>
   <Head title="Detail Top Up" />
 
-  <AppLayout>
+  <DashboardLayout>
     <DataTable
       responsive-layout="scroll"
       column-resize-mode="expand"
@@ -48,14 +47,9 @@ defineProps({
         </div>
       </template>
 
-      <Column
-        v-for="topUpsTable in TopUpsTable"
-        :field="topUpsTable.field"
-        :header="topUpsTable.header"
-        :key="topUpsTable.field"
-      />
+      <Column v-for="value in topUpTable" :field="value.field" :header="value.header" :key="value.field" />
     </DataTable>
 
     <AppPagination :links="topUp.links" />
-  </AppLayout>
+  </DashboardLayout>
 </template>

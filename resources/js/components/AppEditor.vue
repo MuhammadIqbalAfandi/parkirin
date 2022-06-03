@@ -6,13 +6,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  placeholder: {
-    type: String,
-    required: true,
-  },
   readOnly: {
     type: Boolean,
     required: false,
+  },
+  placeholder: {
+    type: String,
+    required: true,
   },
   error: {
     type: String,

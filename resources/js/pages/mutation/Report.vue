@@ -1,14 +1,13 @@
 <script setup>
-import { watch, onMounted, ref } from 'vue'
+import { watch, ref } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
-import { Head, useForm } from '@inertiajs/inertia-vue3'
-import dayjs from 'dayjs'
+import { Head } from '@inertiajs/inertia-vue3'
 import { pickBy } from 'lodash'
-import AppLayout from '@/layouts/AppLayout.vue'
+import tableHeader from './tableHeader'
+import { useDateRangeFilter } from '@/components/useDateRangeFilter'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import AppPagination from '@/components/AppPagination.vue'
-import AppButton from '@/components/AppButton.vue'
-
-import TableHeader from './TableHeader'
+import AppButtonLink from '@/components/AppButtonLink.vue'
 
 const props = defineProps({
   mutations: {
@@ -21,43 +20,16 @@ const props = defineProps({
       },
     },
   },
-  filters: Object,
+  initialDateRage: Array,
 })
 
-const filterForm = useForm({
-  dates: null,
-  startDate: props.filters.startDate,
-  endDate: props.filters.endDate,
-})
+const { dates, startDate, endDate } = useDateRangeFilter(props.initialDateRage)
 
-onMounted(() => {
-  if (props.filters.startDate || props.filters.endDate) {
-    if (props.filters.endDate) {
-      filterForm.dates = [new Date(props.filters.startDate), new Date(props.filters.endDate)]
-    } else {
-      filterForm.dates = [new Date(props.filters.startDate), null]
-    }
-  }
-})
-
-watch(filterForm, () => {
-  if (filterForm.dates) {
-    if (filterForm.dates[1]) {
-      filterForm.startDate = dayjs(filterForm.dates[0]).format('YYYY-MM-DD')
-      filterForm.endDate = dayjs(filterForm.dates[1]).format('YYYY-MM-DD')
-    } else {
-      filterForm.startDate = dayjs(filterForm.dates[0]).format('YYYY-MM-DD')
-      filterForm.endDate = null
-    }
-  } else {
-    filterForm.endDate = null
-    filterForm.startDate = null
-  }
-
+watch(dates, () => {
   Inertia.reload({
     data: pickBy({
-      startDate: filterForm.startDate,
-      endDate: filterForm.endDate,
+      startDate: startDate.value,
+      endDate: endDate.value,
     }),
     only: ['mutations'],
   })
@@ -76,7 +48,7 @@ const linkReference = (data) => {
   } else if (data.expenseId) {
     return route('expenses.show', data.expenseId)
   } else {
-    console.info('under construction')
+    alert('under construction')
     //  return route('out-transactions.show', data.outTransactionId)
   }
 }
@@ -85,7 +57,7 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
 </script>
 
 <template>
-  <AppLayout>
+  <DashboardLayout>
     <Head title="Laporan Mutasi" />
 
     <DataTable
@@ -103,8 +75,9 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
             <div class="grid">
               <div class="col-12 md:col-4">
                 <Calendar
+                  touch-u-i
                   class="w-full"
-                  v-model="filterForm.dates"
+                  v-model="dates"
                   selection-mode="range"
                   placeholder="filter waktu..."
                   date-format="dd/mm/yy"
@@ -117,7 +90,7 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
             </div>
           </div>
           <div class="col-12 md:col-4 flex flex-column md:flex-row justify-content-end">
-            <AppButton
+            <AppButtonLink
               v-if="mutations.details.total"
               label="Export excel"
               class-button="p-button-outlined md:w-16rem"
@@ -159,16 +132,11 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
         </div>
       </template>
 
-      <Column
-        v-for="tableHeader in TableHeader"
-        :field="tableHeader.field"
-        :header="tableHeader.header"
-        :key="tableHeader.field"
-      />
+      <Column v-for="value in tableHeader" :field="value.field" :header="value.header" :key="value.field" />
 
       <Column>
         <template #body="{ data }">
-          <AppButton
+          <AppButtonLink
             icon="pi pi-link"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
             :href="linkReference(data)"
@@ -178,5 +146,5 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
     </DataTable>
 
     <AppPagination :links="mutations.details.links" />
-  </AppLayout>
+  </DashboardLayout>
 </template>

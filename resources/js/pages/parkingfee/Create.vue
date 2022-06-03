@@ -1,22 +1,17 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
-import { useForm, usePage } from '@inertiajs/inertia-vue3'
+import { ref } from 'vue'
+import { useForm } from '@inertiajs/inertia-vue3'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
 import AppInputNumber from '@/components/AppInputNumber.vue'
-import AppLayout from '@/layouts/AppLayout.vue'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 const props = defineProps({
   parkingFees: Object,
 })
 
-const errors = computed(() => usePage().props.value.errors)
-
-watch(errors, () => {
-  form.clearErrors()
-})
-
 const disabled = ref(true)
 
-const edit = () => {
+const onEdit = () => {
   disabled.value = !disabled.value
 }
 
@@ -38,6 +33,11 @@ const form = useForm({
   priceNext: props.parkingFees[4]?.price ?? null,
 })
 
+useFormErrorReset(form)
+
+const dialogVisible = ref()
+const dialogMessage = ref()
+
 const submitValidation = () => {
   const periodTimeCount = [
     form.timePeriod1,
@@ -54,7 +54,7 @@ const submitValidation = () => {
   }
 }
 
-const submit = () => {
+const onSubmit = () => {
   try {
     submitValidation()
 
@@ -66,24 +66,32 @@ const submit = () => {
       }))
       .post(route('parking-fees.store'), { onSuccess: () => (disabled.value = true) })
   } catch (e) {
-    alert(e.message)
+    dialogVisible.value = true
+    dialogMessage.value = e.message
   }
 }
 </script>
 
 <template>
-  <AppLayout>
+  <DashboardLayout>
+    <Dialog modal header="Ada Kesalahan" :visible="dialogVisible" :closable="false">
+      <span style="color: var(--red-500)">{{ dialogMessage }}</span>
+
+      <template #footer>
+        <Button label="tutup" @click="dialogVisible = false" />
+      </template>
+    </Dialog>
+
     <div class="grid">
       <div class="col-12 md:col-6">
         <Card>
           <template #title>
             <div class="flex justify-content-between">
               <div>
-                <h1>Tarif Parkir</h1>
-                <span>24 jam pertama</span>
+                <h1>Tarif Parkir <span class="text-base">24 jam pertama</span></h1>
               </div>
 
-              <Button icon="pi pi-pencil" class="p-button-rounded p-button-primary" @click="edit" />
+              <Button icon="pi pi-pencil" class="p-button-rounded p-button-primary" @click="onEdit" />
             </div>
           </template>
 
@@ -215,12 +223,12 @@ const submit = () => {
                 icon="pi pi-check"
                 class="p-button-outlined"
                 :disabled="form.processing || disabled"
-                @click="submit"
+                @click="onSubmit"
               />
             </div>
           </template>
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>

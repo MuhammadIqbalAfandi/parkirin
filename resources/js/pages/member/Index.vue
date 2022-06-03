@@ -1,36 +1,30 @@
 <script setup>
 import { watch } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
-import { Head, useForm } from '@inertiajs/inertia-vue3'
-import throttle from 'lodash/throttle'
-import pickBy from 'lodash/pickBy'
-import AppButton from '@/components/AppButton.vue'
+import { Head } from '@inertiajs/inertia-vue3'
+import { pickBy } from 'lodash'
+import { indexTable } from './tableHeader'
+import { useSearchText } from '@/components/useSearchText'
+import AppButtonLink from '@/components/AppButtonLink.vue'
 import AppPagination from '@/components/AppPagination.vue'
-import AppLayout from '@/layouts/AppLayout.vue'
-
-import { IndexTable } from './TableHeader'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 const props = defineProps({
   members: Object,
-  filters: Object,
+  initialSearch: String,
 })
 
-const filterForm = useForm({
-  search: props.filters.search,
-})
+const { search } = useSearchText(props.initialSearch)
 
-watch(
-  filterForm,
-  throttle(() => {
-    Inertia.get('/members', pickBy({ search: filterForm.search }), { preserveState: true })
-  }, 300)
-)
+watch(search, () => {
+  Inertia.get('/members', pickBy({ search: search.value }), { preserveState: true })
+})
 </script>
 
 <template>
   <Head title="Daftar Member" />
 
-  <AppLayout>
+  <DashboardLayout>
     <DataTable
       responsive-layout="scroll"
       column-resize-mode="expand"
@@ -44,12 +38,12 @@ watch(
         <div class="grid">
           <div class="col-12 md:col-8">
             <div class="flex align-items-center">
-              <InputText class="w-full md:w-27rem" placeholder="cari, contoh: 08xx, tina" v-model="filterForm.search" />
+              <InputText class="w-full md:w-27rem" placeholder="cari, contoh: 08xx, tina" v-model="search" />
             </div>
           </div>
 
           <div class="col-12 md:col-4 flex flex-column md:flex-row justify-content-end">
-            <AppButton
+            <AppButtonLink
               label="Tambah Member"
               class="p-button-outlined"
               icon="pi pi-pencil"
@@ -59,16 +53,11 @@ watch(
         </div>
       </template>
 
-      <Column
-        v-for="indexTable in IndexTable"
-        :field="indexTable.field"
-        :header="indexTable.header"
-        :key="indexTable.field"
-      />
+      <Column v-for="value in indexTable" :field="value.field" :header="value.header" :key="value.field" />
 
       <Column>
         <template #body="{ data }">
-          <AppButton
+          <AppButtonLink
             icon="pi pi-pencil"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
             :href="route('members.edit', data.id)"
@@ -78,5 +67,5 @@ watch(
     </DataTable>
 
     <AppPagination :links="members.links" />
-  </AppLayout>
+  </DashboardLayout>
 </template>

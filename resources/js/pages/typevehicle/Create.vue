@@ -1,19 +1,16 @@
 <script setup>
-import { computed, watch } from 'vue'
-import { Head, useForm, usePage } from '@inertiajs/inertia-vue3'
-import AppLayout from '@/layouts/AppLayout.vue'
+import { Head, useForm } from '@inertiajs/inertia-vue3'
+import { useFormErrorReset } from '@/components/useFormErrorReset'
+import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import AppInputText from '@/components/AppInputText.vue'
-const errors = computed(() => usePage().props.value.errors)
-
-watch(errors, () => {
-  form.clearErrors()
-})
 
 const form = useForm({
   type: null,
 })
 
-const submit = () => {
+useFormErrorReset(form)
+
+const onSubmit = () => {
   form.post(route('type-vehicles.store'), { onSuccess: () => form.reset() })
 }
 </script>
@@ -21,7 +18,7 @@ const submit = () => {
 <template>
   <Head title="Tambah Jenis Kendaraan" />
 
-  <AppLayout>
+  <DashboardLayout>
     <div class="grid">
       <div class="col-12 md:col-8">
         <Card>
@@ -46,12 +43,12 @@ const submit = () => {
                 icon="pi pi-check"
                 class="p-button-outlined"
                 :disabled="form.processing"
-                @click="submit"
+                @click="onSubmit"
               />
             </div>
           </template>
         </Card>
       </div>
     </div>
-  </AppLayout>
+  </DashboardLayout>
 </template>
