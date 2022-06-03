@@ -48,35 +48,26 @@ const submitValidation = () => {
   ].reduce((prev, current) => prev + current)
 
   if (periodTimeCount > 24) {
-    alert('Waktu tidak boleh melebihi 24 jam')
-    return {
-      alert: true,
-    }
+    throw new Error('Waktu tidak boleh melebihi 24 jam')
   } else if (periodTimeCount < 24) {
-    alert('Waktu tidak boleh kurang dari 24 jam')
-    return {
-      alert: true,
-    }
-  }
-
-  return {
-    alert: false,
+    throw new Error('Waktu tidak boleh kurang dari 24 jam')
   }
 }
 
 const submit = () => {
-  const validation = submitValidation()
-  if (validation.alert) {
-    return
-  }
+  try {
+    submitValidation()
 
-  form
-    .transform((data) => ({
-      id: [data.id1, data.id2, data.id3, data.id4, data.idNext],
-      time_period: [data.timePeriod1, data.timePeriod2, data.timePeriod3, data.timePeriod4, data.timePeriodNext],
-      price: [data.price1, data.price2, data.price3, data.price4, data.priceNext],
-    }))
-    .post(route('parking-fees.store'), { onSuccess: () => (disabled.value = true) })
+    form
+      .transform((data) => ({
+        id: [data.id1, data.id2, data.id3, data.id4, data.idNext],
+        time_period: [data.timePeriod1, data.timePeriod2, data.timePeriod3, data.timePeriod4, data.timePeriodNext],
+        price: [data.price1, data.price2, data.price3, data.price4, data.priceNext],
+      }))
+      .post(route('parking-fees.store'), { onSuccess: () => (disabled.value = true) })
+  } catch (e) {
+    alert(e.message)
+  }
 }
 </script>
 
