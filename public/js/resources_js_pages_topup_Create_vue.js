@@ -310,6 +310,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var primevue_useconfirm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! primevue/useconfirm */ "./node_modules/primevue/useconfirm/useconfirm.esm.js");
 /* harmony import */ var _components_AppAutocompleteBasic_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/AppAutocompleteBasic.vue */ "./resources/js/components/AppAutocompleteBasic.vue");
 /* harmony import */ var _layouts_DashboardLayout_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/layouts/DashboardLayout.vue */ "./resources/js/layouts/DashboardLayout.vue");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 
 
 
@@ -342,6 +344,10 @@ __webpack_require__.r(__webpack_exports__);
 
     var gotoMember = function gotoMember() {
       return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.get(route('members.create'));
+    };
+
+    var checkMember = function checkMember() {
+      return form.member === null || _typeof(form.member) !== 'object';
     };
 
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
@@ -381,6 +387,7 @@ __webpack_require__.r(__webpack_exports__);
       memberOnComplete: memberOnComplete,
       memberOnSelected: memberOnSelected,
       gotoMember: gotoMember,
+      checkMember: checkMember,
       form: form,
       confirm: confirm,
       formSent: formSent,
@@ -940,8 +947,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 
 var _hoisted_1 = {
   "class": "grid"
@@ -1162,7 +1167,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             label: "Topup",
             icon: "pi pi-check",
             "class": "p-button-outlined",
-            disabled: $setup.form.processing || _typeof($setup.form.member) !== 'object',
+            disabled: $setup.form.processing || $setup.checkMember(),
             onClick: $setup.onSubmit
           }, null, 8
           /* PROPS */

@@ -28,6 +28,10 @@ const gotoMember = () => {
   return Inertia.get(route('members.create'))
 }
 
+const checkMember = () => {
+  return form.member === null || typeof form.member !== 'object'
+}
+
 const form = useForm({
   member: null,
 })
@@ -169,7 +173,7 @@ const onSubmit = () => {
                 label="Topup"
                 icon="pi pi-check"
                 class="p-button-outlined"
-                :disabled="form.processing || typeof form.member !== 'object'"
+                :disabled="form.processing || checkMember()"
                 @click="onSubmit"
               />
             </div>
