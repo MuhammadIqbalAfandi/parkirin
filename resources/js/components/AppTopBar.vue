@@ -49,10 +49,12 @@ defineEmits(['menu-toggle'])
 </template>
 
 <style lang="scss" scoped>
+$transition: 0.2s;
+
 @mixin focused() {
   outline: 0 none;
   outline-offset: 0;
-  transition: box-shadow 0.2s;
+  transition: box-shadow $transition;
   box-shadow: var(--focus-ring);
 }
 
@@ -65,7 +67,7 @@ defineEmits(['menu-toggle'])
   width: 100%;
   padding: 0 2rem;
   background-color: var(--surface-card);
-  transition: left 0.2s;
+  transition: left $transition;
   display: flex;
   align-items: center;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
@@ -99,7 +101,7 @@ defineEmits(['menu-toggle'])
     width: 3rem;
     height: 3rem;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color $transition;
 
     &:hover {
       color: var(--text-color);
@@ -170,7 +172,7 @@ defineEmits(['menu-toggle'])
       flex-direction: column;
       background-color: var(--surface-overlay);
       box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
-      border-radius: 12px;
+      border-radius: 4px;
       padding: 1rem;
       right: 2rem;
       top: 5rem;

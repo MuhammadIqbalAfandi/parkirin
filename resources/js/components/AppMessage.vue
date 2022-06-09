@@ -11,20 +11,16 @@ const onClose = () => {
 </script>
 
 <template>
-  <div class="grid">
-    <div class="col-12">
-      <Message v-if="$page.props.flash.success" severity="success" @close="onClose">
-        {{ $page.props.flash.success }}
-      </Message>
+  <Message v-if="$page.props.flash.success" severity="success" @close="onClose">
+    {{ $page.props.flash.success }}
+  </Message>
 
-      <Message v-if="$page.props.flash.error" severity="error" @close="onClose">
-        {{ $page.props.flash.error }}
-      </Message>
+  <Message v-if="$page.props.flash.error" severity="error" @close="onClose">
+    {{ $page.props.flash.error }}
+  </Message>
 
-      <Message v-if="Object.keys($page.props.errors).length > 0" severity="error" @close="onClose">
-        <div v-if="Object.keys($page.props.errors).length === 1">Ditemukan satu error pada form</div>
-        <div v-else>Ditemukan {{ Object.keys($page.props.errors).length }} error pada form</div>
-      </Message>
-    </div>
-  </div>
+  <Message v-if="Object.keys($page.props.errors).length > 0" severity="error" @close="onClose">
+    <div v-if="Object.keys($page.props.errors).length === 1">Ditemukan satu error pada form</div>
+    <div v-else>Ditemukan {{ Object.keys($page.props.errors).length }} error pada form</div>
+  </Message>
 </template>

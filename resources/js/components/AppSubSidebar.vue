@@ -49,6 +49,8 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
+$transition: 0.2s;
+
 li {
   &.layout-menuitem-category {
     margin-top: 0.75rem;
@@ -72,7 +74,7 @@ li {
     display: flex;
     align-items: center;
     color: var(--text-color);
-    transition: color 0.2s;
+    transition: color $transition;
     border-radius: 12px;
     padding: 0.75rem 1rem;
     transition: background-color 0.15s;
@@ -88,7 +90,7 @@ li {
     &:focus {
       outline: 0 none;
       outline-offset: 0;
-      transition: box-shadow 0.2s;
+      transition: box-shadow $transition;
       box-shadow: inset var(--focus-ring);
     }
 
