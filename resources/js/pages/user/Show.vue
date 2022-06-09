@@ -12,7 +12,7 @@ const props = defineProps({
 
 const form = useForm({
   name: props.user.name,
-  phone: props.user.phone,
+  phone: null,
   email: props.user.email,
   role_id: props.user.role_id,
 })

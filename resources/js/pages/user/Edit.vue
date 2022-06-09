@@ -32,7 +32,7 @@ const onDeleteUser = () => {
 
 const form = useForm({
   name: props.user.name,
-  phone: props.user.phone,
+  phone: null,
   email: props.user.email,
   role_id: props.user.role_id,
 })
@@ -66,14 +66,8 @@ const onSubmit = () => {
                 />
               </div>
 
-              <div class="col-12 md:col-6">
-                <AppInputText
-                  label="Nomor HP"
-                  placeholder="nomor hp"
-                  :disabled="user.role_id !== 1"
-                  :error="form.errors.phone"
-                  v-model="form.phone"
-                />
+              <div v-if="user.role_id === 1" class="col-12 md:col-6">
+                <AppInputText label="Nomor HP" placeholder="nomor hp" :error="form.errors.phone" v-model="form.phone" />
               </div>
 
               <div class="col-12 md:col-6">

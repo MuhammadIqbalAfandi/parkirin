@@ -15,9 +15,6 @@ __webpack_require__.r(__webpack_exports__);
   field: 'name',
   header: 'Nama'
 }, {
-  field: 'phone',
-  header: 'No HP'
-}, {
   field: 'email',
   header: 'Email'
 }, {

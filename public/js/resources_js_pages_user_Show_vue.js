@@ -380,7 +380,7 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
       name: props.user.name,
-      phone: props.user.phone,
+      phone: null,
       email: props.user.email,
       role_id: props.user.role_id
     });

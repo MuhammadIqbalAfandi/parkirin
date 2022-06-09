@@ -38,7 +38,6 @@ class UserController extends Controller
                 ->through(fn($user) => [
                     'id' => $user->id,
                     'name' => $user->name,
-                    'phone' => $user->phone,
                     'email' => $user->email,
                     'role' => $user->role->name,
                     'status' => $user->status,
@@ -135,7 +134,12 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->validated());
+        $user->update([
+            'name' => $request->name,
+            'phone' => $request->phone ?? $user->phone,
+            'email' => $request->email,
+            'role_id' => $request->role_id,
+        ]);
 
         return back()->with('success', __('messages.success.update.user'));
     }

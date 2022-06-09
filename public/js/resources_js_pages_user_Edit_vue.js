@@ -477,7 +477,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
       name: props.user.name,
-      phone: props.user.phone,
+      phone: null,
       email: props.user.email,
       role_id: props.user.role_id
     });
@@ -1178,13 +1178,14 @@ var _hoisted_5 = {
   "class": "col-12 md:col-6"
 };
 var _hoisted_6 = {
+  key: 0,
   "class": "col-12 md:col-6"
 };
 var _hoisted_7 = {
   "class": "col-12 md:col-6"
 };
 var _hoisted_8 = {
-  key: 0,
+  key: 1,
   "class": "col-12 md:col-6"
 };
 var _hoisted_9 = {
@@ -1223,10 +1224,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, null, 8
           /* PROPS */
-          , ["disabled", "error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
+          , ["disabled", "error", "modelValue"])]), $props.user.role_id === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
             label: "Nomor HP",
             placeholder: "nomor hp",
-            disabled: $props.user.role_id !== 1,
             error: $setup.form.errors.phone,
             modelValue: $setup.form.phone,
             "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
@@ -1234,7 +1234,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, null, 8
           /* PROPS */
-          , ["disabled", "error", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
+          , ["error", "modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppInputText"], {
             label: "Email",
             placeholder: "email",
             disabled: $props.user.role_id !== 1,

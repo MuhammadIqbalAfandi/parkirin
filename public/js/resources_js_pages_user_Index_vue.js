@@ -981,7 +981,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
             "class": "w-full md:w-27rem",
-            placeholder: "cari, contoh: 08xx, tina, tina@xx.com",
+            placeholder: "cari, contoh: tina, tina@xx.com",
             modelValue: $setup.search,
             "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
               return $setup.search = $event;
@@ -1081,9 +1081,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
   field: 'name',
   header: 'Nama'
-}, {
-  field: 'phone',
-  header: 'No HP'
 }, {
   field: 'email',
   header: 'Email'
