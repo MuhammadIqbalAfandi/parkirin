@@ -29,7 +29,6 @@ class MemberController extends Controller
                     'id' => $member->id,
                     'updatedAt' => $member->updated_at,
                     'name' => $member->name,
-                    'phone' => $member->phone,
                     'platNumber' => $member->vehicleDetail(),
                     'type' => $member->typeMember->type,
                     'price' => $member->topUps()->latest()->first()->amount,
@@ -142,7 +141,6 @@ class MemberController extends Controller
             'member' => [
                 'id' => $member->id,
                 'name' => $member->name,
-                'phone' => $member->phone,
                 'typeMemberId' => $member->type_member_id,
             ],
             'initialVehicles' => $member->vehicles->transform(fn($vehicle) => [
@@ -190,7 +188,7 @@ class MemberController extends Controller
             if ($member->type_member_id !== $request->type_member_id) {
                 $member->update([
                     'name' => $request->name,
-                    'phone' => $request->phone,
+                    'phone' => $request->phone ?? $member->phone,
                     'exp_date' => now()->addDays(30),
                     'type_member_id' => $request->type_member_id,
                 ]);
@@ -215,7 +213,11 @@ class MemberController extends Controller
                     'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
                 ]);
             } else {
-                $member->update($request->validated());
+                $member->update([
+                    'name' => $request->name,
+                    'phone' => $request->phone ?? $member->phone,
+                    'type_member_id' => $request->type_member_id,
+                ]);
 
                 $member->vehicles()->delete();
 

@@ -26,7 +26,7 @@ class UpdateMemberRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:50',
-            'phone' => 'required|numeric|min:12|unique:members,phone,' . $this->member->id,
+            'phone' => 'nullable|numeric|min:12|unique:members,phone,' . $this->member->id,
             'type_member_id' => 'required|numeric',
             'vehicles.*.platNumber' => [Rule::unique('vehicles', 'plat_number')->ignore($this->member->id, 'member_id')],
         ];

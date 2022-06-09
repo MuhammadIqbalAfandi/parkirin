@@ -19,9 +19,6 @@ var indexTable = [{
   field: 'name',
   header: 'Nama'
 }, {
-  field: 'phone',
-  header: 'Nomor HP'
-}, {
   field: 'platNumber',
   header: 'Plat Kendaraan'
 }, {

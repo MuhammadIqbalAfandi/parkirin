@@ -20,7 +20,7 @@ const props = defineProps({
 
 const form = useForm({
   name: props.member.name,
-  phone: props.member.phone,
+  phone: null,
   plat_number: null,
   max_vehicle_id: null,
   type_member_id: props.member.typeMemberId,

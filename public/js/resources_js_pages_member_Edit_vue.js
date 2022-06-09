@@ -438,7 +438,7 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
       name: props.member.name,
-      phone: props.member.phone,
+      phone: null,
       plat_number: null,
       max_vehicle_id: null,
       type_member_id: props.member.typeMemberId
@@ -1503,9 +1503,6 @@ var indexTable = [{
 }, {
   field: 'name',
   header: 'Nama'
-}, {
-  field: 'phone',
-  header: 'Nomor HP'
 }, {
   field: 'platNumber',
   header: 'Plat Kendaraan'
