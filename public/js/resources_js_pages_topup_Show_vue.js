@@ -831,25 +831,6 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_6 = {
   "class": "text-lg"
 };
-var _hoisted_7 = {
-  "class": "col-auto"
-};
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "text-base"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "pi pi-phone"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Nomor HP ")], -1
-/* HOISTED */
-);
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_10 = {
-  "class": "text-lg"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Column = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Column");
 
@@ -868,8 +849,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, {
         header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.member.name), 1
-          /* TEXT */
-          )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.member.phone), 1
           /* TEXT */
           )])])])];
         }),
@@ -925,9 +904,6 @@ var indexTable = [{
   field: 'name',
   header: 'Nama'
 }, {
-  field: 'phone',
-  header: 'Nomor HP'
-}, {
   field: 'platNumber',
   header: 'Plat Kendaraan'
 }, {
@@ -946,9 +922,6 @@ var topUpTable = [{
 }, {
   field: 'name',
   header: 'Nama User'
-}, {
-  field: 'phone',
-  header: 'Nomor HP User'
 }, {
   field: 'platNumber',
   header: 'Plat Kendaraan'

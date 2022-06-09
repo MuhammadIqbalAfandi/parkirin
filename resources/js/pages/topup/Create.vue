@@ -88,16 +88,6 @@ const onSubmit = () => {
 
               <div class="col-12">
                 <h2>
-                  <span class="text-base"> <i class="pi pi-phone" /> Nomor HP</span>
-
-                  <br />
-
-                  <span class="text-lg">{{ form.member.phone }}</span>
-                </h2>
-              </div>
-
-              <div class="col-12">
-                <h2>
                   <span class="text-base"> <i class="pi pi-id-card" /> Jenis Member</span>
 
                   <br />
@@ -141,7 +131,7 @@ const onSubmit = () => {
                 <AppAutocompleteBasic
                   label="Member"
                   field="name"
-                  placeholder="cari, contoh: 08xx, tina"
+                  placeholder="cari, contoh: tina"
                   v-model="form.member"
                   :error="form.errors.member"
                   :suggestions="members"
@@ -152,8 +142,8 @@ const onSubmit = () => {
                     <template v-if="slotProps.item">
                       <div class="flex flex-column">
                         <span>{{ slotProps.item.name }}</span>
-                        <span class="font-bold">{{ slotProps.item.phone }}</span>
-                        <span class="font-bold">{{ slotProps.item.type }}</span>
+                        <span>{{ slotProps.item.type }}</span>
+                        <span class="font-bold">{{ slotProps.item.platNumber }}</span>
                       </div>
                     </template>
                   </template>

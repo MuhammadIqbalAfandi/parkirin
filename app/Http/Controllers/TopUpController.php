@@ -37,7 +37,6 @@ class TopUpController extends Controller
                     'id' => $topUp->id,
                     'updatedAt' => $topUp->updated_at,
                     'name' => $topUp->member->name,
-                    'phone' => $topUp->member->phone,
                     'platNumber' => $topUp->member->vehicleDetail(),
                     'amount' => $topUp->amount,
                     'type' => $topUp->member->typeMember->type,
@@ -58,7 +57,6 @@ class TopUpController extends Controller
                 fn() => Member::filter(request()->only('search'))->latest()->get()->transform(fn($member) => [
                     'id' => $member->id,
                     'name' => $member->name,
-                    'phone' => $member->phone,
                     'platNumber' => $member->vehicleDetail(),
                     'type' => $member->typeMember->type,
                     'price' => $member->typeMember->price,
@@ -117,7 +115,6 @@ class TopUpController extends Controller
         return inertia('topup/Show', [
             'member' => [
                 'name' => $member->name,
-                'phone' => $member->phone,
             ],
             'topUp' => $member->topUps()
                 ->latest()
@@ -127,7 +124,6 @@ class TopUpController extends Controller
                     'id' => $topUp->id,
                     'updatedAt' => $topUp->updated_at,
                     'name' => $topUp->user->name,
-                    'phone' => $topUp->user->phone,
                     'platNumber' => $topUp->member->vehicleDetail(),
                     'amount' => $topUp->amount,
                     'type' => $topUp->member->typeMember->type,

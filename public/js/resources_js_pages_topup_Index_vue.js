@@ -1014,7 +1014,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InputText, {
             "class": "w-full",
-            placeholder: "cari, contoh: 08xx, tina",
+            placeholder: "cari, contoh: tina",
             modelValue: $setup.search,
             "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
               return $setup.search = $event;
@@ -1187,9 +1187,6 @@ var indexTable = [{
   field: 'name',
   header: 'Nama'
 }, {
-  field: 'phone',
-  header: 'Nomor HP'
-}, {
   field: 'platNumber',
   header: 'Plat Kendaraan'
 }, {
@@ -1208,9 +1205,6 @@ var topUpTable = [{
 }, {
   field: 'name',
   header: 'Nama User'
-}, {
-  field: 'phone',
-  header: 'Nomor HP User'
 }, {
   field: 'platNumber',
   header: 'Plat Kendaraan'

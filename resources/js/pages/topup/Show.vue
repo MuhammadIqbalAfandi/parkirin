@@ -34,16 +34,6 @@ defineProps({
               <span class="text-lg">{{ member.name }}</span>
             </h2>
           </div>
-
-          <div class="col-auto">
-            <h2>
-              <span class="text-base"> <i class="pi pi-phone" /> Nomor HP </span>
-
-              <br />
-
-              <span class="text-lg">{{ member.phone }}</span>
-            </h2>
-          </div>
         </div>
       </template>
 
