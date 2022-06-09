@@ -26,7 +26,7 @@ defineProps({
                 </h2>
               </div>
 
-              <div class="col-12">
+              <div v-if="expense.user.phone" class="col-12">
                 <h2>
                   <span class="text-base"> <i class="pi pi-phone" /> Nomor HP </span>
 

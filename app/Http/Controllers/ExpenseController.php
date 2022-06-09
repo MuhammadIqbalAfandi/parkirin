@@ -97,7 +97,7 @@ class ExpenseController extends Controller
                 'description' => $expense->description,
                 'user' => [
                     'name' => $expense->user->name,
-                    'phone' => $expense->user->phone,
+                    'phone' => auth()->user()->id === $expense->user->id ? $expense->user->phone : null,
                     'email' => $expense->user->email,
                 ],
             ],
