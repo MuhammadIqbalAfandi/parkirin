@@ -50,18 +50,20 @@ class MemberController extends Controller
                 'label' => $typeMember->type,
                 'value' => $typeMember->id,
             ]),
-            'typeMember' => fn() => TypeMember::filter(request('id'))->get()->transform(fn($typeMember) => [
-                'type' => $typeMember->type,
-                'description' => $typeMember->description,
-                'price' => $typeMember->price,
-                'max' => $typeMember->maxVehicleDetail(),
-                'maxVehicles' => $typeMember->fresh()->maxVehicles->transform(fn($maxVehicle) => [
-                    'value' => $maxVehicle->id,
-                    'label' => $maxVehicle->typeVehicle->type,
-                    'maxVehicle' => $maxVehicle->max,
-                    'typeVehicleId' => $maxVehicle->typeVehicle->id,
-                ]),
-            ])->first(),
+            'typeMember' => Inertia::lazy(
+                fn() => TypeMember::filter(request('id'))->get()->transform(fn($typeMember) => [
+                    'type' => $typeMember->type,
+                    'description' => $typeMember->description,
+                    'price' => $typeMember->price,
+                    'max' => $typeMember->maxVehicleDetail(),
+                    'maxVehicles' => $typeMember->fresh()->maxVehicles->transform(fn($maxVehicle) => [
+                        'value' => $maxVehicle->id,
+                        'label' => $maxVehicle->typeVehicle->type,
+                        'maxVehicle' => $maxVehicle->max,
+                        'typeVehicleId' => $maxVehicle->typeVehicle->id,
+                    ]),
+                ])->first(),
+            ),
         ]);
     }
 
