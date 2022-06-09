@@ -11,10 +11,10 @@ import AppButtonLink from '@/components/AppButtonLink.vue'
 
 const props = defineProps({
   expenses: Object,
-  initialDateRage: Array,
+  initialDateRange: Array,
 })
 
-const { dates, startDate, endDate } = useDateRangeFilter(props.initialDateRage)
+const { dates, startDate, endDate } = useDateRangeFilter(props)
 
 watch(dates, () => {
   Inertia.get(

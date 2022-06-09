@@ -16,8 +16,9 @@ const props = defineProps({
   initialDateRange: Array,
 })
 
-const { search } = useSearchText(props.initialSearch)
-const { dates, startDate, endDate } = useDateRangeFilter(props.initialDateRange)
+const { search } = useSearchText(props)
+
+const { dates, startDate, endDate } = useDateRangeFilter(props)
 
 watch([dates, search], () => {
   Inertia.get(

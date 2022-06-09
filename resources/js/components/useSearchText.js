@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 
-export function useSearchText(initialSearch) {
-  const search = ref(initialSearch)
+export function useSearchText(props) {
+  const search = ref(props.initialSearch)
 
   return {
     search,

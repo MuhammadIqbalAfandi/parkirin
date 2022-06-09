@@ -339,7 +339,7 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
 
-    var _useSearchText = (0,_components_useSearchText__WEBPACK_IMPORTED_MODULE_5__.useSearchText)(props.initialSearch),
+    var _useSearchText = (0,_components_useSearchText__WEBPACK_IMPORTED_MODULE_5__.useSearchText)(props),
         search = _useSearchText.search;
 
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(search, function () {
@@ -1058,8 +1058,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-function useSearchText(initialSearch) {
-  var search = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(initialSearch);
+function useSearchText(props) {
+  var search = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.initialSearch);
   return {
     search: search
   };

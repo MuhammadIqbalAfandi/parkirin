@@ -332,14 +332,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     expenses: Object,
-    initialDateRage: Array
+    initialDateRange: Array
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
     var props = __props;
 
-    var _useDateRangeFilter = (0,_components_useDateRangeFilter__WEBPACK_IMPORTED_MODULE_5__.useDateRangeFilter)(props.initialDateRage),
+    var _useDateRangeFilter = (0,_components_useDateRangeFilter__WEBPACK_IMPORTED_MODULE_5__.useDateRangeFilter)(props),
         dates = _useDateRangeFilter.dates,
         startDate = _useDateRangeFilter.startDate,
         endDate = _useDateRangeFilter.endDate;
@@ -1088,17 +1088,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function useDateRangeFilter() {
-  var initialDateRage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+function useDateRangeFilter(props) {
   var dates = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
   var startDate = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
   var endDate = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
   (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-    if (initialDateRage[0] || initialDateRage[1]) {
-      if (initialDateRage[1]) {
-        dates.push([new Date(initialDateRage[0]), new Date(initialDateRage[1])]);
+    if (!props.initialDateRange) {
+      return;
+    }
+
+    if (props.initialDateRange[0] || props.initialDateRange[1]) {
+      if (props.initialDateRange[1]) {
+        dates.value = [new Date(props.initialDateRange[0]), new Date(props.initialDateRange[1])];
       } else {
-        dates.push([new Date(props.initialDateRage[1]), null]);
+        dates.value = [new Date(props.props.initialDateRange[1]), null];
       }
     }
   });

@@ -28,7 +28,7 @@ class TopUpController extends Controller
     {
         return inertia('topup/Index', [
             'initialSearch' => request('search'),
-            'initialDateRage' => request()->collect(['startDate', 'endDate'])->flatten(),
+            'initialDateRange' => request()->collect(['startDate', 'endDate'])->flatten(),
             'topUp' => TopUp::filter(request()->only('startDate', 'endDate', 'search'))
                 ->latest()
                 ->paginate(10)

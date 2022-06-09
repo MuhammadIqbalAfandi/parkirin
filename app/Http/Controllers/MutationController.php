@@ -21,7 +21,7 @@ class MutationController extends Controller
         $mutations = Mutation::filter(request()->only('startDate', 'endDate'));
 
         return inertia('mutation/Report', [
-            'initialDateRage' => request()->collect('startDate', 'endDate')->flatten(),
+            'initialDateRange' => request()->collect(['startDate', 'endDate'])->flatten(),
             'mutations' => Inertia::lazy(
                 fn() => [
                     'totalIncome' => (new MutationService)->totalIncomeAsString($mutations->get()),

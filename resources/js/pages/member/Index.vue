@@ -14,7 +14,7 @@ const props = defineProps({
   initialSearch: String,
 })
 
-const { search } = useSearchText(props.initialSearch)
+const { search } = useSearchText(props)
 
 watch(search, () => {
   Inertia.get('/members', pickBy({ search: search.value }), { preserveState: true })

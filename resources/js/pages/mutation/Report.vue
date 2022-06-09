@@ -20,10 +20,10 @@ const props = defineProps({
       },
     },
   },
-  initialDateRage: Array,
+  initialDateRange: Array,
 })
 
-const { dates, startDate, endDate } = useDateRangeFilter(props.initialDateRage)
+const { dates, startDate, endDate } = useDateRangeFilter(props)
 
 watch(dates, () => {
   Inertia.reload({
