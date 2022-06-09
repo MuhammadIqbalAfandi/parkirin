@@ -24,7 +24,7 @@ const form = useForm({
 
 useFormErrorReset(form)
 
-const { listVehicle, vehicleClear, vehicleOnDelete, vehicleOnAdd } = useVehicle(form, props.typeMember.maxVehicles)
+const { listVehicle, vehicleClear, vehicleOnDelete, vehicleOnAdd } = useVehicle(props, form)
 
 const formSent = () => {
   form

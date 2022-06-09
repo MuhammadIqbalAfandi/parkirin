@@ -431,7 +431,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     (0,_components_useFormErrorReset__WEBPACK_IMPORTED_MODULE_5__.useFormErrorReset)(form);
 
-    var _useVehicle = (0,_useVehicle__WEBPACK_IMPORTED_MODULE_4__.useVehicle)(form, props.typeMember.maxVehicles),
+    var _useVehicle = (0,_useVehicle__WEBPACK_IMPORTED_MODULE_4__.useVehicle)(props, form),
         listVehicle = _useVehicle.listVehicle,
         vehicleClear = _useVehicle.vehicleClear,
         vehicleOnDelete = _useVehicle.vehicleOnDelete,
@@ -1472,11 +1472,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function useVehicle(form, maxVehicles) {
-  var initialVehicles = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+function useVehicle(props, form) {
   var listVehicle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)([]);
   (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-    initialVehicles.forEach(function (val) {
+    props.initialVehicles.forEach(function (val) {
       return listVehicle.push(val);
     });
   });
@@ -1534,7 +1533,7 @@ function useVehicle(form, maxVehicles) {
     try {
       form.clearErrors('plat_number', 'max_vehicle_id');
       vehicleAddValidation();
-      var typeVehicle = maxVehicles.filter(function (maxVehicle) {
+      var typeVehicle = props.typeMember.maxVehicles.filter(function (maxVehicle) {
         return maxVehicle.value === form.max_vehicle_id;
       })[0];
       listVehicle.push({

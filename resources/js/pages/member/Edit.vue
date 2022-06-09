@@ -28,11 +28,7 @@ const form = useForm({
 
 useFormErrorReset(form)
 
-const { listVehicle, vehicleOnDelete, vehicleOnAdd } = useVehicle(
-  form,
-  props.typeMember.maxVehicles,
-  props.initialVehicles
-)
+const { listVehicle, vehicleOnDelete, vehicleOnAdd } = useVehicle(props, form)
 
 const confirm = useConfirm()
 

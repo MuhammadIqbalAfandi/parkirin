@@ -3,11 +3,11 @@ import { Inertia } from '@inertiajs/inertia'
 import { usePage } from '@inertiajs/inertia-vue3'
 import FormValidationError from '@/utils/formValidationError'
 
-export function useVehicle(form, maxVehicles, initialVehicles = []) {
+export function useVehicle(props, form) {
   const listVehicle = reactive([])
 
   onMounted(() => {
-    initialVehicles.forEach((val) => listVehicle.push(val))
+    props.initialVehicles.forEach((val) => listVehicle.push(val))
   })
 
   watch(
@@ -61,7 +61,9 @@ export function useVehicle(form, maxVehicles, initialVehicles = []) {
 
       vehicleAddValidation()
 
-      const typeVehicle = maxVehicles.filter((maxVehicle) => maxVehicle.value === form.max_vehicle_id)[0]
+      const typeVehicle = props.typeMember.maxVehicles.filter(
+        (maxVehicle) => maxVehicle.value === form.max_vehicle_id
+      )[0]
 
       listVehicle.push({
         platNumber: form.plat_number.toUpperCase(),
