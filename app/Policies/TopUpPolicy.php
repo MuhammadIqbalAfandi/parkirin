@@ -30,7 +30,7 @@ class TopUpPolicy
      */
     public function view(User $user, TopUp $topUp)
     {
-        return $user->role_id === 3;
+        return $user->role_id !== 3;
     }
 
     /**
