@@ -7,7 +7,9 @@ export function useVehicle(props, form) {
   const listVehicle = reactive([])
 
   onMounted(() => {
-    props.initialVehicles.forEach((val) => listVehicle.push(val))
+    if (props.initialVehicles) {
+      props.initialVehicles.forEach((val) => listVehicle.push(val))
+    }
   })
 
   watch(

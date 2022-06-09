@@ -1551,9 +1551,11 @@ __webpack_require__.r(__webpack_exports__);
 function useVehicle(props, form) {
   var listVehicle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)([]);
   (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-    props.initialVehicles.forEach(function (val) {
-      return listVehicle.push(val);
-    });
+    if (props.initialVehicles) {
+      props.initialVehicles.forEach(function (val) {
+        return listVehicle.push(val);
+      });
+    }
   });
   (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
     return form.type_member_id;
