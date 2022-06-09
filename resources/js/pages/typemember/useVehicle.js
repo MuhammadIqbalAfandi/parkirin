@@ -1,11 +1,13 @@
 import { reactive, onMounted } from 'vue'
 import FormValidationError from '@/utils/formValidationError'
 
-export function useVehicle(form, typeVehicles, initialVehicles = []) {
+export function useVehicle(props, form) {
   const listVehicle = reactive([])
 
   onMounted(() => {
-    initialVehicles.forEach((val) => listVehicle.push(val))
+    if (props.initialVehicles) {
+      props.initialVehicles.forEach((val) => listVehicle.push(val))
+    }
   })
 
   const vehicleClear = () => {
@@ -38,7 +40,7 @@ export function useVehicle(form, typeVehicles, initialVehicles = []) {
 
       vehicleAddValidation()
 
-      const typeVehicle = typeVehicles.filter((vehicle) => vehicle.value === form.type_vehicle_id)[0]
+      const typeVehicle = props.typeVehicles.filter((vehicle) => vehicle.value === form.type_vehicle_id)[0]
 
       listVehicle.push({
         max: form.max_vehicle,

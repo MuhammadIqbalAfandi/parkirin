@@ -608,7 +608,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     (0,_components_useFormErrorReset__WEBPACK_IMPORTED_MODULE_3__.useFormErrorReset)(form);
 
-    var _useVehicle = (0,_useVehicle__WEBPACK_IMPORTED_MODULE_2__.useVehicle)(form, props.typeVehicles),
+    var _useVehicle = (0,_useVehicle__WEBPACK_IMPORTED_MODULE_2__.useVehicle)(props, form),
         listVehicle = _useVehicle.listVehicle,
         vehicleClear = _useVehicle.vehicleClear,
         vehicleOnAdd = _useVehicle.vehicleOnAdd,
@@ -1649,13 +1649,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_formValidationError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/utils/formValidationError */ "./resources/js/utils/formValidationError.js");
 
 
-function useVehicle(form, typeVehicles) {
-  var initialVehicles = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+function useVehicle(props, form) {
   var listVehicle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)([]);
   (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-    initialVehicles.forEach(function (val) {
-      return listVehicle.push(val);
-    });
+    if (props.initialVehicles) {
+      props.initialVehicles.forEach(function (val) {
+        return listVehicle.push(val);
+      });
+    }
   });
 
   var vehicleClear = function vehicleClear() {
@@ -1688,7 +1689,7 @@ function useVehicle(form, typeVehicles) {
     try {
       form.clearErrors('type_vehicle_id', 'max_vehicle');
       vehicleAddValidation();
-      var typeVehicle = typeVehicles.filter(function (vehicle) {
+      var typeVehicle = props.typeVehicles.filter(function (vehicle) {
         return vehicle.value === form.type_vehicle_id;
       })[0];
       listVehicle.push({

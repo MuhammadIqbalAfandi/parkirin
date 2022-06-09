@@ -23,7 +23,7 @@ const form = useForm({
 
 useFormErrorReset(form)
 
-const { listVehicle, vehicleClear, vehicleOnAdd, vehicleOnDelete } = useVehicle(form, props.typeVehicles)
+const { listVehicle, vehicleClear, vehicleOnAdd, vehicleOnDelete } = useVehicle(props, form)
 
 const onSubmit = () => {
   form
