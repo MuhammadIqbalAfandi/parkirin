@@ -370,12 +370,12 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var linkReference = function linkReference(data) {
-      if (data.topupId) {
+      if (data.topUpId) {
         return route('top-ups.show', data.topUpId);
       } else if (data.expenseId) {
         return route('expenses.show', data.expenseId);
       } else {
-        alert('under construction'); //  return route('out-transactions.show', data.outTransactionId)
+        return route('out-transactions.show', data.outTransactionId);
       }
     };
 

@@ -9,24 +9,20 @@ class MutationService extends CurrencyFormatService
 {
     public function totalIncome(EloquentCollection $collections)
     {
-        foreach ($collections->chunk(100) as $chunk) {
-            return $chunk->sum(function ($collect) {
-                if ($collect->getRawOriginal('type') == 1) {
-                    return $collect->getRawOriginal('amount');
-                }
-            });
-        }
+        return $collections->sum(function ($collect) {
+            if ($collect->getRawOriginal('type') == 1) {
+                return $collect->getRawOriginal('amount');
+            }
+        });
     }
 
     public function totalExpense(EloquentCollection $collections)
     {
-        foreach ($collections->chunk(100) as $chunk) {
-            return $chunk->sum(function ($collect) {
-                if ($collect->getRawOriginal('type') == 2) {
-                    return $collect->getRawOriginal('amount');
-                }
-            });
-        }
+        return $collections->sum(function ($collect) {
+            if ($collect->getRawOriginal('type') == 2) {
+                return $collect->getRawOriginal('amount');
+            }
+        });
     }
 
     public function totalIncomeAsString(EloquentCollection $collections)
