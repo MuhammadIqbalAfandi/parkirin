@@ -486,7 +486,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Sign in to continue ");
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Masuk untuk melanjutkan ");
 
 var _hoisted_2 = {
   "class": "flex align-items-center justify-content-between mb-5"
@@ -541,7 +541,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         onClick: $setup.onSubmit,
-        label: "Sign In",
+        label: "Masuk",
         disabled: $setup.form.processing,
         "class": "w-full p-3 text-xl"
       }, null, 8

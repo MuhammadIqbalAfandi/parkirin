@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import { useFormErrorReset } from '@/components/useFormErrorReset'
 import AppInputNumber from '@/components/AppInputNumber.vue'
@@ -10,6 +10,16 @@ const props = defineProps({
 })
 
 const disabled = ref(true)
+
+const editButtonLabel = ref('Ubah tarif')
+
+watch(disabled, () => {
+  if (disabled.value) {
+    editButtonLabel.value = 'Batal ubah tarif'
+  } else {
+    editButtonLabel.value = 'Ubah tarif'
+  }
+})
 
 const onEdit = () => {
   disabled.value = !disabled.value
@@ -86,12 +96,15 @@ const onSubmit = () => {
       <div class="col-12 md:col-6">
         <Card>
           <template #title>
-            <div class="flex justify-content-between">
-              <div>
-                <h1>Tarif Parkir <span class="text-base">24 jam pertama</span></h1>
-              </div>
+            <h1>Tarif Parkir <span class="text-base">24 jam pertama</span></h1>
 
-              <Button icon="pi pi-pencil" class="p-button-rounded p-button-primary" @click="onEdit" />
+            <div class="flex flex-column md:flex-row justify-content-end">
+              <Button
+                icon="pi pi-pencil"
+                class="p-button-outlined p-button-primary"
+                :label="editButtonLabel"
+                @click="onEdit"
+              />
             </div>
           </template>
 

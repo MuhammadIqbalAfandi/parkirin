@@ -28,20 +28,31 @@ defineEmits(['menu-toggle'])
     >
       <i class="pi pi-ellipsis-v"></i>
     </button>
+
     <ul class="layout-topbar-menu hidden lg:flex origin-top">
       <li class="align-self-center">
         <span class="hidden lg:inline">{{ $page.props.auth.user.name }}</span>
       </li>
       <li>
-        <Link :href="route('users.show', $page.props.auth.user.id)" class="p-link layout-topbar-button">
+        <Link
+          :href="route('users.show', $page.props.auth.user.id)"
+          class="p-link layout-topbar-button"
+          v-tooltip.bottom="{ value: 'Ubah Profil', class: 'layout-topbar-menu-tooltip' }"
+        >
           <i class="pi pi-user"></i>
-          <span>Profil Saya</span>
+          <span>Ubah Profil</span>
         </Link>
       </li>
       <li>
-        <Link :href="route('logout')" as="button" method="post" class="p-link layout-topbar-button">
+        <Link
+          :href="route('logout')"
+          as="button"
+          method="post"
+          class="p-link layout-topbar-button"
+          v-tooltip.bottom="{ value: 'Keluar', class: 'layout-topbar-menu-tooltip' }"
+        >
           <i class="pi pi-sign-out"></i>
-          <span>Sign Out</span>
+          <span>Keluar</span>
         </Link>
       </li>
     </ul>
@@ -175,7 +186,7 @@ $transition: 0.2s;
       border-radius: 4px;
       padding: 1rem;
       right: 2rem;
-      top: 5rem;
+      top: 5.5rem;
       min-width: 15rem;
 
       .layout-topbar-button {

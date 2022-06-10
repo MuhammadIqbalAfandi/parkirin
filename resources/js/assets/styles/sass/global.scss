@@ -21,6 +21,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.layout-topbar-menu-tooltip.p-tooltip {
+  position: absolute;
+  z-index: 997;
+  display: none;
+  padding: 0.25em 0.5rem;
+  max-width: 12.5rem;
+}
+
 /*
   Typography
 */
@@ -35,7 +43,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 1.5rem 0 1rem 0;
+  margin: 0.5rem 0 0.5rem 0;
   font-family: inherit;
   font-weight: 500;
   line-height: 1.2;

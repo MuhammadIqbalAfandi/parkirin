@@ -24,7 +24,7 @@ const onSubmit = () => {
   <Head title="Sign In" />
 
   <AuthLayout>
-    <template #header> Sign in to continue </template>
+    <template #header> Masuk untuk melanjutkan </template>
 
     <AppInputText v-model="form.email" label="Email" placeholder="email" :error="form.errors.email" />
 
@@ -40,6 +40,6 @@ const onSubmit = () => {
       </Link>
     </div>
 
-    <Button @click="onSubmit" label="Sign In" :disabled="form.processing" class="w-full p-3 text-xl" />
+    <Button @click="onSubmit" label="Masuk" :disabled="form.processing" class="w-full p-3 text-xl" />
   </AuthLayout>
 </template>
