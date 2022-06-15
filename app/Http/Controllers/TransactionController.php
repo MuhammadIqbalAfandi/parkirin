@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(OutTransaction::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +50,7 @@ class TransactionController extends Controller
                     $transactionOut->entry_transaction_id
                 ),
                 'platNumber' => $transactionOut->plat_number,
-                'entryTransactionId' => $transactionOut->entry_transaction_id,
+                'entryTransactionId' => $transactionOut->entry_transaction_id
             ]);
 
         $typeVehicles = function () {
@@ -54,12 +59,12 @@ class TransactionController extends Controller
             if ($vehicle) {
                 return [[
                     'value' => $vehicle->typeVehicle->id,
-                    'label' => $vehicle->typeVehicle->type,
+                    'label' => $vehicle->typeVehicle->type
                 ]];
             } else {
                 return TypeVehicle::get()->transform(fn($typeVehicle) => [
                     'value' => $typeVehicle->id,
-                    'label' => $typeVehicle->type,
+                    'label' => $typeVehicle->type
                 ]);
             }
         };
@@ -72,7 +77,7 @@ class TransactionController extends Controller
                     ),
                     'totalPriceParking' => ParkingFeeService::totalPriceParkingString(
                         request('transaction_number')
-                    ),
+                    )
                 ];
             }
         };
@@ -80,7 +85,7 @@ class TransactionController extends Controller
         return inertia('transaction/Create.vue', compact([
             'outTransactions',
             'typeVehicles',
-            'detailOutTransaction',
+            'detailOutTransaction'
         ]));
     }
 
@@ -107,7 +112,7 @@ class TransactionController extends Controller
                 'plat_number' => $request->plat_number,
                 'entry_transaction_id' => $request->entry_transaction_id,
                 'type_vehicle_id' => $vehicle->type_vehicle_id,
-                'user_id' => auth()->user()->id,
+                'user_id' => auth()->user()->id
             ]);
 
             return back()->with('success', __('messages.success.store.transaction'));
@@ -119,12 +124,12 @@ class TransactionController extends Controller
                     'plat_number' => $request->plat_number,
                     'entry_transaction_id' => $request->entry_transaction_id,
                     'type_vehicle_id' => $request->type_vehicle_id,
-                    'user_id' => auth()->user()->id,
+                    'user_id' => auth()->user()->id
                 ]);
 
                 $outTransaction->mutation()->create([
                     'type' => 1,
-                    'amount' => ParkingFeeService::totalPriceParking($request->entry_transaction_id),
+                    'amount' => ParkingFeeService::totalPriceParking($request->entry_transaction_id)
                 ]);
 
                 DB::commit();

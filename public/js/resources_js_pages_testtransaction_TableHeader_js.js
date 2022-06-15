@@ -9,23 +9,15 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "InTable": () => (/* binding */ InTable),
-/* harmony export */   "OutTable": () => (/* binding */ OutTable)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var InTable = [{
-  field: 'createdAt',
-  header: 'In'
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
+  field: 'entryCar',
+  header: 'Kendaraan Masuk'
 }, {
   field: 'transactionNumber',
-  header: 'Parking ID'
-}];
-var OutTable = [{
-  field: 'createdAt',
-  header: 'Out'
-}, {
-  field: 'transactionNumber',
-  header: 'Parking ID'
-}];
+  header: 'Nomor Transaksi'
+}]);
 
 /***/ })
 

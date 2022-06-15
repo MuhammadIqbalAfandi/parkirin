@@ -1129,14 +1129,6 @@ __webpack_require__.r(__webpack_exports__);
       to: '/top-ups',
       component: 'topup/Index'
     }]
-  }, {
-    label: 'Not Production',
-    items: [{
-      label: 'Test Transactions',
-      icon: 'pi pi-car',
-      to: '/test-transactions/create',
-      component: 'test-transaction/Create'
-    }]
   }]
 });
 

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Expense;
 use App\Models\Member;
 use App\Models\Mutation;
+use App\Models\OutTransaction;
 use App\Models\ParkingFee;
 use App\Models\TopUp;
 use App\Models\TypeMember;
@@ -13,6 +14,7 @@ use App\Models\User;
 use App\Policies\ExpensePolicy;
 use App\Policies\MemberPolicy;
 use App\Policies\MutationPolicy;
+use App\Policies\OutTransactionPolicy;
 use App\Policies\ParkingFeePolicy;
 use App\Policies\TopUpPolicy;
 use App\Policies\TypeMemberPolicy;
@@ -37,6 +39,7 @@ class AuthServiceProvider extends ServiceProvider
         TopUp::class => TopUpPolicy::class,
         TypeMember::class => TypeMemberPolicy::class,
         TypeVehicle::class => TypeVehiclePolicy::class,
+        OutTransaction::class => OutTransactionPolicy::class
     ];
 
     /**
