@@ -108,7 +108,7 @@ export default {
       label: 'Transaksi',
       items: [
         {
-          label: 'Transaksi masuk dan keluar',
+          label: 'Transaksi Keluar',
           icon: 'pi pi-car',
           to: '/transactions/create',
           component: 'transaction/Create',

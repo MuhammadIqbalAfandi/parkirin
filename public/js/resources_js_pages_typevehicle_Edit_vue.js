@@ -1084,7 +1084,7 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     label: 'Transaksi',
     items: [{
-      label: 'Transaksi masuk dan keluar',
+      label: 'Transaksi Keluar',
       icon: 'pi pi-car',
       to: '/transactions/create',
       component: 'transaction/Create'
