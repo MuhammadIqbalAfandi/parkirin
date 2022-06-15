@@ -57,7 +57,11 @@ const filterReset = () => {
           <div class="col-12 md:col-8">
             <div class="grid">
               <div class="col-12 md:col-3">
-                <InputText class="w-full" placeholder="cari, contoh: tina" v-model="search" />
+                <InputText
+                  class="w-full"
+                  placeholder="cari, contoh: tina"
+                  v-model="search"
+                />
               </div>
               <div class="col-12 md:col-3">
                 <Calendar
@@ -71,12 +75,18 @@ const filterReset = () => {
                 />
               </div>
               <div class="col-auto mt-2 ml-2">
-                <Button label="reset" class="p-button-link" @click="filterReset" />
+                <Button
+                  label="reset"
+                  class="p-button-link"
+                  @click="filterReset"
+                />
               </div>
             </div>
           </div>
 
-          <div class="col-12 md:col-4 flex flex-column md:flex-row justify-content-end">
+          <div
+            class="col-12 md:col-4 flex flex-column md:flex-row justify-content-end"
+          >
             <AppButtonLink
               label="Top Up"
               class="p-button-outlined"
@@ -87,7 +97,12 @@ const filterReset = () => {
         </div>
       </template>
 
-      <Column v-for="value in indexTable" :field="value.field" :header="value.header" :key="value.field" />
+      <Column
+        v-for="value in indexTable"
+        :field="value.field"
+        :header="value.header"
+        :key="value.field"
+      />
 
       <Column>
         <template #body="{ data }">

@@ -5,9 +5,9 @@ namespace App\Services;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection as SupportCollection;
 
-class MutationService extends CurrencyFormatService
+class MutationService
 {
-    public function totalIncome(EloquentCollection $collections)
+    public static function totalIncome(EloquentCollection $collections)
     {
         return $collections->sum(function ($collect) {
             if ($collect->getRawOriginal('type') == 1) {
@@ -16,7 +16,7 @@ class MutationService extends CurrencyFormatService
         });
     }
 
-    public function totalExpense(EloquentCollection $collections)
+    public static function totalExpense(EloquentCollection $collections)
     {
         return $collections->sum(function ($collect) {
             if ($collect->getRawOriginal('type') == 2) {
@@ -25,44 +25,55 @@ class MutationService extends CurrencyFormatService
         });
     }
 
-    public function totalIncomeAsString(EloquentCollection $collections)
+    public static function totalIncomeAsString(EloquentCollection $collections)
     {
         if ($collections->count()) {
-            return $this->setRupiahFormat($this->totalIncome($collections), true);
+            return HelperService::setRupiahFormat(
+                self::totalIncome($collections),
+                true
+            );
         } else {
-            return $this->setRupiahFormat(0, true);
+            return HelperService::setRupiahFormat(0, true);
         }
     }
 
-    public function totalExpenseAsString(EloquentCollection $collections)
+    public static function totalExpenseAsString(EloquentCollection $collections)
     {
         if ($collections->count()) {
-            return $this->setRupiahFormat($this->totalExpense($collections), true);
+            return HelperService::setRupiahFormat(
+                self::totalExpense($collections),
+                true
+            );
         } else {
-            return $this->setRupiahFormat(0, true);
+            return HelperService::setRupiahFormat(0, true);
         }
     }
 
-    public function totalAmountAsString(EloquentCollection $collections)
+    public static function totalAmountAsString(EloquentCollection $collections)
     {
         if ($collections->count()) {
-            $amount = $this->totalIncome($collections) - $this->totalExpense($collections);
+            $amount = self::totalIncome($collections) - self::totalExpense($collections);
         } else {
             $amount = 0;
         }
 
-        return $this->setRupiahFormat($amount, true);
+        return HelperService::setRupiahFormat($amount, true);
     }
 
-    public function totalPerMonth(EloquentCollection $collections)
+    public static function totalPerMonth(EloquentCollection $collections)
     {
-        return $collections->transform(fn($collection) => $collection->sum(fn($collect) => $collect->getRawOriginal('amount')));
+        return $collections->transform(fn($collection) =>
+            $collection->sum(fn($collect) =>
+                $collect->getRawOriginal('amount')
+            )
+        );
     }
 
-    public function statistic(SupportCollection $collections)
+    public static function statistic(SupportCollection $collections)
     {
         $collections = $collections;
-        $collections->transform(fn($collections) => $this->totalPerMonth($collections));
+        $collections->transform(fn($collections) =>
+            self::totalPerMonth($collections));
         return $collections;
     }
 }

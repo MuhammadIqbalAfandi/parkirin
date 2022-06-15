@@ -36,7 +36,12 @@ defineProps({
         </div>
       </template>
 
-      <Column v-for="value in tableHeader" :field="value.field" :header="value.header" :key="value.field" />
+      <Column
+        v-for="value in tableHeader"
+        :field="value.field"
+        :header="value.header"
+        :key="value.field"
+      />
 
       <Column>
         <template #body="{ data }">

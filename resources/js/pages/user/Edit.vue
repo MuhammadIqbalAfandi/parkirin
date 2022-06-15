@@ -67,7 +67,12 @@ const onSubmit = () => {
               </div>
 
               <div v-if="user.role_id === 1" class="col-12 md:col-6">
-                <AppInputText label="Nomor HP" placeholder="nomor hp" :error="form.errors.phone" v-model="form.phone" />
+                <AppInputText
+                  label="Nomor HP"
+                  placeholder="nomor hp"
+                  :error="form.errors.phone"
+                  v-model="form.phone"
+                />
               </div>
 
               <div class="col-12 md:col-6">
@@ -94,7 +99,9 @@ const onSubmit = () => {
 
           <template #footer>
             <div class="grid">
-              <div class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-start">
+              <div
+                class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-start"
+              >
                 <Button
                   v-if="$page.props.auth.user.role_id !== user.role_id"
                   label="Hapus"
@@ -104,7 +111,9 @@ const onSubmit = () => {
                 />
               </div>
 
-              <div class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-end">
+              <div
+                class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-end"
+              >
                 <AppButtonLink
                   label="Blokir"
                   icon="pi pi-ban"

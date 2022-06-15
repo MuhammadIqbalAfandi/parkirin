@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\MaxVehicle;
 use App\Models\Member;
-use App\Services\CurrencyFormatService;
+use App\Services\HelperService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +17,7 @@ class TypeMember extends Model
     protected $fillable = [
         'type',
         'description',
-        'price',
+        'price'
     ];
 
     protected function updatedAt(): Attribute
@@ -37,7 +37,7 @@ class TypeMember extends Model
     protected function price(): Attribute
     {
         return Attribute::make(
-            get:fn($value) => (new CurrencyFormatService)->setRupiahFormat($value, true)
+            get:fn($value) => HelperService::setRupiahFormat($value, true)
         );
     }
 

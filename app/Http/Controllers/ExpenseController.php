@@ -34,8 +34,8 @@ class ExpenseController extends Controller
                     'id' => $expense->id,
                     'createdAt' => $expense->created_at,
                     'amount' => $expense->amount,
-                    'user' => $expense->user->name,
-                ]),
+                    'user' => $expense->user->name
+                ])
         ]);
     }
 
@@ -63,12 +63,12 @@ class ExpenseController extends Controller
             $expense = Expense::create([
                 'description' => $request->description,
                 'amount' => $request->amount,
-                'user_id' => $request->user()->id,
+                'user_id' => $request->user()->id
             ]);
 
             $expense->mutation()->create([
                 'type' => 2,
-                'amount' => $expense->getRawOriginal('amount'),
+                'amount' => $expense->getRawOriginal('amount')
             ]);
 
             DB::commit();
@@ -97,10 +97,12 @@ class ExpenseController extends Controller
                 'description' => $expense->description,
                 'user' => [
                     'name' => $expense->user->name,
-                    'phone' => auth()->user()->id === $expense->user->id ? $expense->user->phone : null,
-                    'email' => $expense->user->email,
-                ],
-            ],
+                    'phone' => auth()->user()->id === $expense->user->id
+                        ? $expense->user->phone
+                        : null,
+                    'email' => $expense->user->email
+                ]
+            ]
         ]);
     }
 

@@ -8,7 +8,10 @@ import AuthLayout from '@/layouts/AuthLayout.vue'
   <Head title="Verifikasi Email" />
 
   <AuthLayout>
-    <template #header> Email verifikasi telah terkirim ke email Anda yang Anda berikan saat pendaftaran </template>
+    <template #header>
+      Email verifikasi telah terkirim ke email Anda yang Anda berikan saat
+      pendaftaran
+    </template>
 
     <AppButtonLink
       label="Kirim ulang email verifikasi"
@@ -17,6 +20,11 @@ import AuthLayout from '@/layouts/AuthLayout.vue'
       :href="route('verification.send')"
     />
 
-    <AppButtonLink label="Sign Out" class="w-full p-3 text-xl p-button-text" method="post" :href="route('logout')" />
+    <AppButtonLink
+      label="Sign Out"
+      class="w-full p-3 text-xl p-button-text"
+      method="post"
+      :href="route('logout')"
+    />
   </AuthLayout>
 </template>

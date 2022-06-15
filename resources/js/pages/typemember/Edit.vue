@@ -127,8 +127,15 @@ const onSubmit = () => {
               </div>
 
               <div class="col-12">
-                <div class="flex flex-column md:flex-row md:justify-content-end">
-                  <Button label="Tambah" icon="pi pi-car" class="p-button-outlined" @click="vehicleOnAdd" />
+                <div
+                  class="flex flex-column md:flex-row md:justify-content-end"
+                >
+                  <Button
+                    label="Tambah"
+                    icon="pi pi-car"
+                    class="p-button-outlined"
+                    @click="vehicleOnAdd"
+                  />
                 </div>
               </div>
 
@@ -180,7 +187,9 @@ const onSubmit = () => {
               </div>
 
               <div class="col-12 md:col-6">
-                <div class="flex flex-column md:flex-row md:justify-content-end">
+                <div
+                  class="flex flex-column md:flex-row md:justify-content-end"
+                >
                   <Button
                     label="Simpan"
                     icon="pi pi-check"

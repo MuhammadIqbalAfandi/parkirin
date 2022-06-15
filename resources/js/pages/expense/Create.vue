@@ -42,12 +42,26 @@ const onSubmit = () => {
               <template #toolbar>
                 <span class="q-formats">
                   <button class="ql-bold" v-tooltip.bottom="'Bold'"></button>
-                  <button class="ql-italic" v-tooltip.bottom="'Italic'"></button>
-                  <button class="ql-underline" v-tooltip.bottom="'Underline'"></button>
+                  <button
+                    class="ql-italic"
+                    v-tooltip.bottom="'Italic'"
+                  ></button>
+                  <button
+                    class="ql-underline"
+                    v-tooltip.bottom="'Underline'"
+                  ></button>
                 </span>
                 <span class="ql-formats">
-                  <button class="ql-list" value="ordered" v-tooltip.bottom="'Ordered'"></button>
-                  <button class="ql-list" value="bullet" v-tooltip.bottom="'Bullet'"></button>
+                  <button
+                    class="ql-list"
+                    value="ordered"
+                    v-tooltip.bottom="'Ordered'"
+                  ></button>
+                  <button
+                    class="ql-list"
+                    value="bullet"
+                    v-tooltip.bottom="'Bullet'"
+                  ></button>
                 </span>
               </template>
             </AppEditor>

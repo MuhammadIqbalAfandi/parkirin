@@ -30,13 +30,19 @@ export default {
       ]
     },
     visible() {
-      return typeof this.item.visible === 'function' ? this.item.visible() : this.item.visible !== false
+      return typeof this.item.visible === 'function'
+        ? this.item.visible()
+        : this.item.visible !== false
     },
     disabled(item) {
-      return typeof item.disabled === 'function' ? item.disabled() : item.disabled
+      return typeof item.disabled === 'function'
+        ? item.disabled()
+        : item.disabled
     },
     label() {
-      return typeof this.item.label === 'function' ? this.item.label() : this.item.label
+      return typeof this.item.label === 'function'
+        ? this.item.label()
+        : this.item.label
     },
   },
   computed: {

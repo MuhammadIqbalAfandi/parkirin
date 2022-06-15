@@ -28,4 +28,9 @@ class Vehicle extends Model
     {
         return $this->belongsTo(TypeVehicle::class);
     }
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
+    }
 }

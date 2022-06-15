@@ -32,8 +32,8 @@ class MemberController extends Controller
                     'platNumber' => $member->vehicleDetail(),
                     'type' => $member->typeMember->type,
                     'price' => $member->topUps()->latest()->first()->amount,
-                    'expDate' => $member->exp_date,
-                ]),
+                    'expDate' => $member->exp_date
+                ])
         ]);
     }
 
@@ -47,7 +47,7 @@ class MemberController extends Controller
         return inertia('member/Create', [
             'typeMembers' => TypeMember::get()->transform(fn($typeMember) => [
                 'label' => $typeMember->type,
-                'value' => $typeMember->id,
+                'value' => $typeMember->id
             ]),
             'typeMember' => Inertia::lazy(
                 fn() => TypeMember::filter(request('id'))->get()->transform(fn($typeMember) => [
@@ -59,10 +59,10 @@ class MemberController extends Controller
                         'value' => $maxVehicle->id,
                         'label' => $maxVehicle->typeVehicle->type,
                         'maxVehicle' => $maxVehicle->max,
-                        'typeVehicleId' => $maxVehicle->typeVehicle->id,
-                    ]),
+                        'typeVehicleId' => $maxVehicle->typeVehicle->id
+                    ])
                 ])->first(),
-            ),
+            )
         ]);
     }
 
@@ -81,25 +81,25 @@ class MemberController extends Controller
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'exp_date' => now()->addDays(30),
-                'type_member_id' => $request->type_member_id,
+                'type_member_id' => $request->type_member_id
             ]);
 
             foreach ($request->vehicles as $vehicle) {
                 $member->vehicles()->create([
                     'plat_number' => $vehicle['platNumber'],
-                    'type_vehicle_id' => $vehicle['typeVehicleId'],
+                    'type_vehicle_id' => $vehicle['typeVehicleId']
                 ]);
             }
 
             $topUp = $member->topUps()->create([
                 'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
                 'exp_date' => now()->addDays(30),
-                'user_id' => auth()->user()->id,
+                'user_id' => auth()->user()->id
             ]);
 
             $topUp->mutation()->create([
                 'type' => 1,
-                'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
+                'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price')
             ]);
 
             DB::commit();
@@ -141,7 +141,7 @@ class MemberController extends Controller
             'member' => [
                 'id' => $member->id,
                 'name' => $member->name,
-                'typeMemberId' => $member->type_member_id,
+                'typeMemberId' => $member->type_member_id
             ],
             'initialVehicles' => $member->vehicles->transform(fn($vehicle) => [
                 'platNumber' => $vehicle->plat_number,
@@ -152,11 +152,11 @@ class MemberController extends Controller
                     ->pluck('id')[0],
                 'maxVehicle' => $member->typeMember->maxVehicles
                     ->where('type_vehicle_id', $vehicle->typeVehicle->id)
-                    ->pluck('max')[0],
+                    ->pluck('max')[0]
             ]),
             'typeMembers' => TypeMember::get()->transform(fn($typeMember) => [
                 'label' => $typeMember->type,
-                'value' => $typeMember->id,
+                'value' => $typeMember->id
             ]),
             'typeMember' => fn() => [
                 'type' => $typeMember->type,
@@ -167,9 +167,9 @@ class MemberController extends Controller
                     'value' => $maxVehicle->id,
                     'label' => $maxVehicle->typeVehicle->type,
                     'maxVehicle' => $maxVehicle->max,
-                    'typeVehicleId' => $maxVehicle->typeVehicle->id,
-                ]),
-            ],
+                    'typeVehicleId' => $maxVehicle->typeVehicle->id
+                ])
+            ]
         ]);
     }
 
@@ -190,7 +190,7 @@ class MemberController extends Controller
                     'name' => $request->name,
                     'phone' => $request->phone ?? $member->phone,
                     'exp_date' => now()->addDays(30),
-                    'type_member_id' => $request->type_member_id,
+                    'type_member_id' => $request->type_member_id
                 ]);
 
                 $member->vehicles()->delete();
@@ -198,25 +198,25 @@ class MemberController extends Controller
                 foreach ($request->vehicles as $vehicle) {
                     $member->vehicles()->create([
                         'plat_number' => $vehicle['platNumber'],
-                        'type_vehicle_id' => $vehicle['typeVehicleId'],
+                        'type_vehicle_id' => $vehicle['typeVehicleId']
                     ]);
                 }
 
                 $topUp = $member->topUps()->create([
                     'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
                     'exp_date' => now()->addDays(30),
-                    'user_id' => auth()->user()->id,
+                    'user_id' => auth()->user()->id
                 ]);
 
                 $topUp->mutation()->create([
                     'type' => 1,
-                    'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price'),
+                    'amount' => TypeMember::find($request->type_member_id)->getRawOriginal('price')
                 ]);
             } else {
                 $member->update([
                     'name' => $request->name,
                     'phone' => $request->phone ?? $member->phone,
-                    'type_member_id' => $request->type_member_id,
+                    'type_member_id' => $request->type_member_id
                 ]);
 
                 $member->vehicles()->delete();
@@ -224,7 +224,7 @@ class MemberController extends Controller
                 foreach ($request->vehicles as $vehicle) {
                     $member->vehicles()->create([
                         'plat_number' => $vehicle['platNumber'],
-                        'type_vehicle_id' => $vehicle['typeVehicleId'],
+                        'type_vehicle_id' => $vehicle['typeVehicleId']
                     ]);
                 }
             }

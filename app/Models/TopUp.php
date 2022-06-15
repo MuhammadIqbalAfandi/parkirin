@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Services\CurrencyFormatService;
+use App\Services\HelperService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +16,7 @@ class TopUp extends Model
         'amount',
         'exp_date',
         'member_id',
-        'user_id',
+        'user_id'
     ];
 
     protected function updatedAt(): Attribute
@@ -29,7 +29,7 @@ class TopUp extends Model
     protected function amount(): Attribute
     {
         return Attribute::make(
-            get:fn($value) => (new CurrencyFormatService)->setRupiahFormat($value, true)
+            get:fn($value) => HelperService::setRupiahFormat($value, true)
         );
     }
 

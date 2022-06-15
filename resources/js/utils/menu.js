@@ -3,11 +3,25 @@ export default {
   1: [
     {
       label: 'Home',
-      items: [{ label: 'Dashboard', icon: 'pi pi-home', to: '/dashboards', component: 'home/Index' }],
+      items: [
+        {
+          label: 'Dashboard',
+          icon: 'pi pi-home',
+          to: '/dashboards',
+          component: 'home/Index',
+        },
+      ],
     },
     {
       label: 'Master',
-      items: [{ label: 'User', icon: 'pi pi-user', to: '/users', component: 'user/Index' }],
+      items: [
+        {
+          label: 'User',
+          icon: 'pi pi-user',
+          to: '/users',
+          component: 'user/Index',
+        },
+      ],
     },
   ],
 
@@ -15,29 +29,65 @@ export default {
   2: [
     {
       label: 'Home',
-      items: [{ label: 'Dashboard', icon: 'pi pi-home', to: '/dashboards', component: 'home/Index' }],
+      items: [
+        {
+          label: 'Dashboard',
+          icon: 'pi pi-home',
+          to: '/dashboards',
+          component: 'home/Index',
+        },
+      ],
     },
     {
       label: 'Menu',
       items: [
-        { label: 'Pengeluaran', icon: 'pi pi-wallet', to: '/expenses', component: 'expense/Index' },
+        {
+          label: 'Pengeluaran',
+          icon: 'pi pi-wallet',
+          to: '/expenses',
+          component: 'expense/Index',
+        },
         {
           label: 'Laporan',
           icon: 'pi pi-book',
-          items: [{ label: 'Mutasi', icon: 'pi pi-circle', to: '/reports/mutations', component: 'mutation/Report' }],
+          items: [
+            {
+              label: 'Mutasi',
+              icon: 'pi pi-circle',
+              to: '/reports/mutations',
+              component: 'mutation/Report',
+            },
+          ],
         },
       ],
     },
     {
       label: 'Master',
       items: [
-        { label: 'Jenis Kendaraan', icon: 'pi pi-car', to: '/type-vehicles', component: 'typevehicle/Index' },
-        { label: 'Jenis Member', icon: 'pi pi-id-card', to: '/type-members', component: 'typemember/Index' },
+        {
+          label: 'Jenis Kendaraan',
+          icon: 'pi pi-car',
+          to: '/type-vehicles',
+          component: 'typevehicle/Index',
+        },
+        {
+          label: 'Jenis Member',
+          icon: 'pi pi-id-card',
+          to: '/type-members',
+          component: 'typemember/Index',
+        },
       ],
     },
     {
       label: 'Pengaturan',
-      items: [{ label: 'Tarif Parkir', icon: 'pi pi-car', to: '/parking-fees/create', component: 'parkingfee/Create' }],
+      items: [
+        {
+          label: 'Tarif Parkir',
+          icon: 'pi pi-car',
+          to: '/parking-fees/create',
+          component: 'parkingfee/Create',
+        },
+      ],
     },
   ],
 
@@ -45,14 +95,47 @@ export default {
   3: [
     {
       label: 'Home',
-      items: [{ label: 'Dashboard', icon: 'pi pi-home', to: '/dashboards', component: 'home/Index' }],
+      items: [
+        {
+          label: 'Dashboard',
+          icon: 'pi pi-home',
+          to: '/dashboards',
+          component: 'home/Index',
+        },
+      ],
+    },
+    {
+      label: 'Transaksi',
+      items: [
+        {
+          label: 'Transaksi masuk dan keluar',
+          icon: 'pi pi-car',
+          to: '/transactions/create',
+          component: 'transaction/Create',
+        },
+      ],
     },
     {
       label: 'Menu',
       items: [
-        { label: 'Pengeluaran', icon: 'pi pi-wallet', to: '/expenses', component: 'expense/Index' },
-        { label: 'Member', icon: 'pi pi-id-card', to: '/members', component: 'member/Index' },
-        { label: 'Top Up', icon: 'pi pi-car', to: '/top-ups', component: 'topup/Index' },
+        {
+          label: 'Pengeluaran',
+          icon: 'pi pi-wallet',
+          to: '/expenses',
+          component: 'expense/Index',
+        },
+        {
+          label: 'Member',
+          icon: 'pi pi-id-card',
+          to: '/members',
+          component: 'member/Index',
+        },
+        {
+          label: 'Top Up',
+          icon: 'pi pi-car',
+          to: '/top-ups',
+          component: 'topup/Index',
+        },
       ],
     },
   ],

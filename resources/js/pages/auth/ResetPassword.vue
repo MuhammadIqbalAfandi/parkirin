@@ -35,9 +35,19 @@ const onSubmit = () => {
       <span>Tulis Password baru untuk login</span>
     </template>
 
-    <AppInputText v-model="form.email" label="Email" placeholder="email" :error="form.errors.email" />
+    <AppInputText
+      v-model="form.email"
+      label="Email"
+      placeholder="email"
+      :error="form.errors.email"
+    />
 
-    <AppPassword v-model="form.password" label="Password" placeholder="password" :error="form.errors.password" />
+    <AppPassword
+      v-model="form.password"
+      label="Password"
+      placeholder="password"
+      :error="form.errors.password"
+    />
 
     <AppPassword
       v-model="form.password_confirmation"
@@ -46,6 +56,11 @@ const onSubmit = () => {
       :error="form.errors.password_confirmation"
     />
 
-    <Button @click="onSubmit" label="Reset Password" :disabled="form.processing" class="w-full p-3 text-xl" />
+    <Button
+      @click="onSubmit"
+      label="Reset Password"
+      :disabled="form.processing"
+      class="w-full p-3 text-xl"
+    />
   </AuthLayout>
 </template>

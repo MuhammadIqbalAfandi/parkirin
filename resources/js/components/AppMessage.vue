@@ -19,8 +19,16 @@ const onClose = () => {
     {{ $page.props.flash.error }}
   </Message>
 
-  <Message v-if="Object.keys($page.props.errors).length > 0" severity="error" @close="onClose">
-    <div v-if="Object.keys($page.props.errors).length === 1">Ditemukan satu error pada form</div>
-    <div v-else>Ditemukan {{ Object.keys($page.props.errors).length }} error pada form</div>
+  <Message
+    v-if="Object.keys($page.props.errors).length > 0"
+    severity="error"
+    @close="onClose"
+  >
+    <div v-if="Object.keys($page.props.errors).length === 1">
+      Ditemukan satu error pada form
+    </div>
+    <div v-else>
+      Ditemukan {{ Object.keys($page.props.errors).length }} error pada form
+    </div>
   </Message>
 </template>

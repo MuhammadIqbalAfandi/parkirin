@@ -32,6 +32,7 @@ return [
     'top_customer' => 'Top Pelanggan',
     'top_number_customer' => 'Top :number Pelanggan',
     'member' => 'Member',
+    'member_expired' => 'Member telah expired silahkan lakukan Top Up kembali',
     'type_member' => 'Jenis Member',
     'type_vehicle' => 'Jenis Kendaraan',
     'top_up_rank' => 'Top Up',

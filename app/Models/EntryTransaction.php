@@ -13,13 +13,13 @@ class EntryTransaction extends Model
 
     protected $fillable = [
         'capture_vehicle',
-        'transaction_number',
+        'transaction_number'
     ];
 
     protected function createdAt(): Attribute
     {
         return Attribute::make(
-            get:fn($value) => Carbon::parse($value)->translatedFormat('l d/m/Y')
+            get:fn($value) => Carbon::parse($value)->translatedFormat('l d/m/Y H:i:s')
         );
     }
 

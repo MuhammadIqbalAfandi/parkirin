@@ -26,7 +26,9 @@ defineEmits(['update:modelValue'])
 
 const isError = computed(() => (props.error ? true : false))
 
-const forLabel = computed(() => (props.label ? props.label.toLowerCase().replace(/\s+/g, '-') : null))
+const forLabel = computed(() =>
+  props.label ? props.label.toLowerCase().replace(/\s+/g, '-') : null
+)
 
 const ariaDescribedbyLabel = computed(() =>
   props.label ? props.label.toLowerCase().replace(/\s+/g, '-') + '-help' : null
@@ -49,7 +51,11 @@ const ariaDescribedbyLabel = computed(() =>
       </template>
     </Editor>
 
-    <small v-if="error" :id="ariaDescribedbyLabel" :class="{ 'p-error': isError }">
+    <small
+      v-if="error"
+      :id="ariaDescribedbyLabel"
+      :class="{ 'p-error': isError }"
+    >
       {{ error }}
     </small>
   </div>

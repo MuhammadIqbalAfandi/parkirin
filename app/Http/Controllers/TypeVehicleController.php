@@ -29,8 +29,8 @@ class TypeVehicleController extends Controller
                     'id' => $typeVehicle->id,
                     'updatedAt' => $typeVehicle->updated_at,
                     'type' => $typeVehicle->type,
-                    'isUsed' => (new TypeVehicleService)->isUsed($typeVehicle),
-                ]),
+                    'isUsed' => TypeVehicleService::isUsed($typeVehicle)
+                ])
         ]);
     }
 
@@ -79,8 +79,8 @@ class TypeVehicleController extends Controller
         return inertia('typevehicle/Edit', [
             'typeVehicle' => [
                 'id' => $typeVehicle->id,
-                'type' => $typeVehicle->type,
-            ],
+                'type' => $typeVehicle->type
+            ]
         ]);
     }
 
@@ -93,7 +93,7 @@ class TypeVehicleController extends Controller
      */
     public function update(UpdateTypeVehicleRequest $request, TypeVehicle $typeVehicle)
     {
-        $isUsed = (new TypeVehicleService)->isUsed($typeVehicle);
+        $isUsed = TypeVehicleService::isUsed($typeVehicle);
         if (!$isUsed) {
             $typeVehicle->update($request->validated());
 
@@ -109,7 +109,7 @@ class TypeVehicleController extends Controller
      */
     public function destroy(TypeVehicle $typeVehicle)
     {
-        $isUsed = (new TypeVehicleService)->isUsed($typeVehicle);
+        $isUsed = TypeVehicleService::isUsed($typeVehicle);
         if (!$isUsed) {
             $typeVehicle->delete();
 

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Services\CurrencyFormatService;
+use App\Services\HelperService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +17,7 @@ class Mutation extends Model
         'amount',
         'out_transaction_id',
         'expense_id',
-        'top_up_id',
+        'top_up_id'
     ];
 
     protected function createdAt(): Attribute
@@ -32,9 +32,9 @@ class Mutation extends Model
         return Attribute::make(
             get:function ($value) {
                 if ($this->getRawOriginal('type') == 1) {
-                    return (new CurrencyFormatService)->setRupiahFormat($value, true);
+                    return HelperService::setRupiahFormat($value, true);
                 } else {
-                    return (new CurrencyFormatService)->setRupiahFormat(-$value, true);
+                    return HelperService::setRupiahFormat(-$value, true);
                 }
             },
         );

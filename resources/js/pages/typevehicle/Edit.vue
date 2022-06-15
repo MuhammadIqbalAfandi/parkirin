@@ -63,7 +63,9 @@ const onSubmit = () => {
 
           <template #footer>
             <div class="grid">
-              <div class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-start">
+              <div
+                class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-start"
+              >
                 <Button
                   label="Hapus"
                   icon="pi pi-trash"
@@ -72,7 +74,9 @@ const onSubmit = () => {
                 />
               </div>
 
-              <div class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-end">
+              <div
+                class="col-12 md:col-6 flex flex-column md:flex-row justify-content-center md:justify-content-end"
+              >
                 <Button
                   label="Simpan"
                   icon="pi pi-check"

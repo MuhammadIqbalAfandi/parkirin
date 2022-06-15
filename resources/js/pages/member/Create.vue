@@ -24,7 +24,10 @@ const form = useForm({
 
 useFormErrorReset(form)
 
-const { listVehicle, vehicleClear, vehicleOnDelete, vehicleOnAdd } = useVehicle(props, form)
+const { listVehicle, vehicleClear, vehicleOnDelete, vehicleOnAdd } = useVehicle(
+  props,
+  form
+)
 
 const formSent = () => {
   form
@@ -36,7 +39,10 @@ const formSent = () => {
     }))
     .post(route('members.store'), {
       onError: () => {
-        Inertia.reload({ only: ['typeMember'], data: { id: form.type_member_id } })
+        Inertia.reload({
+          only: ['typeMember'],
+          data: { id: form.type_member_id },
+        })
       },
       onSuccess: () => {
         vehicleClear()
@@ -77,11 +83,21 @@ const onSubmit = () => {
           <template #content>
             <div class="grid">
               <div class="col-12 md:col-6">
-                <AppInputText v-model="form.name" label="Nama" placeholder="nama" :error="form.errors.name" />
+                <AppInputText
+                  v-model="form.name"
+                  label="Nama"
+                  placeholder="nama"
+                  :error="form.errors.name"
+                />
               </div>
 
               <div class="col-12 md:col-6">
-                <AppInputText v-model="form.phone" label="Nomor HP" placeholder="nomor hp" :error="form.errors.phone" />
+                <AppInputText
+                  v-model="form.phone"
+                  label="Nomor HP"
+                  placeholder="nomor hp"
+                  :error="form.errors.phone"
+                />
               </div>
 
               <div class="col-12 md:col-6">
@@ -147,7 +163,9 @@ const onSubmit = () => {
                 />
               </div>
               <div class="col-12 mb-3 md:mb-0">
-                <div class="flex flex-column md:flex-row md:align-items-center justify-content-end">
+                <div
+                  class="flex flex-column md:flex-row md:align-items-center justify-content-end"
+                >
                   <Button
                     label="Tambah"
                     class="p-button-outlined"
@@ -174,7 +192,9 @@ const onSubmit = () => {
                   />
                   <Column>
                     <template #body="{ index }">
-                      <span style="color: #b71c1c">{{ $page.props.errors[`vehicles.${index}.platNumber`] }}</span>
+                      <span style="color: #b71c1c">{{
+                        $page.props.errors[`vehicles.${index}.platNumber`]
+                      }}</span>
                     </template>
                   </Column>
 
@@ -184,7 +204,12 @@ const onSubmit = () => {
                         <Button
                           icon="pi pi-trash"
                           class="p-button-rounded p-button-text"
-                          :class="{ 'p-button-danger': $page.props.errors[`vehicles.${index}.platNumber`] }"
+                          :class="{
+                            'p-button-danger':
+                              $page.props.errors[
+                                `vehicles.${index}.platNumber`
+                              ],
+                          }"
                           @click="vehicleOnDelete(index)"
                         />
                       </div>

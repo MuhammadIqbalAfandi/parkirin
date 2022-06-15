@@ -7,7 +7,10 @@ defineProps({
 </script>
 
 <template>
-  <nav v-if="links.length > 3" class="p-paginator p-component flex justify-content-start">
+  <nav
+    v-if="links.length > 3"
+    class="p-paginator p-component flex justify-content-start"
+  >
     <div class="p-paginator-pages">
       <template v-for="(link, key) in links">
         <div

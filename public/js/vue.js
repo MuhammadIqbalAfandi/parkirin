@@ -21476,7 +21476,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/*\n  Default style\n*/\n* {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 14px;\n}\n\nbody {\n  font-family: var(--font-family);\n  color: var(--text-color);\n  background-color: var(--surface-ground);\n  margin: 0;\n  padding: 0;\n  min-height: 100%;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n.layout-topbar-menu-tooltip.p-tooltip {\n  position: absolute;\n  z-index: 997;\n  display: none;\n  padding: 0.25em 0.5rem;\n  max-width: 12.5rem;\n}\n\n/*\n  Typography\n*/\na {\n  text-decoration: none;\n  color: var(--primary-color);\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0.5rem 0 0.5rem 0;\n  font-family: inherit;\n  font-weight: 500;\n  line-height: 1.2;\n  color: inherit;\n\n  &:first-child {\n    margin-top: 0;\n  }\n}\n\nh1 {\n  font-size: 2.5rem;\n}\n\nh2 {\n  font-size: 2rem;\n}\n\nh3 {\n  font-size: 1.75rem;\n}\n\nh4 {\n  font-size: 1.5rem;\n}\n\nh5 {\n  font-size: 1.25rem;\n}\n\nh6 {\n  font-size: 1rem;\n}\n\nmark {\n  background: #fff8e1;\n  padding: 0.25rem 0.4rem;\n  border-radius: 12px;\n  font-family: monospace;\n}\n\nblockquote {\n  margin: 1rem 0;\n  padding: 0 2rem;\n  border-left: 4px solid #90a4ae;\n}\n\nhr {\n  border-top: solid var(--surface-border);\n  border-width: 1px 0 0 0;\n  margin: 1rem 0;\n}\n\np {\n  margin: 0 0 1rem 0;\n  line-height: 1.5;\n\n  &:last-child {\n    margin-bottom: 0;\n  }\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/*\n  Default style\n*/\n* {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 14px;\n}\n\nbody {\n  font-family: var(--font-family);\n  color: var(--text-color);\n  background-color: var(--surface-ground);\n  margin: 0;\n  padding: 0;\n  min-height: 100%;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n.layout-topbar-menu-tooltip.p-tooltip {\n  position: absolute;\n  z-index: 997;\n  display: none;\n  padding: 0.25em 0.5rem;\n  max-width: 12.5rem;\n}\n\n/*\n  Typography\n*/\na {\n  text-decoration: none;\n  color: var(--primary-color);\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0.5rem 0 0.5rem 0;\n  font-family: inherit;\n  font-weight: 500;\n  line-height: 1.2;\n  color: inherit;\n\n  &:first-child {\n    margin-top: 0;\n  }\n}\n\nh1 {\n  font-size: 2.5rem;\n}\n\nh2 {\n  font-size: 2rem;\n}\n\nh3 {\n  font-size: 1.75rem;\n}\n\nh4 {\n  font-size: 1.5rem;\n}\n\nh5 {\n  font-size: 1.25rem;\n}\n\nh6 {\n  font-size: 1rem;\n}\n\nmark {\n  background: #fff8e1;\n  padding: 0.25rem 0.4rem;\n  border-radius: 12px;\n  font-family: monospace;\n}\n\nblockquote {\n  margin: 1rem 0;\n  padding: 0 2rem;\n  border-left: 4px solid #90a4ae;\n}\n\nhr {\n  border-top: solid var(--surface-border);\n  border-width: 1px 0 0 0;\n  margin: 1rem 0;\n}\n\np {\n  margin: 0 0 1rem 0;\n  line-height: 1.5;\n\n  &:last-child {\n    margin-bottom: 0;\n  }\n}\n\n.p-message {\n  margin-top: 0px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -58197,6 +58197,22 @@ var map = {
 		"./resources/js/pages/mutation/tableHeader.js",
 		"resources_js_pages_mutation_tableHeader_js"
 	],
+	"./outtransaction/Show": [
+		"./resources/js/pages/outtransaction/Show.vue",
+		"resources_js_pages_outtransaction_Show_vue"
+	],
+	"./outtransaction/Show.vue": [
+		"./resources/js/pages/outtransaction/Show.vue",
+		"resources_js_pages_outtransaction_Show_vue"
+	],
+	"./outtransaction/tableHeader": [
+		"./resources/js/pages/outtransaction/tableHeader.js",
+		"resources_js_pages_outtransaction_tableHeader_js"
+	],
+	"./outtransaction/tableHeader.js": [
+		"./resources/js/pages/outtransaction/tableHeader.js",
+		"resources_js_pages_outtransaction_tableHeader_js"
+	],
 	"./parkingfee/Create": [
 		"./resources/js/pages/parkingfee/Create.vue",
 		"resources_js_pages_parkingfee_Create_vue"
@@ -58204,6 +58220,22 @@ var map = {
 	"./parkingfee/Create.vue": [
 		"./resources/js/pages/parkingfee/Create.vue",
 		"resources_js_pages_parkingfee_Create_vue"
+	],
+	"./test-transaction/Create": [
+		"./resources/js/pages/test-transaction/Create.vue",
+		"resources_js_pages_test-transaction_Create_vue"
+	],
+	"./test-transaction/Create.vue": [
+		"./resources/js/pages/test-transaction/Create.vue",
+		"resources_js_pages_test-transaction_Create_vue"
+	],
+	"./test-transaction/TableHeader": [
+		"./resources/js/pages/test-transaction/TableHeader.js",
+		"resources_js_pages_test-transaction_TableHeader_js"
+	],
+	"./test-transaction/TableHeader.js": [
+		"./resources/js/pages/test-transaction/TableHeader.js",
+		"resources_js_pages_test-transaction_TableHeader_js"
 	],
 	"./topup/Create": [
 		"./resources/js/pages/topup/Create.vue",
@@ -58236,6 +58268,22 @@ var map = {
 	"./topup/tableHeader.js": [
 		"./resources/js/pages/topup/tableHeader.js",
 		"resources_js_pages_topup_tableHeader_js"
+	],
+	"./transaction/Create": [
+		"./resources/js/pages/transaction/Create.vue",
+		"resources_js_pages_transaction_Create_vue"
+	],
+	"./transaction/Create.vue": [
+		"./resources/js/pages/transaction/Create.vue",
+		"resources_js_pages_transaction_Create_vue"
+	],
+	"./transaction/TableHeader": [
+		"./resources/js/pages/transaction/TableHeader.js",
+		"resources_js_pages_transaction_TableHeader_js"
+	],
+	"./transaction/TableHeader.js": [
+		"./resources/js/pages/transaction/TableHeader.js",
+		"resources_js_pages_transaction_TableHeader_js"
 	],
 	"./typemember/Create": [
 		"./resources/js/pages/typemember/Create.vue",
@@ -58466,7 +58514,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"node_modules_chart_js_auto_auto_esm_js":"10c6b388645ceb22","resources_js_pages_auth_ForgotPassword_vue":"85a497d97d470da0","resources_js_pages_auth_Login_vue":"2cfdf492d60f9521","resources_js_pages_auth_ResetPassword_vue":"9bc29d6465cc0c53","resources_js_pages_auth_VerifyEmail_vue":"f88499b46d5f110c","resources_js_pages_expense_Create_vue":"dcf4ae914754f7c3","resources_js_pages_expense_Index_vue":"2e03f2250d29cc7e","resources_js_pages_expense_Show_vue":"bbd4af118a9f9622","resources_js_pages_expense_tableHeader_js":"5b2c3a80fb697fff","resources_js_pages_home_Index_vue":"432fd19563c30f4b","resources_js_pages_member_Create_vue":"2a24d02beaf751ba","resources_js_pages_member_Edit_vue":"2a6a77411409797f","resources_js_pages_member_Index_vue":"60c5c146e74847bf","resources_js_pages_member_tableHeader_js":"61877f698532418e","resources_js_pages_member_useVehicle_js":"8edc972eb134efdf","resources_js_pages_mutation_Report_vue":"705780846727ec54","resources_js_pages_mutation_tableHeader_js":"2c25ede9c3d1ff83","resources_js_pages_parkingfee_Create_vue":"9c4541f49b68a0ba","resources_js_pages_topup_Create_vue":"169244e5e3d7e8d5","resources_js_pages_topup_Index_vue":"9b3b6c72a543f073","resources_js_pages_topup_Show_vue":"12cb2934ed3aba08","resources_js_pages_topup_tableHeader_js":"187746378ee18327","resources_js_pages_typemember_Create_vue":"ef5c53efa2b0a3d5","resources_js_pages_typemember_Edit_vue":"bdce66ddb48ceac1","resources_js_pages_typemember_Index_vue":"e3d9c5222ae2670f","resources_js_pages_typemember_tableHeader_js":"02f8a6c57093a7fe","resources_js_pages_typemember_useVehicle_js":"9bcdb75c62376835","resources_js_pages_typevehicle_Create_vue":"6a94620253e8efe6","resources_js_pages_typevehicle_Edit_vue":"d26dfa3df65fb8cb","resources_js_pages_typevehicle_Index_vue":"787e12666ee97e15","resources_js_pages_typevehicle_tableHeader_js":"9616b18c4a750c3f","resources_js_pages_user_Create_vue":"569ac44a6aa32e95","resources_js_pages_user_Edit_vue":"533c2508493bf676","resources_js_pages_user_Index_vue":"160d80e2d7be49c0","resources_js_pages_user_Show_vue":"62c2479dfe6a6202","resources_js_pages_user_tableHeader_js":"78beeea0dcacb81b"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"node_modules_chart_js_auto_auto_esm_js":"10c6b388645ceb22","resources_js_pages_auth_ForgotPassword_vue":"7d50fd4667466882","resources_js_pages_auth_Login_vue":"171d355a81a2dad7","resources_js_pages_auth_ResetPassword_vue":"59ac77dd752963d1","resources_js_pages_auth_VerifyEmail_vue":"45475e95c3a05116","resources_js_pages_expense_Create_vue":"1be2098254f554c1","resources_js_pages_expense_Index_vue":"45e5cbea5b593290","resources_js_pages_expense_Show_vue":"46b22fd2e4859294","resources_js_pages_expense_tableHeader_js":"5b2c3a80fb697fff","resources_js_pages_home_Index_vue":"68274e78d8c2f329","resources_js_pages_member_Create_vue":"7de6808a82b5e57f","resources_js_pages_member_Edit_vue":"18ef31d3b32d8a22","resources_js_pages_member_Index_vue":"bb893d9fb9011891","resources_js_pages_member_tableHeader_js":"61877f698532418e","resources_js_pages_member_useVehicle_js":"8edc972eb134efdf","resources_js_pages_mutation_Report_vue":"7403ce08257572d1","resources_js_pages_mutation_tableHeader_js":"2c25ede9c3d1ff83","resources_js_pages_outtransaction_Show_vue":"4010482e73c68cdb","resources_js_pages_outtransaction_tableHeader_js":"28e044bd873db9aa","resources_js_pages_parkingfee_Create_vue":"7daf10711dca7c8b","resources_js_pages_test-transaction_Create_vue":"b98a742d23a24db9","resources_js_pages_test-transaction_TableHeader_js":"41de407b819e132e","resources_js_pages_topup_Create_vue":"4386193d8ace3b3e","resources_js_pages_topup_Index_vue":"987756b2af6a717f","resources_js_pages_topup_Show_vue":"228f717e2aa7565f","resources_js_pages_topup_tableHeader_js":"8a585c07bb26d0e7","resources_js_pages_transaction_Create_vue":"5dd6991c8ec62a21","resources_js_pages_transaction_TableHeader_js":"68379a290810960e","resources_js_pages_typemember_Create_vue":"05799a4cebcb539e","resources_js_pages_typemember_Edit_vue":"af7867c70368b1bf","resources_js_pages_typemember_Index_vue":"f6738a04d8c0701a","resources_js_pages_typemember_tableHeader_js":"02f8a6c57093a7fe","resources_js_pages_typemember_useVehicle_js":"9bcdb75c62376835","resources_js_pages_typevehicle_Create_vue":"17efc49901472fd6","resources_js_pages_typevehicle_Edit_vue":"c3980cee4c59955f","resources_js_pages_typevehicle_Index_vue":"c90b5872db78dd23","resources_js_pages_typevehicle_tableHeader_js":"9616b18c4a750c3f","resources_js_pages_user_Create_vue":"1b852ae471563087","resources_js_pages_user_Edit_vue":"383e262532b24469","resources_js_pages_user_Index_vue":"7b153cb89f5825a6","resources_js_pages_user_Show_vue":"04e2e5eb47f0c083","resources_js_pages_user_tableHeader_js":"78beeea0dcacb81b"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

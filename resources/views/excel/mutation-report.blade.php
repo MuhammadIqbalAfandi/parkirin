@@ -31,15 +31,15 @@
         </tr>
         <tr>
             <td colspan="3">Pendapatan</td>
-            <td>{{ (new App\Services\MutationService())->totalIncomeAsString($mutations) }}</td>
+            <td>{{ App\Services\MutationService::totalIncomeAsString($mutations) }}</td>
         </tr>
         <tr>
             <td colspan="3">Pengeluran</td>
-            <td>{{ (new App\Services\MutationService())->totalExpenseAsString($mutations) }}</td>
+            <td>{{ App\Services\MutationService::totalExpenseAsString($mutations) }}</td>
         </tr>
         <tr>
             <td colspan="3">Jumlah</td>
-            <td>{{ (new App\Services\MutationService())->totalAmountAsString($mutations) }}</td>
+            <td>{{ App\Services\MutationService::totalAmountAsString($mutations) }}</td>
         </tr>
     </tbody>
 </table>

@@ -33,7 +33,7 @@ class DashboardController extends Controller
             ->get()
             ->groupBy([
                 fn($mutation) => $mutation->type,
-                fn($mutation) => Carbon::parse($mutation->getRawOriginal('created_at'))->format('M'),
+                fn($mutation) => Carbon::parse($mutation->getRawOriginal('created_at'))->format('M')
             ]);
 
         return inertia('home/Index.vue', [
@@ -51,29 +51,29 @@ class DashboardController extends Controller
                     'icon' => 'pi pi-id-card',
                     'amount' => $members->count(),
                     'amountLabel' => __('words.total'),
-                    'roleId' => [3],
+                    'roleId' => [3]
                 ],
                 [
                     'title' => __('words.type_member'),
                     'icon' => 'pi pi-id-card',
                     'amount' => $typeMembers->count(),
                     'amountLabel' => __('words.total'),
-                    'roleId' => [2],
+                    'roleId' => [2]
                 ],
                 [
                     'title' => __('words.type_vehicle'),
                     'icon' => 'pi pi-car',
                     'amount' => $typeVehicles->count(),
                     'amountLabel' => __('words.total'),
-                    'roleId' => [3],
+                    'roleId' => [3]
                 ],
                 [
                     'title' => __('words.user'),
                     'icon' => 'pi pi-user',
                     'amount' => $users->count(),
                     'amountLabel' => __('words.total'),
-                    'roleId' => [1],
-                ],
+                    'roleId' => [1]
+                ]
             ],
             'barStatistics' => [
                 // [
@@ -85,10 +85,10 @@ class DashboardController extends Controller
                 [
                     'title' => __('words.mutation_statistic'),
                     'description' => __('words.per_year') . ' ' . date('Y'),
-                    'data' => (new MutationService)->statistic($mutations),
-                    'roleId' => [2, 3],
-                ],
-            ],
+                    'data' => MutationService::statistic($mutations),
+                    'roleId' => [2, 3]
+                ]
+            ]
         ]);
     }
 }

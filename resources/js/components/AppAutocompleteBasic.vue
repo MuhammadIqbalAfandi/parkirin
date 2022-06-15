@@ -35,7 +35,9 @@ const isError = computed(() => (props.error ? true : false))
 
 const forLabel = computed(() => props.label.toLowerCase().replace(/\s+/g, '-'))
 
-const ariaDescribedbyLabel = computed(() => props.label.toLowerCase().replace(/\s+/g, '-') + '-help')
+const ariaDescribedbyLabel = computed(
+  () => props.label.toLowerCase().replace(/\s+/g, '-') + '-help'
+)
 </script>
 
 <template>
@@ -67,13 +69,19 @@ const ariaDescribedbyLabel = computed(() => props.label.toLowerCase().replace(/\
       <small
         v-if="error"
         class="mt-1"
-        :class="{ 'mb-2': suggestions.length === 0 || modelValue.length === 0, 'p-error': isError }"
+        :class="{
+          'mb-2': suggestions.length === 0 || modelValue.length === 0,
+          'p-error': isError,
+        }"
         :id="ariaDescribedbyLabel"
       >
         {{ error }}
       </small>
 
-      <small v-if="suggestions.length === 0 || modelValue.length === 0" class="mt-1">
+      <small
+        v-if="suggestions.length === 0 || modelValue.length === 0"
+        class="mt-1"
+      >
         <slot name="empty" />
       </small>
     </div>

@@ -15,7 +15,10 @@ export function useDateRangeFilter(props) {
 
     if (props.initialDateRange[0] || props.initialDateRange[1]) {
       if (props.initialDateRange[1]) {
-        dates.value = [new Date(props.initialDateRange[0]), new Date(props.initialDateRange[1])]
+        dates.value = [
+          new Date(props.initialDateRange[0]),
+          new Date(props.initialDateRange[1]),
+        ]
       } else {
         dates.value = [new Date(props.props.initialDateRange[1]), null]
       }

@@ -50,7 +50,9 @@ const submitValidation = () => {
 
   listVehicles.forEach((val) => {
     if (val.count > val.maxVehicle) {
-      throw new FormValidationError('Ada perubahan pada batas maksimal kendaraan')
+      throw new FormValidationError(
+        'Ada perubahan pada batas maksimal kendaraan'
+      )
     }
   })
 }
@@ -117,11 +119,21 @@ const onSubmit = () => {
           <template #content>
             <div class="grid">
               <div class="col-12 md:col-6">
-                <AppInputText v-model="form.name" label="Nama" placeholder="nama" :error="form.errors.name" />
+                <AppInputText
+                  v-model="form.name"
+                  label="Nama"
+                  placeholder="nama"
+                  :error="form.errors.name"
+                />
               </div>
 
               <div class="col-12 md:col-6">
-                <AppInputText v-model="form.phone" label="Nomor HP" placeholder="nomor hp" :error="form.errors.phone" />
+                <AppInputText
+                  v-model="form.phone"
+                  label="Nomor HP"
+                  placeholder="nomor hp"
+                  :error="form.errors.phone"
+                />
               </div>
 
               <div class="col-12 md:col-6">
@@ -187,7 +199,9 @@ const onSubmit = () => {
                 />
               </div>
               <div class="col-12 mb-3 md:mb-0">
-                <div class="flex flex-column md:flex-row md:align-items-center justify-content-end">
+                <div
+                  class="flex flex-column md:flex-row md:align-items-center justify-content-end"
+                >
                   <Button
                     label="Tambah"
                     class="p-button-outlined"
@@ -214,7 +228,9 @@ const onSubmit = () => {
                   />
                   <Column>
                     <template #body="{ index }">
-                      <span style="color: #b71c1c">{{ $page.props.errors[`vehicles.${index}.platNumber`] }}</span>
+                      <span style="color: #b71c1c">{{
+                        $page.props.errors[`vehicles.${index}.platNumber`]
+                      }}</span>
                     </template>
                   </Column>
 
@@ -224,7 +240,12 @@ const onSubmit = () => {
                         <Button
                           icon="pi pi-trash"
                           class="p-button-rounded p-button-text"
-                          :class="{ 'p-button-danger': $page.props.errors[`vehicles.${index}.platNumber`] }"
+                          :class="{
+                            'p-button-danger':
+                              $page.props.errors[
+                                `vehicles.${index}.platNumber`
+                              ],
+                          }"
                           @click="vehicleOnDelete(index)"
                         />
                       </div>
@@ -236,7 +257,9 @@ const onSubmit = () => {
           </template>
           <template #footer>
             <div class="grid">
-              <div class="col-12 flex flex-column md:flex-row justify-content-center md:justify-content-end">
+              <div
+                class="col-12 flex flex-column md:flex-row justify-content-center md:justify-content-end"
+              >
                 <Button
                   label="Simpan"
                   icon="pi pi-check"

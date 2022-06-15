@@ -4,8 +4,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MutationController;
+use App\Http\Controllers\OutTransactionController;
 use App\Http\Controllers\ParkingFeeController;
 use App\Http\Controllers\TopUpController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TypeMemberController;
 use App\Http\Controllers\TypeVehicleController;
 use App\Http\Controllers\UserController;
@@ -45,6 +47,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/type-vehicles', TypeVehicleController::class);
 
     Route::resource('/parking-fees', ParkingFeeController::class);
+
+    Route::resource('/transactions', TransactionController::class);
+
+    Route::resource('/out-transactions', OutTransactionController::class);
 });
 
 require __DIR__ . '/auth.php';

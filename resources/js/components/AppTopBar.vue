@@ -11,7 +11,10 @@ defineEmits(['menu-toggle'])
       <span>Parkirin</span>
     </Link>
 
-    <button class="p-link layout-menu-button layout-topbar-button" @click="$emit('menu-toggle', $event)">
+    <button
+      class="p-link layout-menu-button layout-topbar-button"
+      @click="$emit('menu-toggle', $event)"
+    >
       <i class="pi pi-bars"></i>
     </button>
 
@@ -37,7 +40,10 @@ defineEmits(['menu-toggle'])
         <Link
           :href="route('users.show', $page.props.auth.user.id)"
           class="p-link layout-topbar-button"
-          v-tooltip.bottom="{ value: 'Ubah Profil', class: 'layout-topbar-menu-tooltip' }"
+          v-tooltip.bottom="{
+            value: 'Ubah Profil',
+            class: 'layout-topbar-menu-tooltip',
+          }"
         >
           <i class="pi pi-user"></i>
           <span>Ubah Profil</span>
@@ -49,7 +55,10 @@ defineEmits(['menu-toggle'])
           as="button"
           method="post"
           class="p-link layout-topbar-button"
-          v-tooltip.bottom="{ value: 'Keluar', class: 'layout-topbar-menu-tooltip' }"
+          v-tooltip.bottom="{
+            value: 'Keluar',
+            class: 'layout-topbar-menu-tooltip',
+          }"
         >
           <i class="pi pi-sign-out"></i>
           <span>Keluar</span>
@@ -81,7 +90,8 @@ $transition: 0.2s;
   transition: left $transition;
   display: flex;
   align-items: center;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05),
+    0px 1px 4px rgba(0, 0, 0, 0.08);
 
   .layout-topbar-logo {
     display: flex;
@@ -182,7 +192,8 @@ $transition: 0.2s;
       position: absolute;
       flex-direction: column;
       background-color: var(--surface-overlay);
-      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02),
+        0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
       border-radius: 4px;
       padding: 1rem;
       right: 2rem;

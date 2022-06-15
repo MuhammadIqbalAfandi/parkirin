@@ -24,9 +24,9 @@ class MutationController extends Controller
             'initialDateRange' => request()->collect(['startDate', 'endDate'])->flatten(),
             'mutations' => Inertia::lazy(
                 fn() => [
-                    'totalIncome' => (new MutationService)->totalIncomeAsString($mutations->get()),
-                    'totalExpense' => (new MutationService)->totalExpenseAsString($mutations->get()),
-                    'totalAmount' => (new MutationService)->totalAmountAsString($mutations->get()),
+                    'totalIncome' => MutationService::totalIncomeAsString($mutations->get()),
+                    'totalExpense' => MutationService::totalExpenseAsString($mutations->get()),
+                    'totalAmount' => MutationService::totalAmountAsString($mutations->get()),
                     'details' => $mutations
                         ->latest()
                         ->paginate(10)
@@ -37,10 +37,10 @@ class MutationController extends Controller
                             'type' => $mutation->type,
                             'outTransactionId' => $mutation->out_transaction_id,
                             'expenseId' => $mutation->expense_id,
-                            'topUpId' => $mutation->top_up_id,
-                        ]),
+                            'topUpId' => $mutation->top_up_id
+                        ])
                 ]
-            ),
+            )
         ]);
     }
 

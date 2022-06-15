@@ -49,14 +49,18 @@ defineEmits(['update:modelValue'])
 
 const isError = computed(() => (props.error ? true : false))
 
-const forLabel = computed(() => (props.label ? props.label.toLowerCase().replace(/\s+/g, '-') : null))
+const forLabel = computed(() =>
+  props.label ? props.label.toLowerCase().replace(/\s+/g, '-') : null
+)
 
 const ariaDescribedbyLabel = computed(() =>
   props.label ? props.label.toLowerCase().replace(/\s+/g, '-') + '-help' : null
 )
 
 const selectedDropdownLabel = (value) => {
-  const result = props.options.find((option) => option[props.optionValue] == value)
+  const result = props.options.find(
+    (option) => option[props.optionValue] == value
+  )
   if (result) {
     return result[props.optionLabel]
   }
@@ -98,7 +102,11 @@ const selectedDropdownLabel = (value) => {
       </template>
     </Dropdown>
 
-    <small v-if="error" :id="ariaDescribedbyLabel" :class="{ 'p-error': isError }">
+    <small
+      v-if="error"
+      :id="ariaDescribedbyLabel"
+      :class="{ 'p-error': isError }"
+    >
       {{ error }}
     </small>
   </div>

@@ -52,7 +52,12 @@ const onChangePassword = () => {
               <TabPanel header="Ubah Profil">
                 <div class="grid">
                   <div class="col-12 md:col-6">
-                    <AppInputText label="Nama" placeholder="nama" :error="form.errors.name" v-model="form.name" />
+                    <AppInputText
+                      label="Nama"
+                      placeholder="nama"
+                      :error="form.errors.name"
+                      v-model="form.name"
+                    />
                   </div>
 
                   <div class="col-12 md:col-6">
@@ -65,7 +70,12 @@ const onChangePassword = () => {
                   </div>
 
                   <div class="col-12 md:col-6">
-                    <AppInputText label="Email" placeholder="email" :error="form.errors.email" v-model="form.email" />
+                    <AppInputText
+                      label="Email"
+                      placeholder="email"
+                      :error="form.errors.email"
+                      v-model="form.email"
+                    />
                   </div>
 
                   <div class="col-12 flex justify-content-end">

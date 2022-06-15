@@ -71,10 +71,24 @@ const onSubmit = () => {
     form
       .transform((data) => ({
         id: [data.id1, data.id2, data.id3, data.id4, data.idNext],
-        time_period: [data.timePeriod1, data.timePeriod2, data.timePeriod3, data.timePeriod4, data.timePeriodNext],
-        price: [data.price1, data.price2, data.price3, data.price4, data.priceNext],
+        time_period: [
+          data.timePeriod1,
+          data.timePeriod2,
+          data.timePeriod3,
+          data.timePeriod4,
+          data.timePeriodNext,
+        ],
+        price: [
+          data.price1,
+          data.price2,
+          data.price3,
+          data.price4,
+          data.priceNext,
+        ],
       }))
-      .post(route('parking-fees.store'), { onSuccess: () => (disabled.value = true) })
+      .post(route('parking-fees.store'), {
+        onSuccess: () => (disabled.value = true),
+      })
   } catch (e) {
     dialogVisible.value = true
     dialogMessage.value = e.message
@@ -84,7 +98,12 @@ const onSubmit = () => {
 
 <template>
   <DashboardLayout>
-    <Dialog modal header="Ada Kesalahan" :visible="dialogVisible" :closable="false">
+    <Dialog
+      modal
+      header="Ada Kesalahan"
+      :visible="dialogVisible"
+      :closable="false"
+    >
       <span style="color: var(--red-500)">{{ dialogMessage }}</span>
 
       <template #footer>

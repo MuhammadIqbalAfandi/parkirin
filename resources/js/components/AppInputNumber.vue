@@ -71,7 +71,9 @@ const isError = computed(() => (props.error ? true : false))
 
 const forLabel = computed(() => props.label.toLowerCase().replace(/\s+/g, '-'))
 
-const ariaDescribedbyLabel = computed(() => props.label.toLowerCase().replace(/\s+/g, '-') + '-help')
+const ariaDescribedbyLabel = computed(
+  () => props.label.toLowerCase().replace(/\s+/g, '-') + '-help'
+)
 </script>
 
 <template>
@@ -101,7 +103,11 @@ const ariaDescribedbyLabel = computed(() => props.label.toLowerCase().replace(/\
       @input="$emit('update:modelValue', $event.value)"
     />
 
-    <small v-if="error" :id="ariaDescribedbyLabel" :class="{ 'p-error': isError }">
+    <small
+      v-if="error"
+      :id="ariaDescribedbyLabel"
+      :class="{ 'p-error': isError }"
+    >
       {{ error }}
     </small>
   </div>

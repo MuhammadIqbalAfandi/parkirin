@@ -84,11 +84,17 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
                 />
               </div>
               <div class="col-auto mt-2 ml-2">
-                <Button label="reset" class="p-button-link" @click="filterReset" />
+                <Button
+                  label="reset"
+                  class="p-button-link"
+                  @click="filterReset"
+                />
               </div>
             </div>
           </div>
-          <div class="col-12 md:col-4 flex flex-column md:flex-row justify-content-end">
+          <div
+            class="col-12 md:col-4 flex flex-column md:flex-row justify-content-end"
+          >
             <AppButtonLink
               v-if="mutations.details.total"
               label="Export excel"
@@ -103,7 +109,9 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
         <div v-if="mutations.totalAmount" class="grid mt-5 ml-1">
           <div class="col-auto mr-7">
             <h2>
-              <span class="text-base"> <i class="pi pi-wallet" /> Pendapatan</span>
+              <span class="text-base">
+                <i class="pi pi-wallet" /> Pendapatan</span
+              >
 
               <br />
 
@@ -112,11 +120,15 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
           </div>
           <div class="col-auto mr-7">
             <h2>
-              <span class="text-base"> <i class="pi pi-wallet" /> Pengeluaran</span>
+              <span class="text-base">
+                <i class="pi pi-wallet" /> Pengeluaran</span
+              >
 
               <br />
 
-              <span class="text-xl font-bold">{{ mutations.totalExpense }}</span>
+              <span class="text-xl font-bold">{{
+                mutations.totalExpense
+              }}</span>
             </h2>
           </div>
           <div class="col-auto">
@@ -131,7 +143,12 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
         </div>
       </template>
 
-      <Column v-for="value in tableHeader" :field="value.field" :header="value.header" :key="value.field" />
+      <Column
+        v-for="value in tableHeader"
+        :field="value.field"
+        :header="value.header"
+        :key="value.field"
+      />
 
       <Column>
         <template #body="{ data }">

@@ -15,7 +15,7 @@ mix
   .js('resources/js/vue.js', 'public/js')
   .webpackConfig(require('./webpack.config'))
   .vue()
-  .browserSync('http://127.0.0.1:8000')
+  .browserSync('http://parkirin.test')
   .disableNotifications()
 
 if (mix.inProduction()) {

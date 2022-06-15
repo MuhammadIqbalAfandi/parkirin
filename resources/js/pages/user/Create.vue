@@ -34,15 +34,30 @@ const onSubmit = () => {
           <template #content>
             <div class="grid">
               <div class="col-12 md:col-6">
-                <AppInputText label="Nama" placeholder="nama" :error="form.errors.name" v-model="form.name" />
+                <AppInputText
+                  label="Nama"
+                  placeholder="nama"
+                  :error="form.errors.name"
+                  v-model="form.name"
+                />
               </div>
 
               <div class="col-12 md:col-6">
-                <AppInputText label="Nomor HP" placeholder="nomor hp" :error="form.errors.phone" v-model="form.phone" />
+                <AppInputText
+                  label="Nomor HP"
+                  placeholder="nomor hp"
+                  :error="form.errors.phone"
+                  v-model="form.phone"
+                />
               </div>
 
               <div class="col-12 md:col-6">
-                <AppInputText label="Email" placeholder="email" :error="form.errors.email" v-model="form.email" />
+                <AppInputText
+                  label="Email"
+                  placeholder="email"
+                  :error="form.errors.email"
+                  v-model="form.email"
+                />
               </div>
 
               <div class="col-12 md:col-6">

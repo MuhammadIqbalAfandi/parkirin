@@ -59,7 +59,7 @@ return [
         'array' => 'Nilai harus have :value items or more.',
     ],
     'image' => 'Harus gambar.',
-    'in' => 'The selected Nilai is invalid.',
+    'in' => 'Nilai tidak cocok.',
     'in_array' => 'Nilai does not exist in :other.',
     'integer' => 'Nilai harus integer.',
     'ip' => 'Nilai harus be a valid IP address.',

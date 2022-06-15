@@ -13,9 +13,16 @@ defineProps({
 <template>
   <ul v-if="items">
     <template v-for="(item, i) of items">
-      <li v-if="item" :key="i" :class="[{ 'layout-menuitem-category': root }]" role="none">
+      <li
+        v-if="item"
+        :key="i"
+        :class="[{ 'layout-menuitem-category': root }]"
+        role="none"
+      >
         <template v-if="root">
-          <div class="layout-menuitem-root-text" :aria-label="item.label">{{ item.label }}</div>
+          <div class="layout-menuitem-root-text" :aria-label="item.label">
+            {{ item.label }}
+          </div>
 
           <AppSubSidebar :items="item.items"></AppSubSidebar>
         </template>
@@ -26,8 +33,12 @@ defineProps({
             :href="item.to"
             :class="[
               {
-                'router-link-active': $page.component.startsWith(item.component) || $page.url.startsWith(item.to),
-                'router-link-exact-active': $page.component.startsWith(item.component) || $page.url.startsWith(item.to),
+                'router-link-active':
+                  $page.component.startsWith(item.component) ||
+                  $page.url.startsWith(item.to),
+                'router-link-exact-active':
+                  $page.component.startsWith(item.component) ||
+                  $page.url.startsWith(item.to),
               },
             ]"
             :aria-label="item.label"

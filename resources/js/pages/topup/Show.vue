@@ -37,7 +37,12 @@ defineProps({
         </div>
       </template>
 
-      <Column v-for="value in topUpTable" :field="value.field" :header="value.header" :key="value.field" />
+      <Column
+        v-for="value in topUpTable"
+        :field="value.field"
+        :header="value.header"
+        :key="value.field"
+      />
     </DataTable>
 
     <AppPagination :links="topUp.links" />

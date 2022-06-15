@@ -19,7 +19,10 @@ export function useVehicle(props, form) {
 
       form.reset('plat_number', 'max_vehicle_id')
 
-      Inertia.reload({ only: ['typeMember'], data: { id: form.type_member_id } })
+      Inertia.reload({
+        only: ['typeMember'],
+        data: { id: form.type_member_id },
+      })
     }
   )
 
@@ -35,24 +38,37 @@ export function useVehicle(props, form) {
 
   const vehicleAddValidation = () => {
     if (!form.plat_number) {
-      throw new FormValidationError('Plat kendaraan tidak boleh kosong', 'plat_number')
+      throw new FormValidationError(
+        'Plat kendaraan tidak boleh kosong',
+        'plat_number'
+      )
     }
 
     if (!form.max_vehicle_id) {
       throw new FormValidationError('Tidak boleh kosong', 'max_vehicle_id')
     }
 
-    const platNumberExist = listVehicle.filter((vehicle) => vehicle.platNumber === form.plat_number.toUpperCase())
+    const platNumberExist = listVehicle.filter(
+      (vehicle) => vehicle.platNumber === form.plat_number.toUpperCase()
+    )
 
     if (platNumberExist.length) {
-      throw new FormValidationError('Nomor plat kendaraan tidak boleh sama', 'plat_number')
+      throw new FormValidationError(
+        'Nomor plat kendaraan tidak boleh sama',
+        'plat_number'
+      )
     }
 
-    const maxVehicles = listVehicle.filter((vehicle) => vehicle.maxVehicleId === form.max_vehicle_id)
+    const maxVehicles = listVehicle.filter(
+      (vehicle) => vehicle.maxVehicleId === form.max_vehicle_id
+    )
 
     if (maxVehicles.length) {
       if (maxVehicles.length + 1 > maxVehicles[0].maxVehicle) {
-        throw new FormValidationError('Melibihi batas maksimal kendaraan', 'plat_number')
+        throw new FormValidationError(
+          'Melibihi batas maksimal kendaraan',
+          'plat_number'
+        )
       }
     }
   }

@@ -1,5 +1,9 @@
 <script>
-import { ConnectedOverlayScrollHandler, DomHandler, ZIndexUtils } from 'primevue/utils'
+import {
+  ConnectedOverlayScrollHandler,
+  DomHandler,
+  ZIndexUtils,
+} from 'primevue/utils'
 import OverlayEventBus from 'primevue/overlayeventbus'
 import Menuitem from './AppMenuItem.vue'
 export default {
@@ -87,7 +91,11 @@ export default {
       this.bindResizeListener()
       this.bindScrollListener()
       if (this.autoZIndex) {
-        ZIndexUtils.set('menu', el, this.baseZIndex + this.$primevue.config.zIndex.menu)
+        ZIndexUtils.set(
+          'menu',
+          el,
+          this.baseZIndex + this.$primevue.config.zIndex.menu
+        )
       }
       this.$emit('show')
     },
@@ -104,7 +112,8 @@ export default {
     },
     alignOverlay() {
       DomHandler.absolutePosition(this.container, this.target)
-      this.container.style.minWidth = DomHandler.getOuterWidth(this.target) + 'px'
+      this.container.style.minWidth =
+        DomHandler.getOuterWidth(this.target) + 'px'
     },
     bindOutsideClickListener() {
       if (!this.outsideClickListener) {
@@ -129,11 +138,14 @@ export default {
     },
     bindScrollListener() {
       if (!this.scrollHandler) {
-        this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, () => {
-          if (this.overlayVisible) {
-            this.hide()
+        this.scrollHandler = new ConnectedOverlayScrollHandler(
+          this.target,
+          () => {
+            if (this.overlayVisible) {
+              this.hide()
+            }
           }
-        })
+        )
       }
       this.scrollHandler.bindScrollListener()
     },
@@ -159,10 +171,15 @@ export default {
       }
     },
     isTargetClicked(event) {
-      return this.target && (this.target === event.target || this.target.contains(event.target))
+      return (
+        this.target &&
+        (this.target === event.target || this.target.contains(event.target))
+      )
     },
     visible(item) {
-      return typeof item.visible === 'function' ? item.visible() : item.visible !== false
+      return typeof item.visible === 'function'
+        ? item.visible()
+        : item.visible !== false
     },
     label(item) {
       return typeof item.label === 'function' ? item.label() : item.label
@@ -197,7 +214,12 @@ export default {
 
 <template>
   <Teleport :to="appendTo" :disabled="!popup">
-    <transition name="p-connected-overlay" @enter="onEnter" @leave="onLeave" @after-leave="onAfterLeave">
+    <transition
+      name="p-connected-overlay"
+      @enter="onEnter"
+      @leave="onLeave"
+      @after-leave="onAfterLeave"
+    >
       <div
         :ref="containerRef"
         :class="containerClass"
@@ -206,12 +228,18 @@ export default {
         @click="onOverlayClick"
       >
         <ul class="p-menu-list p-reset" role="menu">
-          <template v-for="(item, i) of model" :key="label(item) + i.toString()">
+          <template
+            v-for="(item, i) of model"
+            :key="label(item) + i.toString()"
+          >
             <template v-if="item.items && visible(item) && !item.separator">
               <li class="p-submenu-header" v-if="item.items">
                 <slot name="item" :item="item">{{ label(item) }}</slot>
               </li>
-              <template v-for="(child, j) of item.items" :key="child.label + i + j">
+              <template
+                v-for="(child, j) of item.items"
+                :key="child.label + i + j"
+              >
                 <Menuitem
                   v-if="visible(child) && !child.separator"
                   :item="child"

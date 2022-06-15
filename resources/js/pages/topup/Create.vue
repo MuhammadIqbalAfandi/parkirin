@@ -88,7 +88,9 @@ const onSubmit = () => {
 
               <div class="col-12">
                 <h2>
-                  <span class="text-base"> <i class="pi pi-id-card" /> Jenis Member</span>
+                  <span class="text-base">
+                    <i class="pi pi-id-card" /> Jenis Member</span
+                  >
 
                   <br />
 
@@ -98,7 +100,9 @@ const onSubmit = () => {
 
               <div class="col-12">
                 <h2>
-                  <span class="text-base"> <i class="pi pi-wallet" /> Tarif Member</span>
+                  <span class="text-base">
+                    <i class="pi pi-wallet" /> Tarif Member</span
+                  >
 
                   <br />
 
@@ -108,7 +112,9 @@ const onSubmit = () => {
 
               <div class="col-12">
                 <h2>
-                  <span class="text-base"> <i class="pi pi-calendar-times" /> Berakhir</span>
+                  <span class="text-base">
+                    <i class="pi pi-calendar-times" /> Berakhir</span
+                  >
 
                   <br />
 
@@ -143,13 +149,19 @@ const onSubmit = () => {
                       <div class="flex flex-column">
                         <span>{{ slotProps.item.name }}</span>
                         <span>{{ slotProps.item.type }}</span>
-                        <span class="font-bold">{{ slotProps.item.platNumber }}</span>
+                        <span class="font-bold">{{
+                          slotProps.item.platNumber
+                        }}</span>
                       </div>
                     </template>
                   </template>
 
                   <template #empty>
-                    <span class="cursor-pointer" style="color: var(--primary-color)" @click="gotoMember">
+                    <span
+                      class="cursor-pointer"
+                      style="color: var(--primary-color)"
+                      @click="gotoMember"
+                    >
                       Buat Member
                     </span>
                   </template>

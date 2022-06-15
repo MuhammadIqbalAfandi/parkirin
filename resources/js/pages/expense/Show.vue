@@ -18,7 +18,10 @@ defineProps({
             <div class="grid">
               <div class="col-12">
                 <h2>
-                  <span class="text-base"> <i class="pi pi-user" /> User</span>
+                  <span class="text-base">
+                    <i class="pi pi-user" />
+                    Petugas Parkir
+                  </span>
 
                   <br />
 
@@ -28,7 +31,9 @@ defineProps({
 
               <div v-if="expense.user.phone" class="col-12">
                 <h2>
-                  <span class="text-base"> <i class="pi pi-phone" /> Nomor HP </span>
+                  <span class="text-base">
+                    <i class="pi pi-phone" /> Nomor HP
+                  </span>
 
                   <br />
 

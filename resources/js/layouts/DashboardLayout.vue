@@ -64,7 +64,10 @@ const onMenuToggle = (event) => {
     </div>
 
     <Transition name="layout-mask">
-      <div class="layout-mask p-component-overlay" v-if="mobileMenuActive"></div>
+      <div
+        class="layout-mask p-component-overlay"
+        v-if="mobileMenuActive"
+      ></div>
     </Transition>
   </div>
 </template>
@@ -83,7 +86,8 @@ const onMenuToggle = (event) => {
   background-color: var(--surface-overlay);
   border-radius: 4px;
   padding: 1.5rem;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05),
+    0px 1px 4px rgba(0, 0, 0, 0.08);
 }
 
 .layout-main-container {

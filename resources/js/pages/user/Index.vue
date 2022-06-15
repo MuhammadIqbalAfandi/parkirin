@@ -17,7 +17,9 @@ const props = defineProps({
 const { search } = useSearchText(props)
 
 watch(search, () => {
-  Inertia.get('/users', pickBy({ search: search.value }), { preserveState: true })
+  Inertia.get('/users', pickBy({ search: search.value }), {
+    preserveState: true,
+  })
 })
 </script>
 
@@ -38,11 +40,17 @@ watch(search, () => {
         <div class="grid">
           <div class="col-12 md:col-8">
             <div class="flex align-items-center">
-              <InputText class="w-full md:w-27rem" placeholder="cari, contoh: tina, tina@xx.com" v-model="search" />
+              <InputText
+                class="w-full md:w-27rem"
+                placeholder="cari, contoh: tina, tina@xx.com"
+                v-model="search"
+              />
             </div>
           </div>
 
-          <div class="col-12 md:col-4 flex flex-column md:flex-row justify-content-end">
+          <div
+            class="col-12 md:col-4 flex flex-column md:flex-row justify-content-end"
+          >
             <AppButtonLink
               label="Tambah User"
               icon="pi pi-pencil"
@@ -53,7 +61,12 @@ watch(search, () => {
         </div>
       </template>
 
-      <Column v-for="value in tableHeader" :field="value.field" :header="value.header" :key="value.field" />
+      <Column
+        v-for="value in tableHeader"
+        :field="value.field"
+        :header="value.header"
+        :key="value.field"
+      />
 
       <Column>
         <template #body="{ data }">

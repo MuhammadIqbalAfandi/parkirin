@@ -23,7 +23,10 @@ const form = useForm({
 
 useFormErrorReset(form)
 
-const { listVehicle, vehicleClear, vehicleOnAdd, vehicleOnDelete } = useVehicle(props, form)
+const { listVehicle, vehicleClear, vehicleOnAdd, vehicleOnDelete } = useVehicle(
+  props,
+  form
+)
 
 const onSubmit = () => {
   form
@@ -110,8 +113,15 @@ const onSubmit = () => {
               </div>
 
               <div class="col-12">
-                <div class="flex flex-column md:flex-row md:justify-content-end">
-                  <Button label="Tambah" icon="pi pi-car" class="p-button-outlined" @click="vehicleOnAdd" />
+                <div
+                  class="flex flex-column md:flex-row md:justify-content-end"
+                >
+                  <Button
+                    label="Tambah"
+                    icon="pi pi-car"
+                    class="p-button-outlined"
+                    @click="vehicleOnAdd"
+                  />
                 </div>
               </div>
 

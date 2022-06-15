@@ -32,6 +32,7 @@ return [
     'top_customer' => 'Top customer',
     'top_number_customer' => 'Top :number Customer',
     'member' => 'Member',
+    'member_expired' => 'Member has expired please Top Up again',
     'type_member' => 'Type Member',
     'type_vehicle' => 'Type Kendaraan',
     'top_up_rank' => 'Top Up',

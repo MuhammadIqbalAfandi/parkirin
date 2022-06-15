@@ -24,8 +24,18 @@ const onSubmit = () => {
       <span>Tulis Email anda untuk mereset Password.</span>
     </template>
 
-    <AppInputText v-model="form.email" label="Email" placeholder="email" :error="form.errors.email" />
+    <AppInputText
+      v-model="form.email"
+      label="Email"
+      placeholder="email"
+      :error="form.errors.email"
+    />
 
-    <Button @click="onSubmit" label="Permintaan Password baru" :disabled="form.processing" class="w-full p-3 text-xl" />
+    <Button
+      @click="onSubmit"
+      label="Permintaan Password baru"
+      :disabled="form.processing"
+      class="w-full p-3 text-xl"
+    />
   </AuthLayout>
 </template>

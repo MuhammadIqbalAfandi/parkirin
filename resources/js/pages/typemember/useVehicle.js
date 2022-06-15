@@ -27,10 +27,15 @@ export function useVehicle(props, form) {
       throw new FormValidationError('Tidak boleh kosong', 'max_vehicle')
     }
 
-    const listVehicleExist = listVehicle.filter((vehicle) => vehicle.typeVehicleId === form.type_vehicle_id)
+    const listVehicleExist = listVehicle.filter(
+      (vehicle) => vehicle.typeVehicleId === form.type_vehicle_id
+    )
 
     if (listVehicleExist.length) {
-      throw new FormValidationError('Jenis Kendaraan sudah ada', 'type_vehicle_id')
+      throw new FormValidationError(
+        'Jenis Kendaraan sudah ada',
+        'type_vehicle_id'
+      )
     }
   }
 
@@ -40,7 +45,9 @@ export function useVehicle(props, form) {
 
       vehicleAddValidation()
 
-      const typeVehicle = props.typeVehicles.filter((vehicle) => vehicle.value === form.type_vehicle_id)[0]
+      const typeVehicle = props.typeVehicles.filter(
+        (vehicle) => vehicle.value === form.type_vehicle_id
+      )[0]
 
       listVehicle.push({
         max: form.max_vehicle,

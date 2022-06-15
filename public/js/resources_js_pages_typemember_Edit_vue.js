@@ -971,7 +971,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClose: $setup.onClose
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [Object.keys(_ctx.$page.props.errors).length === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, "Ditemukan satu error pada form")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, "Ditemukan " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Object.keys(_ctx.$page.props.errors).length) + " error pada form", 1
+      return [Object.keys(_ctx.$page.props.errors).length === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, " Ditemukan satu error pada form ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, " Ditemukan " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Object.keys(_ctx.$page.props.errors).length) + " error pada form ", 1
       /* TEXT */
       ))];
     }),
@@ -1913,6 +1913,14 @@ __webpack_require__.r(__webpack_exports__);
       component: 'home/Index'
     }]
   }, {
+    label: 'Transaksi',
+    items: [{
+      label: 'Transaksi masuk dan keluar',
+      icon: 'pi pi-car',
+      to: '/transactions/create',
+      component: 'transaction/Create'
+    }]
+  }, {
     label: 'Menu',
     items: [{
       label: 'Pengeluaran',
@@ -1929,6 +1937,14 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'pi pi-car',
       to: '/top-ups',
       component: 'topup/Index'
+    }]
+  }, {
+    label: 'Not Production',
+    items: [{
+      label: 'Test Transactions',
+      icon: 'pi pi-car',
+      to: '/test-transactions/create',
+      component: 'test-transaction/Create'
     }]
   }]
 });

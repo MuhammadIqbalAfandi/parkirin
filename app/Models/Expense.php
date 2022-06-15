@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Services\CurrencyFormatService;
+use App\Services\HelperService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +15,7 @@ class Expense extends Model
     protected $fillable = [
         'description',
         'amount',
-        'user_id',
+        'user_id'
     ];
 
     protected function createdAt(): Attribute
@@ -28,7 +28,7 @@ class Expense extends Model
     protected function amount(): Attribute
     {
         return Attribute::make(
-            get:fn($value) => (new CurrencyFormatService)->setRupiahFormat($value, true)
+            get:fn($value) => HelperService::setRupiahFormat($value, true)
         );
     }
 

@@ -36,7 +36,7 @@ var topUpTable = [{
   header: 'Diperbaharui'
 }, {
   field: 'name',
-  header: 'Nama User'
+  header: 'Petugas Parkir'
 }, {
   field: 'platNumber',
   header: 'Plat Kendaraan'

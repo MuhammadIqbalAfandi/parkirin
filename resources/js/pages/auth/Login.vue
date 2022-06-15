@@ -26,9 +26,19 @@ const onSubmit = () => {
   <AuthLayout>
     <template #header> Masuk untuk melanjutkan </template>
 
-    <AppInputText v-model="form.email" label="Email" placeholder="email" :error="form.errors.email" />
+    <AppInputText
+      v-model="form.email"
+      label="Email"
+      placeholder="email"
+      :error="form.errors.email"
+    />
 
-    <AppPassword v-model="form.password" label="Password" placeholder="password" :error="form.errors.password" />
+    <AppPassword
+      v-model="form.password"
+      label="Password"
+      placeholder="password"
+      :error="form.errors.password"
+    />
 
     <div class="flex align-items-center justify-content-between mb-5">
       <Link
@@ -40,6 +50,11 @@ const onSubmit = () => {
       </Link>
     </div>
 
-    <Button @click="onSubmit" label="Masuk" :disabled="form.processing" class="w-full p-3 text-xl" />
+    <Button
+      @click="onSubmit"
+      label="Masuk"
+      :disabled="form.processing"
+      class="w-full p-3 text-xl"
+    />
   </AuthLayout>
 </template>
