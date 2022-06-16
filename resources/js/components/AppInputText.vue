@@ -14,6 +14,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    default: 'text',
+  },
   error: {
     type: String,
     default: null,
@@ -38,8 +42,8 @@ const ariaDescribedbyLabel = computed(
 
     <InputText
       class="w-full"
-      type="text"
       :class="{ 'p-invalid': isError }"
+      :type="type"
       :id="forLabel"
       :aria-describedby="ariaDescribedbyLabel"
       :model-value="modelValue"
