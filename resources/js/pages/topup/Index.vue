@@ -109,6 +109,7 @@ const filterReset = () => {
           <AppButtonLink
             icon="pi pi-eye"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
+            v-tooltip.bottom="'Detail Top Up'"
             :href="route('top-ups.show', data.id)"
           />
         </template>

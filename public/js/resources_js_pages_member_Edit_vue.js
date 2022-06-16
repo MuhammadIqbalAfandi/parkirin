@@ -127,6 +127,10 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       required: true
     },
+    type: {
+      type: String,
+      "default": 'text'
+    },
     error: {
       type: String,
       "default": null
@@ -699,7 +703,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-full", {
       'p-invalid': $setup.isError
     }]),
-    type: "text",
+    type: $props.type,
     id: $setup.forLabel,
     "aria-describedby": $setup.ariaDescribedbyLabel,
     "model-value": $props.modelValue,
@@ -711,7 +715,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , ["class", "id", "aria-describedby", "model-value", "placeholder", "value", "disabled"]), $props.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", {
+  , ["class", "type", "id", "aria-describedby", "model-value", "placeholder", "value", "disabled"]), $props.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", {
     key: 0,
     id: $setup.ariaDescribedbyLabel,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
@@ -1264,6 +1268,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_DataTable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DataTable");
 
+  var _directive_tooltip = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("tooltip");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Head"], {
     title: "Ubah Member"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DashboardLayout"], null, {
@@ -1421,7 +1427,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Column, null, {
                 body: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref2) {
                   var index = _ref2.index;
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
                     icon: "pi pi-trash",
                     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["p-button-rounded p-button-text", {
                       'p-button-danger': _ctx.$page.props.errors["vehicles.".concat(index, ".platNumber")]
@@ -1431,7 +1437,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     }
                   }, null, 8
                   /* PROPS */
-                  , ["class", "onClick"])])];
+                  , ["class", "onClick"]), [[_directive_tooltip, 'Hapus Data', void 0, {
+                    bottom: true
+                  }]])])];
                 }),
                 _: 1
                 /* STABLE */

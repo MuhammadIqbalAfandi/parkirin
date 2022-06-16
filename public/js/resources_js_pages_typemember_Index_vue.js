@@ -930,6 +930,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_DataTable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DataTable");
 
+  var _directive_tooltip = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("tooltip");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Head"], {
     title: "Daftar Jenis Member"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DashboardLayout"], null, {
@@ -965,13 +967,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Column, null, {
             body: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
               var data = _ref.data;
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppButtonLink"], {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppButtonLink"], {
                 icon: "pi pi-pencil",
                 "class": "p-button-text p-button-icon-only p-button-rounded p-button-text",
                 href: _ctx.route('type-members.edit', data.id)
               }, null, 8
               /* PROPS */
-              , ["href"])];
+              , ["href"]), [[_directive_tooltip, 'Detail Jenis Member', void 0, {
+                bottom: true
+              }]])];
             }),
             _: 1
             /* STABLE */

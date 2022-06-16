@@ -240,6 +240,7 @@ const onSubmit = () => {
                         <Button
                           icon="pi pi-trash"
                           class="p-button-rounded p-button-text"
+                          v-tooltip.bottom="'Hapus Data'"
                           :class="{
                             'p-button-danger':
                               $page.props.errors[

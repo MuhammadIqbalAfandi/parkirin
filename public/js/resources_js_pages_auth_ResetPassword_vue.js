@@ -27,6 +27,10 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       required: true
     },
+    type: {
+      type: String,
+      "default": 'text'
+    },
     error: {
       type: String,
       "default": null
@@ -126,6 +130,22 @@ __webpack_require__.r(__webpack_exports__);
     placeholder: {
       type: String,
       required: true
+    },
+    promptLabel: {
+      type: String,
+      "default": 'Masukan kata sandi'
+    },
+    weakLabel: {
+      type: String,
+      "default": 'Ah Lemah'
+    },
+    mediumLabel: {
+      type: String,
+      "default": 'Lumayan'
+    },
+    strongLabel: {
+      type: String,
+      "default": 'Wow Kuat'
     },
     error: {
       type: String,
@@ -287,7 +307,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-full", {
       'p-invalid': $setup.isError
     }]),
-    type: "text",
+    type: $props.type,
     id: $setup.forLabel,
     "aria-describedby": $setup.ariaDescribedbyLabel,
     "model-value": $props.modelValue,
@@ -299,7 +319,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , ["class", "id", "aria-describedby", "model-value", "placeholder", "value", "disabled"]), $props.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", {
+  , ["class", "type", "id", "aria-describedby", "model-value", "placeholder", "value", "disabled"]), $props.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", {
     key: 0,
     id: $setup.ariaDescribedbyLabel,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
@@ -406,6 +426,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Password, {
     "class": "w-full",
     "input-class": "w-full",
+    promptLabel: $props.promptLabel,
+    weakLabel: $props.weakLabel,
+    mediumLabel: $props.mediumLabel,
+    strongLabel: $props.strongLabel,
     disabled: $props.disabled,
     id: $setup.forLabel,
     placeholder: $props.placeholder,
@@ -418,7 +442,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , ["disabled", "id", "placeholder", "aria-describedby", "value", "model-value"]), $props.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", {
+  , ["promptLabel", "weakLabel", "mediumLabel", "strongLabel", "disabled", "id", "placeholder", "aria-describedby", "value", "model-value"]), $props.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", {
     key: 0,
     id: $setup.ariaDescribedbyLabel,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({

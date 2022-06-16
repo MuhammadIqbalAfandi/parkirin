@@ -155,6 +155,7 @@ const exportExcelLink = ref('/reports/mutations/export/excel')
           <AppButtonLink
             icon="pi pi-link"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
+            v-tooltip.bottom="'Detail Pengeluaran'"
             :href="linkReference(data)"
           />
         </template>

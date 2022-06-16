@@ -96,6 +96,7 @@ const filterReset = () => {
           <AppButtonLink
             icon="pi pi-eye"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
+            v-tooltip.bottom="'Detail Pengeluaran'"
             :href="route('expenses.show', data.id)"
           />
         </template>

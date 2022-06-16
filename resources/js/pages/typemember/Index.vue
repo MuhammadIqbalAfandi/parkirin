@@ -50,6 +50,7 @@ defineProps({
           <AppButtonLink
             icon="pi pi-pencil"
             class="p-button-text p-button-icon-only p-button-rounded p-button-text"
+            v-tooltip.bottom="'Detail Jenis Member'"
             :href="route('type-members.edit', data.id)"
           />
         </template>
