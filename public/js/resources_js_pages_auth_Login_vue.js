@@ -512,7 +512,7 @@ var _hoisted_2 = {
   "class": "flex align-items-center justify-content-between mb-5"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Lupa password? ");
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Lupa kata sandi? ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
@@ -539,8 +539,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $setup.form.password = $event;
         }),
-        label: "Password",
-        placeholder: "password",
+        label: "Kata Sandi",
+        placeholder: "kata sandi",
         error: $setup.form.errors.password
       }, null, 8
       /* PROPS */

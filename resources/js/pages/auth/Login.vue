@@ -35,8 +35,8 @@ const onSubmit = () => {
 
     <AppPassword
       v-model="form.password"
-      label="Password"
-      placeholder="password"
+      label="Kata Sandi"
+      placeholder="kata sandi"
       :error="form.errors.password"
     />
 
@@ -46,7 +46,7 @@ const onSubmit = () => {
         class="font-medium no-underline ml-2 text-right cursor-pointer"
         style="color: var(--primary-color)"
       >
-        Lupa password?
+        Lupa kata sandi?
       </Link>
     </div>
 

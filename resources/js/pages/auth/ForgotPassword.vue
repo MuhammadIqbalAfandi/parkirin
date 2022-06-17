@@ -16,12 +16,12 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <Head title="Lupa Password" />
+  <Head title="Lupa Kata Sandi" />
 
   <AuthLayout>
     <template #header>
-      <span>Lupa Password</span> <br />
-      <span>Tulis Email anda untuk mereset Password.</span>
+      <span>Lupa Kata Sandi</span> <br />
+      <span>Tulis Email anda untuk mereset Kata Sandi.</span>
     </template>
 
     <AppInputText
@@ -33,7 +33,7 @@ const onSubmit = () => {
 
     <Button
       @click="onSubmit"
-      label="Permintaan Password baru"
+      label="Permintaan Kata Sandi baru"
       :disabled="form.processing"
       class="w-full p-3 text-xl"
     />

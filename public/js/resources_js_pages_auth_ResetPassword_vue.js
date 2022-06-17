@@ -512,7 +512,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Reset Password", -1
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Reset Kata Sandi", -1
 /* HOISTED */
 );
 
@@ -522,7 +522,7 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Tulis Password baru untuk login", -1
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Tulis Kata Sandi baru untuk login", -1
 /* HOISTED */
 );
 
@@ -530,7 +530,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Head"], {
-    title: "Reset Password"
+    title: "Reset Kata Sandi"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AuthLayout"], null, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_1, _hoisted_2, _hoisted_3, _hoisted_4];
@@ -551,8 +551,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $setup.form.password = $event;
         }),
-        label: "Password",
-        placeholder: "password",
+        label: "Kata Sandi",
+        placeholder: "kata sandi",
         error: $setup.form.errors.password
       }, null, 8
       /* PROPS */
@@ -561,14 +561,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $setup.form.password_confirmation = $event;
         }),
-        label: "konfirmasi password",
-        placeholder: "konfirmasi password",
+        label: "Konfirmasi Kata Sandi",
+        placeholder: "konfirmasi kata sandi",
         error: $setup.form.errors.password_confirmation
       }, null, 8
       /* PROPS */
       , ["modelValue", "error"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
         onClick: $setup.onSubmit,
-        label: "Reset Password",
+        label: "Reset Kata Sandi",
         disabled: $setup.form.processing,
         "class": "w-full p-3 text-xl"
       }, null, 8

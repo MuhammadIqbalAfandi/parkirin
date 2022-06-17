@@ -27,12 +27,12 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <Head title="Reset Password" />
+  <Head title="Reset Kata Sandi" />
 
   <AuthLayout>
     <template #header>
-      <span>Reset Password</span> <br />
-      <span>Tulis Password baru untuk login</span>
+      <span>Reset Kata Sandi</span> <br />
+      <span>Tulis Kata Sandi baru untuk login</span>
     </template>
 
     <AppInputText
@@ -44,21 +44,21 @@ const onSubmit = () => {
 
     <AppPassword
       v-model="form.password"
-      label="Password"
-      placeholder="password"
+      label="Kata Sandi"
+      placeholder="kata sandi"
       :error="form.errors.password"
     />
 
     <AppPassword
       v-model="form.password_confirmation"
-      label="konfirmasi password"
-      placeholder="konfirmasi password"
+      label="Konfirmasi Kata Sandi"
+      placeholder="konfirmasi kata sandi"
       :error="form.errors.password_confirmation"
     />
 
     <Button
       @click="onSubmit"
-      label="Reset Password"
+      label="Reset Kata Sandi"
       :disabled="form.processing"
       class="w-full p-3 text-xl"
     />
