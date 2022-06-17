@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
             'phone' => '',
             'email' => 'admin@parking.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('admin123'),
-            'role_id' => 1,
+            'password' => bcrypt('12345678'),
+            'role_id' => 1
         ]);
 
         // User::factory(199)->create();
