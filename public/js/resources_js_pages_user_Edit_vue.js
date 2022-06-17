@@ -1281,7 +1281,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             icon: "pi pi-trash",
             "class": "p-button-outlined p-button-danger",
             onClick: $setup.onDeleteUser
-          })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AppButtonLink"], {
+          })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [$props.user.role_id !== 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AppButtonLink"], {
+            key: 0,
             label: "Blokir",
             icon: "pi pi-ban",
             method: "delete",
@@ -1289,7 +1290,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             href: _ctx.route('users.block', $props.user.id)
           }, null, 8
           /* PROPS */
-          , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+          , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
             label: "Simpan",
             "class": "p-button-outlined",
             icon: "pi pi-check",

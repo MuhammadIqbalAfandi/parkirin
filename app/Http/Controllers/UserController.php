@@ -40,8 +40,9 @@ class UserController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'role' => $user->role->name,
-                    'status' => $user->status,
-                ]),
+                    'role_id' => $user->role_id,
+                    'status' => $user->status
+                ])
         ]);
     }
 
@@ -57,8 +58,8 @@ class UserController extends Controller
                 ->get()
                 ->transform(fn($role) => [
                     'label' => $role->name,
-                    'value' => $role->id,
-                ]),
+                    'value' => $role->id
+                ])
         ]);
     }
 
@@ -89,14 +90,14 @@ class UserController extends Controller
                 'name' => $user->name,
                 'phone' => $user->phone,
                 'email' => $user->email,
-                'role_id' => $user->role_id,
+                'role_id' => $user->role_id
             ],
             'roles' => Role::whereNotIn('id', [1])
                 ->get()
                 ->transform(fn($role) => [
                     'label' => $role->name,
-                    'value' => $role->id,
-                ]),
+                    'value' => $role->id
+                ])
         ]);
     }
 
@@ -114,14 +115,14 @@ class UserController extends Controller
                 'name' => $user->name,
                 'phone' => $user->phone,
                 'email' => $user->email,
-                'role_id' => $user->role_id,
+                'role_id' => $user->role_id
             ],
             'roles' => Role::whereNotIn('id', [1])
                 ->get()
                 ->transform(fn($role) => [
                     'label' => $role->name,
-                    'value' => $role->id,
-                ]),
+                    'value' => $role->id
+                ])
         ]);
     }
 
@@ -138,7 +139,7 @@ class UserController extends Controller
             'name' => $request->name,
             'phone' => $request->phone ?? $user->phone,
             'email' => $request->email,
-            'role_id' => $request->role_id,
+            'role_id' => $request->role_id
         ]);
 
         return back()->with('success', __('messages.success.update.user'));
