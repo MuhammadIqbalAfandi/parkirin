@@ -12,6 +12,11 @@ use Inertia\Inertia;
 
 class MemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Member::class);
+    }
+
     /**
      * Display a listing of the resource.
      *

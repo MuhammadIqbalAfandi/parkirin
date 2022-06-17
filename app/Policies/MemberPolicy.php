@@ -18,7 +18,7 @@ class MemberPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->role_id === 3;
     }
 
     /**
@@ -30,7 +30,7 @@ class MemberPolicy
      */
     public function view(User $user, Member $member)
     {
-        //
+        return $user->role_id === 3;
     }
 
     /**
@@ -41,7 +41,7 @@ class MemberPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->role_id === 3;
     }
 
     /**
@@ -53,7 +53,7 @@ class MemberPolicy
      */
     public function update(User $user, Member $member)
     {
-        //
+        return $user->role_id === 3;
     }
 
     /**
